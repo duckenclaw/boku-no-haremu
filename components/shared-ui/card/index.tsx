@@ -4,10 +4,10 @@ import s from './card.module.scss'
 
 type CardProps = {
   className?: string
-  rating?: number
   frameColor?: string
   ratingBackgroundColor?: string
   iconBackgroundColor?: string
+  rating: number
   icon: string
   image: string
 }
