@@ -41,9 +41,11 @@ const cards: Card[] = [
 export const TokenisedEconomy: React.FC<Props> = () => (
   <div className={s.container}>
     <div className={s.title}>TOKENISED ECONOMY</div>
-    <div className={s.subtitle}>
-      We present the latest technological solution for mobile design of
-      expositions, museums, galleries, exhibitions.
+    <div className={s.subtitleWrapper}>
+      <div className={s.subtitle}>
+        We present the latest technological solution for mobile design of
+        expositions, museums, galleries, exhibitions.
+      </div>
     </div>
     <div className={s.cards}>
       {cards?.map((card: Card) => (
