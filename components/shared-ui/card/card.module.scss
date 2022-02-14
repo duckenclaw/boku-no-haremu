@@ -1,12 +1,16 @@
 .container {
   background: url(/images/card-back.jpg);
   border-radius: 12px;
-  min-width: 212px;
+  width: 100%;
+  height: 100%;
   height: 314px;
   padding: 9px;
 }
 
 .frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
   backdrop-filter: blur(80px);
@@ -61,7 +65,25 @@
   bottom: 0;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
-  right: 0;
   z-index: 0;
+}
+
+.iconEmpty {
+  font-family: 'AA BadaBoom BB';
+  font-size: 26px;
+  line-height: 21px;
+  -webkit-text-fill-color: #D5436F;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+  z-index: 3;
+}
+
+.empty {
+  font-family: 'AA BadaBoom BB';
+  font-size: 110px;
+  line-height: 117px;
+  -webkit-text-fill-color: #e8dc3f;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+  z-index: 3;
 }

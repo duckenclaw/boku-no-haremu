@@ -7,9 +7,9 @@ type CardProps = {
   frameColor?: string
   ratingBackgroundColor?: string
   iconBackgroundColor?: string
-  rating: number
-  icon: string
-  image: string
+  rating?: string
+  icon?: string
+  image?: string
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -25,15 +25,23 @@ export const Card: React.FC<CardProps> = ({
     <div className={classNames(className, s.container)}>
       <div className={s.frame} style={{ borderColor: frameColor }}>
         <div className={s.rating} style={{ background: ratingBackgroundColor }}>
-          {rating}
+          {rating || '?'}
         </div>
         <div
           className={s.iconContainer}
           style={{ background: iconBackgroundColor }}
         >
-          <img className={s.icon} src={`images/${icon}.png`} alt="" />
+          {icon ? (
+            <img className={s.icon} src={`images/${icon}.png`} alt="" />
+          ) : (
+            <div className={s.iconEmpty}>?</div>
+          )}
         </div>
-        <img className={s.image} src={`images/${image}.png`} alt="" />
+        {image ? (
+          <img className={s.image} src={`images/${image}.png`} alt="" />
+        ) : (
+          <div className={s.empty}>?</div>
+        )}
       </div>
     </div>
   )
