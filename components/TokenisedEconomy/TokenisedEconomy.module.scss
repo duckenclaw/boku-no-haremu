@@ -2,34 +2,13 @@
   text-align: center;
 }
 
-.title {
-  text-align: center;
-  font-weight: bold;
-  font-size: 48px;
-  line-height: 57px;
-  color: #EF5DA8;
-  margin-bottom: 26px;
-}
-
-.subtitleWrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 80px;
-}
-
-.subtitle {
-  text-align: center;
-  font-size: 18px;
-  line-height: 21px;
-  color: #FFFFFF;
-  max-width: 50%;
-  margin-left: 0;
-  margin-right: 0;
-}
-
 .cards {
   display: flex;
   justify-content: space-between;
+}
+
+.textHeader {
+  margin-bottom: 80px;
 }
 
 .card {

@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { TextHeader } from '../shared-ui/text-header'
 import s from './TokenisedEconomy.module.scss'
 
 type Props = {
@@ -40,13 +41,12 @@ const cards: Card[] = [
 
 export const TokenisedEconomy: React.FC<Props> = () => (
   <div className={s.container}>
-    <div className={s.title}>TOKENISED ECONOMY</div>
-    <div className={s.subtitleWrapper}>
-      <div className={s.subtitle}>
-        We present the latest technological solution for mobile design of
-        expositions, museums, galleries, exhibitions.
-      </div>
-    </div>
+    <TextHeader
+      className={s.textHeader}
+      title="TOKENISED ECONOMY"
+      subtitle="   We present the latest technological solution for mobile design of
+        expositions, museums, galleries, exhibitions."
+    />
     <div className={s.cards}>
       {cards?.map((card: Card) => (
         <div key={card.title} className={s.card}>
