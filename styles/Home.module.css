@@ -87,6 +87,19 @@
   line-height: 1.5;
 }
 
+.fontDisplay {
+  font-family: 'SF Pro Display';
+}
+
+.fontDisplayBold {
+  font-family: 'SF Pro Display';
+  font-weight: bold;
+}
+
+.fontBadaBoom {
+  font-family: 'AA BadaBoom BB';
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
