@@ -1,0 +1,84 @@
+.container {
+  text-align: center;
+  background-color:cadetblue;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 57px;
+  color: #EF5DA8;
+  margin-bottom: 26px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  line-height: 21px;
+  color: #FFFFFF;
+  max-width: 50%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  text-align: center;
+  color: white;
+  width: 268px;
+  padding: 32px 13px;
+  background-color: #171d37;
+  border: 2px solid rgba(230, 105, 163, 0.41);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(40px);
+  border-radius: 20px;
+  box-shadow: 0px 20px 40px 0px #00000026;
+}
+
+.cardLogo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 9px;
+  align-self: center;
+}
+
+.cardTitle {
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 38px;
+  text-transform: uppercase;
+  color: #56CCF2;
+  margin-bottom: 24px;
+}
+
+.cardDescription {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 25px;
+}
+
+.cardButton {
+  font-weight: 600;
+  font-size: 20px;
+  line-height:36px;
+  text-align: center;
+  color: #FFFFFF;
+  background: #56CCF2;
+  border-radius: 10px;
+  border: none;
+  max-width: 90%;
+  width: 100%;
+  align-self: center;
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import s from '/styles/Home.module.css'
 import { Footer } from './shared-ui/footer/footer'
+import { TokenisedEconomy } from './TokenisedEconomy'
 
 type Props = {
   className?: string
@@ -49,6 +50,7 @@ const MainContent: React.FC<Props> = ({ className }) => {
           </a>
         </div>
       </main>
+      <TokenisedEconomy />
       <Footer />
     </div>
   )
