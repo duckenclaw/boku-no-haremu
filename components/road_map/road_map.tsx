@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './road_map.module.scss'
+import { TextHeader } from '../shared-ui/text-header'
 
 export const RoadMap = () => {
   const row = [
@@ -59,12 +60,11 @@ export const RoadMap = () => {
 
   return (
     <div className={s.wrap}>
-      <div className={s.title}>ROAD MAP</div>
-      <div className={s.subtitle}>
-        The panel designers have found the best possible solution to protect the
-        damaged ends of the panels with thin but rigid aluminium profiles. This
-        ensures a durable construction and a clean seam.
-      </div>
+      <TextHeader
+        title="ROAD MAP"
+        subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
+        className={s.textHeader}
+      />
       <div className={s.columns_wrapper}>
         {row.map((item, index) => (
           <div className={s.row} key={index}>

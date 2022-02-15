@@ -1,20 +1,11 @@
 .wrap {
   text-align: center;
-  background: #12162d;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.title {
-  font-weight: bold;
-  font-size: 50px;
-  line-height: 60px;
-  color: #EF5DA8;
-}
-
-.subtitle {
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 29px;
-  color: #FFFFFF;
+.textHeader {
+  margin-top: 100px;
 }
 
 .columns_wrapper {
@@ -54,7 +45,6 @@
 }
 
 .circle {
-  position: relative;
   width: 24px;
   height: 24px;
   border-radius: 50%;
