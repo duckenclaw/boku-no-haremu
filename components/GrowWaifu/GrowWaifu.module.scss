@@ -1,0 +1,51 @@
+.textHeader {
+  margin-bottom: 80px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media(max-width: 768px) {
+    flex-direction: column;
+
+  }
+
+}
+
+.card {
+  max-width: 240px;
+  max-height: 355px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  @media(max-width: 768px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.arrow {
+  width: 90px;
+  height: 36px;
+
+  span {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+}
+
+
+.arrow {
+  @media(max-width: 768px) {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+  }
+
+
+}
