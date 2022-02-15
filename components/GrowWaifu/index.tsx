@@ -25,13 +25,10 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         rating="1"
         frameColor="#93d8ec"
       />
-      <Image
-        className={s.arrow}
-        src="/arrow.svg"
-        alt="arrow"
-        width={90}
-        height={36}
-      />
+      <div className={s.arrow}>
+        <Image src="/arrow_pink.svg" alt="arrow" width={90} height={36} />
+      </div>
+
       <Card
         className={s.card}
         icon="crystal"
@@ -39,13 +36,9 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         rating="2"
         frameColor="#d87193"
       />
-      <Image
-        className={s.arrow}
-        src="/arrow.svg"
-        alt="arrow"
-        width={90}
-        height={36}
-      />
+      <div className={s.arrow}>
+        <Image src="/arrow_yellow.svg" alt="arrow" width={90} height={36} />
+      </div>
       <Card
         className={s.card}
         frameColor="#e8dc3f"
