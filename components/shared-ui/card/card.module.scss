@@ -1,0 +1,89 @@
+.container {
+  background: url(/images/card-back.jpg);
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  height: 314px;
+  padding: 9px;
+}
+
+.frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(80px);
+  border-radius: 12px;
+  border: 6px solid;
+  position: relative; 
+}
+
+.rating {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 32px;
+  height: 32px;
+  background-color: #D5436F;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'AA BadaBoom BB';
+  font-size: 26px;
+  line-height: 21px;
+  -webkit-text-fill-color: #479EC5;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+  z-index: 3;
+}
+
+.iconContainer {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  background-color: #479EC5  ;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+.image {
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 0;
+}
+
+.iconEmpty {
+  font-family: 'AA BadaBoom BB';
+  font-size: 26px;
+  line-height: 21px;
+  -webkit-text-fill-color: #D5436F;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+  z-index: 3;
+}
+
+.empty {
+  font-family: 'AA BadaBoom BB';
+  font-size: 110px;
+  line-height: 117px;
+  -webkit-text-fill-color: #e8dc3f;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+  z-index: 3;
+}

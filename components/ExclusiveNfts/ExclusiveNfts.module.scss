@@ -1,0 +1,46 @@
+.textHeader {
+  margin-bottom: 80px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin-right: 58px;
+}
+
+.cardContainer {
+  display: flex;
+  flex: 1 1 50%;
+  width: max-content;
+  margin-bottom: 78px;
+}
+
+.cardInfo {
+  margin-top: 42px;
+  max-width: 40%;
+}
+
+.cardTitle {
+  font-size: 45px;
+  line-height: 48px;
+  -webkit-text-fill-color: #479EC5;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+  margin-bottom: 24px;
+}
+
+.cardDescription {
+  font-family: 'AA BadaBoom BB';
+  font-size: 18px;
+  line-height: 19px;
+  color: #FFFFFF;
+  margin-bottom: 24px;
+}
+
+.cardIcon {
+  width: 68px;
+  height: 68px;
+}
