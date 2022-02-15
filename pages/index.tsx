@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import styles from '../styles/Home.module.css'
+import MainContent from '../components/main-content'
 
 const Home: NextPage = () => {
-  return <div className={styles.container}></div>
+  return <MainContent />
 }
 
 export default Home

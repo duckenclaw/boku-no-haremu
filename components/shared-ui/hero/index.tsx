@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import Image from 'next/image'
+import Text from '/public/images/svg/only-haremu.svg'
 
 type Props = {
   className?: string
@@ -20,6 +21,7 @@ const Hero: React.FC<Props> = ({ className }) => {
       </div>
       <div className={s.content}>
         <button className={s.button}>PLAY & EARN</button>
+        <Text className={s.text} />
       </div>
     </div>
   )

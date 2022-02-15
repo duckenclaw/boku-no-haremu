@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { Header } from '../components/shared-ui/header.tsx'
+import { Header } from '../components/shared-ui/header'
 import { Hero } from '../components/shared-ui/hero'
 
 type Props = {

@@ -2,6 +2,10 @@ import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import Link from 'next/link'
+import IconInst from '/public/images/svg/icon-inst.svg'
+import IconFace from '/public/images/svg/icon-face.svg'
+import IconDisc from '/public/images/svg/icon-disc.svg'
+import IconTwit from '/public/images/svg/icon-twitter.svg'
 
 type Props = {
   className?: string
@@ -14,28 +18,28 @@ const Socials: React.FC<Props> = ({ className }) => {
         <li>
           <Link href="#">
             <a className={s.item}>
-              <img src="images/svg/icon-inst.svg" alt="" />
+              <IconInst />
             </a>
           </Link>
         </li>
         <li>
           <Link href="#">
             <a className={s.item}>
-              <img src="images/svg/icon-disc.svg" alt="" />
+              <IconFace />
             </a>
           </Link>
         </li>
         <li>
           <Link href="#">
             <a className={s.item}>
-              <img src="images/svg/icon-face.svg" alt="" />
+              <IconDisc />
             </a>
           </Link>
         </li>
         <li>
           <Link href="#">
             <a className={s.item}>
-              <img src="images/svg/icon-twitter.svg" alt="" />
+              <IconTwit />
             </a>
           </Link>
         </li>
