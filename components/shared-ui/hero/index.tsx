@@ -12,14 +12,14 @@ const Hero: React.FC<Props> = ({ className }) => {
     <div className={classNames(className, s.container)}>
       <div className={s.characters}>
         <Image
+          objectFit="cover"
+          layout="fill"
           src={'/images/characters.png'}
           alt="characters"
-          width={1494}
-          height={842}
         />
       </div>
-      <div className={s.text}>
-        <button>PLAY & EARN</button>
+      <div className={s.content}>
+        <button className={s.button}>PLAY & EARN</button>
         <h1 className={s.title}>Only Haremu</h1>
         <h2 className={s.description}>A true strategy NFT game</h2>
       </div>
