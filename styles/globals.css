@@ -35,6 +35,12 @@ body {
   background: #12162d;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 a {
   color: inherit;
   text-decoration: none;
