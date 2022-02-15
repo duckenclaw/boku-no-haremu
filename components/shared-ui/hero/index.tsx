@@ -20,8 +20,6 @@ const Hero: React.FC<Props> = ({ className }) => {
       </div>
       <div className={s.content}>
         <button className={s.button}>PLAY & EARN</button>
-        <h1 className={s.title}>Only Haremu</h1>
-        <h2 className={s.description}>A true strategy NFT game</h2>
       </div>
     </div>
   )
