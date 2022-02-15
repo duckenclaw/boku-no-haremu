@@ -1,11 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
-import RoadMap from '../road_map/road_map'
-import { GrowWaifu } from '../GrowWaifu'
-import { TokenisedEconomy } from '../TokenisedEconomy'
-import { ExclusiveNfts } from '../ExclusiveNfts'
-import { Hero } from '../shared-ui/hero'
+import RoadMap from '../road-map/road_map'
+import { GrowWaifu } from '../grow-waifu'
+import { TokenisedEconomy } from '../tokenised-economy'
+import { ExclusiveNfts } from '../exclusive-nfts'
+import { Hero } from '../hero'
 import { Header } from '../shared-ui/header'
 
 type Props = {
