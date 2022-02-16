@@ -1,9 +1,10 @@
 import s from './types-of-rarity.module.scss'
-import { Button } from '../shared-ui/buttons/button'
 import Container from '../shared-ui/container'
 import { TextHeader } from '../shared-ui/text-header'
 import { Card } from '../shared-ui/card'
 import classNames from 'classnames'
+import Image from 'next/image'
+import Arrow from '/public/arrow_pink.svg'
 
 type Props = {
   className?: string
@@ -42,6 +43,9 @@ export const TypesOfRarity: React.FC<Props> = () => (
       </div>
       <div className={s.cardsBottom}>
         <div className={classNames(s.cardWrapper)}>
+          <div className={s.arrowFirst}>
+            <Arrow />
+          </div>
           <Card
             className={s.card}
             icon="crystal"
@@ -54,6 +58,9 @@ export const TypesOfRarity: React.FC<Props> = () => (
           </div>
         </div>
         <div className={classNames(s.cardWrapper)}>
+          <div className={s.arrowSecond}>
+            <Arrow />
+          </div>
           <Card
             className={s.card}
             icon="crystal"
@@ -66,6 +73,9 @@ export const TypesOfRarity: React.FC<Props> = () => (
           </div>
         </div>
         <div className={classNames(s.cardWrapper)}>
+          <div className={s.arrowThird}>
+            <Arrow />
+          </div>
           <Card
             className={s.card}
             frameColor="#e8dc3f"

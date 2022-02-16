@@ -34,7 +34,8 @@
 }
 
 .cardWrapper {
- width: max-content;
+  position: relative;
+  width: max-content;
 }
 
 .cardName { 
@@ -43,4 +44,31 @@
   font-size: 32px;
   line-height: 34px;
   text-align: center;
+}
+
+.arrowFirst {
+  width: 165px;
+  height: 82px;
+  position: absolute;
+  top: -140px;
+  left: 85px;
+  transform: rotate(130deg);
+}
+
+.arrowSecond {
+  width: 165px;
+  height: 82px;
+  position: absolute;
+  top: -150px;
+  left: 50px;
+  transform: rotate(95deg);
+}
+
+.arrowThird {
+  width: 165px;
+  height: 82px;
+  position: absolute;
+  top: -160px;
+  left: -20px;
+  transform: rotate(55deg);
 }
