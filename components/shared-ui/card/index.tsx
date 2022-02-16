@@ -22,7 +22,10 @@ export const Card: React.FC<CardProps> = ({
   iconBackgroundColor,
 }) => {
   return (
-    <div className={classNames(className, s.container)}>
+    <div
+      className={classNames(className, s.container)}
+      style={{ boxShadow: `0 0 20px ${frameColor}` }}
+    >
       <div className={s.frame} style={{ borderColor: frameColor }}>
         <div className={s.rating} style={{ background: ratingBackgroundColor }}>
           {rating || '?'}
