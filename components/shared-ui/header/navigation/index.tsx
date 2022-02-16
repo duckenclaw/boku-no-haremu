@@ -10,33 +10,33 @@ const Navigation: React.FC<Props> = ({ className }) => {
   return (
     <nav className={classNames(className, s.container)}>
       <ul className={s.navList}>
-        <li>
-          <a className={s.navItem} href="#">
+        <li className={s.navItem}>
+          <a className={s.navLink} href="#">
             TOKENS
           </a>
         </li>
-        <li>
-          <a className={s.navItem} href="#">
+        <li className={s.navItem}>
+          <a className={s.navLink} href="#">
             NFTS
           </a>
         </li>
-        <li>
-          <a className={s.navItem} href="#">
+        <li className={s.navItem}>
+          <a className={s.navLink} href="#">
             GROWTH
           </a>
         </li>
-        <li>
-          <a className={s.navItem} href="#">
+        <li className={s.navItem}>
+          <a className={s.navLink} href="#">
             BLENDING
           </a>
         </li>
         <li>
-          <a className={s.navItem} href="#">
+          <a className={s.navLink} href="#">
             TYPES
           </a>
         </li>
-        <li>
-          <a className={s.navItem} href="#">
+        <li className={s.navItem}>
+          <a className={s.navLink} href="#">
             ROAD MAP
           </a>
         </li>

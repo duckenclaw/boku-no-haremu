@@ -10,7 +10,7 @@ type Props = {
 
 const Hero: React.FC<Props> = ({ className }) => {
   return (
-    <div className={classNames(className, s.container)}>
+    <section className={classNames(className, s.section)}>
       <div className={s.characters}>
         <Image
           objectFit="cover"
@@ -23,7 +23,7 @@ const Hero: React.FC<Props> = ({ className }) => {
         <button className={s.button}>PLAY & EARN</button>
         <Text className={s.text} />
       </div>
-    </div>
+    </section>
   )
 }
 

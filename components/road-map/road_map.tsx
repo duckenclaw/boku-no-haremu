@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './road_map.module.scss'
 import { TextHeader } from '../shared-ui/text-header'
+import Container from '../shared-ui/container'
 
 export const RoadMap = () => {
   const row = [
@@ -59,33 +60,38 @@ export const RoadMap = () => {
   ]
 
   return (
-    <div className={s.wrap}>
-      <TextHeader
-        title="ROAD MAP"
-        subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
-        className={s.textHeader}
-      />
-      <div className={s.columns_wrapper}>
-        {row.map((item, index) => (
-          <div className={s.row} key={index}>
-            <div className={s.number} style={{ color: item.color }}>
-              {item.number}
-            </div>
-            <div
-              className={s.circle}
-              style={{ background: item.background, boxShadow: item.boxShadow }}
-            ></div>
-            <div className={s.text}>
-              {item.text.map((el, i) => (
-                <ul className={s.list} key={i}>
-                  <li>{el}</li>
+    <section>
+      <Container className={s.wrap}>
+        <TextHeader
+          title="ROAD MAP"
+          subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
+          className={s.textHeader}
+        />
+        <div className={s.columns_wrapper}>
+          {row.map((item, index) => (
+            <div className={s.row} key={index}>
+              <div className={s.number} style={{ color: item.color }}>
+                {item.number}
+              </div>
+              <div
+                className={s.circle}
+                style={{
+                  background: item.background,
+                  boxShadow: item.boxShadow,
+                }}
+              ></div>
+              <div className={s.text}>
+                <ul className={s.list}>
+                  {item.text.map((el, i) => (
+                    <li key={i}>{el}</li>
+                  ))}
                 </ul>
-              ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </Container>
+    </section>
   )
 }
 

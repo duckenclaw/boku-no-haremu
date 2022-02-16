@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import s from './ExclusiveNfts.module.scss'
 import { TextHeader } from '../shared-ui/text-header'
 import { Card } from '../shared-ui/card'
+import Container from '../shared-ui/container'
 
 type ExclusiveNftsProps = {
   className?: string
@@ -37,29 +38,35 @@ const cards = [
 ]
 
 export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
-  <div className={classNames(className, s.container)}>
-    <TextHeader
-      title="EXCLUSIVE NFTS"
-      subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
-      className={s.textHeader}
-    />
-    <div className={s.cards}>
-      {cards.map((card) => (
-        <div key={card.title} className={s.cardContainer}>
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl1"
-            rating='1'
-            frameColor="#93d8ec"
-          />
-          <div className={s.cardInfo}>
-            <div className={s.cardTitle}>{card.title}</div>
-            <div className={s.cardDescription}>{card.description}</div>
-            <img className={s.cardIcon} src={`images/${card.icon}.png`} alt="" />
+  <section className={classNames(className, s.section)}>
+    <Container>
+      <TextHeader
+        title="EXCLUSIVE NFTS"
+        subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
+        className={s.textHeader}
+      />
+      <div className={s.cards}>
+        {cards.map((card) => (
+          <div key={card.title} className={s.cardContainer}>
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl1"
+              rating="1"
+              frameColor="#93d8ec"
+            />
+            <div className={s.cardInfo}>
+              <div className={s.cardTitle}>{card.title}</div>
+              <div className={s.cardDescription}>{card.description}</div>
+              <img
+                className={s.cardIcon}
+                src={`images/${card.icon}.png`}
+                alt=""
+              />
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
-  </div>
+        ))}
+      </div>
+    </Container>
+  </section>
 )

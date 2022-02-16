@@ -4,20 +4,20 @@ import s from './button.module.scss'
 type ButtonProps = {
   className?: string
   title?: string
-  onClick: () => void
+  handler: () => void
 }
 
 export const Button: React.FC<ButtonProps> = ({
   className,
   title,
-  onClick,
+  handler,
+  children,
 }) => (
   <button
     className={classNames(className, s.button)}
-    onClick={() => {
-      onClick()
-    }}
+    onClick={handler}
+    type="button"
   >
-    {title}
+    {children}
   </button>
 )
