@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { Button } from '../button/button'
 import { TextHeader } from '../shared-ui/text-header'
 import s from './TokenisedEconomy.module.scss'
 
@@ -59,7 +60,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
             <div className={s.cardTitle}>{card.title}</div>
             <div className={s.cardDescription}>{card.description}</div>
           </div>
-          <button className={s.cardButton}>VIEW ON ALCOR</button>
+          <Button title="VIEW ON ALCOR" className={s.button} />
         </div>
       ))}
     </div>
