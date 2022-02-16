@@ -11,7 +11,7 @@ type SmartBlendingProps = {
 }
 export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
-    <Container>
+    <Container className={s.container}>
       <TextHeader
         title="SMART BLENDING"
         subtitle="Resource mining increases with each new level"
@@ -19,76 +19,87 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
       />
       <div className={s.content}>
         <div className={s.row}>
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl1"
-            rating="1"
-            frameColor="#93d8ec"
-          />
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl1"
-            rating="2"
-            frameColor="#d87193"
-          />
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl1"
-            rating="2"
-            frameColor="#d87193"
-          />
-
-          <div className={s.arrow}>
-            <Image src="/arrow_pink.svg" alt="arrow" width={165} height={82} />
-          </div>
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl2"
-            rating="2"
-            frameColor="#d87193"
-          />
-        </div>
-        <div className={s.row}>
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl2"
-            rating="1"
-            frameColor="#93d8ec"
-          />
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl2"
-            rating="2"
-            frameColor="#d87193"
-          />
-          <Card
-            className={s.card}
-            icon="crystal"
-            image="girl2"
-            rating="2"
-            frameColor="#d87193"
-          />
-
-          <div className={s.arrow}>
-            <Image
-              src="/arrow_yellow.svg"
-              alt="arrow"
-              width={165}
-              height={82}
+          <div className={s.leftSide}>
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl1"
+              rating="1"
+              frameColor="#93d8ec"
+            />
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl1"
+              rating="2"
+              frameColor="#d87193"
+            />
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl1"
+              rating="2"
+              frameColor="#d87193"
             />
           </div>
-          <Card
-            className={s.card}
-            frameColor="#e8dc3f"
-            iconBackgroundColor="#e8dc3f"
-            ratingBackgroundColor="#e8dc3f"
-          />
+          <div className={s.rightSide}>
+            <div className={s.arrow}>
+              <Image
+                src="/arrow_pink.svg"
+                alt="arrow"
+                width={165}
+                height={82}
+              />
+            </div>
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl2"
+              rating="2"
+              frameColor="#d87193"
+            />
+          </div>
+        </div>
+        <div className={s.row}>
+          <div className={s.leftSide}>
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl2"
+              rating="1"
+              frameColor="#93d8ec"
+            />
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl2"
+              rating="2"
+              frameColor="#d87193"
+            />
+            <Card
+              className={s.card}
+              icon="crystal"
+              image="girl2"
+              rating="2"
+              frameColor="#d87193"
+            />
+          </div>
+          <div className={s.rightSide}>
+            <div className={s.arrow}>
+              <Image
+                src="/arrow_yellow.svg"
+                alt="arrow"
+                width={165}
+                height={82}
+              />
+            </div>
+            <Card
+              className={s.card}
+              frameColor="#e8dc3f"
+              iconBackgroundColor="#e8dc3f"
+              ratingBackgroundColor="#e8dc3f"
+            />
+          </div>
         </div>
       </div>
     </Container>
