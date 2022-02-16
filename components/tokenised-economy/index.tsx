@@ -3,6 +3,7 @@ import { Button } from '../shared-ui/buttons/button'
 import Container from '../shared-ui/container'
 import { TextHeader } from '../shared-ui/text-header'
 import s from './TokenisedEconomy.module.scss'
+import Image from 'next/image'
 
 type Props = {
   className?: string
@@ -43,6 +44,7 @@ const cards: Card[] = [
 
 export const TokenisedEconomy: React.FC<Props> = () => (
   <section className={s.section}>
+    <div className={s.wave} />
     <Container>
       <TextHeader
         className={s.textHeader}

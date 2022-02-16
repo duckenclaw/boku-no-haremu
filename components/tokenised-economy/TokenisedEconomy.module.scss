@@ -1,7 +1,20 @@
 .section {
+  position: relative;
   margin-bottom: 80px;
   width: 100%;
   margin-top: 100vh;
+  padding-top: 1px;
+}
+
+.wave {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 155px;
+  background: url('../../public/wave.svg') center no-repeat;
+  background-size: cover;
 }
 
 .cards {
@@ -12,6 +25,7 @@
 
 .textHeader {
   margin-bottom: 80px;
+  margin-top: 100px;
 }
 
 .card {
@@ -55,18 +69,3 @@
   color: #FFFFFF;
   margin-bottom: 25px;
 }
-
-// .cardButton {
-//   font-size: 20px;
-//   line-height:36px;
-//   text-align: center;
-//   color: #FFFFFF;
-//   background: #56CCF2;
-//   border-radius: 10px;
-//   border: none;
-//   max-width: 90%;
-//   width: 100%;
-//   align-self: center;
-//   cursor: pointer;
-//   font-family: 'SF Pro Display';
-// }
