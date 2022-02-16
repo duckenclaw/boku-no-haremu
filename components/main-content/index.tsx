@@ -7,6 +7,7 @@ import { TokenisedEconomy } from '../tokenised-economy'
 import { ExclusiveNfts } from '../exclusive-nfts'
 import { Hero } from '../hero'
 import { Header } from '../shared-ui/header'
+import { SmartBlending } from '../smart-blending'
 
 type Props = {
   className?: string
@@ -22,6 +23,7 @@ const MainContent: React.FC<Props> = ({ className }) => {
           <TokenisedEconomy />
           <ExclusiveNfts />
           <GrowWaifu />
+          <SmartBlending />
           <RoadMap />
         </div>
       </main>
