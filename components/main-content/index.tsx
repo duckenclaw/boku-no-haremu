@@ -7,28 +7,28 @@ import { TokenisedEconomy } from '../tokenised-economy'
 import { ExclusiveNfts } from '../exclusive-nfts'
 import { Hero } from '../hero'
 import { Header } from '../shared-ui/header'
+import { TypesOfRarity } from '../types-of-rarity'
 import { SmartBlending } from '../smart-blending'
 
 type Props = {
   className?: string
 }
 
-const MainContent: React.FC<Props> = ({ className }) => {
-  return (
-    <div className={classNames(className, s.container)}>
-      <Header />
-      <main className={s.main}>
-        <Hero />
-        <div className={s.sections}>
-          <TokenisedEconomy />
-          <ExclusiveNfts />
-          <GrowWaifu />
-          <SmartBlending />
-          <RoadMap />
-        </div>
-      </main>
-    </div>
-  )
-}
+const MainContent: React.FC<Props> = ({ className }) => (
+  <div className={classNames(className, s.container)}>
+    <Header />
+    <main className={s.main}>
+      <Hero />
+      <div className={s.sections}>
+        <TokenisedEconomy />
+        <ExclusiveNfts />
+        <GrowWaifu />
+        <SmartBlending />
+        <TypesOfRarity />
+        <RoadMap />
+      </div>
+    </main>
+  </div>
+)
 
 export default MainContent
