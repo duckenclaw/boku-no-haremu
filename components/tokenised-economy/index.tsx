@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button } from '../button/button'
+import { Button } from '../shared-ui/buttons/button'
+import Container from '../shared-ui/container'
 import { TextHeader } from '../shared-ui/text-header'
 import s from './TokenisedEconomy.module.scss'
 
@@ -41,28 +42,32 @@ const cards: Card[] = [
 ]
 
 export const TokenisedEconomy: React.FC<Props> = () => (
-  <div className={s.container}>
-    <TextHeader
-      className={s.textHeader}
-      title="TOKENISED ECONOMY"
-      subtitle="   We present the latest technological solution for mobile design of
-        expositions, museums, galleries, exhibitions."
-    />
-    <div className={s.cards}>
-      {cards?.map((card: Card) => (
-        <div key={card.title} className={s.card}>
-          <div className={s.cardHeader}>
-            <img
-              className={s.cardLogo}
-              src={`images/${card.logo}.png`}
-              alt={card.title}
-            />
-            <div className={s.cardTitle}>{card.title}</div>
-            <div className={s.cardDescription}>{card.description}</div>
+  <section className={s.section}>
+    <Container>
+      <TextHeader
+        className={s.textHeader}
+        title="TOKENISED ECONOMY"
+        subtitle="   We present the latest technological solution for mobile design of
+          expositions, museums, galleries, exhibitions."
+      />
+      <div className={s.cards}>
+        {cards?.map((card: Card) => (
+          <div key={card.title} className={s.card}>
+            <div className={s.cardHeader}>
+              <img
+                className={s.cardLogo}
+                src={`images/${card.logo}.png`}
+                alt={card.title}
+              />
+              <div className={s.cardTitle}>{card.title}</div>
+              <div className={s.cardDescription}>{card.description}</div>
+            </div>
+            <Button className={s.button} handler={() => null}>
+              VIEW ON ALCOR
+            </Button>
           </div>
-          <Button title="VIEW ON ALCOR" className={s.button} />
-        </div>
-      ))}
-    </div>
-  </div>
+        ))}
+      </div>
+    </Container>
+  </section>
 )

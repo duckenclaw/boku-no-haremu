@@ -12,7 +12,15 @@
 }
 
 .navItem {
+  margin-right: 30px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.navLink {
   display: block;
   padding: 10px;
-  margin-right: 30px;
+  font-size: 18px;
 }
