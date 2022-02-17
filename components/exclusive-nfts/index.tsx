@@ -50,8 +50,8 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
           <div key={card.title} className={s.cardContainer}>
             <Card
               className={s.card}
-              icon="crystal"
-              image="girl1"
+              icon="nyan"
+              image="girl3"
               rating="1"
               frameColor="#93d8ec"
             />
