@@ -13,7 +13,8 @@ const Hero: React.FC<Props> = ({ className }) => {
     <section className={classNames(className, s.section)}>
       <div className={s.characters}>
         <Image
-          objectFit="cover"
+          className={s.charactersImg}
+          objectFit="contain"
           layout="fill"
           src={'/images/characters.png'}
           alt="characters"
