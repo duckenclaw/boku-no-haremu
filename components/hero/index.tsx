@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
@@ -12,11 +13,9 @@ const Hero: React.FC<Props> = ({ className }) => {
   return (
     <section className={classNames(className, s.section)}>
       <div className={s.characters}>
-        <Image
+        <img
           className={s.charactersImg}
-          objectFit="contain"
-          layout="fill"
-          src={'/images/characters.png'}
+          src={'images/characters.png'}
           alt="characters"
         />
       </div>
