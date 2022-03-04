@@ -25,14 +25,14 @@ const Socials: React.FC<Props> = ({ className }) => {
         <li>
           <Link href="#">
             <a className={s.item}>
-              <IconFace />
+              <IconDisc />
             </a>
           </Link>
         </li>
         <li>
           <Link href="#">
             <a className={s.item}>
-              <IconDisc />
+              <IconFace />
             </a>
           </Link>
         </li>
