@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import s from './styles.module.scss'
 import Image from 'next/image'
 import Text from '/public/images/svg/only-haremu.svg'
+import { SakuraAnimation } from './SakuraAnimation'
 
 type Props = {
   className?: string
@@ -13,6 +14,7 @@ const Hero: React.FC<Props> = ({ className }) => {
   return (
     <section className={classNames(className, s.section)}>
       <div className={s.characters}>
+        <SakuraAnimation />
         <img
           className={s.charactersImg}
           src={'images/characters.png'}
