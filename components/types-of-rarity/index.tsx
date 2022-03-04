@@ -21,22 +21,22 @@ export const TypesOfRarity: React.FC<Props> = () => (
       <div className={s.cardsTop}>
         <Card
           className={classNames(s.card, s.firstCard)}
-          icon="crystal"
-          image="girl1"
+          icon="nyan"
+          image="girl3"
           rating="1"
           frameColor="#93d8ec"
         />
         <Card
           className={classNames(s.card, s.secondCard)}
-          icon="crystal"
-          image="girl1"
+          icon="nyan"
+          image="girl3"
           rating="1"
           frameColor="#93d8ec"
         />
         <Card
           className={classNames(s.card, s.thirdCard)}
-          icon="crystal"
-          image="girl1"
+          icon="nyan"
+          image="girl3"
           rating="1"
           frameColor="#93d8ec"
         />
@@ -48,7 +48,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
           </div>
           <Card
             className={s.card}
-            icon="crystal"
+            icon="nyan"
             image="girl2"
             rating="2"
             frameColor="#d87193"
@@ -63,7 +63,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
           </div>
           <Card
             className={s.card}
-            icon="crystal"
+            icon="nyan"
             image="girl2"
             rating="2"
             frameColor="#d87193"

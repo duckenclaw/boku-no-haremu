@@ -22,22 +22,22 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
           <div className={s.leftSide}>
             <Card
               className={s.card}
-              icon="crystal"
-              image="girl1"
+              icon="nyan"
+              image="girl3"
               rating="1"
               frameColor="#93d8ec"
             />
             <Card
               className={s.card}
-              icon="crystal"
-              image="girl1"
+              icon="nyan"
+              image="girl3"
               rating="2"
               frameColor="#d87193"
             />
             <Card
               className={s.card}
-              icon="crystal"
-              image="girl1"
+              icon="nyan"
+              image="girl3"
               rating="2"
               frameColor="#d87193"
             />
@@ -53,7 +53,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
             </div>
             <Card
               className={s.card}
-              icon="crystal"
+              icon="nyan"
               image="girl2"
               rating="2"
               frameColor="#d87193"
@@ -64,21 +64,21 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
           <div className={s.leftSide}>
             <Card
               className={s.card}
-              icon="crystal"
+              icon="nyan"
               image="girl2"
               rating="1"
               frameColor="#93d8ec"
             />
             <Card
               className={s.card}
-              icon="crystal"
+              icon="nyan"
               image="girl2"
               rating="2"
               frameColor="#d87193"
             />
             <Card
               className={s.card}
-              icon="crystal"
+              icon="nyan"
               image="girl2"
               rating="2"
               frameColor="#d87193"

@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import Image from 'next/image'
 import Text from '/public/images/svg/only-haremu.svg'
+import { SakuraAnimation } from './SakuraAnimation'
 
 type Props = {
   className?: string
@@ -12,10 +14,10 @@ const Hero: React.FC<Props> = ({ className }) => {
   return (
     <section className={classNames(className, s.section)}>
       <div className={s.characters}>
-        <Image
-          objectFit="cover"
-          layout="fill"
-          src={'/images/characters.png'}
+        <SakuraAnimation />
+        <img
+          className={s.charactersImg}
+          src={'images/characters.png'}
           alt="characters"
         />
       </div>

@@ -30,6 +30,7 @@
 }
 
 .cardTitle {
+  font-family: 'AA BadaBoom BB';
   font-size: 45px;
   line-height: 48px;
   -webkit-text-fill-color: #479EC5;
@@ -49,4 +50,6 @@
 .cardIcon {
   width: 68px;
   height: 68px;
+  -webkit-filter: drop-shadow(0 0 20px #D5436F );
+  filter: drop-shadow(0 0 20px #D5436F );
 }
