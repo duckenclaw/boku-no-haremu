@@ -15,7 +15,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
     <Container className={s.container}>
       <TextHeader
         title="SMART FUSION"
-        subtitle="Resource mining increases with each new level"
+        subtitle="Resource gathering increases with each level of your waifus"
         className={s.textHeader}
       />
       <div className={s.content}>
