@@ -25,8 +25,8 @@
 }
 
 .cardInfo {
-  margin-top: 42px;
-  max-width: 40%;
+  //margin-top: 42px;
+  max-width: 50%;
 }
 
 .cardTitle {
@@ -36,20 +36,76 @@
   -webkit-text-fill-color: #479EC5;
   -webkit-text-stroke-color: white;
   -webkit-text-stroke-width: 2px; 
+}
+
+.cardTitleWrapper{
+  display: flex;
+  align-items: center;
   margin-bottom: 24px;
 }
 
 .cardDescription {
-  font-family: 'AA BadaBoom BB';
-  font-size: 18px;
+  font-size: 16px;
   line-height: 19px;
   color: #FFFFFF;
   margin-bottom: 24px;
 }
 
 .cardIcon {
-  width: 68px;
-  height: 68px;
+  width: 60px;
+  height: 60px;
+  margin-left: 10px;
   -webkit-filter: drop-shadow(0 0 20px #D5436F );
   filter: drop-shadow(0 0 20px #D5436F );
+}
+
+.cardSubTitle {
+  font-family: 'AA BadaBoom BB';
+  font-size: 28px;
+  line-height: 30px;
+  -webkit-text-fill-color: #E669A3;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 1px; 
+  margin-bottom: 20px;
+}
+
+.cardPrices {
+  display: flex;
+  //justify-content:space-around;
+}
+
+.cardPrice {
+  background:radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
+  background-blend-mode: overlay, normal;
+  backdrop-filter: blur(80px);
+  border-radius: 6px;
+  border: solid 1px #479EC5;
+  height: 28.7px;
+  width: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 30px;
+  position: relative;
+}
+
+.cardPrice :last-child {
+  margin-right: 0px;
+}
+
+.cardPriceContent {
+  position: absolute;
+  font-family: 'AA BadaBoom BB';
+  font-size: 18px;
+  line-height: 19px;
+  color: #FFFFFF;
+  margin-left: 5px;
+}
+
+.cardPriceIcon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: -30%;
+  top: -30%;
 }
