@@ -1,11 +1,14 @@
 .textHeader {
-  margin: 80px 0; 
+  margin: 40px 0; 
 }
 
-.cardsTop {
+.imageTopContainer {
   display: flex;
   justify-content: center;
-  position: relative;
+}
+
+.imageTop {
+  height: 400px;
 }
 
 .card {
