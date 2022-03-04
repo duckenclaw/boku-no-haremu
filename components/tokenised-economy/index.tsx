@@ -4,6 +4,7 @@ import Container from '../shared-ui/container'
 import { TextHeader } from '../shared-ui/text-header'
 import s from './TokenisedEconomy.module.scss'
 import Image from 'next/image'
+import { PreviewText } from '../preview-text/preview_text'
 
 type Props = {
   className?: string
@@ -19,25 +20,25 @@ const cards: Card[] = [
   {
     title: 'NYAN',
     description:
-      'Nyans are an energetic resource, in which your waifu’s character and emotions forwarded to you are concluded.',
+      'An energetic resource, in which your waifu’s character and emotions forwarded to you are concluded.',
     logo: 'nyan',
   },
   {
-    title: 'METAL',
+    title: 'Simptetix',
     description:
-      'Metal is a versatile resource that gives your waifus weapon, accessories and more.',
-    logo: 'metal',
+      'A versatile resource that gives your waifu traits that worth simping over',
+    logo: 'simptetix',
   },
   {
     title: 'BENTO',
     description:
-      'Bento made made with love and care not only gives energy for farming of resources but also demonstrate the care with which you treat your waifus.',
+      'Made with love and care not only gives energy for farming of resources but also demonstrates the care with which you treat your waifus',
     logo: 'bento',
   },
   {
-    title: 'CRYSTAL',
+    title: 'Chantment',
     description:
-      'Magic crystals that fill your waifus with life and unlock their potential. The concept of our resources is a subject to change, and it will develop with every update and give players more opportunities.',
+      'Filled with magicy stuff that unlocks your waifus Lovetential',
     logo: 'crystal',
   },
 ]
@@ -46,6 +47,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
   <section className={s.section}>
     <div className={s.wave} />
     <Container>
+      <PreviewText />
       <TextHeader
         className={s.textHeader}
         title="TOKENISED ECONOMY"

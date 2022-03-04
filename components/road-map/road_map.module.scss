@@ -35,9 +35,11 @@
 }
 
 .row {
+  width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 119px;
+  padding-left: 21.1%;
 }
 
 .number {
@@ -67,5 +69,9 @@
 
   ul {
     padding-left: 0;
+  }
+
+  li {
+    list-style-type: disc;
   }
 }
