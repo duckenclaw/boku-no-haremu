@@ -36,7 +36,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
           <Card
             className={s.card}
             icon="nyan"
-            image="girl2"
+            image="catgirllvl1-1"
             rating="2"
             frameColor="#d87193"
           />
@@ -58,7 +58,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
           <Card
             className={s.card}
             icon="nyan"
-            image="girl2"
+            image="lisa1"
             rating="2"
             frameColor="#d87193"
           />
