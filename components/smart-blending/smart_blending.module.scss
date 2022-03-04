@@ -6,68 +6,56 @@
   max-width: 1230px;
 }
 
-.row {
-  position: relative;
+.content {
+  margin-top: 80px;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  margin-top: 150px;
+  justify-content: space-between;
 }
 
-.leftSide {
+.column {
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: column;
   align-items: center;
-  margin-right: 6%;
 }
 
-.rightSide {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
-
-  margin-left: -170px;
-
-  .card {
-    transform: translate(0, 0) !important;
-  }
-}
-
-.card {
-  max-width: 200px;
-  min-width: 200px;
-  width: 100%;
-}
-
-
-.card:nth-child(2) {
-  z-index: 1;
-  transform: translate(-97px, 0);
-  -webkit-transform: translate(-97px, 0);
-  -moz-transform: translate(-97px, 0);
-  -ms-transform: translate(-97px, 0);
-  -o-transform: translate(-97px, 0);
-}
-
-.card:nth-child(3) {
-  z-index: 2;
-  transform: translate(-170px, 0);
-  -webkit-transform: translate(-170px, 0);
-  -moz-transform: translate(-170px, 0);
-  -ms-transform: translate(-170px, 0);
-  -o-transform: translate(-170px, 0);
+.imageTop {
+  height: 307px;
 }
 
 .arrow {
-  max-width: 165px;
-  min-width: 165px;
-  height: 82px;
-  margin-right: auto;
-
-  img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover;
+  margin-bottom: 50px;
+  margin-left: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  span {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
   }
+}
+
+.multiplier {
+  font-family: 'AA BadaBoom BB';
+  margin-right: 10px;
+  font-size: 32px;
+  -webkit-text-fill-color: #479EC5;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+}
+
+.nextLvl {
+  font-family: 'AA BadaBoom BB';
+  margin-right: 10px;
+  font-size: 32px;
+  -webkit-text-fill-color: #D5436F;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px; 
+}
+
+.card {
+  max-width: 172px;
+  max-height: 255px;
 }
