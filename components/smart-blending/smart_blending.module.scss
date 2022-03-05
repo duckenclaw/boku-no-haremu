@@ -19,11 +19,26 @@
 }
 
 .imageTop {
-  height: 307px;
+  height: 335px;
 }
 
 .arrow {
   margin-bottom: 50px;
+  margin-left: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  span {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+  }
+}
+
+.arrow2 {
+  margin-bottom: 10px;
   margin-left: 30%;
   text-align: center;
   display: flex;

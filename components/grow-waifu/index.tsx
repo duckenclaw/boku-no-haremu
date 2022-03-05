@@ -44,7 +44,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         <Card
           className={s.card}
           frameColor="#e8dc3f"
-          iconBackgroundColor="#e8dc3f"
+          iconBackgroundColor="#479EC5"
           ratingBackgroundColor="#e8dc3f"
           rating="3"
         />

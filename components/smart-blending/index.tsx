@@ -10,6 +10,7 @@ import Image from 'next/image'
 type SmartBlendingProps = {
   className?: string
 }
+
 export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
     <Container className={s.container}>
@@ -38,12 +39,12 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
             icon="nyan"
             image="catgirllvl1-1"
             rating="2"
-            frameColor="#d87193"
+            frameColor="#93d8ec"
           />
         </div>
         <div className={s.column}>
           <img className={s.imageTop} alt="" src="/images/mimi2.png" />
-          <div className={s.arrow}>
+          <div className={s.arrow2}>
             <Image
               src="/images/svg/arrow.svg"
               alt="arrow"
@@ -55,13 +56,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
               <span className={s.nextLvl}>next lvl</span>
             </div>
           </div>
-          <Card
-            className={s.card}
-            icon="nyan"
-            image="wizardlvl1"
-            rating="2"
-            frameColor="#d87193"
-          />
+          <img className={s.imageTop} alt="" src="/images/mimi3.png" />
         </div>
       </div>
     </Container>

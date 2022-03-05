@@ -38,7 +38,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
             icon="nyan"
             image="catgirllvl1-1"
             rating="2"
-            frameColor="#d87193"
+            frameColor="#93d8ec"
           />
           <div style={{ color: 'white' }} className={s.cardName}>
             Common
@@ -80,8 +80,9 @@ export const TypesOfRarity: React.FC<Props> = () => (
           <Card
             className={s.card}
             frameColor="#e8dc3f"
-            iconBackgroundColor="#e8dc3f"
+            iconBackgroundColor="#479EC5"
             ratingBackgroundColor="#e8dc3f"
+            rating="2"
           />
           <div style={{ color: '#e8dc3f' }} className={s.cardName}>
             Epic
