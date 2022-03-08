@@ -23,29 +23,30 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         <Card
           className={s.card}
           icon="nyan"
-          image="girl3"
+          image="catgirllvl1-1"
           rating="1"
           frameColor="#93d8ec"
         />
         <div className={s.arrow}>
-          <Image src="/arrow_pink.svg" alt="arrow" width={90} height={36} />
+          <Image src="/images/svg/arrow.svg" alt="arrow" width={46} height={26} />
         </div>
 
         <Card
           className={s.card}
           icon="nyan"
-          image="girl2"
+          image="lisa1"
           rating="2"
           frameColor="#d87193"
         />
         <div className={s.arrow}>
-          <Image src="/arrow_yellow.svg" alt="arrow" width={90} height={36} />
+          <Image src="/images/svg/arrow.svg" alt="arrow" width={46} height={26} />
         </div>
         <Card
           className={s.card}
           frameColor="#e8dc3f"
-          iconBackgroundColor="#e8dc3f"
+          iconBackgroundColor="#479EC5"
           ratingBackgroundColor="#e8dc3f"
+          rating="3"
         />
       </div>
     </Container>

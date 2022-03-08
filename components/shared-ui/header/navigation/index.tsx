@@ -30,7 +30,7 @@ const Navigation: React.FC<Props> = ({ className }) => {
             BLENDING
           </a>
         </li>
-        <li>
+        <li className={s.navItem}>
           <a className={s.navLink} href="#">
             TYPES
           </a>
@@ -38,6 +38,11 @@ const Navigation: React.FC<Props> = ({ className }) => {
         <li className={s.navItem}>
           <a className={s.navLink} href="#">
             ROAD MAP
+          </a>
+        </li>
+        <li className={s.navItem}>
+          <a className={s.navLink} href="#">
+            WHITE PAPER
           </a>
         </li>
       </ul>

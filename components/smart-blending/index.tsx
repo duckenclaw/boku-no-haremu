@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import classNames from 'classnames'
 import s from './smart_blending.module.scss'
@@ -9,97 +10,53 @@ import Image from 'next/image'
 type SmartBlendingProps = {
   className?: string
 }
+
 export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
     <Container className={s.container}>
       <TextHeader
-        title="SMART BLENDING"
-        subtitle="Resource mining increases with each new level"
+        title="SMART FUSION"
+        subtitle="Resource gathering increases with each level of your waifus"
         className={s.textHeader}
       />
       <div className={s.content}>
-        <div className={s.row}>
-          <div className={s.leftSide}>
-            <Card
-              className={s.card}
-              icon="nyan"
-              image="girl3"
-              rating="1"
-              frameColor="#93d8ec"
+        <div className={s.column}>
+          <img className={s.imageTop} alt="" src="/images/mimi.png" />
+          <div className={s.arrow}>
+            <Image
+              src="/images/svg/arrow.svg"
+              alt="arrow"
+              width={56}
+              height={36}
             />
-            <Card
-              className={s.card}
-              icon="nyan"
-              image="girl3"
-              rating="2"
-              frameColor="#d87193"
-            />
-            <Card
-              className={s.card}
-              icon="nyan"
-              image="girl3"
-              rating="2"
-              frameColor="#d87193"
-            />
-          </div>
-          <div className={s.rightSide}>
-            <div className={s.arrow}>
-              <Image
-                src="/arrow_pink.svg"
-                alt="arrow"
-                width={165}
-                height={82}
-              />
+            <div className={s.arrowText}>
+              <span className={s.multiplier}>x1</span>
+              <span className={s.nextLvl}>next lvl</span>
             </div>
-            <Card
-              className={s.card}
-              icon="nyan"
-              image="girl2"
-              rating="2"
-              frameColor="#d87193"
-            />
           </div>
+          <Card
+            className={s.card}
+            icon="nyan"
+            image="catgirllvl1-1"
+            rating="2"
+            frameColor="#93d8ec"
+          />
         </div>
-        <div className={s.row}>
-          <div className={s.leftSide}>
-            <Card
-              className={s.card}
-              icon="nyan"
-              image="girl2"
-              rating="1"
-              frameColor="#93d8ec"
+        <div className={s.column}>
+          <img className={s.imageTop} alt="" src="/images/mimi2.png" />
+          <div className={s.arrow2}>
+            <Image
+              src="/images/svg/arrow.svg"
+              alt="arrow"
+              width={56}
+              height={36}
             />
-            <Card
-              className={s.card}
-              icon="nyan"
-              image="girl2"
-              rating="2"
-              frameColor="#d87193"
-            />
-            <Card
-              className={s.card}
-              icon="nyan"
-              image="girl2"
-              rating="2"
-              frameColor="#d87193"
-            />
-          </div>
-          <div className={s.rightSide}>
-            <div className={s.arrow}>
-              <Image
-                src="/arrow_yellow.svg"
-                alt="arrow"
-                width={165}
-                height={82}
-              />
+            <div className={s.arrowText}>
+              <span className={s.multiplier}>x2</span>
+              <span className={s.nextLvl}>next lvl</span>
             </div>
-            <Card
-              className={s.card}
-              frameColor="#e8dc3f"
-              iconBackgroundColor="#e8dc3f"
-              ratingBackgroundColor="#e8dc3f"
-            />
           </div>
+          <img className={s.imageTop} alt="" src="/images/mimi3.png" />
         </div>
       </div>
     </Container>

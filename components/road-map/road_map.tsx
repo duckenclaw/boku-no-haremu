@@ -8,11 +8,10 @@ export const RoadMap = () => {
     {
       number: 'Q1 2022',
       text: [
-        'Ideation',
-        'Team Formation',
-        'Strategic Advisors',
-        'Game Logic Development',
-        'MVP Development',
+        'Create Mintpass',
+        'Create NFTs',
+        'Create SmartContract',
+        'Release of packs, sales',
       ],
       color: '#E669A3',
       background: '#E669A3',
@@ -21,11 +20,10 @@ export const RoadMap = () => {
     {
       number: 'Q2 2022',
       text: [
-        'Ideation',
-        'Team Formation',
-        'Strategic Advisors',
-        'Game Logic Development',
-        'MVP Development',
+        'Token listing',
+        'Whitelisted on AtomicHub',
+        'New Waifus',
+        'New resource gathering modes',
       ],
       color: '#FDF150',
       background: '#FDF150',
@@ -34,11 +32,10 @@ export const RoadMap = () => {
     {
       number: 'Q3 2022',
       text: [
-        'Ideation',
-        'Team Formation',
-        'Strategic Advisors',
-        'Game Logic Development',
-        'MVP Development',
+        'Achievements',
+        'PVP mode',
+        'Listing Partnerships',
+        'Launch on BSC',
       ],
       color: '#00FF75',
       background: '#00FF75',
@@ -47,11 +44,9 @@ export const RoadMap = () => {
     {
       number: 'Q4 2022',
       text: [
-        'Ideation',
-        'Team Formation',
-        'Strategic Advisors',
-        'Game Logic Development',
-        'MVP Development',
+        'Bridge for NFT and tokens',
+        'Guilds, guild battles',
+        'Launch on Mobile(Android/iOS)',
       ],
       color: '#56CCF2',
       background: '#56CCF2',

@@ -12,28 +12,45 @@ type ExclusiveNftsProps = {
 
 const cards = [
   {
-    title: 'Cat girls',
-    description:
-      'catgirls are ideal companions and thanks to their loving nature, their emotions towards their masters materialize into Nyans',
+    title: 'Mimi-chan',
+    description:'Ideal companions and because of their every-loving nature, their emotions towards their masters materialize into Nyans.',
     icon: 'nyan',
+    image: 'catgirllvl1-1',
+    price: {
+      sim: 6000,
+      crystal: 8000
+    }
   },
   {
-    title: 'Enchantresses',
-    description:
-      'alluring and enchanting senchantresses that can change the world around them at a snap of a finger, but for it they need to encase their energy inside magical Crystals',
+    title: 'Chantresses',
+    description:'Alluring and enchanting, they can change the world around them at a snap of a finger, but for it they need to encase their energy inside magical Chantments.',
     icon: 'crystal',
+    image: 'wizardlvl1',
+    price: {
+      sim: 4000,
+      nyan: 400
+    }
   },
   {
-    title: 'Cyberloli',
-    description:
-      'Cyberloli - deadly lolis, thanks to their extraordinary intelligence, they move the progress making new technologies using Metal in this new world ',
-    icon: 'metal',
+    title: 'H1-bride ',
+    description:'Deadly and charming, thanks to their extraordinary intelligence, move the progress making new technologies using Simptetix.',
+    icon: 'sim',
+    image: 'mechalvl1',
+    price: {
+      crystal: 4000,
+      nyan: 400
+    }
   },
   {
-    title: 'Schoolgirls',
-    description:
-      'Schoolgirls - cute and nostalgic, show their affection with homey Bento with notes to you.',
+    title: 'Hitomi',
+    description:'Cute and nostalgic, care for you showing their affection to you with homey Bento.',
     icon: 'bento',
+    image: 'schoollvl1',
+    price: {
+      crystal: 3000,
+      nyan: 800,
+      sim: 3000
+    }
   },
 ]
 
@@ -50,19 +67,42 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
           <div key={card.title} className={s.cardContainer}>
             <Card
               className={s.card}
-              icon="nyan"
-              image="girl3"
+              icon={card.icon}
+              image={card.image}
               rating="1"
               frameColor="#93d8ec"
             />
             <div className={s.cardInfo}>
-              <div className={s.cardTitle}>{card.title}</div>
-              <div className={s.cardDescription}>{card.description}</div>
-              <img
+              <div className={s.cardTitleWrapper}>
+                <div className={s.cardTitle}>{card.title}</div>
+                <img
                 className={s.cardIcon}
                 src={`images/${card.icon}.png`}
                 alt=""
-              />
+                />
+              </div>
+              <div className={s.cardDescription}>{card.description}</div>
+              <div className={s.cardSubTitle}>Asking out cost</div>
+              <div className={s.cardPrices}>
+                {card.price.sim && 
+                  <div className={s.cardPrice}>
+                    <img className={s.cardPriceIcon} src={`images/sim.png`} />
+                    <div className={s.cardPriceContent}>{card.price.sim}</div>
+                  </div>
+                }
+                {card.price.crystal && 
+                  <div className={s.cardPrice}>
+                    <img className={s.cardPriceIcon} src={`images/crystal.png`} />
+                    <div className={s.cardPriceContent}>{card.price.crystal}</div>
+                  </div>
+                }
+                {card.price.nyan && 
+                  <div className={s.cardPrice}>
+                    <img className={s.cardPriceIcon} src={`images/nyan.png`} />
+                    <div className={s.cardPriceContent}>{card.price.nyan}</div>
+                  </div>
+                }
+              </div>
             </div>
           </div>
         ))}
