@@ -9,6 +9,8 @@ import { Hero } from '../hero'
 import { Header } from '../shared-ui/header'
 import { TypesOfRarity } from '../types-of-rarity'
 import { SmartBlending } from '../smart-blending'
+import { Rules } from '../rules'
+import { ContactInfo } from '../contact_info'
 
 type Props = {
   className?: string
@@ -25,7 +27,9 @@ const MainContent: React.FC<Props> = ({ className }) => (
         <GrowWaifu />
         <SmartBlending />
         <TypesOfRarity />
+        <Rules/>
         <RoadMap />
+        <ContactInfo />
       </div>
     </main>
   </div>

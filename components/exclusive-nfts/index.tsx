@@ -13,43 +13,44 @@ type ExclusiveNftsProps = {
 const cards = [
   {
     title: 'Mimi-chan',
-    description:'Ideal companions and because of their every-loving nature, their emotions towards their masters materialize into Nyans.',
+    description:'An ideal companion. She love you so much, that you get Nyans from them.',
     icon: 'nyan',
     image: 'catgirllvl1-1',
     price: {
-      sim: 6000,
-      crystal: 8000
+      sim: 7500,
+      crystal: 8250,
+      nyan: 300
     }
   },
   {
     title: 'Chantresses',
-    description:'Alluring and enchanting, they can change the world around them at a snap of a finger, but for it they need to encase their energy inside magical Chantments.',
+    description: 'Enchant the reality to shift according to her will. So can you, if she presents her power to you in small boxes called Chantments.',
     icon: 'crystal',
     image: 'wizardlvl1',
     price: {
-      sim: 4000,
-      nyan: 400
+      sim: 6000,
+      nyan: 600
     }
   },
   {
     title: 'H1-bride ',
-    description:'Deadly and charming, thanks to their extraordinary intelligence, move the progress making new technologies using Simptetix.',
+    description: 'As deadly as she is charming. She is so smart - Simpthetix are like child’s for her.',
     icon: 'sim',
     image: 'mechalvl1',
     price: {
-      crystal: 4000,
-      nyan: 400
+      crystal: 6000,
+      nyan: 600
     }
   },
   {
     title: 'Hitomi',
-    description:'Cute and nostalgic, care for you showing their affection to you with homey Bento.',
+    description: 'Home impersonated. She takes such good care of you. You’ll never go hungry without a delicious Bento with her.',
     icon: 'bento',
     image: 'schoollvl1',
     price: {
-      crystal: 3000,
-      nyan: 800,
-      sim: 3000
+      crystal: 4500,
+      nyan: 1200,
+      sim: 4500
     }
   },
 ]
@@ -59,7 +60,6 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
     <Container>
       <TextHeader
         title="EXCLUSIVE NFTS"
-        subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
         className={s.textHeader}
       />
       <div className={s.cards}>

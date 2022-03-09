@@ -3,7 +3,7 @@ import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import Image from 'next/image'
-import Text from '/public/images/svg/only-haremu.svg'
+//import Text from '/public/images/svg/boku-no-haremu.svg'
 import { SakuraAnimation } from './SakuraAnimation'
 
 type Props = {
@@ -23,7 +23,8 @@ const Hero: React.FC<Props> = ({ className }) => {
       </div>
       <div className={s.content}>
         <button className={s.button}>PLAY & EARN</button>
-        <Text className={s.text} />
+        <div className={s.title}>Boku no haremu</div>
+        <div className={s.subtitle}>a true strategy nft game</div>
       </div>
     </section>
   )

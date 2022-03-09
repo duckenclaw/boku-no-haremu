@@ -36,12 +36,12 @@ export const TypesOfRarity: React.FC<Props> = () => (
           <Card
             className={s.card}
             icon="nyan"
-            image="catgirllvl1-1"
+            image="lisa1"
             rating="2"
             frameColor="#93d8ec"
           />
           <div style={{ color: 'white' }} className={s.cardName}>
-            Common
+            89% Common
           </div>
         </div>
         <div className={classNames(s.cardWrapper)}>
@@ -63,7 +63,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
             frameColor="#d87193"
           />
           <div style={{ color: '#D5436F' }} className={s.cardName}>
-            Rare
+            10% Rare
           </div>
         </div>
         <div className={classNames(s.cardWrapper)}>
@@ -82,10 +82,12 @@ export const TypesOfRarity: React.FC<Props> = () => (
             frameColor="#e8dc3f"
             iconBackgroundColor="#479EC5"
             ratingBackgroundColor="#e8dc3f"
+            icon="nyan"
+            image="lisa1"
             rating="2"
           />
           <div style={{ color: '#e8dc3f' }} className={s.cardName}>
-            Epic
+            1% Epic
           </div>
         </div>
       </div>

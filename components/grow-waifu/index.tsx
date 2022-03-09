@@ -16,7 +16,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
     <Container>
       <TextHeader
         title="GROW YOUR UNIQUE WAIFU"
-        subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
+        subtitle="Inside every waifu there is a milfu. Milfus are more powerful and experienced than their younger counterparts. Let your milfus guide your waifus on their path to excellence."
         className={s.textHeader}
       />
       <div className={s.content}>
