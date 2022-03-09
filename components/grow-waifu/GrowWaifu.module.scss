@@ -1,5 +1,9 @@
 .textHeader {
   margin-bottom: 80px;
+
+  @media(max-width: 768px) {
+    margin-bottom: 42px;
+  }
 }
 
 .content {
@@ -24,6 +28,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
+
+  @media (max-width: 425px) {
+    max-width: 140px !important;
+    height: 200px !important;
+  }
 }
 
 .arrow {
@@ -40,6 +49,7 @@
 
 .arrow {
   text-align: center;
+
   @media(max-width: 768px) {
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);

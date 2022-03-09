@@ -12,4 +12,11 @@
   align-self: center;
   cursor: pointer;
   font-family: 'SF Pro Display';
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 179%;
+    width: 117px;
+    height: 24px;
+  }
 }

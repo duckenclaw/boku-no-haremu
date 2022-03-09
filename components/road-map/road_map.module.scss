@@ -6,6 +6,10 @@
 
 .textHeader {
   margin-top: 100px;
+
+  @media(max-width:768px) {
+    margin-top: 60px;
+  }
 }
 
 .columns_wrapper {
@@ -31,6 +35,10 @@
     background: #FFFFFF;
     border-radius: 8px;
     z-index: 0;
+
+    @media (max-width: 425px) {
+      left: 32%
+    }
   }
 }
 
@@ -39,7 +47,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 119px;
-  padding-left: 21.1%;
+  justify-content: space-around;
 }
 
 .number {
@@ -48,24 +56,41 @@
   font-size: 38px;
   line-height: 37px;
   text-align: right;
+  margin-left: 103px;
+
+  @media (max-width: 425px) {
+    font-size: 16px;
+    line-height: 16px;
+    margin-left: 20px;
+  }
 }
 
 .circle {
+  position: absolute;
+  left: 48.6%;
+  right: 48.6%;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  margin-left: 99px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   z-index: 1;
+
+  @media (max-width: 425px) {
+    width: 16px;
+    height: 16px;
+    left: 30.6%;
+  }
 }
 
 .text {
+  max-width: 209px;
+  width: 100%;
   text-align: left;
   margin-top: 75px;
-  margin-left: 56px;
+  margin-left: 98px;
 
   ul {
     padding-left: 0;
@@ -73,5 +98,10 @@
 
   li {
     list-style-type: disc;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 14px;
+    line-height: 17px;
   }
 }

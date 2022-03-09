@@ -6,9 +6,20 @@
   font-size: 39px;
   line-height: 47px;
   color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media(max-width: 425px) {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
 
-.title{
+.title {
   font-family: 'AA BadaBoom BB';
   font-style: normal;
   font-weight: normal;

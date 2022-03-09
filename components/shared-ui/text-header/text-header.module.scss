@@ -11,6 +11,11 @@
   line-height: 57px;
   color: #EF5DA8;
   margin-bottom: 26px;
+
+  @media (max-width: 425px) {
+    font-size: 26px;
+    line-height: 31px;
+  }
 }
 
 .subtitle {
@@ -19,4 +24,9 @@
   line-height: 21px;
   color: #FFFFFF;
   max-width: 65%;
+
+  @media (max-width: 425px) {
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
