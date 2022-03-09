@@ -6,7 +6,8 @@
 
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: flex-end;
   width: 100%;
   min-height: 90px;
 }

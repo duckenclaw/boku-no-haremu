@@ -780,7 +780,7 @@ function animate() {
 function makeCanvasFullScreen(canvas) {
     var b = document.body;
 	var d = document.documentElement;
-	const fullw = Math.min(b.clientWidth , b.scrollWidth, d.scrollWidth, d.clientWidth);
+	const fullw = Math.max(b.clientWidth , b.scrollWidth, d.scrollWidth, d.clientWidth);
 	const fullh = Math.min(b.clientHeight , b.scrollHeight, d.scrollHeight, d.clientHeight);
 	canvas.width = fullw;
 	canvas.height = fullh;
