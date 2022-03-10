@@ -3,16 +3,16 @@
   top: 0;
   left: 0;
   z-index: 100;
-
   display: flex;
   flex-flow: column nowrap;
-  justify-content:center;
+  justify-content: center;
   align-items: flex-end;
   width: 100%;
   min-height: 90px;
 }
 
 .wrapper {
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
 }
