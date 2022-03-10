@@ -3,16 +3,27 @@
   top: 0;
   left: 0;
   z-index: 100;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: flex-end;
   width: 100%;
   min-height: 90px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: flex-end;
+  }
 }
 
 .wrapper {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
+  max-width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(239 246 255 / 50%);
+
+  @media (max-width: 768px) {
+    background-color: transparent;
+  }
 }
