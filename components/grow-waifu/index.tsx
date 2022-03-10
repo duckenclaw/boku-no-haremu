@@ -49,7 +49,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
           ratingBackgroundColor="#e8dc3f"
           rating="3"
         />*/}
-        <Image src="/images/mimi_card3.png" alt="mimi_card"  width={244} height={362}/>
+        <Image src="/images/question_card.png" alt="mimi_card"  width={244} height={362}/>
       </div>
     </Container>
   </section>
