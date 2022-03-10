@@ -18,6 +18,8 @@
   @media (max-width: 1024px) {
     flex-direction: column;
   }
+
+
 }
 
 .card {
@@ -32,8 +34,12 @@
 
   @media (max-width: 768px) {
     margin-right: 29px;
-    max-width: 140px;
+    max-width: 123px;
     height: 200px;
+  }
+
+  @media (max-width: 320px) {
+    margin-right: 21px;
   }
 }
 
