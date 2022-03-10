@@ -37,7 +37,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
           <Card
             className={s.card}
             icon="nyan"
-            image="catgirllvl1-1"
+            image="lisa1"
             rating="2"
             frameColor="#93d8ec"
           />

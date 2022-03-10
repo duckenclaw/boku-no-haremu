@@ -17,6 +17,8 @@ type Props = {
 }
 
 const MainContent: React.FC<Props> = ({ className }) => (
+  
+
   <div className={classNames(className, s.container)}>
     <Header />
     <main className={s.main}>
@@ -30,9 +32,10 @@ const MainContent: React.FC<Props> = ({ className }) => (
         <Rules/>
         <RoadMap />
         <ContactInfo />
-      </div>
+      </div> 
     </main>
   </div>
+        
 )
 
 export default MainContent
