@@ -33,7 +33,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
               />
             </div>
           </div>
-          <img src="/images/group_mimi1.png" alt="mimi" />
+          <Image src="/images/mimi_card2.png" alt="mimi_card" width={244} height={362} />
           {/*<Card
             className={s.card}
             icon="nyan"
@@ -56,7 +56,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
               />
             </div>
           </div>
-          <img src="/images/group_mimi2.png" alt="mimi" />
+          <Image src="/images/mimi_card.png" alt="mimi_card" width={244} height={362} />
           {/*<Card
             className={s.card}
             icon="nyan"
@@ -79,7 +79,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
               />
             </div>
           </div>
-          <img src="/images/group_mimi3.png" alt="mimi" />
+          <Image src="/images/mimi_card33.png" alt="mimi" width={244} height={362} />
           {/*<Card
             className={s.card}
             frameColor="#e8dc3f"
