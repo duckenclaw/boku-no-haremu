@@ -34,16 +34,17 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
               <span className={s.nextLvl}>next lvl</span>
             </div>
           </div>
-          <Card
+          {/*<Card
             className={s.card}
             icon="nyan"
             image="lisa1"
             rating="2"
             frameColor="#93d8ec"
-          />
+          />*/}
+          <Image src="/images/mimi2.png" alt="" width={172} height={256} />
         </div>
         <div className={s.column}>
-          <img className={s.imageTop} alt="" src="/images/mimi2.png" />
+          <img className={s.imageTop} alt="" src="/images/chan111.png" />
           <div className={s.arrow2}>
             <Image
               src="/images/svg/arrow.svg"
@@ -56,7 +57,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
               <span className={s.nextLvl}>next lvl</span>
             </div>
           </div>
-          <img className={s.imageTop} alt="" src="/images/mimi3.png" />
+          <Image alt="" src="/images/mimi3.png" width={248} height={256} />
         </div>
       </div>
     </Container>
