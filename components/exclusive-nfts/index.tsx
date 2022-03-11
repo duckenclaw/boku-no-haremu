@@ -5,6 +5,7 @@ import s from './ExclusiveNfts.module.scss'
 import { TextHeader } from '../shared-ui/text-header'
 import { Card } from '../shared-ui/card'
 import Container from '../shared-ui/container'
+import Image from 'next/image'
 
 type ExclusiveNftsProps = {
   className?: string
@@ -15,7 +16,7 @@ const cards = [
     title: 'Mimi-chan',
     description:'An ideal companion. She love you so much, that you get Nyans from them.',
     icon: 'nyan',
-    image: 'catgirllvl1-1',
+    image: '/images/mimi1.png',
     price: {
       sim: 7500,
       crystal: 8250,
@@ -26,7 +27,7 @@ const cards = [
     title: 'Chantresses',
     description: 'Enchant the reality to shift according to her will. So can you, if she presents her power to you in small boxes called Chantments.',
     icon: 'crystal',
-    image: 'wizardlvl1',
+    image: '/images/chan1.png',
     price: {
       sim: 6000,
       nyan: 600
@@ -36,7 +37,7 @@ const cards = [
     title: 'H1-bride ',
     description: 'As deadly as she is charming. She is so smart - Simpthetix are like child’s for her.',
     icon: 'sim',
-    image: 'mechalvl1',
+    image: '/images/h11.png',
     price: {
       crystal: 6000,
       nyan: 600
@@ -46,7 +47,7 @@ const cards = [
     title: 'Hitomi',
     description: 'Home impersonated. She takes such good care of you. You’ll never go hungry without a delicious Bento with her.',
     icon: 'bento',
-    image: 'schoollvl1',
+    image: '/images/hitomi1.png',
     price: {
       crystal: 4500,
       nyan: 1200,
@@ -65,13 +66,14 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
       <div className={s.cards}>
         {cards.map((card) => (
           <div key={card.title} className={s.cardContainer}>
-            <Card
+            {/*<Card
               className={s.card}
               icon={card.icon}
               image={card.image}
               rating="1"
               frameColor="#93d8ec"
-            />
+            />*/}
+            <img className={s.card_image} src={card.image} alt="mimi" />
             <div className={s.cardInfo}>
               <div className={s.cardTitleWrapper}>
                 <div className={s.cardTitle}>{card.title}</div>
