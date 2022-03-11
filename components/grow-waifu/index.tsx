@@ -20,7 +20,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         className={s.textHeader}
       />
       <div className={s.content}>
-        <Image src="/images/mimi_card2.png" alt="mimi_card" width={244} height={362} />
+        <Image src="/images/mimi1.png" alt="mimi_card" width={244} height={362} />
         {/*<Card
           className={s.card}
           icon="nyan"
@@ -31,7 +31,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         <div className={s.arrow}>
           <Image src="/images/svg/arrow.svg" alt="arrow" width={46} height={26} />
         </div>
-        <Image src="/images/mimi_card.png" alt="mimi_card"  width={244} height={362}/>
+        <Image src="/images/mimi_rare2.png" alt="mimi_card"  width={244} height={362}/>
         {/*<Card
           className={s.card}
           icon="nyan"
@@ -49,7 +49,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
           ratingBackgroundColor="#e8dc3f"
           rating="3"
         />*/}
-        <Image src="/images/question_card.png" alt="mimi_card"  width={244} height={362}/>
+        <Image src="/images/question.png" alt="mimi_card"  width={244} height={362}/>
       </div>
     </Container>
   </section>

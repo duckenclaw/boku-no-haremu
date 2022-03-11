@@ -152,3 +152,12 @@
   left: -30%;
   top: -30%;
 }
+
+.card_image{
+  width: 220px;
+  height: 320px;
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 200px;
+  }
+}
