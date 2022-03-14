@@ -12,8 +12,8 @@ import {
 } from './Shaders'
 
 // Utilities
-var Vector3 = {}
-var Matrix44 = {}
+let Vector3 = {}
+let Matrix44 = {}
 Vector3.create = function (x, y, z) {
   return { x: x, y: y, z: z }
 }
@@ -26,7 +26,7 @@ Vector3.cross = function (v, v0, v1) {
   v.z = v0.x * v1.y - v0.y * v1.x
 }
 Vector3.normalize = function (v) {
-  var l = v.x * v.x + v.y * v.y + v.z * v.z
+  let l = v.x * v.x + v.y * v.y + v.z * v.z
   if (l > 0.00001) {
     l = 1.0 / Math.sqrt(l)
     v.x *= l
@@ -51,8 +51,8 @@ Matrix44.createIdentity = function () {
   ])
 }
 Matrix44.loadProjection = function (m, aspect, vdeg, near, far) {
-  var h = near * Math.tan(((vdeg * Math.PI) / 180.0) * 0.5) * 2.0
-  var w = h * aspect
+  let h = near * Math.tan(((vdeg * Math.PI) / 180.0) * 0.5) * 2.0
+  let w = h * aspect
 
   m[0] = (2.0 * near) / w
   m[1] = 0.0
@@ -75,16 +75,16 @@ Matrix44.loadProjection = function (m, aspect, vdeg, near, far) {
   m[15] = 0.0
 }
 Matrix44.loadLookAt = function (m, vpos, vlook, vup) {
-  var frontv = Vector3.create(
+  let frontv = Vector3.create(
     vpos.x - vlook.x,
     vpos.y - vlook.y,
     vpos.z - vlook.z
   )
   Vector3.normalize(frontv)
-  var sidev = Vector3.create(1.0, 0.0, 0.0)
+  let sidev = Vector3.create(1.0, 0.0, 0.0)
   Vector3.cross(sidev, vup, frontv)
   Vector3.normalize(sidev)
-  var topv = Vector3.create(1.0, 0.0, 0.0)
+  let topv = Vector3.create(1.0, 0.0, 0.0)
   Vector3.cross(topv, frontv, sidev)
   Vector3.normalize(topv)
 
@@ -110,7 +110,7 @@ Matrix44.loadLookAt = function (m, vpos, vlook, vup) {
 }
 
 //
-var timeInfo = {
+let timeInfo = {
   start: 0,
   prev: 0, // Date
   delta: 0,
@@ -118,8 +118,8 @@ var timeInfo = {
 }
 
 //
-var gl
-var renderSpec = {
+let gl
+let renderSpec = {
   width: 0,
   height: 0,
   aspect: 1,
@@ -151,7 +151,7 @@ function deleteRenderTarget(rt) {
 }
 
 function createRenderTarget(w, h) {
-  var ret = {
+  let ret = {
     width: w,
     height: h,
     sizeArray: new Float32Array([w, h, w / h]),
@@ -204,13 +204,13 @@ function createRenderTarget(w, h) {
 }
 
 function compileShader(shtype, shsrc) {
-  var retsh = gl.createShader(shtype)
+  let retsh = gl.createShader(shtype)
 
   gl.shaderSource(retsh, shsrc)
   gl.compileShader(retsh)
 
   if (!gl.getShaderParameter(retsh, gl.COMPILE_STATUS)) {
-    var errlog = gl.getShaderInfoLog(retsh)
+    let errlog = gl.getShaderInfoLog(retsh)
     gl.deleteShader(retsh)
     console.error(errlog)
     return null
@@ -219,14 +219,14 @@ function compileShader(shtype, shsrc) {
 }
 
 function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
-  var vsh = compileShader(gl.VERTEX_SHADER, vtxsrc)
-  var fsh = compileShader(gl.FRAGMENT_SHADER, frgsrc)
+  let vsh = compileShader(gl.VERTEX_SHADER, vtxsrc)
+  let fsh = compileShader(gl.FRAGMENT_SHADER, frgsrc)
 
   if (vsh == null || fsh == null) {
     return null
   }
 
-  var prog = gl.createProgram()
+  let prog = gl.createProgram()
   gl.attachShader(prog, vsh)
   gl.attachShader(prog, fsh)
 
@@ -235,14 +235,14 @@ function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
 
   gl.linkProgram(prog)
   if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-    var errlog = gl.getProgramInfoLog(prog)
+    let errlog = gl.getProgramInfoLog(prog)
     console.error(errlog)
     return null
   }
 
   if (uniformlist) {
     prog.uniforms = {}
-    for (var i = 0; i < uniformlist.length; i++) {
+    for (let i = 0; i < uniformlist.length; i++) {
       prog.uniforms[uniformlist[i]] = gl.getUniformLocation(
         prog,
         uniformlist[i]
@@ -252,8 +252,8 @@ function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
 
   if (attrlist) {
     prog.attributes = {}
-    for (var i = 0; i < attrlist.length; i++) {
-      var attr = attrlist[i]
+    for (let i = 0; i < attrlist.length; i++) {
+      let attr = attrlist[i]
       prog.attributes[attr] = gl.getAttribLocation(prog, attr)
     }
   }
@@ -263,25 +263,25 @@ function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
 
 function useShader(prog) {
   gl.useProgram(prog)
-  for (var attr in prog.attributes) {
+  for (let attr in prog.attributes) {
     gl.enableVertexAttribArray(prog.attributes[attr])
   }
 }
 
 function unuseShader(prog) {
-  for (var attr in prog.attributes) {
+  for (let attr in prog.attributes) {
     gl.disableVertexAttribArray(prog.attributes[attr])
   }
   gl.useProgram(null)
 }
 
 /////
-var projection = {
+let projection = {
   angle: 60,
   nearfar: new Float32Array([0.1, 100.0]),
   matrix: Matrix44.createIdentity(),
 }
-var camera = {
+let camera = {
   position: Vector3.create(0, 0, 100),
   lookat: Vector3.create(0, 0, 0),
   up: Vector3.create(0, 1, 0),
@@ -289,11 +289,11 @@ var camera = {
   matrix: Matrix44.createIdentity(),
 }
 
-var pointFlower = {}
-var meshFlower = {}
-var sceneStandBy = false
+let pointFlower = {}
+let meshFlower = {}
+let sceneStandBy = false
 
-var BlossomParticle = function () {
+let BlossomParticle = function () {
   this.velocity = new Array(3)
   this.rotation = new Array(3)
   this.position = new Array(3)
@@ -343,11 +343,11 @@ BlossomParticle.prototype.update = function (dt, et) {
 
 function createPointFlowers() {
   // get point sizes
-  var prm = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE)
+  let prm = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE)
   renderSpec.pointSize = { min: prm[0], max: prm[1] }
 
-  var vtxsrc = sakura_point_vsh
-  var frgsrc = sakura_point_fsh
+  let vtxsrc = sakura_point_vsh
+  let frgsrc = sakura_point_fsh
 
   pointFlower.program = createShader(
     vtxsrc,
@@ -376,7 +376,7 @@ function createPointFlowers() {
 
   unuseShader(pointFlower.program)
 
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
     pointFlower.particles[i] = new BlossomParticle()
   }
 }
@@ -391,14 +391,14 @@ function initPointFlowers() {
   pointFlower.fader.z = 0.1 //near fade start
 
   //particles
-  var PI2 = Math.PI * 2.0
-  var tmpv3 = Vector3.create(0, 0, 0)
-  var tmpv = 0
-  var symmetryrand = function () {
+  let PI2 = Math.PI * 2.0
+  let tmpv3 = Vector3.create(0, 0, 0)
+  let tmpv = 0
+  let symmetryrand = function () {
     return Math.random() * 2.0 - 1.0
   }
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
-    var tmpprtcl = pointFlower.particles[i]
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
+    let tmpprtcl = pointFlower.particles[i]
 
     //velocity
     tmpv3.x = symmetryrand() * 0.3 + 0.8
@@ -436,9 +436,9 @@ function initPointFlowers() {
 
 function renderPointFlowers() {
   //update
-  var PI2 = Math.PI * 2.0
-  var limit = [pointFlower.area.x, pointFlower.area.y, pointFlower.area.z]
-  var repeatPos = function (prt, cmp, limit) {
+  let PI2 = Math.PI * 2.0
+  let limit = [pointFlower.area.x, pointFlower.area.y, pointFlower.area.z]
+  let repeatPos = function (prt, cmp, limit) {
     if (Math.abs(prt.position[cmp]) - prt.size * 0.5 > limit) {
       //out of area
       if (prt.position[cmp] > 0) {
@@ -448,15 +448,15 @@ function renderPointFlowers() {
       }
     }
   }
-  var repeatEuler = function (prt, cmp) {
+  let repeatEuler = function (prt, cmp) {
     prt.euler[cmp] = prt.euler[cmp] % PI2
     if (prt.euler[cmp] < 0.0) {
       prt.euler[cmp] += PI2
     }
   }
 
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
-    var prtcl = pointFlower.particles[i]
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
+    let prtcl = pointFlower.particles[i]
     prtcl.update(timeInfo.delta, timeInfo.elapsed)
     repeatPos(prtcl, 0, pointFlower.area.x)
     repeatPos(prtcl, 1, pointFlower.area.y)
@@ -480,11 +480,11 @@ function renderPointFlowers() {
   })
 
   // update data
-  var ipos = pointFlower.positionArrayOffset
-  var ieuler = pointFlower.eulerArrayOffset
-  var imisc = pointFlower.miscArrayOffset
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
-    var prtcl = pointFlower.particles[i]
+  let ipos = pointFlower.positionArrayOffset
+  let ieuler = pointFlower.eulerArrayOffset
+  let imisc = pointFlower.miscArrayOffset
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
+    let prtcl = pointFlower.particles[i]
     pointFlower.dataArray[ipos] = prtcl.position[0]
     pointFlower.dataArray[ipos + 1] = prtcl.position[1]
     pointFlower.dataArray[ipos + 2] = prtcl.position[2]
@@ -503,7 +503,7 @@ function renderPointFlowers() {
   //gl.disable(gl.DEPTH_TEST);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
-  var prog = pointFlower.program
+  let prog = pointFlower.program
   useShader(prog)
 
   gl.uniformMatrix4fv(prog.uniforms.uProjection, false, projection.matrix)
@@ -541,8 +541,8 @@ function renderPointFlowers() {
   )
 
   // doubler
-  for (var i = 1; i < 2; i++) {
-    var zpos = i * -2.0
+  for (let i = 1; i < 2; i++) {
+    let zpos = i * -2.0
     pointFlower.offset[0] = pointFlower.area.x * -1.0
     pointFlower.offset[1] = pointFlower.area.y * -1.0
     pointFlower.offset[2] = pointFlower.area.z * zpos
@@ -585,12 +585,12 @@ function renderPointFlowers() {
 // effects
 //common util
 function createEffectProgram(vtxsrc, frgsrc, exunifs, exattrs) {
-  var ret = {}
-  var unifs = ['uResolution', 'uSrc', 'uDelta']
+  let ret = {}
+  let unifs = ['uResolution', 'uSrc', 'uDelta']
   if (exunifs) {
     unifs = unifs.concat(exunifs)
   }
-  var attrs = ['aPosition']
+  let attrs = ['aPosition']
   if (exattrs) {
     attrs = attrs.concat(exattrs)
   }
@@ -616,7 +616,7 @@ function createEffectProgram(vtxsrc, frgsrc, exunifs, exattrs) {
 // unuseEffect(prog)
 // TEXTURE0 makes src
 function useEffect(fxobj, srctex) {
-  var prog = fxobj.program
+  let prog = fxobj.program
   useShader(prog)
   gl.uniform3fv(prog.uniforms.uResolution, renderSpec.array)
 
@@ -644,11 +644,11 @@ function unuseEffect(fxobj) {
   unuseShader(fxobj.program)
 }
 
-var effectLib = {}
+let effectLib = {}
 function createEffectLib() {
-  var vtxsrc, frgsrc
+  let vtxsrc, frgsrc
   //common
-  var cmnvtxsrc = fx_common_vsh
+  let cmnvtxsrc = fx_common_vsh
 
   //background
   frgsrc = bg_fsh
@@ -691,7 +691,7 @@ function renderBackground() {
 }
 
 // post process
-var postProcess = {}
+let postProcess = {}
 function createPostProcess() {
   //console.log("create post process");
 }
@@ -700,9 +700,9 @@ function initPostProcess() {
 }
 
 function renderPostProcess() {
-  gl.enable(gl.TEXTURE_2D)
+  //gl.enable(gl.TEXTURE_2D)
   gl.disable(gl.DEPTH_TEST)
-  var bindRT = function (rt, isclear) {
+  let bindRT = function (rt, isclear) {
     gl.bindFramebuffer(gl.FRAMEBUFFER, rt.frameBuffer)
     gl.viewport(0, 0, rt.width, rt.height)
     if (isclear) {
@@ -718,9 +718,9 @@ function renderPostProcess() {
   unuseEffect(effectLib.mkBrightBuf)
 
   // make bloom
-  for (var i = 0; i < 2; i++) {
-    var p = 1.5 + 1 * i
-    var s = 2.0 + 1 * i
+  for (let i = 0; i < 2; i++) {
+    let p = 1.5 + 1 * i
+    let s = 2.0 + 1 * i
     bindRT(renderSpec.wHalfRT1, true)
     useEffect(effectLib.dirBlur, renderSpec.wHalfRT0)
     gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0)
@@ -750,7 +750,7 @@ function renderPostProcess() {
 }
 
 /////
-var SceneEnv = {}
+let SceneEnv = {}
 function createScene() {
   createEffectLib()
   createBackground()
@@ -797,23 +797,14 @@ function renderScene() {
   renderPostProcess()
 }
 
-/////
-function onResize(e) {
-  makeCanvasFullScreen(document.getElementById('sakura'))
-  setViewports()
-  if (sceneStandBy) {
-    initScene()
-  }
-}
-
 function setViewports() {
   renderSpec.setSize(gl.canvas.width, gl.canvas.height)
 
   gl.clearColor(0.2, 0.2, 0.5, 1.0)
   gl.viewport(0, 0, renderSpec.width, renderSpec.height)
 
-  var rtfunc = function (rtname, rtw, rth) {
-    var rt = renderSpec[rtname]
+  let rtfunc = function (rtname, rtw, rth) {
+    let rt = renderSpec[rtname]
     if (rt) deleteRenderTarget(rt)
     renderSpec[rtname] = createRenderTarget(rtw, rth)
   }
@@ -824,36 +815,20 @@ function setViewports() {
   rtfunc('wHalfRT1', renderSpec.halfWidth, renderSpec.halfHeight)
 }
 
-function render() {
-  renderScene()
-}
-
-var animating = true
-function toggleAnimation(elm) {
-  animating ^= true
-  if (animating) animate()
-  if (elm) {
-    elm.innerHTML = animating ? 'Stop' : 'Start'
-  }
-}
-
-function stepAnimation() {
-  if (!animating) animate()
-}
-
-function animate() {
-  var curdate = new Date()
+let animating = true
+function animate(timestamp) {
+  let curdate = new Date()
   timeInfo.elapsed = (curdate - timeInfo.start) / 1000.0
   timeInfo.delta = (curdate - timeInfo.prev) / 1000.0
   timeInfo.prev = curdate
 
   if (animating) requestAnimationFrame(animate)
-  render()
+  renderScene()
 }
 
 function makeCanvasFullScreen(canvas) {
-  var b = document.body
-  var d = document.documentElement
+  let b = document.body
+  let d = document.documentElement
   const fullw = Math.min(
     b.clientWidth,
     b.scrollWidth,
@@ -870,21 +845,24 @@ function makeCanvasFullScreen(canvas) {
   canvas.height = fullh
 }
 
-export function runSakuraAnimation() {
-  ;(function (w, r) {
-    w['r' + r] =
-      w['r' + r] ||
-      w['webkitR' + r] ||
-      w['mozR' + r] ||
-      w['msR' + r] ||
-      w['oR' + r] ||
-      function (c) {
-        w.setTimeout(c, 1000 / 60)
-      }
-  })(window, 'requestAnimationFrame')
+let resizeCallback
+let scrollCallback
 
-  var canvas = document.getElementById('sakura')
-  console.log(canvas)
+// polyfill for requestAnimationFrame on window object
+const enablePolyfill = (w, r) => {
+  w['r' + r] =
+    w['r' + r] ||
+    w['webkitR' + r] ||
+    w['mozR' + r] ||
+    w['msR' + r] ||
+    w['oR' + r] ||
+    function (c) {
+      w.setTimeout(() => c(performance.now()), 1000 / 30)
+    }
+}
+
+export function runSakuraAnimation(canvas) {
+  enablePolyfill(window, 'requestAnimationFrame')
   try {
     makeCanvasFullScreen(canvas)
     gl = canvas.getContext('experimental-webgl')
@@ -894,7 +872,24 @@ export function runSakuraAnimation() {
     return
   }
 
-  window.addEventListener('resize', onResize)
+  resizeCallback = () => {
+    makeCanvasFullScreen(canvas)
+    setViewports()
+    if (sceneStandBy) {
+      initScene()
+    }
+  }
+  window.addEventListener('resize', resizeCallback, { passive: true })
+
+  scrollCallback = () => {
+    if (window.scrollY + 100 >= canvas.height) {
+      animating = false
+    } else {
+      animating = true
+      requestAnimationFrame(animate)
+    }
+  }
+  window.addEventListener('scroll', scrollCallback, { passive: true })
 
   setViewports()
   createScene()
@@ -902,5 +897,12 @@ export function runSakuraAnimation() {
 
   timeInfo.start = new Date()
   timeInfo.prev = timeInfo.start
+  animating = true
   animate()
+}
+
+export const unmountSakuraAnimation = () => {
+  animating = false
+  window.removeEventListener('scroll', scrollCallback)
+  window.removeEventListener('resize', resizeCallback)
 }
