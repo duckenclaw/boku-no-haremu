@@ -7,46 +7,29 @@ type Props = {
   className?: string
 }
 
-const Navigation: React.FC<Props> = ({ className }) => (
-  <nav className={classNames(className, s.container)}>
-    <ul className={s.navList}>
-      <li className={s.navItem}>
-        <Link href="/tokens/">
-          <a className={s.navLink}>TOKENS</a>
-        </Link>
-      </li>
-      <li className={s.navItem}>
-        <Link href="/nfts/">
-          <a className={s.navLink}>NFTS</a>
-        </Link>
-      </li>
-      <li className={s.navItem}>
-        <Link href="/growth/">
-          <a className={s.navLink}>GROWTH</a>
-        </Link>
-      </li>
-      <li className={s.navItem}>
-        <Link href="/blending/">
-          <a className={s.navLink}>BLENDING</a>
-        </Link>
-      </li>
-      <li className={s.navItem}>
-        <Link href="/rarity/">
-          <a className={s.navLink}>RARITY</a>
-        </Link>
-      </li>
-      <li className={s.navItem}>
-        <Link href="/road_map/">
-          <a className={s.navLink}>ROAD MAP</a>
-        </Link>
-      </li>
-      <li className={s.navItem}>
-        <Link href="/white_paper/">
-          <a className={s.navLink}>WHITE PAPER</a>
-        </Link>
-      </li>
-    </ul>
-  </nav>
-)
+const Navigation: React.FC<Props> = ({ className }) => {
+  const items = [
+    { value: 'TOKENS', href: '/tokens' },
+    { value: 'NFTS', href: '/nfts' },
+    { value: 'GROWTH', href: '/growth' },
+    { value: 'BLENDING', href: '/blending' },
+    { value: 'RARITY', href: '/rarity' },
+    { value: 'ROAD MAP', href: '/road_map' },
+    { value: 'WHITE PAPER', href: '/white_paper' },
+  ]
+  return (
+    <nav className={classNames(className, s.container)}>
+      <ul className={s.navList}>
+        {items.map((el, i) => (
+          <li className={s.navItem} key={i}>
+            <Link href={el.href}>
+              <a className={s.navLink}>{el.value}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
 
 export { Navigation }
