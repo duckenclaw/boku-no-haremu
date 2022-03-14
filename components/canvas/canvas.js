@@ -700,7 +700,7 @@ function initPostProcess() {
 }
 
 function renderPostProcess() {
-  gl.enable(gl.TEXTURE_2D)
+  //gl.enable(gl.TEXTURE_2D)
   gl.disable(gl.DEPTH_TEST)
   let bindRT = function (rt, isclear) {
     gl.bindFramebuffer(gl.FRAMEBUFFER, rt.frameBuffer)
@@ -815,19 +815,15 @@ function setViewports() {
   rtfunc('wHalfRT1', renderSpec.halfWidth, renderSpec.halfHeight)
 }
 
-function render() {
-  renderScene()
-}
-
 let animating = true
-function animate() {
+function animate(timestamp) {
   let curdate = new Date()
   timeInfo.elapsed = (curdate - timeInfo.start) / 1000.0
   timeInfo.delta = (curdate - timeInfo.prev) / 1000.0
   timeInfo.prev = curdate
 
   if (animating) requestAnimationFrame(animate)
-  render()
+  renderScene()
 }
 
 function makeCanvasFullScreen(canvas) {
@@ -849,20 +845,24 @@ function makeCanvasFullScreen(canvas) {
   canvas.height = fullh
 }
 
-export function runSakuraAnimation(canvas) {
-  // polyfill for requestAnimationFrame on window object
-  ;(function (w, r) {
-    w['r' + r] =
-      w['r' + r] ||
-      w['webkitR' + r] ||
-      w['mozR' + r] ||
-      w['msR' + r] ||
-      w['oR' + r] ||
-      function (c) {
-        w.setTimeout(c, 1000 / 30)
-      }
-  })(window, 'requestAnimationFrame')
+let resizeCallback
+let scrollCallback
 
+// polyfill for requestAnimationFrame on window object
+const enablePolyfill = (w, r) => {
+  w['r' + r] =
+    w['r' + r] ||
+    w['webkitR' + r] ||
+    w['mozR' + r] ||
+    w['msR' + r] ||
+    w['oR' + r] ||
+    function (c) {
+      w.setTimeout(() => c(performance.now()), 1000 / 30)
+    }
+}
+
+export function runSakuraAnimation(canvas) {
+  enablePolyfill(window, 'requestAnimationFrame')
   try {
     makeCanvasFullScreen(canvas)
     gl = canvas.getContext('experimental-webgl')
@@ -872,30 +872,24 @@ export function runSakuraAnimation(canvas) {
     return
   }
 
-  window.addEventListener(
-    'resize',
-    () => {
-      makeCanvasFullScreen(canvas)
-      setViewports()
-      if (sceneStandBy) {
-        initScene()
-      }
-    },
-    { passive: true }
-  )
+  resizeCallback = () => {
+    makeCanvasFullScreen(canvas)
+    setViewports()
+    if (sceneStandBy) {
+      initScene()
+    }
+  }
+  window.addEventListener('resize', resizeCallback, { passive: true })
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (window.scrollY + 100 >= canvas.height) {
-        animating = false
-      } else {
-        animating = true
-        requestAnimationFrame(animate)
-      }
-    },
-    { passive: true }
-  )
+  scrollCallback = () => {
+    if (window.scrollY + 100 >= canvas.height) {
+      animating = false
+    } else {
+      animating = true
+      requestAnimationFrame(animate)
+    }
+  }
+  window.addEventListener('scroll', scrollCallback, { passive: true })
 
   setViewports()
   createScene()
@@ -903,5 +897,12 @@ export function runSakuraAnimation(canvas) {
 
   timeInfo.start = new Date()
   timeInfo.prev = timeInfo.start
+  animating = true
   animate()
+}
+
+export const unmountSakuraAnimation = () => {
+  animating = false
+  window.removeEventListener('scroll', scrollCallback)
+  window.removeEventListener('resize', resizeCallback)
 }
