@@ -10,13 +10,41 @@ export const MobileMenu = () => {
           <span></span>
         </label>
         <ul className={s.menu__box}>
-          <li><a className={s.menu__item} href="#">TOKENS</a></li>
-          <li><a className={s.menu__item} href="#">NFTS</a></li>
-          <li><a className={s.menu__item} href="#">GROWTH</a></li>
-          <li><a className={s.menu__item} href="#">BLENDING</a></li>
-          <li><a className={s.menu__item} href="#">TYPES</a></li>
-          <li><a className={s.menu__item} href="#">ROAD MAP</a></li>
-          <li><a className={s.menu__item} href="#">WHITE PAPER</a></li>
+          <li>
+            <a className={s.menu__item} href="/pages/tokens/">
+              TOKENS
+            </a>
+          </li>
+          <li>
+            <a className={s.menu__item} href="#">
+              NFTS
+            </a>
+          </li>
+          <li>
+            <a className={s.menu__item} href="#">
+              GROWTH
+            </a>
+          </li>
+          <li>
+            <a className={s.menu__item} href="#">
+              BLENDING
+            </a>
+          </li>
+          <li>
+            <a className={s.menu__item} href="#">
+              TYPES
+            </a>
+          </li>
+          <li>
+            <a className={s.menu__item} href="#">
+              ROAD MAP
+            </a>
+          </li>
+          <li>
+            <a className={s.menu__item} href="#">
+              WHITE PAPER
+            </a>
+          </li>
         </ul>
       </div>
     </div>
