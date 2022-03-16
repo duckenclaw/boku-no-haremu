@@ -1,17 +1,29 @@
 .list {
   display: flex;
   flex-flow: row nowrap;
-  margin-left: -20px;
+
+  li {
+    width: 40px;
+    height: 40px;
+    margin-left: 22px;
+
+    @media(max-width: 768px) {
+      margin-left: 10px;
+    }
+  }
 }
 
 .item {
   display: block;
   width: 40px;
   height: 40px;
-  margin-left: 20px;
-  @media(max-width: 768px) {
-    width: 30px;
-    height: 30px;
-  }
-}
+  // margin-left: 20px;
 
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+
+
+
+}
