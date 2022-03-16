@@ -45,7 +45,6 @@ const cards: Card[] = [
 
 export const TokenisedEconomy: React.FC<Props> = () => (
   <section className={s.section}>
-    <div className={s.wave} />
     <Container>
       <PreviewText />
       <TextHeader

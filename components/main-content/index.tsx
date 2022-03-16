@@ -11,36 +11,18 @@ import { TypesOfRarity } from '../types-of-rarity'
 import { SmartBlending } from '../smart-blending'
 import { Rules } from '../rules'
 import { ContactInfo } from '../contact_info'
-import Head from 'next/head';
 
-type Props = {
-  className?: string
-}
-
-const MainContent: React.FC<Props> = ({ className }) => (
-  
-
-  <div className={classNames(className, s.container)}>
-    <Head>
-      <link rel="shortcut icon" href="images/favicon.ico" />
-      <title>Boku no haremu</title>
-    </Head>
-    <Header />
-    <main className={s.main}>
-      <Hero />
-      <div className={s.sections}>
-        <TokenisedEconomy />
-        <ExclusiveNfts />
-        <GrowWaifu />
-        <SmartBlending />
-        <TypesOfRarity />
-        <Rules/>
-        <RoadMap />
-        <ContactInfo />
-      </div> 
-    </main>
-  </div>
-        
+const MainContent: React.FC = () => (
+  <>
+    <TokenisedEconomy />
+    <ExclusiveNfts />
+    <GrowWaifu />
+    <SmartBlending />
+    <TypesOfRarity />
+    <Rules />
+    <RoadMap />
+    <ContactInfo />
+  </>
 )
 
 export default MainContent

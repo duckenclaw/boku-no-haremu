@@ -1,10 +1,22 @@
+import Head from 'next/head'
 import React from 'react'
+import { Hero } from '../hero'
+import { Header } from '../shared-ui/header'
 import s from './layout.module.scss'
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
-  <div className={s.layout}>
-    <div className={s.content}>{children}</div>
-  </div>
+  <>
+    <Head>
+      <link rel="shortcut icon" href="images/favicon.ico" />
+      <title>Boku no haremu</title>
+    </Head>
+    <Header />
+    <Hero />
+    <main className={s.main}>
+      <div className={s.wave} />
+      <div className={s.sections}>{children}</div>
+    </main>
+  </>
 )
 
 export default Layout
