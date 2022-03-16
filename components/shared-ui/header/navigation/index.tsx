@@ -7,29 +7,28 @@ type Props = {
   className?: string
 }
 
-const Navigation: React.FC<Props> = ({ className }) => {
-  const items = [
-    { value: 'TOKENS', href: '/tokens' },
-    { value: 'NFTS', href: '/nfts' },
-    { value: 'GROWTH', href: '/growth' },
-    { value: 'BLENDING', href: '/blending' },
-    { value: 'RARITY', href: '/rarity' },
-    { value: 'ROAD MAP', href: '/road_map' },
-    { value: 'WHITE PAPER', href: '/white_paper' },
-  ]
-  return (
-    <nav className={classNames(className, s.container)}>
-      <ul className={s.navList}>
-        {items.map((el, i) => (
-          <li className={s.navItem} key={i}>
-            <Link href={el.href}>
-              <a className={s.navLink}>{el.value}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
-}
+const items = [
+  { value: 'TOKENS', href: '/tokens' },
+  { value: 'NFTS', href: '/nfts' },
+  { value: 'GROWTH', href: '/growth' },
+  { value: 'BLENDING', href: '/blending' },
+  { value: 'RARITY', href: '/rarity' },
+  { value: 'ROAD MAP', href: '/road_map' },
+  { value: 'WHITE PAPER', href: '/white_paper' },
+]
+
+const Navigation: React.FC<Props> = ({ className }) => (
+  <nav className={classNames(className, s.container)}>
+    <ul className={s.navList}>
+      {items.map((el, i) => (
+        <li className={s.navItem} key={i}>
+          <Link href={el.href}>
+            <a className={s.navLink}>{el.value}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)
 
 export { Navigation }
