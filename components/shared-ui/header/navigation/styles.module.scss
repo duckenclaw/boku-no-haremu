@@ -42,6 +42,10 @@
     2px -2px 0 #FFFFFF,
     -2px 2px 0 #FFFFFF,
     2px 2px 0 #FFFFFF;
+  
+    @media(max-width: 1024px) {
+      margin-right: 0px;
+    }
 }
 
 .navLink {
