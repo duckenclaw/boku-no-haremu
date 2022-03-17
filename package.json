@@ -10,6 +10,7 @@
   "dependencies": {
     "@types/gl-react": "^3.15.4",
     "@types/gl-react-dom": "^3.15.4",
+    "@types/react-scroll": "^1.8.3",
     "classnames": "^2.3.1",
     "gl-react": "^4.1.0",
     "gl-react-dom": "^5.1.0",
@@ -17,6 +18,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-intersection-observer": "^8.33.1",
+    "react-scroll": "^1.8.6",
     "sass": "^1.49.7"
   },
   "devDependencies": {

@@ -61,6 +61,7 @@ export const RoadMap = () => {
           title="ROAD MAP"
           subtitle="The panel designers have found the best possible solution to protect the damaged ends of the panels with thin but rigid aluminium profiles. This ensures a durable construction and a clean seam."
           className={s.textHeader}
+          id="road_map"
         />
         <div className={s.columns_wrapper}>
           {row.map((item, index) => (

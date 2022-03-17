@@ -52,6 +52,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
         title="TOKENISED ECONOMY"
         subtitle="   We present the latest technological solution for mobile design of
           expositions, museums, galleries, exhibitions."
+          id="tokens"
       />
       <div className={s.cards}>
         {cards?.map((card: Card) => (

@@ -18,6 +18,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         title="GROW YOUR UNIQUE WAIFU"
         subtitle="Inside every waifu there is a milfu. Milfus are more powerful and experienced than their younger counterparts. Let your milfus guide your waifus on their path to excellence."
         className={s.textHeader}
+        id="growth"
       />
       <div className={s.content}>
         <Image src="/images/mimi1.png" alt="mimi_card" width={244} height={362} />

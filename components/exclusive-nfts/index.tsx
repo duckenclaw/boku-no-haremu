@@ -62,6 +62,7 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
       <TextHeader
         title="EXCLUSIVE NFTS"
         className={s.textHeader}
+        id="nfts"
       />
       <div className={s.cards}>
         {cards.map((card) => (

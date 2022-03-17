@@ -17,6 +17,7 @@ export const TypesOfRarity: React.FC<Props> = () => (
         className={s.textHeader}
         title="TIERS OF RARITY"
         subtitle="Increase the rarity of your waifu by blending other waifus of the same type into one more love giving  waifu."
+        id="rarity"
       />
       <div className={s.imageTopContainer}>
         <img className={s.imageTop} alt="" src="/images/mimi.png" />
