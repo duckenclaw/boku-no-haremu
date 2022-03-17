@@ -6,17 +6,6 @@
   padding-top: 1px;
 }
 
-.wave {
-  position: absolute;
-  top: -50px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 155px;
-  background: url('../../public/wave.svg') center no-repeat;
-  background-size: cover;
-}
-
 .cards {
   display: flex;
   justify-content: space-between;

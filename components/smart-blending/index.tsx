@@ -18,6 +18,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
         title="SMART FUSION"
         subtitle="You can fuse waifus together in order to get another one that you will like even more."
         className={s.textHeader}
+        id="blending"
       />
       <div className={s.content}>
         <div className={s.column}>

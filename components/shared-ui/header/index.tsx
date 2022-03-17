@@ -10,16 +10,14 @@ type Props = {
   className?: string
 }
 
-const Header: React.FC<Props> = ({ className }) => {
-  return (
-    <header className={classNames(className, s.container)}>
-      <Container className={s.wrapper}>
-        <Navigation />
-        <MobileMenu />
-        <Socials />
-      </Container>
-    </header>
-  )
-}
+const Header: React.FC<Props> = ({ className }) => (
+  <header className={classNames(className, s.container)}>
+    <Container className={s.wrapper}>
+      <Navigation />
+      <MobileMenu />
+      <Socials />
+    </Container>
+  </header>
+)
 
 export { Header }
