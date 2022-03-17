@@ -7,6 +7,13 @@
   margin-right: auto;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding-right: 16px;
