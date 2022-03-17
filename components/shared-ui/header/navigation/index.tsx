@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
-import {default as NextLink} from 'next/link'
+import { default as NextLink } from 'next/link'
 import { Link, animateScroll as scroll } from 'react-scroll'
 
 type Props = {
@@ -22,20 +22,13 @@ const Navigation: React.FC<Props> = ({ className }) => (
     <ul className={s.navList}>
       {items.map((el, i) => (
         <li className={s.navItem} key={i}>
-          <Link 
-            to={el.href} 
-            smooth={true}
-            offset={-100}
-            duration={500}>
-            <a className={s.navLink}>{el.value}</a>
+          <Link to={el.href} smooth={true} offset={-100} duration={500}>
+            {el.value}
           </Link>
         </li>
       ))}
-      <li className={s.navItem} >
-          <NextLink 
-            href='/white_paper' >
-            <a className={s.navLink}>{'WHITE PAPER'}</a>
-          </NextLink>
+      <li className={s.navItem}>
+        <NextLink href="/white_paper">WHITE PAPER</NextLink>
       </li>
     </ul>
   </nav>
