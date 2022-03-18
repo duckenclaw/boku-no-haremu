@@ -1,12 +1,11 @@
 import { NextPage } from 'next/types'
 import React from 'react'
-import Layout from '../components/layout/layout'
+import { Layout } from '../components/landing/layout'
 import { PageTitle } from '../components/page_title'
-import Container from '../components/shared-ui/container'
 
 const WhitePaper: NextPage = () => (
   <Layout>
-      <PageTitle />
+    <PageTitle />
   </Layout>
 )
 
