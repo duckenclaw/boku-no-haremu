@@ -2,12 +2,11 @@ import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 
-type Props = {
+type ContainerProps = {
   className?: string
 }
 
-const Container: React.FC<Props> = ({ className, children }) => (
-  <div className={classNames(className, s.container)}>{children}</div>
-)
-
-export default Container
+export const Container: React.FC<ContainerProps> = ({
+  className,
+  children,
+}) => <div className={classNames(className, s.container)}>{children}</div>

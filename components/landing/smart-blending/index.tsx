@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import classNames from 'classnames'
-import s from './smart_blending.module.scss'
-import Container from '../shared-ui/container'
-import { TextHeader } from '../shared-ui/text-header'
-import { Card } from '../shared-ui/card'
+import { Container } from 'components/shared-ui/container'
+import { TextHeader } from 'components/shared-ui/text-header'
 import Image from 'next/image'
+
+import s from './smart_blending.module.scss'
 
 type SmartBlendingProps = {
   className?: string

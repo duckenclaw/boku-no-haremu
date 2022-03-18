@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button } from '../shared-ui/buttons/button'
-import Container from '../shared-ui/container'
-import { TextHeader } from '../shared-ui/text-header'
+import { Button } from 'components/shared-ui//button'
+import { Container } from 'components/shared-ui/container'
+import { TextHeader } from 'components/shared-ui/text-header'
+import { PreviewText } from 'components/landing/preview-text/preview_text'
+
 import s from './TokenisedEconomy.module.scss'
-import Image from 'next/image'
-import { PreviewText } from '../preview-text/preview_text'
 
 type Props = {
   className?: string
@@ -52,7 +52,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
         title="TOKENISED ECONOMY"
         subtitle="   We present the latest technological solution for mobile design of
           expositions, museums, galleries, exhibitions."
-          id="tokens"
+        id="tokens"
       />
       <div className={s.cards}>
         {cards?.map((card: Card) => (

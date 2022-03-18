@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import s from './styles.module.scss'
 import { Navigation } from './navigation'
 import { Socials } from '../socials'
-import Container from '../container'
+import { Container } from 'components/shared-ui/container'
 import { MobileMenu } from './mobile-menu/mobile-menu'
 
 type Props = {

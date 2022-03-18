@@ -3,13 +3,11 @@ import s from './button.module.scss'
 
 type ButtonProps = {
   className?: string
-  title?: string
   handler: () => void
 }
 
 export const Button: React.FC<ButtonProps> = ({
   className,
-  title,
   handler,
   children,
 }) => (

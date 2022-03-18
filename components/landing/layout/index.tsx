@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import React from 'react'
 import { Hero } from '../hero'
-import { Header } from '../shared-ui/header'
+import { Header } from 'components/shared-ui/header'
 import s from './layout.module.scss'
 
-const Layout = ({ children }: { children: React.ReactNode }) => (
+export const Layout: React.FC = ({ children }) => (
   <>
     <Head>
       <link rel="shortcut icon" href="images/favicon.ico" />
@@ -18,5 +18,3 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
     </main>
   </>
 )
-
-export default Layout

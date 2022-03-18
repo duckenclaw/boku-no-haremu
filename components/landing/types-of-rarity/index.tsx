@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import s from './types-of-rarity.module.scss'
-import Container from '../shared-ui/container'
-import { TextHeader } from '../shared-ui/text-header'
-import { Card } from '../shared-ui/card'
+import { Container } from 'components/shared-ui/container'
+import { TextHeader } from 'components/shared-ui/text-header'
+import { Card } from 'components/shared-ui/card'
 import classNames from 'classnames'
 import Image from 'next/image'
 
@@ -34,7 +34,12 @@ export const TypesOfRarity: React.FC<Props> = () => (
               />
             </div>
           </div>
-          <Image src="/images/mimi1.png" alt="mimi_card" width={244} height={362} />
+          <Image
+            src="/images/mimi1.png"
+            alt="mimi_card"
+            width={244}
+            height={362}
+          />
           {/*<Card
             className={s.card}
             icon="nyan"
@@ -57,7 +62,12 @@ export const TypesOfRarity: React.FC<Props> = () => (
               />
             </div>
           </div>
-          <Image src="/images/mimi_epic2.png" alt="mimi_card" width={244} height={362} />
+          <Image
+            src="/images/mimi_epic2.png"
+            alt="mimi_card"
+            width={244}
+            height={362}
+          />
           {/*<Card
             className={s.card}
             icon="nyan"
@@ -80,7 +90,12 @@ export const TypesOfRarity: React.FC<Props> = () => (
               />
             </div>
           </div>
-          <Image src="/images/mimi_rare2.png" alt="mimi" width={244} height={362} />
+          <Image
+            src="/images/mimi_rare2.png"
+            alt="mimi"
+            width={244}
+            height={362}
+          />
           {/*<Card
             className={s.card}
             frameColor="#e8dc3f"

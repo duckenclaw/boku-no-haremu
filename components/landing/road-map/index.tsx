@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './road_map.module.scss'
-import { TextHeader } from '../shared-ui/text-header'
-import Container from '../shared-ui/container'
+import { TextHeader } from 'components/shared-ui/text-header'
+import { Container } from 'components/shared-ui/container'
 
 export const RoadMap = () => {
   const row = [
@@ -90,5 +90,3 @@ export const RoadMap = () => {
     </section>
   )
 }
-
-export default RoadMap
