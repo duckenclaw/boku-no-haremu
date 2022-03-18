@@ -1,0 +1,37 @@
+.text {
+  max-width: 895px;
+  text-align: center;
+  margin: 100px auto;
+  font-weight: bold;
+  font-size: 39px;
+  line-height: 47px;
+  color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 45px;
+  }
+}
+
+.title {
+  font-family: 'AA BadaBoom BB';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 69px;
+  line-height: 73px;
+  color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    font-size: 42px;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 32px;
+    line-height: 34px;
+  }
+}

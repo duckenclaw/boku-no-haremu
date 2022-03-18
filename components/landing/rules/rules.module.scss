@@ -1,0 +1,29 @@
+.text {
+  max-width: 895px;
+  text-align: center;
+  margin: 100px auto;
+  font-weight: bold;
+  font-size: 39px;
+  line-height: 47px;
+  color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media(max-width: 425px) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.title {
+  font-family: 'AA BadaBoom BB';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 69px;
+  line-height: 73px;
+  color: #FFFFFF;
+}
