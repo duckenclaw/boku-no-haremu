@@ -1,8 +1,9 @@
 import React from 'react'
 import { NextPage } from 'next'
+import { GameComponent } from 'game'
 
 const Game: NextPage = () => {
-  return <div></div>
+  return <GameComponent />
 }
 
 export default Game

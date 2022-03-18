@@ -66,9 +66,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
               <div className={s.cardTitle}>{card.title}</div>
               <div className={s.cardDescription}>{card.description}</div>
             </div>
-            <Button className={s.button} handler={() => null}>
-              VIEW ON ALCOR
-            </Button>
+            <Button className={s.button}>VIEW ON ALCOR</Button>
           </div>
         ))}
       </div>
