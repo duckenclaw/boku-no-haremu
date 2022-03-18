@@ -1,21 +1,20 @@
 import classNames from 'classnames'
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 import s from './button.module.scss'
 
 type ButtonProps = {
   className?: string
-  handler: () => void
-}
+} & DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>
 
 export const Button: React.FC<ButtonProps> = ({
   className,
-  handler,
   children,
+  ...props
 }) => (
-  <button
-    className={classNames(className, s.button)}
-    onClick={handler}
-    type="button"
-  >
+  <button {...props} className={classNames(className, s.button)} type="button">
     {children}
   </button>
 )
