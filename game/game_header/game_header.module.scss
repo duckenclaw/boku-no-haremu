@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 40px;
+    //background-color: #3c62aa;
+}
+
+.profile_info{
+    max-width: 208px;
+    height: 100%;
+    padding: 10px;
+    color: #D5436F;
+    background-blend-mode: overlay, normal;
+    backdrop-filter: blur(40px);
+    border: solid 7px;
+    border-color:  rgba(71, 158, 197, 0.3);
+    border-radius: 12px;
+    font-family: 'AA BadaBoom BB';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 26px;
+    text-align: center;
+    margin-right: 100px;
+}
+
+.cards{
+    display: flex;
+    align-items: center;
+}
+
+.res{
+    width: 172px;
+    height: 60px;
+    padding: 10px;
+    color: #D5436F;
+    background-blend-mode: overlay, normal;
+    backdrop-filter: blur(40px);
+    border: solid 7px;
+    border-radius: 12px;
+    font-family: 'AA BadaBoom BB';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 26px;
+    text-align: center;
+    margin-right: 50px;
+    position: relative;
+    border-color: rgb(71,158,197);
+    //border-color: linear-gradient(90deg, rgba(71,158,197,1) 0%, rgba(165,239,255,1) 60%, rgba(255,255,255,1) 100%);
+}
+
+.cardPriceIcon {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: -20%;
+    top: -30%;
+  }
