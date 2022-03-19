@@ -1,22 +1,41 @@
 .footer {
+    position: relative;
+    font-family: 'Bangers';
     max-width: 1011px;
+    width: 100%;
     height: 88px;
-    border: 10px solid;
-    border-image-slice: 1;
-    border-width: 5px;
-    border-image-source: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 5px #A5EFFF66;
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
+    background-blend-mode: overlay, normal;
+    backdrop-filter: blur(80px);
+    border-radius: 12px;
 
-    background:
-        radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
-    background-blend-mode: overlay,
-        normal;
-    backdrop-filter: blur(40px);
+    .nav_list {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
 }
+
+
 
 .link {
 
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 34px;
+    color: #FFFFFF;
 
-    .active {}
+    &.active {
+        background: linear-gradient(180deg, #D5436F 0%, #BB35FF 53.65%, #98F9FF 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
 
-    .disabled {}
+    &.disabled {}
 }
