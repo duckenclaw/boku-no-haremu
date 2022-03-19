@@ -7,15 +7,11 @@
     //background-color: #3c62aa;
 }
 
-.profile_info{
+.profile_info {
     max-width: 208px;
     height: 100%;
     padding: 10px;
     color: #D5436F;
-    background-blend-mode: overlay, normal;
-    backdrop-filter: blur(40px);
-    border: solid 7px;
-    border-color:  rgba(71, 158, 197, 0.3);
     border-radius: 12px;
     font-family: 'AA BadaBoom BB';
     font-style: normal;
@@ -24,22 +20,24 @@
     line-height: 26px;
     text-align: center;
     margin-right: 100px;
+    border: solid 7px rgb(71, 158, 197);
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
+    background-blend-mode: overlay,
+        normal;
+    backdrop-filter: blur(80px);
 }
 
-.cards{
+.cards {
     display: flex;
     align-items: center;
 }
 
-.res{
+.res {
     width: 172px;
     height: 60px;
     padding: 10px;
     color: #D5436F;
-    background-blend-mode: overlay, normal;
-    backdrop-filter: blur(40px);
-    border: solid 7px;
-    border-radius: 12px;
+    border: solid 7px rgb(71, 158, 197);
     font-family: 'AA BadaBoom BB';
     font-style: normal;
     font-weight: 400;
@@ -48,8 +46,11 @@
     text-align: center;
     margin-right: 50px;
     position: relative;
-    border-color: rgb(71,158,197);
-    //border-color: linear-gradient(90deg, rgba(71,158,197,1) 0%, rgba(165,239,255,1) 60%, rgba(255,255,255,1) 100%);
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
+    background-blend-mode: overlay, normal;
+    backdrop-filter: blur(80px);
+
+    border-radius: 12px;
 }
 
 .cardPriceIcon {
@@ -58,4 +59,4 @@
     position: absolute;
     left: -20%;
     top: -30%;
-  }
+}
