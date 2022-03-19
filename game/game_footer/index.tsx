@@ -33,8 +33,8 @@ const ScreenLink: React.FC<ScreenLinkProps> = ({
 
 export const GameFooter = () => {
   return (
-    <footer>
-      <nav>
+    <footer className={s.footer}>
+      <nav className={s.nav_list}>
         <ScreenLink screen="mine">MINE </ScreenLink>
         <ScreenLink screen="craft" disabled>
           CRAFT
