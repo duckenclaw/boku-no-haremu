@@ -1,0 +1,25 @@
+.page_title {
+  text-align: center;
+  margin-top: 200px;
+  font-family: 'AA BadaBoom BB';
+  font-size: 92px;
+  line-height: 98px;
+  -webkit-text-fill-color: #479EC5;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 4px;
+  
+
+  @media (max-width: 768px) {
+    font-size: 58px;
+    line-height: 62px;
+    -webkit-text-stroke-width: 2px;
+  }
+}
+
+.section {
+  position: relative;
+  margin-bottom: 80px;
+  width: 100%;
+  height: calc(100vh - 180px);
+  padding-top: 1px;
+}

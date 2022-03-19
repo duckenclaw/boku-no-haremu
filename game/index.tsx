@@ -1,0 +1,32 @@
+import { useWax } from 'contexts/wax_context'
+import React from 'react'
+import { GameContextProvider } from './game_context'
+import { GameFooter } from './game_footer'
+import { GameHeader } from './game_header'
+import { Router } from './router'
+
+import s from './game_component.module.scss'
+import { Button } from 'components/shared-ui/button'
+
+export const GameComponent = () => {
+  const { isLoading, isConnected, login } = useWax()
+  return (
+    <div className={s.layout}>
+      {isConnected ? (
+        <GameContextProvider>
+          <GameHeader />
+          <Router />
+          <GameFooter />
+        </GameContextProvider>
+      ) : (
+        <Button
+          onClick={() => login()}
+          className={s.login_button}
+          disabled={isLoading}
+        >
+          Login
+        </Button>
+      )}
+    </div>
+  )
+}
