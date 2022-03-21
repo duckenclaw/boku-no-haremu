@@ -12,8 +12,8 @@ import { TypesOfRarity } from 'components/landing/types-of-rarity'
 const Home: NextPage = () => (
   <Layout>
     <TokenisedEconomy />
-    <ExclusiveNfts />
     <GrowWaifu />
+    <ExclusiveNfts />
     <SmartBlending />
     <TypesOfRarity />
     <Rules />

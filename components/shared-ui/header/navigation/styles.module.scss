@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   color: #479EC5;
+
   @media(max-width: 768px) {
     display: none;
   }
@@ -16,7 +17,8 @@
 
 .navItem {
   margin-right: 30px;
-  color: #479EC5;
+  color: #F237A5;
+  ;
   font-weight: bold;
   display: block;
   padding: 10px;
@@ -46,10 +48,10 @@
     2px -2px 0 #FFFFFF,
     -2px 2px 0 #FFFFFF,
     2px 2px 0 #FFFFFF;
-  
-    @media(max-width: 1024px) {
-      margin-right: 0px;
-    }
+
+  @media(max-width: 1024px) {
+    margin-right: 0px;
+  }
 }
 
 .navLink {
