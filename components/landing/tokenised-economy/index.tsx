@@ -20,25 +20,25 @@ const cards: Card[] = [
   {
     title: 'NYAN',
     description:
-      'An energetic resource, in which your waifu’s character and emotions forwarded to you are concluded.',
+      'The more your feline spouses love you, the more nyans you have. Purrs made tangible. Sometimes even barks.',
     logo: 'nyan',
   },
   {
     title: 'Simptetix',
     description:
-      'A versatile resource that gives your waifu traits that worth simping over',
+      'This resource lets you simpthesize a new feature for your waifus. True custom love.',
     logo: 'simptetix',
   },
   {
     title: 'BENTO',
     description:
-      'Made with love and care not only gives energy for farming of resources but also demonstrates the care with which you treat your waifus',
+      'Made with love. Demonstrates how much you treasure your waifus.',
     logo: 'bento',
   },
   {
     title: 'Chantment',
     description:
-      'Filled with magicy stuff that unlocks your waifus Lovetential',
+      'Filled with magical stuff that unlocks your waifu’s lovetential.',
     logo: 'crystal',
   },
 ]
@@ -49,7 +49,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
       <PreviewText />
       <TextHeader
         className={s.textHeader}
-        title="TOKENISED ECONOMY"
+        title="in-game resources"
         subtitle="   We present the latest technological solution for mobile design of
           expositions, museums, galleries, exhibitions."
         id="tokens"
@@ -57,16 +57,13 @@ export const TokenisedEconomy: React.FC<Props> = () => (
       <div className={s.cards}>
         {cards?.map((card: Card) => (
           <div key={card.title} className={s.card}>
-            <div className={s.cardHeader}>
-              <img
-                className={s.cardLogo}
-                src={`images/${card.logo}.png`}
-                alt={card.title}
-              />
-              <div className={s.cardTitle}>{card.title}</div>
-              <div className={s.cardDescription}>{card.description}</div>
-            </div>
-            <Button className={s.button}>VIEW ON ALCOR</Button>
+            <img
+              className={s.cardLogo}
+              src={`images/${card.logo}.png`}
+              alt={card.title}
+            />
+            <div className={s.cardTitle}>{card.title}</div>
+            <div className={s.cardDescription}>{card.description}</div>
           </div>
         ))}
       </div>
