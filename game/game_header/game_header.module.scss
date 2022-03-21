@@ -35,6 +35,19 @@
         border: none;
         background: transparent;
         cursor: pointer;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+    select:not([multiple]) {
+        /*  mine again  */
+        padding-right: 1.2em;
+        background-repeat: no-repeat;
+        background-position: calc(100% - 0.25em) 0.35em;
+        background-size: 0.6em auto;
+        background-image: url("/images/svg/Polygon.svg")
+    }
+    select:focus {
+        outline: none;
     }
 
     span {
@@ -46,6 +59,8 @@
         margin-top: 4px;
     }
 }
+
+
 
 .cards {
     display: flex;
