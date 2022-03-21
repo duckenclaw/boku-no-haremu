@@ -13,8 +13,8 @@ import { SliderCharacters } from 'components/landing/slider-characters'
 const Home: NextPage = () => (
   <Layout>
     <TokenisedEconomy />
-    <ExclusiveNfts />
     <GrowWaifu />
+    <ExclusiveNfts />
     <SmartBlending />
     <TypesOfRarity />
     <Rules />
