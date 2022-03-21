@@ -1,11 +1,15 @@
 .text {
-  max-width: 895px;
+  max-width: 993px;
   text-align: center;
-  margin: 100px auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100vh;
   font-weight: bold;
   font-size: 40px;
   line-height: 48px;
   color: #FFFFFF;
+  padding-top: 129px;
+  margin-bottom: 65px;
 
   @media (max-width: 768px) {
     font-size: 32px;

@@ -1,8 +1,12 @@
 .section {
   position: relative;
   width: 100%;
-  margin-top: 100vh;
   padding-top: 1px;
+}
+
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .cards {
@@ -38,7 +42,7 @@
   width: 268px;
   height: 350px;
   background: rgba(33, 44, 79, 0.4);
-  backdrop-filter: blur(40px);  
+  backdrop-filter: blur(40px);
   border-radius: 15px;
   box-shadow: 0px 0px 10px 0px #d5436f;
   margin-bottom: 140px;
