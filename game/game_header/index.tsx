@@ -29,7 +29,13 @@ export const GameHeader = () => {
   const { wax } = useWax()
   return (
     <header className={s.container}>
-      <div className={s.profile_info}>{wax?.userAccount}</div>
+      <div className={s.profile_info}>
+        <select name="wax">
+          <option value="first">{wax?.userAccount}</option>
+        </select>
+        <span>+87 wax ($ 38,2)</span>
+      </div>
+
       <div className={s.cards}>
         {res?.map((item: Res) => (
           <div key={item.logo} className={s.res}>
