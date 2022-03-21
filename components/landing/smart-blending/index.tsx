@@ -13,6 +13,7 @@ type SmartBlendingProps = {
 
 export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
+    <div className={s.top}></div>
     <Container className={s.container}>
       <TextHeader
         title="SMART FUSION"
@@ -22,17 +23,17 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
       />
       <div className={s.content}>
         <div className={s.column}>
-          <img className={s.imageTop} alt="" src="/images/mimi.png" />
+          <img className={s.imageTop} alt="" src="/images/mimi_3.png" />
           <div className={s.arrow}>
             <Image
               src="/images/svg/arrow.svg"
               alt="arrow"
-              width={56}
-              height={36}
+              width={60}
+              height={82}
             />
             <div className={s.arrowText}>
-              <span className={s.multiplier}>x1</span>
-              <span className={s.nextLvl}>next lvl</span>
+              <div className={s.multiplier}>x1</div>
+              <div className={s.nextLvl}>next lvl</div>
             </div>
           </div>
           {/*<Card
@@ -42,25 +43,31 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
             rating="2"
             frameColor="#93d8ec"
           />*/}
-          <Image src="/images/mimi2.png" alt="" width={172} height={256} />
+          <Image src="/images/mimi_1.png" alt="" width={188} height={283} />
         </div>
         <div className={s.column}>
-          <img className={s.imageTop} alt="" src="/images/chan111.png" />
+          <img className={s.imageTop} alt="" src="/images/cantress_5.png" />
           <div className={s.arrow2}>
             <Image
-              src="/images/svg/arrow.svg"
+              src="/images/svg/arrow2.svg"
               alt="arrow"
-              width={56}
-              height={36}
+              width={60}
+              height={82}
             />
             <div className={s.arrowText}>
-              <span className={s.multiplier}>x2</span>
-              <span className={s.nextLvl}>next lvl</span>
+              <div className={s.multiplier}>x2</div>
+              <div className={s.nextLvl}>next lvl</div>
             </div>
           </div>
-          <Image alt="" src="/images/mimi3.png" width={248} height={256} />
+          <Image
+            alt=""
+            src="/images/chantress_2.png"
+            width={289}
+            height={283}
+          />
         </div>
       </div>
     </Container>
+    <div className={s.bottom}></div>
   </section>
 )
