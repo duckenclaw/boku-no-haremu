@@ -15,7 +15,7 @@ const Home: NextPage = () => (
     <GrowWaifu />
     <ExclusiveNfts />
     <SmartBlending />
-    <TypesOfRarity />
+    {/*<TypesOfRarity />*/}
     <Rules />
     <RoadMap />
     <ContactInfo />

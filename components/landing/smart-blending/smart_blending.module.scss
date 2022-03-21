@@ -86,6 +86,7 @@
   text-align: center;
   display: flex;
   justify-content: center;
+  align-items: center;  
   
   @media (max-width: 1024px) {
     margin-left: 18%;
@@ -115,19 +116,19 @@
 
 .multiplier {
   font-family: 'Kamikaze-Regular';
-  margin-right: 10px;
+  margin-right: 5px;
   font-style: normal;
   font-weight: 400;
   font-size: 47px;
   line-height: 39px;
-  //color: #D5436F;
   -webkit-text-fill-color: #E669A3;
   -webkit-text-stroke-color: #000;
   -webkit-text-stroke-width: 1px;
 
   @media(max-width: 425px) {
-    font-size: 25px;
-    line-height: 13px;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 27px;
   }
 }
 

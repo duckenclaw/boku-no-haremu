@@ -4,11 +4,16 @@
 
 .textHeader {
   margin-bottom: 80px;
+  margin-top: 80px;
 
   @media (max-width: 768px) {
     margin-bottom: 42px;
     margin-top: 64px;
   }
+}
+
+.nfts{
+  width: 100%;
 }
 
 .cards {
