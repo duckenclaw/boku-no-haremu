@@ -13,7 +13,11 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => {
         backgroundImage: `url(/images/characters/${data.background}.png)`,
       }}
     >
-      {data.title}
+      <img
+        className={styles.image}
+        alt=""
+        src={`/images/characters/${data.characterImg}.png`}
+      />
     </div>
   )
 }

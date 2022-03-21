@@ -1,3 +1,19 @@
 .slider {
-  height: calc(100vh - 120px);
+}
+
+.listDots li {
+  width: auto;  
+  margin: 0px 12px;
+}
+
+.dot {
+  background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
+  border-radius: 8px;
+  font-size: 22px;
+  line-height: 26px;
+  text-transform: uppercase;
+  font-family: 'SF Pro Display';
+  color: #FFFFFF;
+  padding: 17px 19px;
+  min-width: 190px;
 }
