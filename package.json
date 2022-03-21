@@ -11,6 +11,7 @@
     "@types/gl-react": "^3.15.4",
     "@types/gl-react-dom": "^3.15.4",
     "@types/react-scroll": "^1.8.3",
+    "@types/react-slick": "^0.23.8",
     "@waxio/waxjs": "^1.0.4",
     "classnames": "^2.3.1",
     "gl-react": "^4.1.0",
@@ -21,7 +22,9 @@
     "react-intersection-observer": "^8.33.1",
     "react-query": "^3.34.16",
     "react-scroll": "^1.8.6",
-    "sass": "^1.49.9"
+    "react-slick": "^0.28.1",
+    "sass": "^1.49.9",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^4.2.7",
