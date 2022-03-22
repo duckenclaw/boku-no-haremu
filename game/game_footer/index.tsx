@@ -35,7 +35,7 @@ export const GameFooter = () => {
   return (
     <footer className={s.footer}>
       <nav className={s.nav_list}>
-        <ScreenLink screen="mine">MINE </ScreenLink>
+        <ScreenLink screen="mine">MINE</ScreenLink>
         <ScreenLink screen="craft" disabled>
           CRAFT
         </ScreenLink>

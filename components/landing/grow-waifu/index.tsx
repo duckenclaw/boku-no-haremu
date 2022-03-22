@@ -5,7 +5,6 @@ import s from './GrowWaifu.module.scss'
 import { TextHeader } from 'components/shared-ui/text-header'
 import Image from 'next/image'
 import { Container } from 'components/shared-ui/container'
-import { PreviewText } from '../preview-text/preview_text'
 
 type GrowWaifuProps = {
   className?: string
