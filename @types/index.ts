@@ -9,4 +9,6 @@ type CharacterSlider = {
     simptetix?: string
     crystal?: string
   }
+  imageDesktop: string,
+  imageMobile: string
 }
