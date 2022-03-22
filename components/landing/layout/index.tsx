@@ -8,7 +8,7 @@ export const Layout: React.FC = ({ children }) => (
   <>
     <Head>
       <link rel="shortcut icon" href="images/favicon.ico" />
-      <title>Boku no haremu</title>
+      <title>Boku no Haremu</title>
     </Head>
     <Header />
     <Hero />
