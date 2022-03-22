@@ -11,6 +11,7 @@
 }
 
 .dot {
+  display: block;
   background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
   border-radius: 8px;
   font-size: 22px;
@@ -20,13 +21,22 @@
   color: #FFFFFF;
   padding: 17px 19px;
   min-width: 190px;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 }
 
 .dotMobile {
+  display: none;
   width: 16px;
   height: 16px;
   left: 137px;
   top: 679px;
   background: linear-gradient(180deg, #294046 0%, rgba(166, 235, 255, 0) 96.11%);
   border-radius: 50%;
+
+  @media (max-width: 900px) {
+    display: block;
+  }
 }
