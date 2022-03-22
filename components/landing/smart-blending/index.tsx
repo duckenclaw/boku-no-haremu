@@ -20,12 +20,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
         <div className={s.column}>
           <img className={s.imageTop} alt="" src="/images/mimi_3.png" />
           <div className={s.arrow}>
-            <Image
-              src="/images/svg/arrow.svg"
-              alt="arrow"
-              width={60}
-              height={82}
-            />
+            <Image src="/arrow_left.svg" alt="arrow" width={60} height={82} />
             <div className={s.arrowText}>
               <div className={s.multiplier}>x1</div>
               <div className={s.nextLvl}>next lvl</div>
