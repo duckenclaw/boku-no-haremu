@@ -7,7 +7,6 @@ import s from './layout.module.scss'
 export const Layout: React.FC = ({ children }) => (
   <>
     <Head>
-      <link rel="shortcut icon" href="images/favicon.ico" />
       <title>Boku no haremu</title>
     </Head>
     <Header />

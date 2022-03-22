@@ -32,7 +32,7 @@
     right: 50%;
     width: 4px;
     min-height: 100%;
-    background: #FFFFFF;
+    background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(29, 115, 153, 0.61) 100%);
     border-radius: 8px;
     z-index: 0;
 
@@ -51,12 +51,16 @@
 }
 
 .number {
-  max-width: 94px;
-  font-weight: bold;
-  font-size: 38px;
-  line-height: 37px;
+  font-family: 'Kamikaze-Regular';
+  max-width: 120px;
+  font-weight: 400;
+  font-size: 54px;
+  line-height: 49px;
   text-align: right;
   margin-left: 103px;
+  background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(29, 115, 153, 0.61) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
   @media (max-width: 425px) {
     max-width: 60px;
@@ -78,6 +82,8 @@
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   z-index: 1;
+  background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
+  box-shadow: 0px 0px 33px 40px rgba(0, 240, 255, 0.27);
 
   @media (max-width: 425px) {
     width: 16px;
@@ -87,10 +93,10 @@
 }
 
 .text {
-  max-width: 209px;
+  max-width: 212px;
   width: 100%;
   text-align: left;
-  margin-top: 75px;
+  margin-top: 65px;
   margin-left: 98px;
 
   ul {

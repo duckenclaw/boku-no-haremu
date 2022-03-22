@@ -1,14 +1,20 @@
 .text {
-  max-width: 895px;
+  max-width: 993px;
   text-align: center;
-  margin: 100px auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100vh;
   font-weight: bold;
-  font-size: 39px;
-  line-height: 47px;
+  font-size: 40px;
+  line-height: 48px;
   color: #FFFFFF;
+  padding-top: 129px;
+  margin-bottom: 65px;
 
   @media (max-width: 768px) {
     font-size: 32px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   @media (max-width: 425px) {
@@ -19,11 +25,11 @@
 }
 
 .title {
-  font-family: 'AA BadaBoom BB';
+  font-family: 'Kamikaze-Regular';
   font-style: normal;
-  font-weight: normal;
-  font-size: 69px;
-  line-height: 73px;
+  font-weight: 400;
+  font-size: 62px;
+  line-height: 54px;
   color: #FFFFFF;
 
   @media (max-width: 768px) {

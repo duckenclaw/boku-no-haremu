@@ -6,14 +6,11 @@ import Image from 'next/image'
 //import Text from '/public/images/svg/boku-no-haremu.svg'
 import { SakuraAnimation } from './SakuraAnimation'
 
-
-
 type Props = {
   className?: string
 }
 
 const Hero: React.FC<Props> = ({ className }) => {
-  
   return (
     <section className={classNames(className, s.section)}>
       <div className={s.characters}>
@@ -25,10 +22,10 @@ const Hero: React.FC<Props> = ({ className }) => {
         />
       </div>
       <div className={s.content}>
-        <button className={s.button}>PLAY & EARN</button>
+        <button className={s.button}>PLAY</button>
         <div>
-        <div className={s.title}>Boku no haremu</div>
-        <div className={s.subtitle}>a true strategy nft game</div>
+          <div className={s.title}>Boku no haremu</div>
+          <div className={s.subtitle}>GROW YOUR UNIquE WAIFU</div>
         </div>
       </div>
     </section>
