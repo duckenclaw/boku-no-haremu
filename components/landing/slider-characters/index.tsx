@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './slider_characters.module.scss'
+import Image from 'next/image'
 import Slider from 'react-slick'
 import { SliderItem } from 'components/shared-ui/slider-item'
 import classNames from 'classnames'
@@ -17,6 +18,8 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
+    imageDesktop: '/slider/content_1',
+    imageMobile: '/slider/content_1_mobile',
   },
   {
     background: 'character-background2',
@@ -30,6 +33,8 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
+    imageDesktop: '/slider/content_2',
+    imageMobile: '/slider/content_2_mobile',
   },
   {
     background: 'character-background3',
@@ -43,6 +48,8 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
+    imageDesktop: '/slider/content_3',
+    imageMobile: '/slider/content_3_mobile',
   },
   {
     background: 'character-background4',
@@ -56,6 +63,8 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
+    imageDesktop: '/slider/content_4',
+    imageMobile: '/slider/content_4_mobile',
   },
 ]
 
