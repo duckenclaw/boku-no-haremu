@@ -1,9 +1,12 @@
-const version ='100';
+const version = '100'
+
+const prefix = `#version ${version} 
+#ifdef GL_ES
+precision mediump float;
+#endif`
 
 //type="x-shader/x_vertex"
-export const sakura_point_vsh = `#version ${version} 
-precision mediump float;
-
+export const sakura_point_vsh = `${prefix}
 uniform mat4 uProjection;
 uniform mat4 uModelview;
 uniform vec3 uResolution;
@@ -96,13 +99,8 @@ void main(void) {
 }
 `
 
-
 //type="x-shader/x_fragment"
-export const sakura_point_fsh = `#version ${version}
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
+export const sakura_point_fsh = `${prefix}
 
 uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
 uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
@@ -172,8 +170,7 @@ void main(void) {
 `
 
 //type="x-shader/x_vertex"
-export const fx_common_vsh = `#version ${version}
-precision mediump float;
+export const fx_common_vsh = `${prefix}
 
 uniform vec3 uResolution;
 
@@ -190,11 +187,7 @@ void main(void) {
 `
 
 //type="x-shader/x_fragment"
-export const bg_fsh = `#version ${version}
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
+export const bg_fsh = `${prefix}
 
 uniform vec2 uTimes;
 
@@ -212,11 +205,8 @@ void main(void) {
 `
 
 //type="x-shader/x_fragment"
-export const fx_brightbuf_fsh = `#version ${version}
-#ifdef GL_ES    
-//precision mediump float;
-precision highp float;
-#endif
+export const fx_brightbuf_fsh = `${prefix}
+
 uniform sampler2D uSrc;
 uniform vec2 uDelta;
 
@@ -230,11 +220,8 @@ void main(void) {
 `
 
 //type="x-shader/x_fragment"
-export const fx_dirblur_r4_fsh = `#version ${version}
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
+export const fx_dirblur_r4_fsh = `${prefix}
+
 uniform sampler2D uSrc;
 uniform vec2 uDelta;
 uniform vec4 uBlurDir; //dir(x, y), stride(z, w)
@@ -252,11 +239,7 @@ void main(void) {
 }
 `
 //type="x-shader/x_fragment"
-export const fx_common_fsh = `#version ${version}
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
+export const fx_common_fsh = `${prefix}
 uniform sampler2D uSrc;
 uniform vec2 uDelta;
 
@@ -269,7 +252,7 @@ void main(void) {
 `
 
 //type="x-shader/x_vertex"
-export const pp_final_vsh =`#version ${version}
+export const pp_final_vsh = `${prefix}
 uniform vec3 uResolution;
 attribute vec2 aPosition;
 varying vec2 texCoord;
@@ -282,11 +265,7 @@ void main(void) {
 `
 
 //type="x-shader/x_fragment"
-export const pp_final_fsh =`#version ${version}
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
+export const pp_final_fsh = `${prefix}
 uniform sampler2D uSrc;
 uniform sampler2D uBloom;
 uniform vec2 uDelta;
@@ -303,4 +282,4 @@ void main(void) {
     gl_FragColor = vec4(col.rgb, 1.0);
     gl_FragColor.a = 1.0;
 }
-`;
+`
