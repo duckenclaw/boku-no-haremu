@@ -3,11 +3,13 @@
   flex-wrap: wrap;
   background: url(/images/LooperGroup.png) no-repeat;
   background-size: contain;
-  @media (max-width: 768px) {
+
+  @media (max-width: 1200px) {
     margin-top: 64px;
-    background-size: 170%; 
+    background-size: 240%;
     background-position: center top;
     justify-content: flex-end;
+    flex-direction: column;
   }
 }
 
@@ -17,15 +19,16 @@
   margin: 0px auto;
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 36px;
   line-height: 48px;
   color: #FFFFFF;
   padding: 50px;
   padding-top: 300px;
-  
+
 
   @media (max-width: 768px) {
-    font-size: 32px;
+    font-size: 24px;
+    line-height: 40px;
     padding: 20px;
     padding-bottom: 0;
   }
@@ -45,11 +48,11 @@
   color: #FFFFFF;
 }
 
-.rules_enchantress{
+.rules_enchantress {
   flex: 1;
 
-  @media (max-width: 768px) {
-    width: 468.26px;
-    height: 587.34px;
+  @media (max-width: 1200px) {
+    width: 100%;
+    height: auto;
   }
 }

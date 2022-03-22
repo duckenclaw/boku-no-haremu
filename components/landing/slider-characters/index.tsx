@@ -20,7 +20,6 @@ const characters: CharacterSlider[] = [
       crystal: 'string',
     },
     imageDesktop: '/slider/content_1',
-    imageMobile: '/slider/content_1_mobile',
   },
   {
     background: 'character-background2',
@@ -35,7 +34,6 @@ const characters: CharacterSlider[] = [
       crystal: 'string',
     },
     imageDesktop: '/slider/content_2',
-    imageMobile: '/slider/content_2_mobile',
   },
   {
     background: 'character-background3',
@@ -50,7 +48,6 @@ const characters: CharacterSlider[] = [
       crystal: 'string',
     },
     imageDesktop: '/slider/content_3',
-    imageMobile: '/slider/content_3_mobile',
   },
   {
     background: 'character-background4',
@@ -65,7 +62,6 @@ const characters: CharacterSlider[] = [
       crystal: 'string',
     },
     imageDesktop: '/slider/content_4',
-    imageMobile: '/slider/content_4_mobile',
   },
 ]
 

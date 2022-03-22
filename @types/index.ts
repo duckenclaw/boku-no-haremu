@@ -10,6 +10,5 @@ export type CharacterSlider = {
     crystal?: string
   }
   imageDesktop: string,
-  imageMobile: string
 }
 

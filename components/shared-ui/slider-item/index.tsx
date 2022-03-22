@@ -32,14 +32,6 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => {
           height={526}
         />
       </div>
-      <div className={s.characterInfoWrapperMobile}>
-        <Image
-          src={`${data.imageDesktop}.png`}
-          alt="card_info"
-          width={755}
-          height={526}
-        />
-      </div>
     </div>
   )
 }

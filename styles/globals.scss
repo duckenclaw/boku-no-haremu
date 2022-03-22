@@ -88,3 +88,11 @@ a {
     padding-bottom: 130px;
   }
 }
+
+
+
+canvas {
+  @media(max-width: 768px) {
+    display: none;
+  }
+}
