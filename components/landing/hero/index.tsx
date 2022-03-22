@@ -22,7 +22,7 @@ const Hero: React.FC<Props> = ({ className }) => {
         />
       </div>
       <div className={s.content}>
-        <button className={s.button}>PLAY</button>
+        {/* <button className={s.button}>PLAY</button> */}
         <div>
           <div className={s.title}>Boku no haremu</div>
           <div className={s.subtitle}>GROW YOUR UNIquE WAIFU</div>
