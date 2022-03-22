@@ -1,4 +1,4 @@
-type CharacterSlider = {
+export type CharacterSlider = {
   background: string
   characterImg: string
   title: string
@@ -12,3 +12,4 @@ type CharacterSlider = {
   imageDesktop: string,
   imageMobile: string
 }
+

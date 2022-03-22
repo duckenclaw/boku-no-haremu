@@ -49,9 +49,7 @@ export const RoadMap = () => {
         <div className={s.columns_wrapper}>
           {row.map((item, index) => (
             <div className={s.row} key={index}>
-              <div className={s.number} style={{ color: item.color }}>
-                {item.number}
-              </div>
+              <div className={s.number}>{item.number}</div>
               <div className={s.circle}></div>
               <div className={s.text}>
                 <ul className={s.list}>
