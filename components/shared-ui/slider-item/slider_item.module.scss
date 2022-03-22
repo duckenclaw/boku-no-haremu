@@ -3,6 +3,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
+
+  @media(max-width: 1024px) {
+    flex-direction: column;
+  }
 }
 
 .image {
@@ -12,8 +16,40 @@
   height: -webkit-fill-available;
 }
 
-.characterInfo {
+.characterInfoWrapperDesktop {
   position: absolute;
-  right: 0%;
-  top: 20%;
+  top: 15%;
+  right: 0;
+  max-width: 755px;
+  width: 100%;
+  height: 526px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media(max-width: 1024px) {
+    display: none;
+  }
+}
+
+.characterInfoWrapperMobile {
+  display: none;
+  position: absolute;
+  top: 15%;
+  right: 0;
+  max-width: 755px;
+  width: 100%;
+  height: 526px;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  @media(max-width: 1024px) {
+    display: block;
+  }
 }
