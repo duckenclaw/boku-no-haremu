@@ -2,7 +2,6 @@
 import { Button } from 'components/shared-ui//button'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
-import { PreviewText } from 'components/landing/preview-text/preview_text'
 
 import s from './TokenisedEconomy.module.scss'
 
@@ -45,8 +44,7 @@ const cards: Card[] = [
 
 export const TokenisedEconomy: React.FC<Props> = () => (
   <section className={s.section}>
-    <Container>
-      <PreviewText />
+    <Container className={s.container}>
       <TextHeader
         className={s.textHeader}
         title="in-game resources"
