@@ -39,7 +39,7 @@
 
 @font-face {
   font-family: 'Kamikaze-Regular';
-  src: url('/fonts/Kamikaze-Regular.wof2') format('woff2'),
+  src: url('/fonts/Kamikaze-Regular.woff2') format('woff2'),
       url('/fonts/Kamikaze-Regular.woff') format('woff');
   font-weight: normal;
   font-style: italic;
