@@ -45,7 +45,7 @@ export const RoadMap = () => {
   return (
     <section>
       <Container className={s.wrap}>
-        <TextHeader title="ROADMAP" className={s.textHeader} id="road_map" />
+        <TextHeader title="ROADMAP" className={s.textHeader} id="roadmap" />
         <div className={s.columns_wrapper}>
           {row.map((item, index) => (
             <div className={s.row} key={index}>

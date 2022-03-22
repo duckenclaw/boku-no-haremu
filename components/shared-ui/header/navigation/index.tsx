@@ -13,7 +13,7 @@ const items = [
   { value: 'TRADE', href: 'trade' },
   { value: 'NFTS', href: 'nfts' },
   { value: 'FUSION', href: 'fusion' },
-  { value: 'ROADMAP', href: 'road_map' },
+  { value: 'ROADMAP', href: 'roadmap' },
 ]
 
 const Navigation: React.FC<Props> = ({ className }) => (

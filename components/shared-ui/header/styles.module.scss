@@ -4,8 +4,7 @@
   left: 0;
   z-index: 100;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  height: 104px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(50px);
 
@@ -15,12 +14,21 @@
     justify-content: center;
     align-items: flex-end;
   }
+
+
 }
 
 .wrapper {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-flow: row nowrap;
   max-width: 100%;
   justify-content: flex-end;
+  align-items: center;
+
+  @media (max-width: 1400px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }

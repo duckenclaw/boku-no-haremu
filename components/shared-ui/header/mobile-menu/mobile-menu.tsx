@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import s from './styles.module.scss'
 import { default as NextLink } from 'next/link'
-import { Link, animateScroll as scroll } from 'react-scroll'
+// import { Link, animateScroll as scroll } from 'react-scroll'
 
 const items = [
   { value: 'GROWTH', href: 'growth' },
@@ -9,7 +9,7 @@ const items = [
   { value: 'TRADE', href: 'trade' },
   { value: 'NFTS', href: 'nfts' },
   { value: 'FUSION', href: 'fusion' },
-  { value: 'ROADMAP', href: 'road_map' },
+  { value: 'ROADMAP', href: 'roadmap' },
 ]
 
 export const MobileMenu = () => {
@@ -33,16 +33,10 @@ export const MobileMenu = () => {
         </label>
         <ul className={s.menu__box}>
           {items.map((el, i) => (
-            <li className={s.menu__item} onClick={handleOnChange} key={i}>
-              <Link
-                to={el.href}
-                smooth={true}
-                offset={-100}
-                duration={500}
-                onClick={handleOnChange}
-              >
+            <li className={s.menu__item} key={i}>
+              <NextLink href={`/#${el.href}`} scroll={false}>
                 {el.value}
-              </Link>
+              </NextLink>
             </li>
           ))}
           <li className={s.menu__item}>

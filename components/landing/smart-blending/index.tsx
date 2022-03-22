@@ -15,7 +15,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
     <div className={s.top}></div>
     <Container className={s.container}>
-      <TextHeader title="SMART FUSION" className={s.textHeader} id="blending" />
+      <TextHeader title="SMART FUSION" className={s.textHeader} id="fusion" />
       <div className={s.content}>
         <div className={s.column}>
           <img className={s.imageTop} alt="" src="/images/mimi_3.png" />

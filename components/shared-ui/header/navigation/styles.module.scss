@@ -2,13 +2,14 @@
   width: 100%;
   color: #479EC5;
 
-  @media(max-width: 768px) {
+  @media(max-width: 1024px) {
     display: none;
   }
 }
 
 .navList {
   display: flex;
+  align-items: center;
   flex-flow: row wrap;
   width: 100%;
   list-style: none;
@@ -49,7 +50,7 @@
     -2px 2px 0 #FFFFFF,
     2px 2px 0 #FFFFFF;
 
-  @media(max-width: 1024px) {
+  @media(max-width: 1200px) {
     margin-right: 0px;
   }
 }
