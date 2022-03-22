@@ -22,7 +22,7 @@ const Home: NextPage = () => (
     <SliderCharacters />
     <SmartBlending />
     <Rules />
-    <RoadMap />
+    {/* <RoadMap /> */}
     <ContactInfo />
   </Layout>
 )
