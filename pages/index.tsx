@@ -9,6 +9,7 @@ import { SmartBlending } from 'components/landing/smart-blending'
 import { TokenisedEconomy } from 'components/landing/tokenised-economy'
 import { TypesOfRarity } from 'components/landing/types-of-rarity'
 import { PreviewText } from 'components/landing/preview-text/preview_text'
+import { SliderCharacters } from 'components/landing/slider-characters'
 
 const Home: NextPage = () => (
   <Layout>
@@ -19,6 +20,7 @@ const Home: NextPage = () => (
     <SmartBlending />
     <TypesOfRarity />
     <Rules />
+    <SliderCharacters />
     <RoadMap />
     <ContactInfo />
   </Layout>

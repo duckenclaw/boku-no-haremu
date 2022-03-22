@@ -1,3 +1,6 @@
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
+
 @font-face {
   font-family: 'AA BadaBoom BB';
   src: url('/fonts/AA_BadaBoom_BB.woff2') format('woff2'),
