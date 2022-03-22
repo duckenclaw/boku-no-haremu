@@ -6,7 +6,6 @@ import {
   bg_fsh,
   fx_brightbuf_fsh,
   fx_dirblur_r4_fsh,
-  fx_common_fsh,
   pp_final_fsh,
   pp_final_vsh,
 } from './Shaders'
@@ -361,7 +360,7 @@ function createPointFlowers() {
   pointFlower.fader = Vector3.create(0.0, 10.0, 0.0)
 
   // paramerters: velocity[3], rotate[3]
-  pointFlower.numFlowers = 1600
+  pointFlower.numFlowers = 300
   pointFlower.particles = new Array(pointFlower.numFlowers)
   // vertex attributes {position[3], euler_xyz[3], size[1]}
   pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2))
@@ -862,43 +861,49 @@ const enablePolyfill = (w, r) => {
 }
 
 export function runSakuraAnimation(canvas) {
-  enablePolyfill(window, 'requestAnimationFrame')
   try {
-    makeCanvasFullScreen(canvas)
-    gl = canvas.getContext('experimental-webgl')
-  } catch (e) {
-    alert('WebGL not supported.' + e)
-    console.error(e)
-    return
-  }
+    enablePolyfill(window, 'requestAnimationFrame')
+    try {
+      makeCanvasFullScreen(canvas)
+      gl = canvas.getContext('experimental-webgl')
+    } catch (e) {
+      alert('WebGL not supported.' + e)
+      console.error(e)
+      return
+    }
 
-  resizeCallback = () => {
-    makeCanvasFullScreen(canvas)
+    resizeCallback = () => {
+      makeCanvasFullScreen(canvas)
+      setViewports()
+      if (sceneStandBy) {
+        initScene()
+      }
+    }
+    window.addEventListener('resize', resizeCallback, { passive: true })
+
+    scrollCallback = () => {
+      if (window.scrollY + 100 >= canvas.height) {
+        animating = false
+      } else {
+        animating = true
+        requestAnimationFrame(animate)
+      }
+    }
+    window.addEventListener('scroll', scrollCallback, { passive: true })
+
     setViewports()
-    if (sceneStandBy) {
-      initScene()
-    }
+    createScene()
+    initScene()
+
+    timeInfo.start = new Date()
+    timeInfo.prev = timeInfo.start
+    animating = true
+    animate()
+  } catch (e) {
+    console.error(e)
+  } finally {
+    unmountSakuraAnimation
   }
-  window.addEventListener('resize', resizeCallback, { passive: true })
-
-  scrollCallback = () => {
-    if (window.scrollY + 100 >= canvas.height) {
-      animating = false
-    } else {
-      animating = true
-      requestAnimationFrame(animate)
-    }
-  }
-  window.addEventListener('scroll', scrollCallback, { passive: true })
-
-  setViewports()
-  createScene()
-  initScene()
-
-  timeInfo.start = new Date()
-  timeInfo.prev = timeInfo.start
-  animating = true
-  animate()
 }
 
 export const unmountSakuraAnimation = () => {

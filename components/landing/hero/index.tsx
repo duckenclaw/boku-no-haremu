@@ -2,9 +2,8 @@
 import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
-import Image from 'next/image'
-//import Text from '/public/images/svg/boku-no-haremu.svg'
 import { SakuraAnimation } from './SakuraAnimation'
+import Link from 'next/link'
 
 type Props = {
   className?: string
@@ -25,8 +24,8 @@ const Hero: React.FC<Props> = ({ className }) => {
         {/* <button className={s.button}>PLAY</button> */}
         <div>
           <div className={s.title}>Boku no haremu</div>
-          <div className={s.subtitle}>GROW YOUR UNIquE WAIFU</div>
-        </div>
+          <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
+z        </div>
       </div>
     </section>
   )
