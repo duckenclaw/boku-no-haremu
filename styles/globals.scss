@@ -70,3 +70,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.slick-active .slider-character-dot {
+  border: 1.5px solid #FFE8F0;
+  transform: translateY(-20px);
+  transition: .3s ease-in-out;
+  box-shadow: white 0px 0px 15px;
+}
+
+.slick-active  .slider-character-mobile-dots {
+  background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
+}
