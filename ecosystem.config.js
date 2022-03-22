@@ -3,7 +3,7 @@ module.exports = {
       {
         name: 'haremu-front',
         script: 'npm',
-        args: 'run start'
+        args: 'run start -- -p 3001'
       }
     ],
 
