@@ -76,8 +76,8 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
               rating="1"
               frameColor="#93d8ec"
             />*/}
-            <img className={s.card_image} src={card.image} alt="mimi" />
-            <div className={s.cardInfo}>
+            {/* <img className={s.card_image} src={card.image} alt="mimi" /> */}
+            {/* <div className={s.cardInfo}>
               <div className={s.cardTitleWrapper}>
                 <div className={s.cardTitle}>{card.title}</div>
                 <img
@@ -113,7 +113,7 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
