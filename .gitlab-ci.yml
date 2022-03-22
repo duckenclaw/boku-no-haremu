@@ -1,20 +1,22 @@
 stages:
   - build
-  - deploy_staging
+  - deploy_production
 
 build_app:
   image: node:lts
   stage: build
   script:
+    - rm -f package-lock.json
     - npm install -g npm@latest
     - npm install --progress=false
+    - npm -v && node -v
     - npm run build
   only:
     - main
 
-staging:
+production:
   image: node:lts-alpine
-  stage: deploy_staging
+  stage: deploy_production
   script:
     - apk add --no-cache openssh
     - apk add --update bash
