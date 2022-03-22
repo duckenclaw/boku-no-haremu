@@ -59,8 +59,6 @@ const characters: CharacterSlider[] = [
 ]
 
 export const SliderCharacters = () => {
-  const [currentDot, setCurrentDot] = useState(0)
-
   const settings = {
     dots: true,
     arrows: false,

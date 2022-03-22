@@ -1,5 +1,5 @@
 .root {
-  height: 900px;
+  height: 700px;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
@@ -9,4 +9,11 @@
   position: absolute;
   bottom: 0;
   left: 0;
+  height: -webkit-fill-available;
+}
+
+.characterInfo {
+  position: absolute;
+  right: 0%;
+  top: 20%;
 }

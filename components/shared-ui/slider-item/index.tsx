@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import styles from './slider_item.module.scss'
 
@@ -10,7 +11,7 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => {
     <div
       className={styles.root}
       style={{
-        backgroundImage: `url(/images/characters/${data.background}.png)`,
+        backgroundImage: `linear-gradient(to bottom, #2B0A37, transparent,  #2B0A37), url(/images/characters/${data.background}.png)`,
       }}
     >
       <img
@@ -18,6 +19,7 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => {
         alt=""
         src={`/images/characters/${data.characterImg}.png`}
       />
+      <div className={styles.characterInfo}></div>
     </div>
   )
 }
