@@ -4,8 +4,6 @@ import classNames from 'classnames'
 import s from './ExclusiveNfts.module.scss'
 import { TextHeader } from 'components/shared-ui/text-header'
 import { Container } from 'components/shared-ui/container'
-import { Card } from 'components/shared-ui/card'
-import Image from 'next/image'
 
 type ExclusiveNftsProps = {
   className?: string
@@ -64,7 +62,7 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
     <Container>
       <TextHeader title="EXCLUSIVE NFTS" className={s.textHeader} id="nfts" />
-      <img src="/images/nft3.png" className={s.nfts3} alt="" />
+      <img src="/images/nft3.webp" className={s.nfts3} alt="" />
       <img src="/images/nft4.png" className={s.nfts4} alt="" />
       <div className={s.cards}>
         {cards.map((card) => (

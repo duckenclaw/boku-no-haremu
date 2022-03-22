@@ -16,7 +16,7 @@ const Hero: React.FC<Props> = ({ className }) => {
         <SakuraAnimation />
         <img
           className={s.charactersImg}
-          src={'images/characters.png'}
+          src={'images/characters.webp'}
           alt="characters"
         />
       </div>
@@ -25,7 +25,7 @@ const Hero: React.FC<Props> = ({ className }) => {
         <div>
           <div className={s.title}>Boku no haremu</div>
           <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
-z        </div>
+        </div>
       </div>
     </section>
   )

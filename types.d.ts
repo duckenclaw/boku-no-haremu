@@ -45,3 +45,18 @@ type GetAllCardsResponseType = {
   query_time: number
   success: boolean
 }
+
+type CharacterSlider = {
+  background: string
+  characterImg: string
+  title: string
+  description: string
+  logo: string
+  price: {
+    nyan?: string
+    simptetix?: string
+    crystal?: string
+  }
+  imageDesktop: string
+  imageMobile: string
+}
