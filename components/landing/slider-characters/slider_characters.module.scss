@@ -1,5 +1,11 @@
+.slider {}
+
+.listDots {
+  margin-bottom: -10px;
+}
+
 .listDots li {
-  width: auto;  
+  width: auto;
   margin: 0px 12px;
 }
 
@@ -13,4 +19,13 @@
   color: #FFFFFF;
   padding: 17px 19px;
   min-width: 190px;
+}
+
+.dotMobile {
+  width: 16px;
+  height: 16px;
+  left: 137px;
+  top: 679px;
+  background: linear-gradient(180deg, #294046 0%, rgba(166, 235, 255, 0) 96.11%);
+  border-radius: 50%;
 }

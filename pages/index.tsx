@@ -17,10 +17,9 @@ const Home: NextPage = () => (
     <GrowWaifu />
     <TokenisedEconomy />
     <ExclusiveNfts />
-    <SmartBlending />
-    {/*<TypesOfRarity />*/}
-    <Rules />
     <SliderCharacters />
+    <SmartBlending />
+    <Rules />
     <RoadMap />
     <ContactInfo />
   </Layout>
