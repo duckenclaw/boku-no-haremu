@@ -19,10 +19,9 @@ const Home: NextPage = () => (
     <TokenisedEconomy />
     <Trade />
     <ExclusiveNfts />
-    <SmartBlending />
-    {/*<TypesOfRarity />*/}
-    <Rules />
     <SliderCharacters />
+    <SmartBlending />
+    <Rules />
     <RoadMap />
     <ContactInfo />
   </Layout>

@@ -14,7 +14,7 @@ const items = [
 
 export const MobileMenu = () => {
   const [isChecked, setIsChecked] = useState(false)
-  console.log(isChecked)
+
   const handleOnChange = () => {
     setIsChecked(!isChecked)
   }

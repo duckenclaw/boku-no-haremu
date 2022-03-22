@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styles from './slider_characters.module.scss'
 import Slider from 'react-slick'
 import { SliderItem } from 'components/shared-ui/slider-item'
+import classNames from 'classnames'
+import { useMediaQuery } from 'react-responsive'
 
 const characters: CharacterSlider[] = [
   {
@@ -60,6 +62,7 @@ const characters: CharacterSlider[] = [
 
 export const SliderCharacters = () => {
   const [currentDot, setCurrentDot] = useState(0)
+  const isDesktop = useMediaQuery({ query: '(min-width: 900px)' })
 
   const settings = {
     dots: true,
@@ -81,9 +84,19 @@ export const SliderCharacters = () => {
         <ul className={styles.listDots}> {dots} </ul>
       </div>
     ),
-    customPaging: (i: number) => (
-      <div className={styles.dot}>{characters[i].title}</div>
-    ),
+    customPaging: (i: number) =>
+      isDesktop ? (
+        <div className={classNames(styles.dot, 'slider-character-dot')}>
+          {characters[i].title}
+        </div>
+      ) : (
+        <div
+          className={classNames(
+            styles.dotMobile,
+            'slider-character-mobile-dots'
+          )}
+        ></div>
+      ),
   }
 
   return (
