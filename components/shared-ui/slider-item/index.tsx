@@ -2,6 +2,7 @@
 import React from 'react'
 import s from './slider_item.module.scss'
 import Image from 'next/image'
+import { CharacterSlider } from '@types'
 
 type SliderItemProps = {
   data: CharacterSlider

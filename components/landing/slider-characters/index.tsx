@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Slider from 'react-slick'
 import { SliderItem } from 'components/shared-ui/slider-item'
 import classNames from 'classnames'
+import { CharacterSlider } from '@types'
 
 const characters: CharacterSlider[] = [
   {
