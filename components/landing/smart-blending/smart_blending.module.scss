@@ -1,13 +1,28 @@
 .section {
-  margin-top: 162px;
+  margin-top: 100px;
+  background-image: url(/images/fusion_background.png);
+  background-size: cover;
 
   @media (max-width: 768px) {
     margin-top: 64px;
   }
 }
 
+.top{
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(#2B0A37, transparent 60px);
+}
+
+.bottom{
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(transparent 60px, #2B0A37);
+}
+
 .container {
   max-width: 1230px;
+  
 }
 
 .content {
@@ -71,20 +86,11 @@
   text-align: center;
   display: flex;
   justify-content: center;
-
-  span {
-    transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-  }
-
+  align-items: center;  
+  
   @media (max-width: 1024px) {
     margin-left: 18%;
   }
-
-
 
   @media (max-width: 425px) {
     margin-left: 30%;
@@ -97,20 +103,11 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-
-  span {
-    transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-  }
+  align-items: center;  
 
   @media (max-width: 1024px) {
     margin-left: 18%;
   }
-
 
   @media (max-width: 425px) {
     margin-left: 30%;
@@ -118,26 +115,31 @@
 }
 
 .multiplier {
-  font-family: 'AA BadaBoom BB';
-  margin-right: 10px;
-  font-size: 32px;
-  -webkit-text-fill-color: #479EC5;
-  -webkit-text-stroke-color: white;
-  -webkit-text-stroke-width: 2px;
+  font-family: 'Kamikaze-Regular';
+  margin-right: 5px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 47px;
+  line-height: 39px;
+  -webkit-text-fill-color: #E669A3;
+  -webkit-text-stroke-color: #000;
+  -webkit-text-stroke-width: 1px;
 
   @media(max-width: 425px) {
-    font-size: 25px;
-    line-height: 13px;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 27px;
   }
 }
 
 .nextLvl {
-  font-family: 'AA BadaBoom BB';
+  font-family: 'Kamikaze-Regular';
   margin-right: 10px;
+  font-weight: 400;
   font-size: 32px;
-  -webkit-text-fill-color: #D5436F;
-  -webkit-text-stroke-color: white;
-  -webkit-text-stroke-width: 2px;
+  line-height: 27px;
+  color: #fff;
+  text-align: center;
 
   @media(max-width: 425px) {
     font-size: 25px;
@@ -148,4 +150,9 @@
 .card {
   max-width: 172px;
   max-height: 255px;
+}
+
+.arrowText{
+  width: 60%;
+  display: flex;
 }

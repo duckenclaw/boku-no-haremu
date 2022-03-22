@@ -4,10 +4,26 @@
 
 .textHeader {
   margin-bottom: 80px;
+  margin-top: 80px;
 
   @media (max-width: 768px) {
     margin-bottom: 42px;
     margin-top: 64px;
+  }
+}
+
+.nfts3{
+  width: 100%;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.nfts4{
+  width: 100%;
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
   }
 }
 
