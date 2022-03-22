@@ -6,6 +6,9 @@ build_app:
   image: node:lts
   stage: build
   script:
+    - export NEXT_PUBLIC_WAX_CONTRACT=$NEXT_PUBLIC_WAX_CONTRACT
+    - export NEXT_PUBLIC_NFT_COLLECTION=$NEXT_PUBLIC_NFT_COLLECTION
+    - export NEXT_PUBLIC_ENABLE_GAME=$NEXT_PUBLIC_ENABLE_GAME
     - rm -f package-lock.json
     - npm install -g npm@latest
     - npm install --progress=false
