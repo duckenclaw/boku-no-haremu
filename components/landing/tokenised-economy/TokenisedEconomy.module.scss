@@ -11,7 +11,7 @@
 
 .cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   margin-left: -19px;
 
@@ -52,6 +52,15 @@
     margin-bottom: 110px;
     width: 162px;
     height: 250px;
+  }
+
+  @media (min-width: 1301px) {
+    &:first-child {
+      transform: translateY(-43px);
+    }
+    &:last-child {
+      transform: translateY(-43px);
+    }
   }
 }
 

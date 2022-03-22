@@ -66,57 +66,6 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
       <TextHeader title="EXCLUSIVE NFTS" className={s.textHeader} id="nfts" />
       <img src="/images/nft3.png" className={s.nfts3} alt="" />
       <img src="/images/nft4.png" className={s.nfts4} alt="" />
-      <div className={s.cards}>
-        {cards.map((card) => (
-          <div key={card.title} className={s.cardContainer}>
-            {/*<Card
-              className={s.card}
-              icon={card.icon}
-              image={card.image}
-              rating="1"
-              frameColor="#93d8ec"
-            />*/}
-            <img className={s.card_image} src={card.image} alt="mimi" />
-            <div className={s.cardInfo}>
-              <div className={s.cardTitleWrapper}>
-                <div className={s.cardTitle}>{card.title}</div>
-                <img
-                  className={s.cardIcon}
-                  src={`images/${card.icon}.png`}
-                  alt=""
-                />
-              </div>
-              <div className={s.cardDescription}>{card.description}</div>
-              <div className={s.cardSubTitle}>Asking out cost</div>
-              <div className={s.cardPrices}>
-                {card.price.sim && (
-                  <div className={s.cardPrice}>
-                    <img className={s.cardPriceIcon} src={`images/sim.png`} />
-                    <div className={s.cardPriceContent}>{card.price.sim}</div>
-                  </div>
-                )}
-                {card.price.crystal && (
-                  <div className={s.cardPrice}>
-                    <img
-                      className={s.cardPriceIcon}
-                      src={`images/crystal.png`}
-                    />
-                    <div className={s.cardPriceContent}>
-                      {card.price.crystal}
-                    </div>
-                  </div>
-                )}
-                {card.price.nyan && (
-                  <div className={s.cardPrice}>
-                    <img className={s.cardPriceIcon} src={`images/nyan.png`} />
-                    <div className={s.cardPriceContent}>{card.price.nyan}</div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
     </Container>
   </section>
 )
