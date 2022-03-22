@@ -17,7 +17,7 @@ const Home: NextPage = () => (
     <PreviewText />
     <GrowWaifu />
     <TokenisedEconomy />
-    <Trade />
+    {/* <Trade /> */}
     <ExclusiveNfts />
     <SliderCharacters />
     <SmartBlending />
