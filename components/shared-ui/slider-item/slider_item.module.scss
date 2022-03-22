@@ -1,18 +1,23 @@
 .root {
-  min-height: 700px;
+  min-height: 900px;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
 
   @media(max-width: 1024px) {
     flex-direction: column;
-    min-height: 500px;
+    min-height: 800px;
+  }
+
+  @media(max-width: 768px) {
+    flex-direction: column;
+    min-height: 550px;
   }
 }
 
 .characterInfoWrapperDesktop {
   position: absolute;
-  top: 15%;
+  top: 20%;
   right: 0;
   max-width: 755px;
   width: 100%;
@@ -62,7 +67,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  height: -webkit-fill-available;
+  height: auto;
 
   @media(max-width: 768px) {
 
