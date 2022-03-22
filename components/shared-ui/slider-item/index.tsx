@@ -15,11 +15,14 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => {
         backgroundImage: `linear-gradient(to bottom, #2B0A37, transparent,  #2B0A37), url(/images/characters/${data.background}.png)`,
       }}
     >
-      <img
-        className={s.image}
-        alt=""
-        src={`/images/characters/${data.characterImg}.png`}
-      />
+      <div className={s.personImg}>
+        <img
+          className={s.image}
+          alt=""
+          src={`/images/characters/${data.characterImg}.png`}
+        />
+      </div>
+
       <div className={s.characterInfoWrapperDesktop}>
         <Image
           src={`${data.imageDesktop}.png`}
