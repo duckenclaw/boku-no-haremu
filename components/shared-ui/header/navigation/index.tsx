@@ -9,12 +9,12 @@ type Props = {
 }
 
 const items = [
-  { value: 'TOKENS', href: 'tokens' },
-  { value: 'NFTS', href: 'nfts' },
   { value: 'GROWTH', href: 'growth' },
-  { value: 'BLENDING', href: 'blending' },
-  { value: 'RARITY', href: 'rarity' },
-  { value: 'ROAD MAP', href: 'road_map' },
+  { value: 'RESOURCES', href: 'resources' },
+  { value: 'TRADE', href: 'trade' },
+  { value: 'NFTS', href: 'nfts' },
+  { value: 'FUSION', href: 'fusion' },
+  { value: 'ROADMAP', href: 'road_map' },
 ]
 
 const Navigation: React.FC<Props> = ({ className }) => (

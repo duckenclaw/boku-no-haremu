@@ -4,17 +4,17 @@ import { default as NextLink } from 'next/link'
 import { Link, animateScroll as scroll } from 'react-scroll'
 
 const items = [
-  { value: 'TOKENS', href: 'tokens' },
-  { value: 'NFTS', href: 'nfts' },
   { value: 'GROWTH', href: 'growth' },
-  { value: 'BLENDING', href: 'blending' },
-  { value: 'RARITY', href: 'rarity' },
-  { value: 'ROAD MAP', href: 'road_map' },
+  { value: 'RESOURCES', href: 'resources' },
+  { value: 'TRADE', href: 'trade' },
+  { value: 'NFTS', href: 'nfts' },
+  { value: 'FUSION', href: 'fusion' },
+  { value: 'ROADMAP', href: 'road_map' },
 ]
 
 export const MobileMenu = () => {
   const [isChecked, setIsChecked] = useState(false)
-  console.log(isChecked)
+
   const handleOnChange = () => {
     setIsChecked(!isChecked)
   }

@@ -5,12 +5,37 @@
 }
 
 .title {
+  font-family: 'Kamikaze-Regular';
   text-align: center;
-  font-weight: bold;
-  font-size: 48px;
-  line-height: 57px;
+  font-weight: 400;
+  font-size: 77px;
+  line-height: 64px;
   color: #EF5DA8;
   margin-bottom: 26px;
+  text-shadow: -0 -2px 0 #FFFFFF,
+    0 -2px 0 #FFFFFF,
+    -0 2px 0 #FFFFFF,
+    0 2px 0 #FFFFFF,
+    -2px -0 0 #FFFFFF,
+    2px -0 0 #FFFFFF,
+    -2px 0 0 #FFFFFF,
+    2px 0 0 #FFFFFF,
+    -1px -2px 0 #FFFFFF,
+    1px -2px 0 #FFFFFF,
+    -1px 2px 0 #FFFFFF,
+    1px 2px 0 #FFFFFF,
+    -2px -1px 0 #FFFFFF,
+    2px -1px 0 #FFFFFF,
+    -2px 1px 0 #FFFFFF,
+    2px 1px 0 #FFFFFF,
+    -2px -2px 0 #FFFFFF,
+    2px -2px 0 #FFFFFF,
+    -2px 2px 0 #FFFFFF,
+    2px 2px 0 #FFFFFF,
+    -2px -2px 0 #FFFFFF,
+    2px -2px 0 #FFFFFF,
+    -2px 2px 0 #FFFFFF,
+    2px 2px 0 #FFFFFF;
 
   @media (max-width: 425px) {
     font-size: 26px;

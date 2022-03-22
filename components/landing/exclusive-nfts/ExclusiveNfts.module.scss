@@ -1,9 +1,11 @@
 .section {
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .textHeader {
   margin-bottom: 80px;
+  margin-top: 80px;
 
   @media (max-width: 768px) {
     margin-bottom: 42px;
@@ -11,8 +13,25 @@
   }
 }
 
+.nfts3 {
+  width: 100%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.nfts4 {
+  width: 100%;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
 .cards {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
 
   @media (max-width: 1024px) {
@@ -153,9 +172,10 @@
   top: -30%;
 }
 
-.card_image{
+.card_image {
   width: 220px;
   height: 320px;
+
   @media (max-width: 768px) {
     width: 150px;
     height: 200px;

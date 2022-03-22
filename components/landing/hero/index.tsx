@@ -21,13 +21,11 @@ const Hero: React.FC<Props> = ({ className }) => {
         />
       </div>
       <div className={s.content}>
-        <Link href="/game">
-          <a className={s.button}>PLAY &amp; EARN</a>
-        </Link>
+        <button className={s.button}>PLAY</button>
         <div>
           <div className={s.title}>Boku no haremu</div>
-          <div className={s.subtitle}>a true strategy nft game</div>
-        </div>
+          <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
+z        </div>
       </div>
     </section>
   )
