@@ -10,12 +10,14 @@ import { TokenisedEconomy } from 'components/landing/tokenised-economy'
 import { TypesOfRarity } from 'components/landing/types-of-rarity'
 import { PreviewText } from 'components/landing/preview-text/preview_text'
 import { SliderCharacters } from 'components/landing/slider-characters'
+import { Trade } from 'components/landing/trade'
 
 const Home: NextPage = () => (
   <Layout>
     <PreviewText />
     <GrowWaifu />
     <TokenisedEconomy />
+    <Trade />
     <ExclusiveNfts />
     <SliderCharacters />
     <SmartBlending />
