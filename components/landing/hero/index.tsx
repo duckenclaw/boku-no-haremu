@@ -2,8 +2,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
-import { SakuraAnimation } from './SakuraAnimation'
-import Link from 'next/link'
+import { SakuraAnimation } from './sakura_animation'
 
 type Props = {
   className?: string
@@ -12,20 +11,18 @@ type Props = {
 const Hero: React.FC<Props> = ({ className }) => {
   return (
     <section className={classNames(className, s.section)}>
-      <div className={s.characters}>
-        <SakuraAnimation />
-        <img
-          className={s.charactersImg}
-          src={'images/characters.webp'}
-          alt="characters"
-        />
-      </div>
+      <SakuraAnimation className={s.canvas} />
+      <img
+        className={s.characters_img}
+        src={'images/characters.webp'}
+        alt="characters"
+      />
       <div className={s.content}>
-        {/* <button className={s.button}>PLAY</button> */}
-        <div>
-          <div className={s.title}>Boku no haremu</div>
-          <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
-        </div>
+        <a href="https://discord.gg/FYWk9dEe" className={s.cta}>
+          <button className={s.button}>JOIN</button>
+        </a>
+        <div className={s.title}>Boku no haremu</div>
+        <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
       </div>
     </section>
   )
