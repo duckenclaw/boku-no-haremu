@@ -58,7 +58,7 @@ const characters: CharacterSlider[] = [
   },
   {
     background: 'character-background4',
-    characterImg: Character3,
+    characterImg: Character4,
     title: 'H1-bride',
     description:
       'As deadly as she is charming. She is so smart - Simpthetix are like child’s for her.',
