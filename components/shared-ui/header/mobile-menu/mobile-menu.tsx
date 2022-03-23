@@ -6,10 +6,10 @@ import { default as NextLink } from 'next/link'
 const items = [
   { value: 'GROWTH', href: 'growth' },
   { value: 'RESOURCES', href: 'resources' },
-  { value: 'TRADE', href: 'trade' },
+  // { value: 'TRADE', href: 'trade' },
   { value: 'NFTS', href: 'nfts' },
   { value: 'FUSION', href: 'fusion' },
-  { value: 'ROADMAP', href: 'roadmap' },
+  // { value: 'ROADMAP', href: 'roadmap' },
 ]
 
 export const MobileMenu = () => {
@@ -33,7 +33,7 @@ export const MobileMenu = () => {
         </label>
         <ul className={s.menu__box}>
           {items.map((el, i) => (
-            <li className={s.menu__item} key={i}>
+            <li className={s.menu__item} key={i} onClick={handleOnChange}>
               <NextLink href={`/#${el.href}`} scroll={false}>
                 {el.value}
               </NextLink>
