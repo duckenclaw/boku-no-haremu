@@ -2,7 +2,6 @@
 import s from './types-of-rarity.module.scss'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
-import { Card } from 'components/shared-ui/card'
 import classNames from 'classnames'
 import Image from 'next/image'
 
@@ -40,13 +39,6 @@ export const TypesOfRarity: React.FC<Props> = () => (
             width={244}
             height={362}
           />
-          {/*<Card
-            className={s.card}
-            icon="nyan"
-            image="lisa1"
-            rating="2"
-            frameColor="#93d8ec"
-          />*/}
           <div style={{ color: 'white' }} className={s.cardName}>
             89% Common
           </div>
@@ -68,13 +60,6 @@ export const TypesOfRarity: React.FC<Props> = () => (
             width={244}
             height={362}
           />
-          {/*<Card
-            className={s.card}
-            icon="nyan"
-            image="lisa1"
-            rating="2"
-            frameColor="#d87193"
-          />*/}
           <div style={{ color: '#D5436F' }} className={s.cardName}>
             10% Rare
           </div>
@@ -96,15 +81,6 @@ export const TypesOfRarity: React.FC<Props> = () => (
             width={244}
             height={362}
           />
-          {/*<Card
-            className={s.card}
-            frameColor="#e8dc3f"
-            iconBackgroundColor="#479EC5"
-            ratingBackgroundColor="#e8dc3f"
-            icon="nyan"
-            image="lisa1"
-            rating="2"
-          />*/}
           <div style={{ color: '#e8dc3f' }} className={s.cardName}>
             1% Epic
           </div>
