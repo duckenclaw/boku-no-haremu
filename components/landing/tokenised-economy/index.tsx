@@ -48,8 +48,6 @@ export const TokenisedEconomy: React.FC<Props> = () => (
       <TextHeader
         className={s.textHeader}
         title="in-game resources"
-        subtitle="   We present the latest technological solution for mobile design of
-          expositions, museums, galleries, exhibitions."
         id="resources"
       />
       <div className={s.cards}>
