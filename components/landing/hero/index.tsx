@@ -21,8 +21,10 @@ const Hero: React.FC<Props> = ({ className }) => {
         <a href="https://discord.gg/FYWk9dEe" className={s.cta}>
           <button className={s.button}>JOIN</button>
         </a>
-        <div className={s.title}>Boku no haremu</div>
-        <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
+        <div className={s.text_wrap}>
+          <div className={s.title}>Boku no haremu</div>
+          <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
+        </div>
       </div>
     </section>
   )
