@@ -100,6 +100,14 @@ a {
   }
 }
 
+.slick-dots {
+  bottom: 71px;
+
+  @media (max-width: 768px) {
+    bottom: -21px;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }

@@ -23,7 +23,7 @@ const cards = [
     },
   },
   {
-    title: 'Chantresses',
+    title: 'Chantress',
     description:
       'Enchant the reality to shift according to her will. So can you, if she presents her power to you in small boxes called Chantments.',
     icon: 'crystal',

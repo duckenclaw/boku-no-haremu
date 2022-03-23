@@ -14,6 +14,8 @@
 }
 
 .text {
+  max-width: 900px;
+  width: 100%;
   flex: 2;
   text-align: center;
   margin: 0px auto;
@@ -24,7 +26,12 @@
   color: #FFFFFF;
   padding: 50px;
   padding-top: 300px;
+  padding-right: 0;
 
+  @media (max-width: 1200px) {
+    padding-top: 0;
+    padding-right: 50px;
+  }
 
   @media (max-width: 768px) {
     font-size: 24px;
@@ -50,8 +57,11 @@
 
 .rules_enchantress {
   flex: 1;
+  max-width: 37%;
+  width: 100%;
 
   @media (max-width: 1200px) {
+    max-width: initial;
     width: 100%;
     height: auto;
   }

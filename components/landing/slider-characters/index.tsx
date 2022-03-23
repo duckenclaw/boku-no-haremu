@@ -17,7 +17,7 @@ const characters: CharacterSlider[] = [
   {
     background: 'character-background1',
     characterImg: Character1,
-    title: 'Chantresses',
+    title: 'Chantress',
     description:
       'Enchant the reality to shift according to her will. So can you, if she presents her power to you in small boxes called Chantments.',
     logo: 'string',
