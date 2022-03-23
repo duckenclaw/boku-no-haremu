@@ -29,7 +29,7 @@ const characters: CharacterSlider[] = [
     imageDesktop: imageDesktop1,
   },
   {
-    background: 'character-background2',
+    background: 'character-background2_peace',
     characterImg: Character2,
     title: 'mimi-chan',
     description:
@@ -57,7 +57,7 @@ const characters: CharacterSlider[] = [
     imageDesktop: imageDesktop3,
   },
   {
-    background: 'character-background4',
+    background: 'character-background4_peace',
     characterImg: Character4,
     title: 'H1-bride',
     description:

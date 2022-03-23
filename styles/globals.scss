@@ -37,8 +37,10 @@
 
 @font-face {
   font-family: 'Bangers';
-  src: url('/fonts/Bangers.wof2') format('woff2'),
-    url('/fonts/Bangers.woff') format('woff');
+  src: url('/fonts/Bangers-Regular.wof2') format('woff2'),
+    url('/fonts/Bangers-Regular.woff') format('woff'),
+    url('/fonts/Bangers-Regular.ttf') format('ttf'),
+    url('/fonts/Bangers-Regular.eot') format('eot');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -46,7 +48,10 @@
 
 @font-face {
   font-family: 'Kamikaze-Regular';
-  src: url('/fonts/Kamikaze-Regular.woff2') format('woff2'),
+  src:
+    url('/fonts/Kamikaze-Regular.ttf') format('ttf'),
+    url('/fonts/Kamikaze-Regular.eot') format('eot'),
+    url('/fonts/Kamikaze-Regular.woff2') format('woff2'),
     url('/fonts/Kamikaze-Regular.woff') format('woff');
   font-weight: normal;
   font-style: italic;

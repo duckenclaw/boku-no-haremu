@@ -1,7 +1,7 @@
 .root {
   min-height: 900px;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: auto;
+  background-repeat: repeat;
   position: relative;
 
   @media(max-width: 768px) {
