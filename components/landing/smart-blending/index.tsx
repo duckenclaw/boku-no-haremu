@@ -13,7 +13,6 @@ type SmartBlendingProps = {
 
 export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
-    <div className={s.top}></div>
     <Container className={s.container}>
       <TextHeader title="SMART FUSION" className={s.textHeader} id="fusion" />
       <div className={s.content}>
@@ -57,6 +56,5 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
         </div>
       </div>
     </Container>
-    <div className={s.bottom}></div>
   </section>
 )

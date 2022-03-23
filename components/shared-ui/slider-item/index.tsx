@@ -15,13 +15,8 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => (
     }}
   >
     <div className={s.personImg}>
-      <img
-        className={s.image}
-        alt=""
-        src={`${data.characterImg.src}`}
-      />
+      <img className={s.image} alt="" src={`${data.characterImg.src}`} />
     </div>
-    {console.log(data.imageDesktop)}
     <div className={s.characterInfoWrapperDesktop}>
       <Image
         src={`${data.imageDesktop.src}`}

@@ -12,7 +12,6 @@ type GrowWaifuProps = {
 
 export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
-    <div className={s.bg_top}></div>
     <Container>
       <TextHeader
         title="GROW YOUR UNIQUE WAIFU"
@@ -58,6 +57,5 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         />
       </div>
     </Container>
-    <div className={s.bg_bot}></div>
   </section>
 )
