@@ -48,7 +48,7 @@ type GetAllCardsResponseType = {
 
 type CharacterSlider = {
   background: string
-  characterImg: string
+  characterImg: StaticImageData
   title: string
   description: string
   logo: string
@@ -57,5 +57,5 @@ type CharacterSlider = {
     simptetix?: string
     crystal?: string
   }
-  imageDesktop: string
+  imageDesktop: StaticImageData
 }

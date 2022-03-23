@@ -7,30 +7,28 @@ type SliderItemProps = {
   data: CharacterSlider
 }
 
-export const SliderItem: React.FC<SliderItemProps> = ({ data }) => {
-  return (
-    <div
-      className={s.root}
-      style={{
-        backgroundImage: `linear-gradient(to bottom, #2B0A37, transparent,  #2B0A37), url(/images/characters/${data.background}.png)`,
-      }}
-    >
-      <div className={s.personImg}>
-        <img
-          className={s.image}
-          alt=""
-          src={`/images/characters/${data.characterImg}.png`}
-        />
-      </div>
-
-      <div className={s.characterInfoWrapperDesktop}>
-        <Image
-          src={`${data.imageDesktop}.png`}
-          alt="card_info"
-          width={755}
-          height={526}
-        />
-      </div>
+export const SliderItem: React.FC<SliderItemProps> = ({ data }) => (
+  <div
+    className={s.root}
+    style={{
+      backgroundImage: `linear-gradient(to bottom, #2B0A37, transparent,  #2B0A37), url(/images/characters/${data.background}.png)`,
+    }}
+  >
+    <div className={s.personImg}>
+      <img
+        className={s.image}
+        alt=""
+        src={`${data.characterImg.src}`}
+      />
     </div>
-  )
-}
+    {console.log(data.imageDesktop)}
+    <div className={s.characterInfoWrapperDesktop}>
+      <Image
+        src={`${data.imageDesktop.src}`}
+        alt="card_info"
+        width={755}
+        height={526}
+      />
+    </div>
+  </div>
+)

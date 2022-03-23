@@ -4,11 +4,19 @@ import Image from 'next/image'
 import Slider from 'react-slick'
 import { SliderItem } from 'components/shared-ui/slider-item'
 import classNames from 'classnames'
+import imageDesktop1 from 'public/images/slider/content_1.png'
+import imageDesktop2 from 'public/images/slider/content_2.png'
+import imageDesktop3 from 'public/images/slider/content_3.png'
+import imageDesktop4 from 'public/images/slider/content_4.png'
+import Character1 from 'public/images/characters/character1.png'
+import Character2 from 'public/images/characters/character2.png'
+import Character3 from 'public/images/characters/character3.png'
+import Character4 from 'public/images/characters/character4.png'
 
 const characters: CharacterSlider[] = [
   {
     background: 'character-background1',
-    characterImg: 'character1',
+    characterImg: Character1,
     title: 'Chantresses',
     description:
       'Enchant the reality to shift according to her will. So can you, if she presents her power to you in small boxes called Chantments.',
@@ -18,11 +26,11 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
-    imageDesktop: '/slider/content_1',
+    imageDesktop: imageDesktop1,
   },
   {
     background: 'character-background2',
-    characterImg: 'character2',
+    characterImg: Character2,
     title: 'mimi-chan',
     description:
       'An ideal companion. She love you so much, that you get Nyans from her.',
@@ -32,11 +40,11 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
-    imageDesktop: '/slider/content_2',
+    imageDesktop: imageDesktop2,
   },
   {
     background: 'character-background3',
-    characterImg: 'character3',
+    characterImg: Character3,
     title: 'Hitomi',
     description:
       'Home impersonated. She takes such good care of you. You’ll never go hungry without a delicious Bento with her.',
@@ -46,11 +54,11 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
-    imageDesktop: '/slider/content_3',
+    imageDesktop: imageDesktop3,
   },
   {
     background: 'character-background4',
-    characterImg: 'character4',
+    characterImg: Character3,
     title: 'H1-bride',
     description:
       'As deadly as she is charming. She is so smart - Simpthetix are like child’s for her.',
@@ -60,7 +68,7 @@ const characters: CharacterSlider[] = [
       simptetix: 'string',
       crystal: 'string',
     },
-    imageDesktop: '/slider/content_4',
+    imageDesktop: imageDesktop4,
   },
 ]
 
