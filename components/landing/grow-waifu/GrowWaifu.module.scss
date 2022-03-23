@@ -1,6 +1,6 @@
 .section {
   position: relative;
-
+  margin-bottom: 80px;
   padding-top: 150px;
   padding-bottom: 150px;
   background: linear-gradient(to bottom, #2B0A37, transparent, #2B0A37),
@@ -10,6 +10,7 @@
   @media(max-width: 768px) {
     padding-top: 120px;
     padding-bottom: 40px;
+    margin-bottom: 40px;
   }
 
   @media(max-width: 425px) {
