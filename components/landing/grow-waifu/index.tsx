@@ -5,6 +5,9 @@ import s from './GrowWaifu.module.scss'
 import { TextHeader } from 'components/shared-ui/text-header'
 import Image from 'next/image'
 import { Container } from 'components/shared-ui/container'
+import Mimi1 from 'public/images/mimi1.png'
+import Mimi2 from 'public/images/mimi2_new.png'
+import Mimi3 from 'public/images/mimi3_new.png'
 
 type GrowWaifuProps = {
   className?: string
@@ -19,13 +22,13 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         id="growth"
       />
       <div className={s.content}>
-        <Image
+        {/*<Image
           src="/images/mimi1.png"
           alt="mimi_card"
           width={244}
           height={362}
-        />
-
+        />*/}
+        <img src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
         <div className={s.arrow}>
           <Image
             src="/images/svg/arrow.svg"
@@ -34,13 +37,13 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
             height={26}
           />
         </div>
-        <Image
+        {/*<Image
           src="/images/mimi2_new.png"
           alt="mimi_card"
           width={244}
           height={362}
-        />
-
+        />*/}
+        <img src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
         <div className={s.arrow}>
           <Image
             src="/images/svg/arrow.svg"
@@ -49,12 +52,13 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
             height={26}
           />
         </div>
-        <Image
+        {/*<Image
           src="/images/mimi3_new.png"
           alt="mimi_card"
           width={244}
           height={362}
-        />
+        />*/}
+        <img src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />
       </div>
     </Container>
   </section>
