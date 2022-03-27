@@ -14,6 +14,18 @@ export const AtomicHubApi = axios.create({
   withCredentials: false,
 })
 
+export const balanceStringToObject = (
+  value: string,
+  fallbackCurrency?: string
+) => {
+  const [balance_str, currency_str] = value.split(' ', 2)
+  const balance = Number.parseFloat(balance_str)
+  return {
+    balance: isNaN(balance) ? 0 : balance,
+    currency: currency_str ?? fallbackCurrency,
+  } as BalanceType
+}
+
 export const useGetAllCards = () => {
   const { wax } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
@@ -47,18 +59,28 @@ export const useGetResources = () => {
           code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
           scope: wax.userAccount,
           table: 'accounts',
-          limit: 10000,
+          limit: 1,
           reverse: false,
           show_payer: false,
         })
         .catch((e) => console.log(e))
         .then((res) => {
-          console.log('wax/resources table', res)
+          if (res?.rows[0]) {
+            const row = res.rows[0]
+            return {
+              smp: balanceStringToObject(row.resource_balances[0], 'SMP'),
+              nya: balanceStringToObject(row.resource_balances[1], 'NYA'),
+              bnt: balanceStringToObject(row.resource_balances[2], 'BHT'),
+              cht: balanceStringToObject(row.resource_balances[3], 'CHT'),
+              is_blocked: row.is_blocked > 0,
+            }
+          }
           return {
-            nya: 0,
-            bnt: 0,
-            spt: 0,
-            cht: 0,
+            smp: balanceStringToObject('0', 'SMP'),
+            nya: balanceStringToObject('0', 'NYA'),
+            bnt: balanceStringToObject('0', 'BHT'),
+            cht: balanceStringToObject('0', 'CHT'),
+            is_blocked: false,
           }
         }),
   })
@@ -72,6 +94,6 @@ export const useWaxBalance = () => {
     queryFn: () =>
       wax?.api.rpc
         .get_currency_balance('eosio.token', wax.userAccount, 'WAX')
-        .then((v) => v[0] as string),
+        .then((v) => balanceStringToObject(v[0], 'WAX') as BalanceType),
   })
 }

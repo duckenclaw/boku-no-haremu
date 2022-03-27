@@ -59,3 +59,8 @@ type CharacterSlider = {
   }
   imageDesktop: StaticImageData
 }
+
+type BalanceType = {
+  balance: number
+  currency: string
+}
