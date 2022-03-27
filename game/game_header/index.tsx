@@ -1,4 +1,5 @@
 import { useWax } from 'contexts/wax_context'
+import { useGetResources, useWaxBalance } from 'game/game_api'
 import s from './game_header.module.scss'
 
 type Res = {
@@ -27,25 +28,53 @@ const res: Res[] = [
 
 export const GameHeader = () => {
   const { wax } = useWax()
+  const { data: resourcesData } = useGetResources()
+  const { data: balanceData } = useWaxBalance()
   return (
     <header className={s.container}>
       <div className={s.profile_info}>
-        <select name="wax">
-          <option value="first">{wax?.userAccount}</option>
-        </select>
-        <span>+87 wax ($ 38,2)</span>
+        <span>{wax?.userAccount}</span>
+        <span>
+          {balanceData?.balance} {balanceData?.currency}
+        </span>
       </div>
 
       <div className={s.cards}>
-        {res?.map((item: Res) => (
-          <div key={item.logo} className={s.res}>
-            <img className={s.cardPriceIcon} src={`images/${item.logo}.png`} />
-            {item.value}
-          </div>
-        ))}
-        <div>
-          <img src="images/Icon.png" />
+        <div className={s.res}>
+          <img
+            className={s.cardPriceIcon}
+            alt="nya"
+            src={`images/currencies/nyan.png`}
+          />
+          {resourcesData?.nya.balance ?? 0}
         </div>
+        <div className={s.res}>
+          <img
+            className={s.cardPriceIcon}
+            alt="crystal"
+            src={`images/currencies/crystal.png`}
+          />
+          {resourcesData?.cht.balance ?? 0}
+        </div>
+        <div className={s.res}>
+          <img
+            className={s.cardPriceIcon}
+            alt="simptetix"
+            src={`images/currencies/simptetix.png`}
+          />
+          {resourcesData?.smp.balance ?? 0}
+        </div>
+        <div className={s.res}>
+          <img
+            className={s.cardPriceIcon}
+            alt="bento"
+            src={`images/currencies/bento.png`}
+          />
+          {resourcesData?.bnt.balance ?? 0}
+        </div>
+      </div>
+      <div className={s.info}>
+        <img src="images/Icon.png" />
       </div>
     </header>
   )
