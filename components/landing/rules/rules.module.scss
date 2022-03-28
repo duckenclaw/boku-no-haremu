@@ -1,7 +1,11 @@
 .section {
   display: flex;
+  padding: 270px 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  background: url(/images/looper_group.webp) no-repeat;
+  background: url(/images/looper_group.webp) no-repeat center;
   background-size: contain;
 
   @media (max-width: 1200px) {
@@ -14,26 +18,22 @@
 }
 
 .text {
-  max-width: 900px;
-  width: 100%;
-  flex: 2;
-  text-align: center;
-  margin: 0px auto;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
+  font-family: 'SF Pro Display';
+  font-size: 40px;
   line-height: 48px;
+  text-align: center;
   color: #FFFFFF;
-  padding: 50px;
-  padding-top: 300px;
-  padding-right: 0;
+  max-width: 60%;
+  margin-bottom: 95px;
 
   @media (max-width: 1200px) {
     padding-top: 0;
     padding-right: 50px;
+    max-width: 70%;
   }
 
   @media (max-width: 768px) {
+    max-width: 90%;
     font-size: 24px;
     line-height: 40px;
     padding: 20px;
@@ -46,23 +46,26 @@
   }
 }
 
-.title {
-  font-family: 'AA BadaBoom BB';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 69px;
-  line-height: 73px;
-  color: #FFFFFF;
+.paragraph {
+  margin: 10px 0; 
 }
 
-.rules_enchantress {
-  flex: 1;
-  max-width: 37%;
-  width: 100%;
+.button {
+  cursor: pointer;
+  background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
+  border-radius: 8px;
+  font-size: 22px;
+  line-height: 26px;
+  text-transform: uppercase;
+  font-family: 'SF Pro Display';
+  color: #FFFFFF;
+  padding: 17px 32px;
+  min-width: 190px;
+  border: none;
 
-  @media (max-width: 1200px) {
-    max-width: initial;
-    width: 100%;
-    height: auto;
+  @media (max-width: 768px) {
+    padding: 12px 19px;
+    font-size: 17px;
+    line-height: 40px;
   }
 }
