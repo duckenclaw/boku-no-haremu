@@ -46,6 +46,20 @@
   }
 }
 
+.title {
+  margin-bottom: 20px;
+  font-size: 50px;
+  line-height: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 34px;
+  }
+
+  @media(max-width: 425px) {
+    font-size: 30px;
+  }
+}
+
 .paragraph {
   margin: 10px 0; 
 }

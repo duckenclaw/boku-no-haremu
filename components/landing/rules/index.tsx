@@ -4,7 +4,7 @@ import s from './rules.module.scss'
 export const Rules = () => (
   <section className={s.section}>
     <div className={s.text}>
-      <p className={s.paragraph}>Become a gentleman-hero.</p>
+      <div className={s.title}>Become a gentleman-hero.</div>
       <p className={s.paragraph}>
         The most powerful leader has the most waifus and knows how to treat them
         like ladies that they are.
