@@ -55,7 +55,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
           <div key={card.title} className={s.card}>
             <img
               className={s.cardLogo}
-              src={`images/${card.logo}.png`}
+              src={`images/currencies/${card.logo}.png`}
               alt={card.title}
             />
             <div className={s.cardTitle}>{card.title}</div>
