@@ -1,5 +1,7 @@
 .footer {
-    position: relative;
+    position: sticky;
+    bottom: 10px;
+    z-index: 1000;
     font-family: 'Bangers';
     max-width: 1011px;
     width: 100%;

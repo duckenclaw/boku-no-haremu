@@ -7,6 +7,10 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { useState } from 'react'
 import Head from 'next/head'
 
+import Modal from 'react-modal'
+
+Modal.setAppElement('#__next')
+
 function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
   return (

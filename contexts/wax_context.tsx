@@ -2,22 +2,28 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { WaxJS } from '@waxio/waxjs/dist'
 
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'
+import { Api, JsonRpc } from 'eosjs'
 
-const waxConfig =
-  process.env.NEXT_PUBLIC_TESTNET === 'true'
-    ? {
-        apiSigner: new JsSignatureProvider([
-          process.env.NEXT_PUBLIC_ACTIVE_KEY_PRIV!,
-          process.env.NEXT_PUBLIC_OWNER_KEY_PRIV!,
-        ]),
-        pubKeys: [
-          process.env.NEXT_PUBLIC_ACTIVE_KEY_PUB!,
-          process.env.NEXT_PUBLIC_OWNER_KEY_PUB!,
-        ],
-        rpcEndpoint: 'http://testnet.wax.blacklusion.io',
-        userAccount: process.env.NEXT_PUBLIC_ACCOUNT,
-      }
-    : { rpcEndpoint: 'https://wax.greymass.com/' }
+const createWax = (): WaxJS => {
+  if (process.env.NEXT_PUBLIC_TESTNET === 'true') {
+    const waxFakeObject: any = {
+      userAccount: null,
+      login: () => {
+        waxFakeObject.userAccount = process.env.NEXT_PUBLIC_ACCOUNT
+        waxFakeObject.api = new Api({
+          rpc: new JsonRpc('http://testnet.wax.blacklusion.io'),
+          signatureProvider: new JsSignatureProvider([
+            process.env.NEXT_PUBLIC_ACTIVE_KEY_PRIV!,
+            process.env.NEXT_PUBLIC_OWNER_KEY_PRIV!,
+          ]),
+        })
+        return Promise.resolve()
+      },
+    }
+    return waxFakeObject
+  }
+  return new WaxJS({ rpcEndpoint: 'https://wax.greymass.com/' })
+}
 
 const context = createContext<WaxContextValue | null>(null)
 context.displayName = 'WaxContext'
@@ -47,7 +53,7 @@ const initer = () =>
 export const WaxProvider: React.FC = ({ children }) => {
   const [state, setState] = useState<WaxContextState>(initer)
   useEffect(() => {
-    const wax = new WaxJS(waxConfig)
+    const wax = createWax()
     setState({
       isLoading: false,
       wax,
@@ -57,14 +63,14 @@ export const WaxProvider: React.FC = ({ children }) => {
   const value = useMemo(
     () => ({
       ...state,
-      isConnected: !!state.wax?.user,
+      isConnected: !!state.wax?.userAccount,
       login: () =>
         state.wax?.login().then(() => setState((s) => ({ ...s }))) ??
         Promise.resolve(),
     }),
     [
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       state,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       state.wax,
     ]
   )

@@ -10,7 +10,9 @@ import {
 } from 'react-query'
 
 export const AtomicHubApi = axios.create({
-  baseURL: 'https://wax.api.atomicassets.io/atomicassets/v1/',
+  baseURL: process.env.NEXT_PUBLIC_TESTNET
+    ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
+    : 'https://wax.api.atomicassets.io/atomicassets/v1/',
   withCredentials: false,
 })
 
@@ -30,7 +32,7 @@ export const useGetAllCards = () => {
   const { wax } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllCards', { account: wax?.userAccount }],
-    enabled: !!wax?.user,
+    enabled: !!wax?.userAccount,
     refetchOnWindowFocus: false,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.post('/assets', {
@@ -47,13 +49,26 @@ export const useGetAllCards = () => {
   })
 }
 
+export const useWaxBalance = () => {
+  const { wax, isConnected } = useWax()
+  return useQuery({
+    queryKey: ['wax/balance', { address: wax?.userAccount }],
+    enabled: isConnected && !!wax?.userAccount,
+    queryFn: () =>
+      wax?.api.rpc
+        .get_currency_balance('eosio.token', wax.userAccount, 'WAX')
+        .then((v) => balanceStringToObject(v[0], 'WAX') as BalanceType),
+  })
+}
+
+// get resources amount for user
 export const useGetResources = () => {
   const { wax, isConnected } = useWax()
   return useQuery({
     queryKey: ['wax/resources', { address: wax?.userAccount }],
     enabled: isConnected && !!wax?.userAccount,
     queryFn: () =>
-      wax?.rpc
+      wax?.api.rpc
         .get_table_rows({
           json: true,
           code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
@@ -86,14 +101,65 @@ export const useGetResources = () => {
   })
 }
 
-export const useWaxBalance = () => {
+// get all mining/set cards for user
+export const useGetMiningCards = () => {
   const { wax, isConnected } = useWax()
   return useQuery({
-    queryKey: ['wax/balance', { address: wax?.userAccount }],
+    queryKey: ['wax/mining', { address: wax?.userAccount }],
     enabled: isConnected && !!wax?.userAccount,
     queryFn: () =>
       wax?.api.rpc
-        .get_currency_balance('eosio.token', wax.userAccount, 'WAX')
-        .then((v) => balanceStringToObject(v[0], 'WAX') as BalanceType),
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: wax.userAccount,
+          table: 'minerecords',
+          limit: 10,
+          key_type: `i64`,
+          index_position: 4,
+          lower_bound: 0,
+          upper_bound: 1,
+        })
+        .then((res) => res.rows),
+  })
+}
+
+type useInitMineArguments = {
+  asset_id: string
+}
+
+export const useInitMine = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation<any, any, useInitMineArguments>({
+    mutationKey: 'wax/initMine',
+    mutationFn: ({ asset_id }) =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'initmine',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                asset_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries(['wax/mining'])
+    },
   })
 }
