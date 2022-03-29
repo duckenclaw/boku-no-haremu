@@ -13,12 +13,6 @@
   flex-direction: column;
   justify-content: flex-end;
 
-
-  @media (max-width: 768px) {
-    background: url('/sakura_bg.png') center no-repeat;
-    background-size: 110%;
-  }
-
   .canvas {
     position: absolute;
     top: 0;

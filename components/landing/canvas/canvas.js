@@ -882,6 +882,12 @@ export function runSakuraAnimation(canvas) {
   }
 }
 
+export const stopSakuraAnimation = () => {
+  animating = false
+  window.removeEventListener('scroll', scrollCallback)
+  window.removeEventListener('resize', resizeCallback)
+}
+
 export const unmountSakuraAnimation = () => {
   animating = false
   window.removeEventListener('scroll', scrollCallback)
