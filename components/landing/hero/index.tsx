@@ -3,15 +3,20 @@ import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import { SakuraAnimation } from './sakura_animation'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = {
   className?: string
 }
 
 const Hero: React.FC<Props> = ({ className }) => {
+  const isMobile = useMediaQuery({
+    query: '(min-width: 768px)',
+  })
+
   return (
     <section className={classNames(className, s.section)}>
-      <SakuraAnimation className={s.canvas} />
+      {isMobile && <SakuraAnimation className={s.canvas} />}
       <img
         className={s.characters_img}
         src={'images/characters.webp'}
