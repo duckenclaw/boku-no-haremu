@@ -1,10 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import {
-  runSakuraAnimation,
-  unmountSakuraAnimation,
-  stopSakuraAnimation,
-} from '../canvas/canvas'
+import { runSakuraAnimation, unmountSakuraAnimation } from '../canvas/canvas'
 
 type SakuraAnimationProps = {
   className?: string
@@ -17,7 +13,7 @@ export const SakuraAnimation = ({ className }: SakuraAnimationProps) => {
   })
   useLayoutEffect(() => {
     runSakuraAnimation(canvasRef.current)
-    !isMobile && stopSakuraAnimation()
+    !isMobile && unmountSakuraAnimation()
     return () => {
       unmountSakuraAnimation()
     }
