@@ -17,7 +17,7 @@ const Hero: React.FC<Props> = ({ className }) => (
       alt="characters"
     />
     <div className={s.content}>
-      <a href="https://discord.gg/FYWk9dEe" className={s.cta}>
+      <a href="https://discord.gg/S3rbu5GXGQ" className={s.cta}>
         <button className={s.button}>JOIN</button>
       </a>
       <div className={s.text_wrap}>

@@ -15,7 +15,7 @@ export const Rules = () => (
         main currency in this world…
       </p>
     </div>
-    <a href="https://discord.gg/FYWk9dEe">
+    <a href="https://discord.gg/S3rbu5GXGQ">
       <button className={s.button}>open your heart</button>
     </a>
   </section>

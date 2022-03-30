@@ -8,7 +8,7 @@ type Props = {
 const Socials: React.FC<Props> = () => (
   <ul className={s.list}>
     <li>
-      <a href="https://discord.gg/GN5CukNF" className={s.item}>
+      <a href="https://discord.gg/S3rbu5GXGQ" className={s.item}>
         <img src="/images/discord.png" className={s.icon} />
       </a>
     </li>
