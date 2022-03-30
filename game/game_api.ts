@@ -6,11 +6,12 @@ import {
   useMutation,
   useQuery,
   useQueryClient,
-  UseQueryOptions,
 } from 'react-query'
 
 export const AtomicHubApi = axios.create({
-  baseURL: 'https://wax.api.atomicassets.io/atomicassets/v1/',
+  baseURL: process.env.NEXT_PUBLIC_TESTNET
+    ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
+    : 'https://wax.api.atomicassets.io/atomicassets/v1/',
   withCredentials: false,
 })
 
@@ -30,7 +31,7 @@ export const useGetAllCards = () => {
   const { wax } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllCards', { account: wax?.userAccount }],
-    enabled: !!wax?.user,
+    enabled: !!wax?.userAccount,
     refetchOnWindowFocus: false,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.post('/assets', {
@@ -47,13 +48,26 @@ export const useGetAllCards = () => {
   })
 }
 
+export const useWaxBalance = () => {
+  const { wax, isConnected } = useWax()
+  return useQuery({
+    queryKey: ['wax/balance', { address: wax?.userAccount }],
+    enabled: isConnected && !!wax?.userAccount,
+    queryFn: () =>
+      wax?.api.rpc
+        .get_currency_balance('eosio.token', wax.userAccount, 'WAX')
+        .then((v) => balanceStringToObject(v[0], 'WAX') as BalanceType),
+  })
+}
+
+// get resources amount for user
 export const useGetResources = () => {
   const { wax, isConnected } = useWax()
   return useQuery({
     queryKey: ['wax/resources', { address: wax?.userAccount }],
     enabled: isConnected && !!wax?.userAccount,
     queryFn: () =>
-      wax?.rpc
+      wax?.api.rpc
         .get_table_rows({
           json: true,
           code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
@@ -63,7 +77,6 @@ export const useGetResources = () => {
           reverse: false,
           show_payer: false,
         })
-        .catch((e) => console.log(e))
         .then((res) => {
           if (res?.rows[0]) {
             const row = res.rows[0]
@@ -86,14 +99,221 @@ export const useGetResources = () => {
   })
 }
 
-export const useWaxBalance = () => {
+// get all mining/set cards for user
+export const useGetMiningCards = () => {
   const { wax, isConnected } = useWax()
   return useQuery({
-    queryKey: ['wax/balance', { address: wax?.userAccount }],
+    queryKey: ['wax/mining', { address: wax?.userAccount }],
     enabled: isConnected && !!wax?.userAccount,
     queryFn: () =>
       wax?.api.rpc
-        .get_currency_balance('eosio.token', wax.userAccount, 'WAX')
-        .then((v) => balanceStringToObject(v[0], 'WAX') as BalanceType),
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: wax.userAccount,
+          table: 'minerecords',
+          limit: 10,
+        })
+        .then((res) => res.rows as MineRecordType[]),
+  })
+}
+
+type useGetCardByAssetIdOptions = {
+  asset_id?: string | null
+}
+
+// get card metadata
+export const useGetCardByAssetId = ({
+  asset_id,
+}: useGetCardByAssetIdOptions) => {
+  return useQuery({
+    queryKey: ['wax/getCardByAssetId', { asset_id }],
+    enabled: !!asset_id,
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AtomicHubApi.get(`/assets/${asset_id}`).then(
+        (res) => res.data as GetCardByIdResponseType
+      ),
+  })
+}
+
+type useGetMiningRecipeOptions = {
+  template_id?: string
+}
+
+export const useGetMiningRecipe = ({
+  template_id,
+}: useGetMiningRecipeOptions) => {
+  const { wax, isConnected } = useWax()
+  return useQuery({
+    queryKey: ['wax/mining_recipes', { template_id }],
+    enabled: isConnected && !!wax?.userAccount && !!template_id,
+    queryFn: () =>
+      wax?.api.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          table: 'miningrecipe',
+          limit: 1,
+          index_position: 2,
+          key_type: 'i64',
+          lower_bound: template_id,
+        })
+        .then((res) => res.rows as any[]),
+  })
+}
+
+type useMineArguments = {
+  asset_id: string
+}
+
+// place card into slot
+export const useInitMine = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation<any, any, useMineArguments>({
+    mutationKey: 'wax/initMine',
+    mutationFn: ({ asset_id }) =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'initmine',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                asset_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries(['wax/mining'])
+    },
+  })
+}
+
+// place card into slot
+export const useUnsetMine = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation<any, any, useMineArguments>({
+    mutationKey: 'wax/unsetMine',
+    mutationFn: ({ asset_id }) =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'unsetmine',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                asset_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries(['wax/mining'])
+    },
+  })
+}
+
+// mine card in the slot
+export const useMine = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation<any, any, useMineArguments>({
+    mutationKey: 'wax/start_mine',
+    mutationFn: ({ asset_id }) =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'startmine',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                asset_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries(['wax/mining'])
+      qc.invalidateQueries(['wax/resources'])
+    },
+  })
+}
+
+// claimed mined card
+export const useClaim = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation<any, any, useMineArguments>({
+    mutationKey: 'wax/claim',
+    mutationFn: ({ asset_id }) =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'claim',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                asset_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries(['wax/mining'])
+      qc.invalidateQueries(['wax/resources'])
+    },
   })
 }

@@ -5,6 +5,9 @@
     justify-content: space-between;
     width: 100%;
     padding: 40px;
+    position: sticky;
+    top:0;
+    z-index: 1000;
 }
 
 .profile_info {

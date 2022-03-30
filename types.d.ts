@@ -19,7 +19,16 @@ type AtomicAsset = {
   prices: []
   sales: []
   schema: {}
-  template: {}
+  template: {
+    template_id: string
+    created_at_block: string
+    created_at_time: string
+    immutable_data: any
+    is_burnable: boolean
+    is_transferable: boolean
+    issued_supply: string
+    max_supply: string
+  }
   template_mint: string
   transferred_at_block: string
   transferred_at_time: string
@@ -63,4 +72,17 @@ type CharacterSlider = {
 type BalanceType = {
   balance: number
   currency: string
+}
+
+type MineRecordType = {
+  finishing_at: number
+  staked_asset_id: string
+  status_code: number
+  username: string
+}
+
+type GetCardByIdResponseType = {
+  data: AtomicAsset
+  query_time: number
+  success: boolean
 }
