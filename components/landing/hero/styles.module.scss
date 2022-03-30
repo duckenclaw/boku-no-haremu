@@ -13,12 +13,6 @@
   flex-direction: column;
   justify-content: flex-end;
 
-
-  @media (max-width: 768px) {
-    background: url('/sakura_bg.png') center no-repeat;
-    background-size: 110%;
-  }
-
   .canvas {
     position: absolute;
     top: 0;
@@ -51,7 +45,7 @@
 
 
 .content {
-  font-family: 'Kamikaze-Regular';
+  font-family: 'Kamikaze';
   position: relative;
   z-index: 15;
   width: 100%;
@@ -134,8 +128,7 @@
 
 
 .button {
-  font-family: 'Kamikaze-Regular';
-
+  font-family: 'Kamikaze';
   border-radius: 30px;
   cursor: pointer;
   font-weight: 400;

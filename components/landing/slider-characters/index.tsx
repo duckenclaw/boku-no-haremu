@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styles from './slider_characters.module.scss'
-import Image from 'next/image'
 import Slider from 'react-slick'
 import { SliderItem } from 'components/shared-ui/slider-item'
 import classNames from 'classnames'
@@ -43,7 +42,7 @@ const characters: CharacterSlider[] = [
     imageDesktop: imageDesktop2,
   },
   {
-    background: 'character-background3',
+    background: 'character-background4_peace',
     characterImg: Character3,
     title: 'Hitomi',
     description:
@@ -57,7 +56,7 @@ const characters: CharacterSlider[] = [
     imageDesktop: imageDesktop3,
   },
   {
-    background: 'character-background4_peace',
+    background: 'character-background3',
     characterImg: Character4,
     title: 'H1-bride',
     description:
