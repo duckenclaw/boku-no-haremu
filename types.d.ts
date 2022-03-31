@@ -18,7 +18,7 @@ type AtomicAsset = {
   owner: string
   prices: []
   sales: []
-  schema: {}
+  schema: AtomicSchema
   template: {
     template_id: string
     created_at_block: string
@@ -36,6 +36,13 @@ type AtomicAsset = {
   updated_at_time: string
 }
 
+type AtomicSchema = {
+  schema_name: string
+  format: any[]
+  created_at_block: string
+  created_at_time: string
+}
+
 type AtomicCollection = {
   name: string
   allow_notify: boolean
@@ -49,8 +56,46 @@ type AtomicCollection = {
   notify_accounts: []
 }
 
+type AtomicStats = {
+  schemas: {
+    schema_name: string
+    assets: string
+  }[]
+  templates: {
+    template_id: string
+    assets: string
+  }[]
+}
+
+type AtomicTemplate = {
+  template_id: string
+  collection: AtomicCollection
+  contract: string
+  created_at_block: string
+  created_at_time: string
+  immutable_data: any
+  is_burnable: boolean
+  is_transferable: boolean
+  issued_supply: string
+  max_supply: string
+  name: string
+  schema: AtomicSchema
+}
+
 type GetAllCardsResponseType = {
   data: AtomicAsset[]
+  query_time: number
+  success: boolean
+}
+
+type GetAllBanknotesResponseType = {
+  data: AtomicTemplate[]
+  query_time: number
+  success: boolean
+}
+
+type GetBanknoteBalancesResponseType = {
+  data: AtomicStats
   query_time: number
   success: boolean
 }

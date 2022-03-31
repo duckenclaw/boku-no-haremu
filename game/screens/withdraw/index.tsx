@@ -1,5 +1,37 @@
+import {
+  useGetAllBanknotesTemplates,
+  useGetBanknotesBalances,
+} from 'game/game_api'
+import { useMemo } from 'react'
+import { BanknoteCard } from './banknote_card'
 import s from './withdraw.module.scss'
 
 export const Withdraw = () => {
-  return <div className={s.container}></div>
+  const { data: templateData } = useGetAllBanknotesTemplates()
+  const { data: balancesData, isLoading: isLoadingAmount } =
+    useGetBanknotesBalances()
+
+  const templateMapping = useMemo(
+    () =>
+      (balancesData?.data.templates ?? []).reduce((map, val) => {
+        map[val.template_id] = Number.parseInt(val.assets)
+        return map
+      }, {} as { [key: string]: number }),
+
+    [balancesData]
+  )
+
+  const banknotes = templateData?.pages.map((p) => p.data).flat(1) ?? []
+  return (
+    <div className={s.container}>
+      {banknotes.map((b) => (
+        <BanknoteCard
+          templateData={b}
+          isLoadingAmount={isLoadingAmount}
+          amount={templateMapping[b.template_id] ?? 0}
+          key={b.template_id}
+        />
+      ))}
+    </div>
+  )
 }

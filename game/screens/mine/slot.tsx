@@ -8,10 +8,10 @@ import {
 } from 'game/game_api'
 import Image from 'next/image'
 import s from './mine.module.scss'
-import placeholder from 'public/images/mimi_1.png'
 import { Button } from 'components/shared-ui/button'
 import { useEffect, useMemo, useState } from 'react'
-import { DateTime, Duration } from 'luxon'
+import { Duration } from 'luxon'
+import { ipfsToUrlSafe } from 'utils'
 
 type SlotProps = {
   className?: string
@@ -80,11 +80,7 @@ export const Slot = ({
                 width={234}
                 height={352}
                 alt={card.asset_id}
-                src={
-                  card.data.img
-                    ? `https://ipfs.io/ipfs/${card.data.img}`
-                    : placeholder
-                }
+                src={ipfsToUrlSafe(card.data.img)}
               />
             </div>
             {status == 1 && showTimer && (

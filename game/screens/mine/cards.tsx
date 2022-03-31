@@ -2,8 +2,8 @@ import { useGetAllCards } from 'game/game_api'
 import Image from 'next/image'
 import s from './mine.module.scss'
 
-import placeholder from 'public/images/mimi_1.png'
 import { useMemo } from 'react'
+import { ipfsToUrlSafe } from 'utils'
 
 type CardsSelectionProps = {
   onSelect?: (asset_id: string) => void
@@ -35,9 +35,7 @@ export const CardsSelection = ({
             width={120}
             objectFit="cover"
             alt={c.name}
-            src={
-              c.data.img ? `https://ipfs.io/ipfs/${c.data.img}` : placeholder
-            }
+            src={ipfsToUrlSafe(c.data.img)}
           />
         </div>
       ))}

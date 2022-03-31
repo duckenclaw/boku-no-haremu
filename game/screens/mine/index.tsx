@@ -27,7 +27,11 @@ export const Mine = () => {
 
   return (
     <>
-      <GameModal isOpen={isOpenModal} onRequestClose={() => setIsOpen(false)}>
+      <GameModal
+        title="CHOOSE CARD FOR STAKE"
+        isOpen={isOpenModal}
+        onRequestClose={() => setIsOpen(false)}
+      >
         <CardsSelection blockedCards={blockedCards} onSelect={onSelectCard} />
       </GameModal>
       <div className={s.slots}>
