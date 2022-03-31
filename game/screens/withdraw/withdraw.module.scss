@@ -1,28 +1,24 @@
-.slots {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 48px;
+.container {
+    width: 1440px;
+    max-width: 100%;
+    margin: 10 auto;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-
-    .slot {
-        margin: 24px;
-    }
-
+    padding: 48px;
 }
 
-.slot {
+.card {
+
+    margin: 24px;
+
+
+    width: 430px;
+    height: 240px;
     position: relative;
     overflow: hidden;
     border-radius: 12px;
     border: 6px solid #6AA3C6;
-
-
-    height: 430px;
-    width: 240px;
     max-height: 430px;
     max-width: 240px;
 
@@ -51,20 +47,22 @@
         align-items: center;
         justify-content: center;
     }
-
 }
 
-.cards {
+.asset_list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 10px;
 
-    .card {
+    .asset_card {
+        margin: 10px;
+        background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #2D0D3B 100%);
         border-radius: 12px;
         border: 6px solid #6AA3C6;
-        background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #2D0D3B 100%);
 
-        margin: 5px;
+        display: flex;
+        flex-direction: column;
         cursor: pointer;
     }
 }

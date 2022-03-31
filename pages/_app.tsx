@@ -6,6 +6,7 @@ import { WaxProvider } from 'contexts/wax_context'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { useState } from 'react'
 import Head from 'next/head'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 import Modal from 'react-modal'
 
@@ -54,6 +55,7 @@ function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </WaxProvider>
       </Hydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
