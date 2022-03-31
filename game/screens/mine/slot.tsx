@@ -11,7 +11,7 @@ import s from './mine.module.scss'
 import placeholder from 'public/images/mimi_1.png'
 import { Button } from 'components/shared-ui/button'
 import { useEffect, useMemo, useState } from 'react'
-import { Duration } from 'luxon'
+import { DateTime, Duration } from 'luxon'
 
 type SlotProps = {
   className?: string
@@ -47,7 +47,6 @@ export const Slot = ({
   const { data: mineRecipe } = useGetMiningRecipe({
     template_id: cardData?.data.template.template_id,
   })
-  console.log(mineRecipe)
   const card = cardData?.data
 
   const { mutateAsync: unsetMine, isLoading: isUnsetLoading } = useUnsetMine()
@@ -103,12 +102,27 @@ export const Slot = ({
                 Claim
               </Button>
             )}
+            {status == 1 && mineRecipe && (
+              <div>
+                {mineRecipe.cost
+                  .map((c) => `${c.balance} ${c.currency}`)
+                  .join('+')}
+                =&gt;{mineRecipe.mined_resource.balance}{' '}
+                {mineRecipe.mined_resource.currency}
+              </div>
+            )}
             {status == 0 && (
               <Button
                 disabled={isUnsetLoading || isMineLoading}
                 onClick={() => mine({ asset_id })}
               >
-                Mine
+                Mine (
+                {mineRecipe
+                  ? Duration.fromObject({
+                      seconds: mineRecipe.mining_time,
+                    }).toHuman()
+                  : '...'}
+                )
               </Button>
             )}
             {status == 0 && (

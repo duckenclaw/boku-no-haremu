@@ -15,6 +15,7 @@ export const AtomicHubApi = axios.create({
   withCredentials: false,
 })
 
+// balance
 export const balanceStringToObject = (
   value: string,
   fallbackCurrency?: string
@@ -27,6 +28,7 @@ export const balanceStringToObject = (
   } as BalanceType
 }
 
+// get all Waifu NFTs for user
 export const useGetAllCards = () => {
   const { wax } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
@@ -38,7 +40,31 @@ export const useGetAllCards = () => {
         owner: wax!.userAccount,
         page: String(pageParam ?? 1),
         limit: '20',
-        collection_name: process.env.NEXT_PUBLIC_NFT_COLLECTION,
+        collection_name: process.env.NEXT_PUBLIC_NFT_CARDS_COLLECTION,
+        schema_name: process.env.NEXT_PUBLIC_NFT_CARDS_SCHEMA,
+      }).then((res) => res.data as GetAllCardsResponseType),
+    getNextPageParam: (page, pages) => {
+      if (page.data.length === 20) {
+        return pages.length + 1
+      } else return false
+    },
+  })
+}
+
+// get all Banknotes NFTs for user
+export const useGetAllBanknotes = () => {
+  const { wax } = useWax()
+  return useInfiniteQuery<GetAllCardsResponseType>({
+    queryKey: ['wax/getAllBanknotes', { account: wax?.userAccount }],
+    enabled: !!wax?.userAccount,
+    refetchOnWindowFocus: false,
+    queryFn: ({ pageParam }) =>
+      AtomicHubApi.post('/assets', {
+        owner: wax!.userAccount,
+        page: String(pageParam ?? 1),
+        limit: '20',
+        collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
+        schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
       if (page.data.length === 20) {
@@ -141,6 +167,7 @@ type useGetMiningRecipeOptions = {
   template_id?: string
 }
 
+// get mining recipe for particular card
 export const useGetMiningRecipe = ({
   template_id,
 }: useGetMiningRecipeOptions) => {
@@ -160,7 +187,12 @@ export const useGetMiningRecipe = ({
           key_type: 'i64',
           lower_bound: template_id,
         })
-        .then((res) => res.rows as any[]),
+        .then((res) => {
+          const row = res.rows[0]
+          row.mined_resource = balanceStringToObject(row.mined_resource)
+          row.cost = row.cost.map((c: any) => balanceStringToObject(c))
+          return row as MiningRecipeRecordType
+        }),
   })
 }
 

@@ -81,6 +81,14 @@ type MineRecordType = {
   username: string
 }
 
+type MiningRecipeRecordType = {
+  asset_template_id: number
+  cost: BalanceType[]
+  id: number
+  mined_resource: BalanceType
+  mining_time: number
+}
+
 type GetCardByIdResponseType = {
   data: AtomicAsset
   query_time: number
