@@ -1,3 +1,4 @@
+import { Loader } from 'components/shared-ui/loader'
 import {
   useGetAllBanknotesTemplates,
   useGetBanknotesBalances,
@@ -7,7 +8,8 @@ import { BanknoteCard } from './banknote_card'
 import s from './withdraw.module.scss'
 
 export const Withdraw = () => {
-  const { data: templateData } = useGetAllBanknotesTemplates()
+  const { data: templateData, isLoading: isLoadingTemplates } =
+    useGetAllBanknotesTemplates()
   const { data: balancesData, isLoading: isLoadingAmount } =
     useGetBanknotesBalances()
 
@@ -24,14 +26,16 @@ export const Withdraw = () => {
   const banknotes = templateData?.pages.map((p) => p.data).flat(1) ?? []
   return (
     <div className={s.container}>
-      {banknotes.map((b) => (
-        <BanknoteCard
-          templateData={b}
-          isLoadingAmount={isLoadingAmount}
-          amount={templateMapping[b.template_id] ?? 0}
-          key={b.template_id}
-        />
-      ))}
+      <Loader isLoading={isLoadingTemplates}>
+        {banknotes.map((b) => (
+          <BanknoteCard
+            templateData={b}
+            isLoadingAmount={isLoadingAmount}
+            amount={templateMapping[b.template_id] ?? 0}
+            key={b.template_id}
+          />
+        ))}
+      </Loader>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { Slot } from './slot'
 
 import s from './mine.module.scss'
 import { useGetMiningCards, useInitMine, useMine } from 'game/game_api'
+import { Loader } from 'components/shared-ui/loader'
 
 const MAX_SLOTS_COUNT = 5
 
@@ -35,17 +36,22 @@ export const Mine = () => {
         <CardsSelection blockedCards={blockedCards} onSelect={onSelectCard} />
       </GameModal>
       <div className={s.slots}>
-        {/* TODO loader */}
-        {data?.map((s) => (
-          <Slot key={s.staked_asset_id} isLoading={isLoading} asset_data={s} />
-        ))}
-        {!isLoading && data!.length < MAX_SLOTS_COUNT && (
-          <Slot
-            onPlaceCard={() => {
-              setIsOpen(true)
-            }}
-          />
-        )}
+        <Loader isLoading={isCardsLoading}>
+          {data?.map((s) => (
+            <Slot
+              key={s.staked_asset_id}
+              isLoading={isLoading}
+              asset_data={s}
+            />
+          ))}
+          {!isLoading && data!.length < MAX_SLOTS_COUNT && (
+            <Slot
+              onPlaceCard={() => {
+                setIsOpen(true)
+              }}
+            />
+          )}
+        </Loader>
       </div>
     </>
   )

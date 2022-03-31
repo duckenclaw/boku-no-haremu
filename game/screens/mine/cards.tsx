@@ -4,6 +4,7 @@ import s from './mine.module.scss'
 
 import { useMemo } from 'react'
 import { ipfsToUrlSafe } from 'utils'
+import { Loader } from 'components/shared-ui/loader'
 
 type CardsSelectionProps = {
   onSelect?: (asset_id: string) => void
@@ -14,7 +15,7 @@ export const CardsSelection = ({
   onSelect,
   blockedCards = [],
 }: CardsSelectionProps) => {
-  const { data } = useGetAllCards()
+  const { data, isLoading } = useGetAllCards()
   const cards = useMemo(
     () =>
       data?.pages
@@ -24,21 +25,23 @@ export const CardsSelection = ({
   )
   return (
     <div className={s.cards}>
-      {cards.map((c) => (
-        <div
-          className={s.card}
-          key={c.asset_id}
-          onClick={() => onSelect?.(c.asset_id)}
-        >
-          <Image
-            height={215}
-            width={120}
-            objectFit="cover"
-            alt={c.name}
-            src={ipfsToUrlSafe(c.data.img)}
-          />
-        </div>
-      ))}
+      <Loader isLoading={isLoading}>
+        {cards.map((c) => (
+          <div
+            className={s.card}
+            key={c.asset_id}
+            onClick={() => onSelect?.(c.asset_id)}
+          >
+            <Image
+              height={215}
+              width={120}
+              objectFit="cover"
+              alt={c.name}
+              src={ipfsToUrlSafe(c.data.img)}
+            />
+          </div>
+        ))}
+      </Loader>
     </div>
   )
 }
