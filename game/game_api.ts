@@ -8,10 +8,10 @@ import {
 } from 'react-query'
 
 export const AtomicHubApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_TESTNET
-    ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
-    : 'https://wax.api.atomicassets.io/atomicassets/v1/',
-  withCredentials: false,
+  baseURL:
+    process.env.NEXT_PUBLIC_TESTNET === 'true'
+      ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
+      : 'https://wax.api.atomicassets.io/atomicassets/v1/',
   headers: {
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
@@ -54,12 +54,14 @@ export const useGetAllCards = () => {
     queryKey: ['wax/getAllCards', { account: wax?.userAccount }],
     enabled: !!wax?.userAccount,
     queryFn: ({ pageParam }) =>
-      AtomicHubApi.post('/assets', {
-        owner: wax!.userAccount,
-        page: String(pageParam ?? 1),
-        limit: '20',
-        collection_name: process.env.NEXT_PUBLIC_NFT_CARDS_COLLECTION,
-        schema_name: process.env.NEXT_PUBLIC_NFT_CARDS_SCHEMA,
+      AtomicHubApi.get('/assets', {
+        params: {
+          owner: wax!.userAccount,
+          page: String(pageParam ?? 1),
+          limit: '20',
+          collection_name: process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION,
+          schema_name: process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA,
+        },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
       if (page.data.length === 20) {
