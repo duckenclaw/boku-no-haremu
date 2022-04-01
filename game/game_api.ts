@@ -58,8 +58,8 @@ export const useGetAllCards = () => {
         owner: wax!.userAccount,
         page: String(pageParam ?? 1),
         limit: '20',
-        collection_name: process.env.NEXT_PUBLIC_NFT_CARDS_COLLECTION,
-        schema_name: process.env.NEXT_PUBLIC_NFT_CARDS_SCHEMA,
+        collection_name: process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION,
+        schema_name: process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA,
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
       if (page.data.length === 20) {
