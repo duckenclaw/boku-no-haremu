@@ -27,17 +27,21 @@
   &:before {
     content: '';
     position: absolute;
-    top: 0;
+    top: 46px;
     left: 50%;
     right: 50%;
     width: 4px;
-    min-height: 100%;
+    min-height: 76%;
     background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(29, 115, 153, 0.61) 100%);
     border-radius: 8px;
     z-index: 0;
 
+    @media (max-width: 630px) {
+      left: 31.7%
+    }
+
     @media (max-width: 425px) {
-      left: 32%
+      left: 32.3%
     }
   }
 }
@@ -52,17 +56,17 @@
 
 .number {
   font-family: 'Kamikaze';
-  max-width: 120px;
+  max-width: 184px;
   font-weight: 400;
   font-size: 54px;
   line-height: 49px;
-  text-align: right;
-  margin-left: 103px;
+  text-align: left;
+  margin-left: 63px;
   background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(29, 115, 153, 0.61) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  @media (max-width: 425px) {
+  @media (max-width: 630px) {
     max-width: 60px;
     font-size: 16px;
     line-height: 16px;
@@ -85,7 +89,7 @@
   background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
   box-shadow: 0px 0px 33px 40px rgba(0, 240, 255, 0.27);
 
-  @media (max-width: 425px) {
+  @media (max-width: 630px) {
     width: 16px;
     height: 16px;
     left: 30.6%;
@@ -107,7 +111,7 @@
     list-style-type: disc;
   }
 
-  @media (max-width: 425px) {
+  @media (max-width: 630px) {
     font-size: 14px;
     line-height: 17px;
     margin-top: 55px;

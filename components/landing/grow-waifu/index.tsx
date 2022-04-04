@@ -22,42 +22,24 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         id="growth"
       />
       <div className={s.content}>
-        {/*<Image
-          src="/images/mimi1.png"
-          alt="mimi_card"
-          width={244}
-          height={362}
-        />*/}
         <img src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
         <div className={s.arrow}>
           <Image
             src="/images/svg/arrow.svg"
             alt="arrow"
-            width={46}
-            height={26}
+            width={90}
+            height={36}
           />
         </div>
-        {/*<Image
-          src="/images/mimi2_new.png"
-          alt="mimi_card"
-          width={244}
-          height={362}
-        />*/}
         <img src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
         <div className={s.arrow}>
           <Image
             src="/images/svg/arrow.svg"
             alt="arrow"
-            width={46}
-            height={26}
+            width={90}
+            height={36}
           />
         </div>
-        {/*<Image
-          src="/images/mimi3_new.png"
-          alt="mimi_card"
-          width={244}
-          height={362}
-        />*/}
         <img src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />
       </div>
     </Container>
