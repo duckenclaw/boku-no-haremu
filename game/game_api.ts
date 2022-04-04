@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useWax } from 'contexts/wax_context'
-import { useEffect, useMemo } from 'react'
 import {
   useInfiniteQuery,
   useMutation,
@@ -9,12 +8,20 @@ import {
 } from 'react-query'
 
 export const AtomicHubApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_TESTNET
-    ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
-    : 'https://wax.api.atomicassets.io/atomicassets/v1/',
-  withCredentials: false,
+  baseURL:
+    process.env.NEXT_PUBLIC_TESTNET === 'true'
+      ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
+      : 'https://wax.api.atomicassets.io/atomicassets/v1/',
+  headers: {
+    'Cache-Control': 'no-cache',
+    Pragma: 'no-cache',
+    Expires: '0',
+  },
 })
 
+/// QUERIES
+
+// balance string helper
 export const balanceStringToObject = (
   value: string,
   fallbackCurrency?: string
@@ -27,27 +34,7 @@ export const balanceStringToObject = (
   } as BalanceType
 }
 
-export const useGetAllCards = () => {
-  const { wax } = useWax()
-  return useInfiniteQuery<GetAllCardsResponseType>({
-    queryKey: ['wax/getAllCards', { account: wax?.userAccount }],
-    enabled: !!wax?.userAccount,
-    refetchOnWindowFocus: false,
-    queryFn: ({ pageParam }) =>
-      AtomicHubApi.post('/assets', {
-        owner: wax!.userAccount,
-        page: String(pageParam ?? 1),
-        limit: '20',
-        collection_name: process.env.NEXT_PUBLIC_NFT_COLLECTION,
-      }).then((res) => res.data as GetAllCardsResponseType),
-    getNextPageParam: (page, pages) => {
-      if (page.data.length === 20) {
-        return pages.length + 1
-      } else return false
-    },
-  })
-}
-
+/// get WAX balance
 export const useWaxBalance = () => {
   const { wax, isConnected } = useWax()
   return useQuery({
@@ -57,6 +44,95 @@ export const useWaxBalance = () => {
       wax?.api.rpc
         .get_currency_balance('eosio.token', wax.userAccount, 'WAX')
         .then((v) => balanceStringToObject(v[0], 'WAX') as BalanceType),
+  })
+}
+
+// get all Waifu NFTs for user
+export const useGetAllCards = () => {
+  const { wax } = useWax()
+  return useInfiniteQuery<GetAllCardsResponseType>({
+    queryKey: ['wax/getAllCards', { account: wax?.userAccount }],
+    enabled: !!wax?.userAccount,
+    queryFn: ({ pageParam }) =>
+      AtomicHubApi.get('/assets', {
+        params: {
+          owner: wax!.userAccount,
+          page: String(pageParam ?? 1),
+          limit: '20',
+          collection_name: process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION,
+          schema_name: process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA,
+        },
+      }).then((res) => res.data as GetAllCardsResponseType),
+    getNextPageParam: (page, pages) => {
+      if (page.data.length === 20) {
+        return pages.length + 1
+      } else return false
+    },
+  })
+}
+
+// get all Banknotes NFTs for user
+export const useGetAllBanknotesTemplates = () => {
+  const { wax } = useWax()
+  return useInfiniteQuery<GetAllBanknotesResponseType>({
+    queryKey: ['wax/getAllBanknotes', { account: wax?.userAccount }],
+    enabled: !!wax?.userAccount,
+    queryFn: ({ pageParam }) =>
+      AtomicHubApi.post('/templates', {
+        page: String(pageParam ?? 1),
+        limit: '40',
+        collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
+        schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+      }).then((res) => res.data as GetAllBanknotesResponseType),
+    getNextPageParam: (page, pages) => {
+      if (page.data.length === 20) {
+        return pages.length + 1
+      } else return false
+    },
+  })
+}
+
+// get banknote balance stats for user
+export const useGetBanknotesBalances = () => {
+  const { wax } = useWax()
+  return useQuery<GetBanknoteBalancesResponseType>({
+    queryKey: ['wax/getBanknotesBalances', { account: wax?.userAccount }],
+    enabled: !!wax?.userAccount,
+
+    queryFn: () =>
+      AtomicHubApi.post(
+        `/accounts/${wax?.userAccount}/${process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION}`
+      ).then((res) => res.data as GetBanknoteBalancesResponseType),
+  })
+}
+
+type useGetBanknotesByTemplateIdOptions = {
+  template_id: string
+}
+
+// get all NFTs of specific banknote for user
+export const useGetBanknotesByTemplateId = ({
+  template_id,
+}: useGetBanknotesByTemplateIdOptions) => {
+  const { wax } = useWax()
+  return useInfiniteQuery<GetAllCardsResponseType>({
+    queryKey: [
+      'wax/getBanknotesByTemplateId',
+      { account: wax?.userAccount, template_id },
+    ],
+    enabled: !!wax?.userAccount,
+    queryFn: ({ pageParam }) =>
+      AtomicHubApi.post('/assets', {
+        owner: wax!.userAccount,
+        page: String(pageParam ?? 1),
+        limit: '20',
+        template_id,
+      }).then((res) => res.data as GetAllCardsResponseType),
+    getNextPageParam: (page, pages) => {
+      if (page.data.length === 20) {
+        return pages.length + 1
+      } else return false
+    },
   })
 }
 
@@ -129,9 +205,9 @@ export const useGetCardByAssetId = ({
   return useQuery({
     queryKey: ['wax/getCardByAssetId', { asset_id }],
     enabled: !!asset_id,
-    refetchOnWindowFocus: false,
+
     queryFn: () =>
-      AtomicHubApi.get(`/assets/${asset_id}`).then(
+      AtomicHubApi.post(`/assets/${asset_id}`).then(
         (res) => res.data as GetCardByIdResponseType
       ),
   })
@@ -141,6 +217,7 @@ type useGetMiningRecipeOptions = {
   template_id?: string
 }
 
+// get mining recipe for particular card
 export const useGetMiningRecipe = ({
   template_id,
 }: useGetMiningRecipeOptions) => {
@@ -160,14 +237,20 @@ export const useGetMiningRecipe = ({
           key_type: 'i64',
           lower_bound: template_id,
         })
-        .then((res) => res.rows as any[]),
+        .then((res) => {
+          const row = res.rows[0]
+          row.mined_resource = balanceStringToObject(row.mined_resource)
+          row.cost = row.cost.map((c: any) => balanceStringToObject(c))
+          return row as MiningRecipeRecordType
+        }),
   })
 }
+
+/// MUTATIONS
 
 type useMineArguments = {
   asset_id: string
 }
-
 // place card into slot
 export const useInitMine = () => {
   const { wax } = useWax()
@@ -274,8 +357,8 @@ export const useMine = () => {
         }
       ),
     onSuccess: () => {
-      qc.invalidateQueries(['wax/mining'])
-      qc.invalidateQueries(['wax/resources'])
+      qc.invalidateQueries('wax/resources')
+      qc.invalidateQueries('wax/mining')
     },
   })
 }
@@ -314,6 +397,96 @@ export const useClaim = () => {
     onSuccess: () => {
       qc.invalidateQueries(['wax/mining'])
       qc.invalidateQueries(['wax/resources'])
+    },
+  })
+}
+
+type useMintBanknoteOptions = {
+  template_id: string
+}
+
+// mint banknote by template_id
+export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation({
+    mutationKey: 'wax/mintBanknote',
+    mutationFn: () =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'buybanknote',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                banknote_template_id: template_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries('wax/resources')
+      qc.invalidateQueries('wax/getBanknotesBalances')
+      qc.invalidateQueries('wax/getAllBanknotes')
+    },
+  })
+}
+
+type UseBurnBanknoteVariables = {
+  asset_id: string
+}
+
+/// burn selected user banknote
+export const useBurnBanknote = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation<any, any, UseBurnBanknoteVariables>({
+    mutationKey: 'wax/burn_banknote',
+    mutationFn: ({ asset_id }) =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'burnasset',
+              account: 'atomicassets',
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                asset_id,
+                asset_owner: wax?.userAccount,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries('wax/resources')
+      qc.invalidateQueries('wax/getBanknotesBalances')
+      qc.invalidateQueries('wax/getAllBanknotes')
+      qc.invalidateQueries([
+        'wax/getBanknotesByTemplateId',
+        { account: wax?.userAccount },
+      ])
     },
   })
 }

@@ -2,13 +2,34 @@ stages:
   - build
   - deploy_production
 
-build_app:
+build_landing:
   image: node:lts
   stage: build
   script:
+    - export NEXT_PUBLIC_ENABLE_GAME=false
     - export NEXT_PUBLIC_WAX_CONTRACT=$NEXT_PUBLIC_WAX_CONTRACT
-    - export NEXT_PUBLIC_NFT_COLLECTION=$NEXT_PUBLIC_NFT_COLLECTION
-    - export NEXT_PUBLIC_ENABLE_GAME=$NEXT_PUBLIC_ENABLE_GAME
+    - export NEXT_PUBLIC_CARDS_NFT_COLLECTION=$NEXT_PUBLIC_CARDS_NFT_COLLECTION
+    - export NEXT_PUBLIC_CARDS_NFT_SCHEMA=$NEXT_PUBLIC_CARDS_NFT_SCHEMA
+    - export NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION=$NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION
+    - export NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA=$NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA
+    - rm -f package-lock.json
+    - npm install -g npm@latest
+    - npm install --progress=false
+    - npm -v && node -v
+    - npm run build
+  only:
+    - main
+
+build_game:
+  image: node:lts
+  stage: build
+  script:
+    - export NEXT_PUBLIC_ENABLE_GAME=true
+    - export NEXT_PUBLIC_WAX_CONTRACT=$NEXT_PUBLIC_WAX_CONTRACT
+    - export NEXT_PUBLIC_CARDS_NFT_COLLECTION=$NEXT_PUBLIC_CARDS_NFT_COLLECTION
+    - export NEXT_PUBLIC_CARDS_NFT_SCHEMA=$NEXT_PUBLIC_CARDS_NFT_SCHEMA
+    - export NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION=$NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION
+    - export NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA=$NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA
     - rm -f package-lock.json
     - npm install -g npm@latest
     - npm install --progress=false
@@ -34,6 +55,7 @@ production:
     - chmod 600 ./deploy.key
     - npm install -g npm@latest
     - npm list -g pm2 || npm i -g pm2
-    - pm2 deploy ecosystem.config.js production
+    - pm2 deploy ecosystem.config.js landing_production
+    - pm2 deploy ecosystem.config.js game_production
   only:
     - main

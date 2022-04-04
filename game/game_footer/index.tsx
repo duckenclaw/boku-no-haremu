@@ -42,9 +42,7 @@ export const GameFooter = () => {
         <ScreenLink screen="fusion" disabled>
           FUSION
         </ScreenLink>
-        <ScreenLink screen="withdraw" disabled>
-          WITHDRAW
-        </ScreenLink>
+        <ScreenLink screen="withdraw">WITHDRAW</ScreenLink>
         <ScreenLink screen="convert" disabled>
           CONVERT
         </ScreenLink>
