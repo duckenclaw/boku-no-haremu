@@ -10,6 +10,20 @@
     border: 3px solid #71B2CF;
     width: fit-content;
     margin: auto;
+    max-height: 90vh;
+    overflow: scroll;
 
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        font-family: 'Bangers';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 27px;
+        text-align: center;
+        color: #FFFFFF;
+
+    }
 
 }

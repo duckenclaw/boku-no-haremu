@@ -6,38 +6,27 @@ import { Container } from 'components/shared-ui/container'
 export const RoadMap = () => {
   const row = [
     {
-      number: 'Q1 2022',
+      number: 'MARCH 2022',
+      text: ['Webpage', 'Create SmartContract'],
+    },
+    {
+      number: 'APRIL 2022',
       text: [
-        'Create Mintpass',
-        'Create NFTs',
-        'Create SmartContract',
-        'Release of packs, sales',
+        'Whitelist on AtomicHub',
+        'Mintpass sale',
+        'Packs sale',
+        'Release the Demo Game',
       ],
     },
     {
-      number: 'Q2 2022',
-      text: [
-        'Token listing',
-        'Whitelisted on AtomicHub',
-        'New Waifus',
-        'New resource gathering modes',
-      ],
+      number: 'MAY 2022',
+      text: ['Generative NFTs up to Lvl 3', 'Launch'],
     },
     {
-      number: 'Q3 2022',
+      number: 'JUNE 2022',
       text: [
-        'Achievements',
-        'PVP mode',
-        'Listing Partnerships',
-        'Launch on BSC',
-      ],
-    },
-    {
-      number: 'Q4 2022',
-      text: [
-        'Bridge for NFT and tokens',
-        'Guilds, guild battles',
-        'Launch on Mobile(Android/iOS)',
+        'Generative Waifu NFTs up to 5th Lvl',
+        'Bridge NFTs of 5th Lvl to Ethereum',
       ],
     },
   ]
