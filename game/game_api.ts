@@ -157,6 +157,7 @@ export const useGetResources = () => {
           if (res?.rows[0]) {
             const row = res.rows[0]
             return {
+              isUserInitialized: true,
               smp: balanceStringToObject(row.resource_balances[0], 'SMP'),
               nya: balanceStringToObject(row.resource_balances[1], 'NYA'),
               bnt: balanceStringToObject(row.resource_balances[2], 'BHT'),
@@ -165,6 +166,7 @@ export const useGetResources = () => {
             }
           }
           return {
+            isUserInitialized: false,
             smp: balanceStringToObject('0', 'SMP'),
             nya: balanceStringToObject('0', 'NYA'),
             bnt: balanceStringToObject('0', 'BHT'),
@@ -247,6 +249,41 @@ export const useGetMiningRecipe = ({
 }
 
 /// MUTATIONS
+
+export const useInitAccount = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation({
+    mutationKey: 'wax/login',
+    mutationFn: () =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'login',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries(['wax/resources'])
+    },
+  })
+}
 
 type useMineArguments = {
   asset_id: string
