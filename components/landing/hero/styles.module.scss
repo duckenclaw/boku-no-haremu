@@ -76,7 +76,12 @@
   .title {
     font-size: 92px;
     line-height: 98px;
-    -webkit-text-fill-color: #FF418A;
+    background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    color: #FF418A;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 4px;
     padding-left: 10px;
@@ -89,8 +94,14 @@
     }
 
     @media (max-width: 514px) {
+      font-size: 40px;
+    }
+
+    @media (max-width: 361px) {
       font-size: 35px;
     }
+
+
   }
 
 
@@ -113,6 +124,12 @@
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 2px;
 
+    background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(29, 115, 153, 0.61) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+
     @media (max-width: 768px) {
       font-size: 24px;
       line-height: 26px;
@@ -120,6 +137,10 @@
     }
 
     @media (max-width: 514px) {
+      font-size: 24px;
+    }
+
+    @media (max-width: 361px) {
       font-size: 20px;
     }
   }
