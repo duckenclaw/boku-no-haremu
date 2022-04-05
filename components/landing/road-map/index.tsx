@@ -8,6 +8,7 @@ export const RoadMap = () => {
     {
       number: 'MARCH 2022',
       text: ['Webpage', 'Create SmartContract'],
+      className: 'done',
     },
     {
       number: 'APRIL 2022',
