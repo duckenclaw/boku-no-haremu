@@ -3,6 +3,7 @@ import React from 'react'
 import { Hero } from '../hero'
 import { Header } from 'components/shared-ui/header'
 import s from './layout.module.scss'
+import { Footer } from '../footer'
 
 export const Layout: React.FC = ({ children }) => (
   <>
@@ -14,6 +15,7 @@ export const Layout: React.FC = ({ children }) => (
     <main className={s.main}>
       <div className={s.wave} />
       <div className={s.sections}>{children}</div>
+      <Footer />
     </main>
   </>
 )

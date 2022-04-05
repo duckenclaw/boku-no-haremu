@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React from 'react'
 import s from './styles.module.scss'
 
@@ -5,8 +6,8 @@ type Props = {
   className?: string
 }
 
-const Socials: React.FC<Props> = () => (
-  <ul className={s.list}>
+const Socials: React.FC<Props> = ({ className }) => (
+  <ul className={classNames(s.list, className)}>
     <li>
       <a href="https://discord.gg/S3rbu5GXGQ" className={s.item}>
         <img src="/images/discord.png" className={s.icon} />

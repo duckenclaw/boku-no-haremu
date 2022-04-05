@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { ContactInfo } from 'components/landing/contact_info'
 import { ExclusiveNfts } from 'components/landing/exclusive-nfts'
 import { GrowWaifu } from 'components/landing/grow-waifu'
 import { Layout } from 'components/landing/layout'
@@ -22,7 +21,6 @@ const Home: NextPage = () => (
     <SmartBlending />
     <Rules />
     <RoadMap />
-    <ContactInfo />
   </Layout>
 )
 
