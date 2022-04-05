@@ -40,7 +40,13 @@ export const MobileMenu = () => {
             </li>
           ))}
           <li className={s.menu__item}>
-            <NextLink href="/white_paper">WHITE PAPER</NextLink>
+            <a
+              href="https://bokunoharemu.notion.site/bokunoharemu/Boku-no-Haremu-Whitepaper-417e138e88b949098bbbe71e5c74631e"
+              target="_blank"
+              rel="noreferrer"
+            >
+              WHITE PAPER
+            </a>
           </li>
         </ul>
       </div>
