@@ -3,7 +3,6 @@ import React from 'react'
 import { Hero } from '../hero'
 import { Header } from 'components/shared-ui/header'
 import s from './layout.module.scss'
-import Footer from 'components/footer'
 
 export const Layout: React.FC = ({ children }) => (
   <>
