@@ -35,6 +35,10 @@
   padding-top: 15px;
   margin-right: 25px;
 
+  @media (max-width: 1024px) {
+    margin-right: 0;
+  }
+
   p {
     font-weight: 400;
     font-size: 16px;
