@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import s from './contact.module.scss'
 import { Socials } from 'components/shared-ui/socials'
