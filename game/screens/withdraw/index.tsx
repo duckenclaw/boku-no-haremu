@@ -1,4 +1,5 @@
 import { Loader } from 'components/shared-ui/loader'
+import { ScreenContainer } from 'game/components/screen_container'
 import {
   useGetAllBanknotesTemplates,
   useGetBanknotesBalances,
@@ -25,7 +26,7 @@ export const Withdraw = () => {
 
   const banknotes = templateData?.pages.map((p) => p.data).flat(1) ?? []
   return (
-    <div className={s.container}>
+    <ScreenContainer>
       <Loader isLoading={isLoadingTemplates}>
         {banknotes.map((b) => (
           <BanknoteCard
@@ -36,6 +37,6 @@ export const Withdraw = () => {
           />
         ))}
       </Loader>
-    </div>
+    </ScreenContainer>
   )
 }
