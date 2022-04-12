@@ -361,6 +361,7 @@ function createPointFlowers() {
 
   // paramerters: velocity[3], rotate[3]
   pointFlower.numFlowers = /Mobi|Android/i.test(navigator.userAgent) ? 100 : 400
+
   pointFlower.particles = new Array(pointFlower.numFlowers)
   // vertex attributes {position[3], euler_xyz[3], size[1]}
   pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2))
@@ -667,13 +668,6 @@ function createEffectLib() {
   effectLib.finalComp = createEffectProgram(vtxsrc, frgsrc, ['uBloom'], null)
 }
 
-// background
-function createBackground() {
-  //console.log("create background");
-}
-function initBackground() {
-  //console.log("init background");
-}
 function renderBackground() {
   gl.disable(gl.DEPTH_TEST)
 
@@ -689,17 +683,8 @@ function renderBackground() {
   gl.enable(gl.DEPTH_TEST)
 }
 
-// post process
-let postProcess = {}
-function createPostProcess() {
-  //console.log("create post process");
-}
-function initPostProcess() {
-  //console.log("init post process");
-}
-
 function renderPostProcess() {
-  //gl.enable(gl.TEXTURE_2D)
+  gl.enable(gl.TEXTURE_2D)
   gl.disable(gl.DEPTH_TEST)
   let bindRT = function (rt, isclear) {
     gl.bindFramebuffer(gl.FRAMEBUFFER, rt.frameBuffer)
@@ -752,16 +737,13 @@ function renderPostProcess() {
 let SceneEnv = {}
 function createScene() {
   createEffectLib()
-  createBackground()
   createPointFlowers()
-  createPostProcess()
+
   sceneStandBy = true
 }
 
 function initScene() {
-  initBackground()
   initPointFlowers()
-  initPostProcess()
 
   //camera.position.z = 17.320508;
   camera.position.z = pointFlower.area.z + projection.nearfar[0]
@@ -863,16 +845,11 @@ const enablePolyfill = (w, r) => {
 export function runSakuraAnimation(canvas) {
   try {
     enablePolyfill(window, 'requestAnimationFrame')
-    try {
-      makeCanvasFullScreen(canvas)
-      gl = canvas.getContext('experimental-webgl')
-    } catch (e) {
-      alert('WebGL not supported.' + e)
-      console.error(e)
-      return
-    }
 
-    resizeCallback = () => {
+    makeCanvasFullScreen(canvas)
+    gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+
+    resizeCallback = (e) => {
       makeCanvasFullScreen(canvas)
       setViewports()
       if (sceneStandBy) {
@@ -884,7 +861,7 @@ export function runSakuraAnimation(canvas) {
     scrollCallback = () => {
       if (window.scrollY + 100 >= canvas.height) {
         animating = false
-      } else {
+      } else if (!animating) {
         animating = true
         requestAnimationFrame(animate)
       }
@@ -898,11 +875,10 @@ export function runSakuraAnimation(canvas) {
     timeInfo.start = new Date()
     timeInfo.prev = timeInfo.start
     animating = true
-    animate()
+    requestAnimationFrame(animate)
   } catch (e) {
     console.error(e)
-  } finally {
-    unmountSakuraAnimation
+    unmountSakuraAnimation()
   }
 }
 

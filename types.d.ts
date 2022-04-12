@@ -18,13 +18,29 @@ type AtomicAsset = {
   owner: string
   prices: []
   sales: []
-  schema: {}
-  template: {}
+  schema: AtomicSchema
+  template: {
+    template_id: string
+    created_at_block: string
+    created_at_time: string
+    immutable_data: any
+    is_burnable: boolean
+    is_transferable: boolean
+    issued_supply: string
+    max_supply: string
+  }
   template_mint: string
   transferred_at_block: string
   transferred_at_time: string
   updated_at_block: string
   updated_at_time: string
+}
+
+type AtomicSchema = {
+  schema_name: string
+  format: any[]
+  created_at_block: string
+  created_at_time: string
 }
 
 type AtomicCollection = {
@@ -40,15 +56,53 @@ type AtomicCollection = {
   notify_accounts: []
 }
 
+type AtomicStats = {
+  schemas: {
+    schema_name: string
+    assets: string
+  }[]
+  templates: {
+    template_id: string
+    assets: string
+  }[]
+}
+
+type AtomicTemplate = {
+  template_id: string
+  collection: AtomicCollection
+  contract: string
+  created_at_block: string
+  created_at_time: string
+  immutable_data: any
+  is_burnable: boolean
+  is_transferable: boolean
+  issued_supply: string
+  max_supply: string
+  name: string
+  schema: AtomicSchema
+}
+
 type GetAllCardsResponseType = {
   data: AtomicAsset[]
   query_time: number
   success: boolean
 }
 
+type GetAllBanknotesResponseType = {
+  data: AtomicTemplate[]
+  query_time: number
+  success: boolean
+}
+
+type GetBanknoteBalancesResponseType = {
+  data: AtomicStats
+  query_time: number
+  success: boolean
+}
+
 type CharacterSlider = {
   background: string
-  characterImg: string
+  characterImg: StaticImageData
   title: string
   description: string
   logo: string
@@ -57,5 +111,31 @@ type CharacterSlider = {
     simptetix?: string
     crystal?: string
   }
-  imageDesktop: string
+  imageDesktop: StaticImageData
+}
+
+type BalanceType = {
+  balance: number
+  currency: string
+}
+
+type MineRecordType = {
+  finishing_at: number
+  staked_asset_id: string
+  status_code: number
+  username: string
+}
+
+type MiningRecipeRecordType = {
+  asset_template_id: number
+  cost: BalanceType[]
+  id: number
+  mined_resource: BalanceType
+  mining_time: number
+}
+
+type GetCardByIdResponseType = {
+  data: AtomicAsset
+  query_time: number
+  success: boolean
 }

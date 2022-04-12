@@ -1,0 +1,30 @@
+.slots {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    &>* {
+        margin: 24px;
+    }
+
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .card {
+        border-radius: 12px;
+        border: 6px solid #6AA3C6;
+        background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #2D0D3B 100%);
+
+        margin: 5px;
+        cursor: pointer;
+    }
+}

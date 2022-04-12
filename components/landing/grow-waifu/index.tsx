@@ -5,6 +5,9 @@ import s from './GrowWaifu.module.scss'
 import { TextHeader } from 'components/shared-ui/text-header'
 import Image from 'next/image'
 import { Container } from 'components/shared-ui/container'
+import Mimi1 from 'public/images/mimi1.png'
+import Mimi2 from 'public/images/mimi2_new.png'
+import Mimi3 from 'public/images/mimi3_new.png'
 
 type GrowWaifuProps = {
   className?: string
@@ -12,7 +15,6 @@ type GrowWaifuProps = {
 
 export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
-    <div className={s.bg_top}></div>
     <Container>
       <TextHeader
         title="GROW YOUR UNIQUE WAIFU"
@@ -20,44 +22,26 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
         id="growth"
       />
       <div className={s.content}>
-        <Image
-          src="/images/mimi1.png"
-          alt="mimi_card"
-          width={244}
-          height={362}
-        />
-
+        <img src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
         <div className={s.arrow}>
           <Image
             src="/images/svg/arrow.svg"
             alt="arrow"
-            width={46}
-            height={26}
+            width={90}
+            height={36}
           />
         </div>
-        <Image
-          src="/images/mimi2_new.png"
-          alt="mimi_card"
-          width={244}
-          height={362}
-        />
-
+        <img src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
         <div className={s.arrow}>
           <Image
             src="/images/svg/arrow.svg"
             alt="arrow"
-            width={46}
-            height={26}
+            width={90}
+            height={36}
           />
         </div>
-        <Image
-          src="/images/mimi3_new.png"
-          alt="mimi_card"
-          width={244}
-          height={362}
-        />
+        <img src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />
       </div>
     </Container>
-    <div className={s.bg_bot}></div>
   </section>
 )

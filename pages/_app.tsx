@@ -6,9 +6,23 @@ import { WaxProvider } from 'contexts/wax_context'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { useState } from 'react'
 import Head from 'next/head'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+import Modal from 'react-modal'
+
+Modal.setAppElement('#__next')
 
 function App({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  )
   return (
     <QueryClientProvider client={queryClient}>
       <Head>
@@ -50,6 +64,7 @@ function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </WaxProvider>
       </Hydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

@@ -1,0 +1,29 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #2D0D3B;
+    border-radius: 8px;
+    padding: 54px;
+    max-width: 90%;
+    border: 3px solid #71B2CF;
+    width: fit-content;
+    margin: auto;
+    max-height: 90vh;
+    overflow: scroll;
+
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        font-family: 'Bangers';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 27px;
+        text-align: center;
+        color: #FFFFFF;
+
+    }
+
+}

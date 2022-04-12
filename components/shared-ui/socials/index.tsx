@@ -1,45 +1,33 @@
+import classNames from 'classnames'
 import React from 'react'
 import s from './styles.module.scss'
-import Link from 'next/link'
-import IconInst from '/public/images/svg/Subtract.svg'
-import IconMed from '/public/images/svg/medium.svg'
-import IconDisc from '/public/images/svg/discord.svg'
-import IconTwit from '/public/images/svg/icon-twitter.svg'
 
 type Props = {
   className?: string
 }
 
-const Socials: React.FC<Props> = () => (
-  <ul className={s.list}>
+const Socials: React.FC<Props> = ({ className }) => (
+  <ul className={classNames(s.list, className)}>
     <li>
-      <Link href="#">
-        <a className={s.item}>
-          <IconDisc />
-        </a>
-      </Link>
+      <a href="https://discord.gg/S3rbu5GXGQ" className={s.item}>
+        <img src="/images/discord.png" className={s.icon} />
+      </a>
     </li>
     <li>
-      <Link href="#">
-        <a className={s.item}>
-          <IconMed />
-        </a>
-      </Link>
+      <a href="https://medium.com/@bokunoharemu" className={s.item}>
+        <img src="/images/medium.png" className={s.icon} />
+      </a>
     </li>
     <li>
-      <Link href="#">
-        <a className={s.item}>
-          <IconTwit />
-        </a>
-      </Link>
+      <a href="https://twitter.com/bokunoharemu" className={s.item}>
+        <img src="/images/twitter.png" className={s.icon} />
+      </a>
     </li>
-    <li>
-      <Link href="#">
-        <a className={s.item}>
-          <IconInst />
-        </a>
-      </Link>
-    </li>
+    {/*<li>
+      <a className={s.item}>
+        <img src="/images/nefty.png" className={s.icon} />
+      </a>
+    </li>*/}
   </ul>
 )
 

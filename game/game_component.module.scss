@@ -1,11 +1,14 @@
 .layout {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 52px;
-    background: url('/game_screen_bg.png') center no-repeat;
 
-    .login_button {}
+    justify-content: space-between;
+    padding-bottom: 0px;
+    background: url('/game_screen_bg.png') center no-repeat fixed;
+
+    min-height: 100vh;
+
+    .login_button {
+        margin: auto;
+    }
 }

@@ -1,32 +1,35 @@
 .section {
   display: flex;
+  padding: 270px 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  background: url(/images/looper_group.webp) no-repeat;
+  background: url(/images/LooperGroup.webp) no-repeat center;
   background-size: contain;
 
-  @media (max-width: 1200px) {
-    margin-top: 64px;
-    background-size: 240%;
-    background-position: center top;
-    justify-content: flex-end;
-    flex-direction: column;
+  @media (max-width: 1100px) {
+    background-size: auto;
   }
 }
 
 .text {
-  flex: 2;
-  text-align: center;
-  margin: 0px auto;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
+  font-family: 'SF Pro Display';
+  font-size: 40px;
   line-height: 48px;
+  text-align: center;
   color: #FFFFFF;
-  padding: 50px;
-  padding-top: 300px;
+  max-width: 60%;
+  margin-bottom: 64px;
 
+  @media (max-width: 1200px) {
+    padding-top: 0;
+    padding-right: 50px;
+    max-width: 70%;
+  }
 
   @media (max-width: 768px) {
+    max-width: 90%;
     font-size: 24px;
     line-height: 40px;
     padding: 20px;
@@ -40,19 +43,39 @@
 }
 
 .title {
-  font-family: 'AA BadaBoom BB';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 69px;
-  line-height: 73px;
-  color: #FFFFFF;
+  margin-bottom: 20px;
+  font-size: 50px;
+  line-height: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 34px;
+  }
+
+  @media(max-width: 425px) {
+    font-size: 30px;
+  }
 }
 
-.rules_enchantress {
-  flex: 1;
+.paragraph {
+  margin: 10px 0; 
+}
 
-  @media (max-width: 1200px) {
-    width: 100%;
-    height: auto;
+.button {
+  cursor: pointer;
+  background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
+  border-radius: 8px;
+  font-size: 22px;
+  line-height: 26px;
+  text-transform: uppercase;
+  font-family: 'SF Pro Display';
+  color: #FFFFFF;
+  padding: 17px 32px;
+  min-width: 190px;
+  border: none;
+
+  @media (max-width: 768px) {
+    padding: 12px 19px;
+    font-size: 17px;
+    line-height: 40px;
   }
 }

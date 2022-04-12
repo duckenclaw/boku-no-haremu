@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  background: #2B0A37;
+  padding-bottom: 32px;
+  border-top: 1px solid #656269;
+  padding-top: 27px;
+  font-family: 'SF Pro Display';
+  margin: 0;
+  max-width: 100%;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.contact_text {
+  max-width: 398px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+  text-align: left;
+
+  @media (max-width: 1024px) {
+    text-align: center;
+  }
+}
+
+.left {
+  padding-top: 15px;
+  margin-right: 25px;
+
+  @media (max-width: 1024px) {
+    margin-right: 0;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 32px;
+
+    @media (max-width: 1024px) {
+      margin-left: 0;
+    }
+  }
+}
+
+.privateDesktop {
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.privateMobile {
+  display: none;
+  @media (max-width: 1024px) {
+    display: block;
+  }
+}
+
+.br {
+  display: none;
+  @media (max-width: 1024px) {
+    display: block;
+  }
+}
+
+.socials {
+  @media (max-width: 1024px) {
+    margin-bottom: 25px;
+  }
+}
+
+.heading {
+  @media (max-width: 1024px) {
+    margin-bottom: 10px;
+  }
+}

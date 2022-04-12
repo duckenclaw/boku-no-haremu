@@ -19,4 +19,9 @@
     width: 117px;
     height: 24px;
   }
+
+  &:disabled {
+    background: #a0d2e2;
+    cursor: not-allowed;
+  }
 }

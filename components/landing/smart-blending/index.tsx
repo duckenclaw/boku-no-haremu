@@ -13,26 +13,24 @@ type SmartBlendingProps = {
 
 export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
   <section className={classNames(className, s.section)}>
-    <div className={s.top}></div>
     <Container className={s.container}>
       <TextHeader title="SMART FUSION" className={s.textHeader} id="fusion" />
       <div className={s.content}>
         <div className={s.column}>
           <img className={s.imageTop} alt="" src="/images/mimi_3.png" />
           <div className={s.arrow}>
-            <Image src="/arrow_left.svg" alt="arrow" width={60} height={82} />
+            <Image
+              className={s.arrowLeft}
+              src="/images/svg/arrow2.svg"
+              alt="arrow"
+              width={60}
+              height={82}
+            />
             <div className={s.arrowText}>
               <div className={s.multiplier}>x1</div>
               <div className={s.nextLvl}>next lvl</div>
             </div>
           </div>
-          {/*<Card
-            className={s.card}
-            icon="nyan"
-            image="lisa1"
-            rating="2"
-            frameColor="#93d8ec"
-          />*/}
           <Image src="/images/mimi_1.png" alt="" width={188} height={283} />
         </div>
         <div className={s.column}>
@@ -58,6 +56,5 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
         </div>
       </div>
     </Container>
-    <div className={s.bottom}></div>
   </section>
 )
