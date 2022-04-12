@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Button } from 'components/shared-ui/button'
+import { Button } from 'game/components/button'
 import {
   useBurnBanknote,
   useGetBanknotesByTemplateId,
@@ -98,12 +98,14 @@ export const BanknoteCard = ({
         </div>
         <div>You own: {isLoadingAmount ? '...' : amount}</div>
         <Button
+          size="xsmall"
           disabled={isMintLoading || isBurnLoading}
           onClick={() => mintBanknote()}
         >
           MINT
         </Button>
         <Button
+          size="xsmall"
           disabled={isMintLoading || isBurnLoading || (amount ?? 0) === 0}
           onClick={() => setIsModalOpen(true)}
         >

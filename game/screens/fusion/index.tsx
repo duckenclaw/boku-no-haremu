@@ -30,14 +30,20 @@ export const Fusion = () => {
     <ScreenContainer vertical>
       <div className={s.header}>
         <div className={s.side}>
-          <Button size="small">Fusion Queue</Button>
+          <Button disabled size="small">
+            Fusion Queue
+          </Button>
         </div>
         <h1 className={classNames(s.center, s.title)}>FUSION</h1>
         <div className={s.side}></div>
       </div>
       <div className={s.modes}>
-        <Button onClick={() => setMode('3to1')}>3 to 1</Button>
-        <Button onClick={() => setMode('5to2')}>5 to 2</Button>
+        <Button disabled={mode === '3to1'} onClick={() => setMode('3to1')}>
+          3 to 1
+        </Button>
+        <Button disabled={mode === '5to2'} onClick={() => setMode('5to2')}>
+          5 to 2
+        </Button>
       </div>
       <div className={s.cards}>
         {cards.map((c, index) => (
