@@ -22,12 +22,6 @@
     padding: 10px;
     border-radius: 12px;
     margin-right: 20px;
-    border: solid 7px rgb(71, 158, 197);
-    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
-    background-blend-mode: overlay,
-        normal;
-    backdrop-filter: blur(80px);
-
     
     span {
         width: 100%;
@@ -39,7 +33,15 @@
         margin-top: 4px;
         padding-left: 15px;
     }
+    .user{
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 26px;
+        color: #FFBAD0;
+    }
 }
+
 
 
 
@@ -48,42 +50,26 @@
     flex:1;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: auto;
-    margin-right:10px;
-    justify-content: flex-end;
-    
-    
 }
 
 .res {
-    width: 172px;
-    height: 60px;
-    padding: 10px;
-    color: #D5436F;
-    border: solid 7px rgb(71, 158, 197);
+    color: white;
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 26px;
+    font-size: 32px;
+    line-height: 34px;
     text-align: center;
+    display: flex;
+    align-items: center;
     margin-left: 50px;
-    position: relative;
-    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
-    background-blend-mode: overlay, normal;
-    backdrop-filter: blur(80px);
-    border-radius: 12px;
-    margin-bottom: 10px;
 }
 
 .cardPriceIcon {
     width: 70px;
     height: 70px;
-    position: absolute;
-    left: -20%;
-    top: -30%;
+    
 }
 
-.info{
-    margin-left: auto;
-    align-self: flex-start;
+.icon_info{
+    margin-right: 10px;
 }
