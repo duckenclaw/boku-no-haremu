@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-spring/web": "^9.4.4",
     "@waxio/waxjs": "^1.0.4",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",

@@ -1,0 +1,17 @@
+.container {
+
+    width: 1440px;
+    max-width: 100%;
+    margin: 10 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 48px;
+
+    &.vertical {
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+}
