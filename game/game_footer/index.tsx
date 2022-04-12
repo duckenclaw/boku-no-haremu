@@ -42,7 +42,7 @@ export const GameFooter = () => {
         <ScreenLink screen="fusion">FUSION</ScreenLink>
         <ScreenLink screen="withdraw">WITHDRAW</ScreenLink>
         <ScreenLink screen="convert" disabled>
-          CONVERT
+          inventory
         </ScreenLink>
       </nav>
     </footer>
