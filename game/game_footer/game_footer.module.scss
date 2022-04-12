@@ -8,31 +8,31 @@
     height: 88px;
     margin-left: auto;
     margin-right: auto;
-    border: solid 5px #A5EFFF66;
-    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
-    background-blend-mode: overlay, normal;
-    backdrop-filter: blur(80px);
-    border-radius: 12px;
 
     .nav_list {
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: space-around;
+        background: radial-gradient(58.13% 34.13% at 50% 50%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%);
+        backdrop-filter: blur(10px);
+        border-radius: 100%;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        -ms-border-radius: 100%;
+        -o-border-radius: 100%;
     }
 }
 
-
-
 .link {
-
     font-weight: 400;
     font-size: 32px;
     line-height: 34px;
     color: #FFFFFF;
+    width: -webkit-fill-available;
 
     &.active {
-        background: linear-gradient(180deg, #D5436F 0%, #BB35FF 53.65%, #98F9FF 100%);
+        background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -40,6 +40,6 @@
     }
 
     &.disabled {
-         color: #b3b3b3;
+        color: #b3b3b3;
     }
 }
