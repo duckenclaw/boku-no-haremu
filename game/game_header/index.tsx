@@ -1,5 +1,7 @@
 import { useWax } from 'contexts/wax_context'
 import { useGetResources, useWaxBalance } from 'game/game_api'
+import IconInfo from 'public/game/svg/IconInfo.svg'
+import IconSound from 'public/game/svg/IconSound.svg'
 import s from './game_header.module.scss'
 
 type Res = {
@@ -33,7 +35,7 @@ export const GameHeader = () => {
   return (
     <header className={s.container}>
       <div className={s.profile_info}>
-        <span>{wax?.userAccount}</span>
+        <span className={s.user}>{wax?.userAccount}</span>
         <span>
           {balanceData?.balance} {balanceData?.currency}
         </span>
@@ -74,7 +76,8 @@ export const GameHeader = () => {
         </div>
       </div>
       <div className={s.info}>
-        <img src="images/Icon.png" />
+        <IconInfo className={s.icon_info} />
+        <IconSound />
       </div>
     </header>
   )
