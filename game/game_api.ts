@@ -6,6 +6,7 @@ import {
   useQuery,
   useQueryClient,
 } from 'react-query'
+import { toast } from 'react-toastify'
 
 export const AtomicHubApi = axios.create({
   baseURL:
@@ -68,6 +69,26 @@ export const useGetAllCards = () => {
         return pages.length + 1
       } else return false
     },
+  })
+}
+
+// get templates data by id
+
+type UseGetTemplateByIdOptions = {
+  template_id?: number
+}
+
+export const useGetTemplateById = ({
+  template_id,
+}: UseGetTemplateByIdOptions) => {
+  const { wax } = useWax()
+  return useQuery<GetTemplateByIdResponseType>({
+    queryKey: ['wax/getTemplate', { template_id }],
+    enabled: !!wax?.userAccount && !!template_id,
+    queryFn: () =>
+      AtomicHubApi.get(
+        `/templates/${process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION}/${template_id}`
+      ).then((res) => res.data as GetTemplateByIdResponseType),
   })
 }
 
@@ -244,6 +265,31 @@ export const useGetMiningRecipe = ({
           row.mined_resource = balanceStringToObject(row.mined_resource)
           row.cost = row.cost.map((c: any) => balanceStringToObject(c))
           return row as MiningRecipeRecordType
+        }),
+  })
+}
+
+// get craft recipes
+export const useCraftRecipes = () => {
+  const { wax, isConnected } = useWax()
+  return useQuery({
+    queryKey: ['wax/craft_recipes'],
+    enabled: isConnected && !!wax?.userAccount,
+    queryFn: () =>
+      wax?.api.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          table: 'craftrecipes',
+          limit: 100,
+        })
+        .then((res) => {
+          res.rows = res.rows.map((r) => ({
+            ...r,
+            cost: r.cost.map((c: any) => balanceStringToObject(c)),
+          }))
+          return res.rows as CraftRecipe[]
         }),
   })
 }
@@ -474,6 +520,7 @@ export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
         }
       ),
     onSuccess: () => {
+      toast.success('Banknote minted!')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/getBanknotesBalances')
       qc.invalidateQueries('wax/getAllBanknotes')
@@ -517,6 +564,7 @@ export const useBurnBanknote = () => {
         }
       ),
     onSuccess: () => {
+      toast.success('Banknote burned!')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/getBanknotesBalances')
       qc.invalidateQueries('wax/getAllBanknotes')
@@ -583,6 +631,50 @@ export const useFuseCards = () => {
         }
       ),
     onSuccess: () => {
+      toast.success('New Waifu NFT created!')
+      qc.invalidateQueries('wax/getAllCards')
+    },
+  })
+}
+
+type UseCraftCardOptions = {
+  template_id: number
+}
+
+// mint banknote by template_id
+export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+  return useMutation({
+    mutationKey: 'wax/craftasset',
+    mutationFn: () =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'craftasset',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                asset_template_id: template_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      toast.success('New Waifu NFT crafted!')
+      qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/getAllCards')
     },
   })

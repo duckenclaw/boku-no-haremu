@@ -1,14 +1,15 @@
 import '../styles/globals.scss'
+import 'react-toastify/dist/ReactToastify.css'
+
 import type { AppProps } from 'next/app'
-
-import { WaxProvider } from 'contexts/wax_context'
-
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { useState } from 'react'
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import Head from 'next/head'
+import Modal from 'react-modal'
+import { ToastContainer } from 'react-toastify'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import Modal from 'react-modal'
+import { WaxProvider } from 'contexts/wax_context'
 
 Modal.setAppElement('#__next')
 
@@ -65,6 +66,7 @@ function App({ Component, pageProps }: AppProps) {
         </WaxProvider>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
+      <ToastContainer />
     </QueryClientProvider>
   )
 }

@@ -119,6 +119,11 @@ type BalanceType = {
   currency: string
 }
 
+type CraftRecipe = {
+  result_template_id: number
+  cost: BalanceType[]
+}
+
 type MineRecordType = {
   finishing_at: number
   staked_asset_id: string
@@ -136,6 +141,12 @@ type MiningRecipeRecordType = {
 
 type GetCardByIdResponseType = {
   data: AtomicAsset
+  query_time: number
+  success: boolean
+}
+
+type GetTemplateByIdResponseType = {
+  data: AtomicTemplate
   query_time: number
   success: boolean
 }

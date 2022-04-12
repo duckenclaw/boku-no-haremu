@@ -36,13 +36,11 @@ export const GameFooter = () => {
     <footer className={s.footer}>
       <nav className={s.nav_list}>
         <ScreenLink screen="mine">MINE</ScreenLink>
-        <ScreenLink screen="craft" disabled>
-          CRAFT
-        </ScreenLink>
+        <ScreenLink screen="craft">CRAFT</ScreenLink>
         <ScreenLink screen="fusion">FUSION</ScreenLink>
         <ScreenLink screen="withdraw">WITHDRAW</ScreenLink>
         <ScreenLink screen="convert" disabled>
-          CONVERT
+          INVENTORY
         </ScreenLink>
       </nav>
     </footer>
