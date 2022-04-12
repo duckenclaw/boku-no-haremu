@@ -527,3 +527,63 @@ export const useBurnBanknote = () => {
     },
   })
 }
+
+type UseFuseCardsVariables = {
+  primeCards: string[]
+  secondaryCards: string[]
+}
+
+/// fuse cards
+export const useFuseCards = () => {
+  const { wax } = useWax()
+  const qc = useQueryClient()
+
+  return useMutation<any, any, UseFuseCardsVariables>({
+    mutationKey: 'wax/fuse_cards',
+    mutationFn: ({ primeCards, secondaryCards }) =>
+      wax!.api.transact(
+        {
+          actions: [
+            {
+              name: 'transfer',
+              account: 'atomicassets',
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                from: wax?.userAccount!,
+                to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                asset_ids: [...primeCards, ...secondaryCards],
+                memo: 'fuse_waifu',
+              },
+            },
+            {
+              name: 'fuse',
+              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+              authorization: [
+                {
+                  actor: wax?.userAccount!,
+                  permission: 'active',
+                },
+              ],
+              data: {
+                username: wax?.userAccount,
+                primary_asset_ids: primeCards,
+                secondary_asset_ids: secondaryCards,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries('wax/getAllCards')
+    },
+  })
+}

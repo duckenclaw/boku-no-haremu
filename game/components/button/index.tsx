@@ -20,12 +20,16 @@ export const Button = ({
   className,
   size = 'medium',
   color = 'purple',
+  onClick,
+  disabled,
   ...props
 }: ButtonProps) => {
   return (
     <button
       {...props}
-      className={cn(s.button, className, { [s.size]: true, [s.color]: color })}
+      disabled={disabled}
+      onClick={!disabled ? onClick : undefined}
+      className={cn(s.button, className, { [s[size]]: true, [s[color]]: true })}
     >
       {children}
     </button>

@@ -73,6 +73,7 @@ export const Slot = ({
         <>
           {status == 1 && !showTimer && (
             <Button
+              size="small"
               disabled={isClaimLoading || isMineLoading}
               onClick={() => claim({ asset_id: asset_id! })}
             >
@@ -90,6 +91,7 @@ export const Slot = ({
           )}
           {status == 0 && (
             <Button
+              size="small"
               disabled={isUnsetLoading || isMineLoading}
               onClick={() => mine({ asset_id: asset_id! })}
             >
@@ -104,6 +106,7 @@ export const Slot = ({
           )}
           {status == 0 && (
             <Button
+              size="small"
               disabled={isUnsetLoading || isMineLoading}
               onClick={() => unsetMine({ asset_id: asset_id! })}
             >
@@ -113,16 +116,14 @@ export const Slot = ({
         </>
       }
     >
-      <div>
-        {card && (
-          <Image
-            width={234}
-            height={352}
-            alt={card.asset_id}
-            src={ipfsToUrlSafe(card.data.img)}
-          />
-        )}
-      </div>
+      {card && (
+        <Image
+          width={234}
+          height={352}
+          alt={card.asset_id}
+          src={ipfsToUrlSafe(card.data.img)}
+        />
+      )}
       {status == 1 && showTimer && (
         <div>
           {Duration.fromMillis(

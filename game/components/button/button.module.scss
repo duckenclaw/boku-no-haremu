@@ -26,6 +26,7 @@ button.button {
 
     &:focus {
         box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+        outline: none;
     }
 
     &:active {
@@ -33,7 +34,9 @@ button.button {
     }
 
     &:disabled {
+        transform: none;
         background: #53585B;
+        cursor: not-allowed;
     }
 
     &.small {
