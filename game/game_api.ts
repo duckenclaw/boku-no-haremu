@@ -24,14 +24,17 @@ export const AtomicHubApi = axios.create({
 
 // balance string helper
 export const balanceStringToObject = (
-  value: string,
+  value?: string,
   fallbackCurrency?: string
 ) => {
-  const [balance_str, currency_str] = value.split(' ', 2)
+  const [balance_str, currency_str] = value?.split(' ', 2) ?? [
+    '0',
+    fallbackCurrency ?? '',
+  ]
   const balance = Number.parseFloat(balance_str)
   return {
     balance: isNaN(balance) ? 0 : balance,
-    currency: currency_str ?? fallbackCurrency,
+    currency: currency_str,
   } as BalanceType
 }
 
