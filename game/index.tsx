@@ -20,28 +20,48 @@ export const GameComponent = () => {
     useInitAccount()
   return (
     <GameLayout>
-      {(isLoadingWax || isLoadingResources) && <Loader />}
-      {isConnected && resourcesData ? (
-        resourcesData?.isUserInitialized ? (
-          <GameContextProvider>
-            <GameHeader />
-            <Router />
-            <GameFooter />
-          </GameContextProvider>
+      <Loader isLoading={isLoadingWax || isLoadingResources}>
+        {isConnected && resourcesData ? (
+          resourcesData?.isUserInitialized ? (
+            <GameContextProvider>
+              <GameHeader />
+              <Router />
+              <GameFooter />
+            </GameContextProvider>
+          ) : (
+            <Button
+              onClick={() => initAccount()}
+              disabled={isInitAccountLoading}
+            >
+              Initialize Game Account
+            </Button>
+          )
         ) : (
-          <Button onClick={() => initAccount()} disabled={isInitAccountLoading}>
-            Initialize Game Account
-          </Button>
-        )
-      ) : (
-        <Button
-          onClick={() => login()}
-          className={s.login_button}
-          disabled={isLoadingWax}
-        >
-          Login
-        </Button>
-      )}
+          <div className={s.login}>
+            <Button onClick={() => login('waxjs')} disabled={isLoadingWax}>
+              Login WCW
+            </Button>
+            <Button
+              disabled={isLoadingWax}
+              onClick={() => {
+                login('anchor')
+              }}
+            >
+              Login Anchor
+            </Button>
+            {process.env.NEXT_PUBLIC_TESTNET === 'true' && (
+              <Button
+                disabled={isLoadingWax}
+                onClick={() => {
+                  login('testnet')
+                }}
+              >
+                Login Testnet
+              </Button>
+            )}
+          </div>
+        )}
+      </Loader>
     </GameLayout>
   )
 }
