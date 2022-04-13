@@ -17,7 +17,9 @@ const Header: React.FC<Props> = ({ className }) => (
       <Logo />
       <Navigation />
       <MobileMenu />
-      <Socials className={s.socials} />
+      <div className={s.socials}>
+        <Socials />
+      </div>
     </Container>
   </header>
 )
