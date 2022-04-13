@@ -326,7 +326,7 @@ export const useInitAccount = () => {
       ),
     onSuccess: () => {
       toast.success('Account successfully initialized!')
-      qc.invalidateQueries(['wax/resources'])
+      qc.invalidateQueries('wax/resources')
     },
     onError: (e) => {
       console.log('error', e)
@@ -371,7 +371,7 @@ export const useInitMine = () => {
       ),
     onSuccess: () => {
       toast.success('Card placed into mining slot!')
-      qc.invalidateQueries(['wax/mining'])
+      qc.invalidateQueries('wax/mining')
     },
     onError: (e) => {
       console.log('error', e)
@@ -413,7 +413,7 @@ export const useUnsetMine = () => {
       ),
     onSuccess: () => {
       toast.success('Card removed from mining slot!')
-      qc.invalidateQueries(['wax/mining'])
+      qc.invalidateQueries('wax/mining')
     },
     onError: (e) => {
       console.log('error', e)
@@ -498,8 +498,8 @@ export const useClaim = () => {
       ),
     onSuccess: () => {
       toast.success('Rewards claimed!')
-      qc.invalidateQueries(['wax/mining'])
-      qc.invalidateQueries(['wax/resources'])
+      qc.invalidateQueries('wax/mining')
+      qc.invalidateQueries('wax/resources')
     },
     onError: (e) => {
       console.log('error', e)
@@ -596,7 +596,7 @@ export const useBurnBanknote = () => {
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/getBanknotesBalances')
       qc.invalidateQueries('wax/getAllBanknotes')
-      qc.invalidateQueries(['wax/getBanknotesByTemplateId'])
+      qc.invalidateQueries('wax/getBanknotesByTemplateId')
     },
     onError: (e) => {
       console.log('error', e)
