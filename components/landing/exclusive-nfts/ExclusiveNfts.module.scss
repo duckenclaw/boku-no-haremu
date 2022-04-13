@@ -23,10 +23,17 @@
 }
 
 .nfts3 {
-  width: 100%;
+  width: 90%;
+  display: block;
+  margin: auto;
+
+  @media (max-width: 1440px) {
+    width: 100%;
+  }
 
   @media (max-width: 768px) {
     display: none;
+
   }
 }
 
@@ -36,6 +43,8 @@
 
   @media (max-width: 768px) {
     display: block;
+    width: 63%;
+    margin: auto;
   }
 }
 
