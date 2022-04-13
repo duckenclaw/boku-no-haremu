@@ -99,6 +99,10 @@ a {
   @media(max-width: 1024px) {
     padding-bottom: 130px;
   }
+
+  @media(max-width: 425px) {
+    padding-bottom: 73px;
+  }
 }
 
 .slick-dots {

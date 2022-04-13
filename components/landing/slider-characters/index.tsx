@@ -11,6 +11,7 @@ import Character1 from 'public/images/characters/character1.png'
 import Character2 from 'public/images/characters/character2.png'
 import Character3 from 'public/images/characters/character3.png'
 import Character4 from 'public/images/characters/character4.png'
+import { Container } from 'components/shared-ui/container'
 
 const characters: CharacterSlider[] = [
   {
