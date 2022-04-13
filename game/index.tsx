@@ -20,8 +20,10 @@ export const GameComponent = () => {
     useInitAccount()
   return (
     <GameLayout>
-      <Loader isLoading={isLoadingWax || isLoadingResources}>
-        {isConnected && resourcesData ? (
+      <Loader
+        isLoading={isLoadingWax || isLoadingResources || isInitAccountLoading}
+      >
+        {isConnected ? (
           resourcesData?.isUserInitialized ? (
             <GameContextProvider>
               <GameHeader />
@@ -29,12 +31,14 @@ export const GameComponent = () => {
               <GameFooter />
             </GameContextProvider>
           ) : (
-            <Button
-              onClick={() => initAccount()}
-              disabled={isInitAccountLoading}
-            >
-              Initialize Game Account
-            </Button>
+            <div className={s.login}>
+              <Button
+                onClick={() => initAccount()}
+                disabled={isInitAccountLoading}
+              >
+                init Game Account
+              </Button>
+            </div>
           )
         ) : (
           <div className={s.login}>
