@@ -325,7 +325,12 @@ export const useInitAccount = () => {
         }
       ),
     onSuccess: () => {
+      toast.success('Account successfully initialized!')
       qc.invalidateQueries(['wax/resources'])
+    },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
     },
   })
 }
@@ -365,7 +370,12 @@ export const useInitMine = () => {
         }
       ),
     onSuccess: () => {
+      toast.success('Card placed into mining slot!')
       qc.invalidateQueries(['wax/mining'])
+    },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
     },
   })
 }
@@ -402,7 +412,12 @@ export const useUnsetMine = () => {
         }
       ),
     onSuccess: () => {
+      toast.success('Card removed from mining slot!')
       qc.invalidateQueries(['wax/mining'])
+    },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
     },
   })
 }
@@ -439,8 +454,13 @@ export const useMine = () => {
         }
       ),
     onSuccess: () => {
+      toast.success('Resource mining started!')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/mining')
+    },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
     },
   })
 }
@@ -477,8 +497,13 @@ export const useClaim = () => {
         }
       ),
     onSuccess: () => {
+      toast.success('Rewards claimed!')
       qc.invalidateQueries(['wax/mining'])
       qc.invalidateQueries(['wax/resources'])
+    },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
     },
   })
 }
@@ -524,6 +549,10 @@ export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
       qc.invalidateQueries('wax/getBanknotesBalances')
       qc.invalidateQueries('wax/getAllBanknotes')
     },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
+    },
   })
 }
 
@@ -568,6 +597,10 @@ export const useBurnBanknote = () => {
       qc.invalidateQueries('wax/getBanknotesBalances')
       qc.invalidateQueries('wax/getAllBanknotes')
       qc.invalidateQueries(['wax/getBanknotesByTemplateId'])
+    },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
     },
   })
 }
@@ -630,6 +663,10 @@ export const useFuseCards = () => {
       toast.success('New Waifu NFT created!')
       qc.invalidateQueries('wax/getAllCards')
     },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
+    },
   })
 }
 
@@ -672,6 +709,10 @@ export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
       toast.success('New Waifu NFT crafted!')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/getAllCards')
+    },
+    onError: (e) => {
+      console.log('error', e)
+      toast.error('Error occurred during transaction')
     },
   })
 }
