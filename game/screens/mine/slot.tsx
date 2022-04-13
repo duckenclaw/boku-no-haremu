@@ -99,7 +99,7 @@ export const Slot = ({
               {mineRecipe
                 ? Duration.fromObject({
                     seconds: mineRecipe.mining_time,
-                  }).toHuman()
+                  }).toFormat('hh:mm:ss')
                 : '...'}
               )
             </Button>
@@ -126,9 +126,9 @@ export const Slot = ({
       )}
       {status == 1 && showTimer && (
         <div>
-          {Duration.fromMillis(
-            finishing_at.getTime() - now.getTime()
-          ).toISOTime()}
+          {Duration.fromMillis(finishing_at.getTime() - now.getTime()).toFormat(
+            'hh:mm:ss'
+          )}
         </div>
       )}
     </BaseSlot>
