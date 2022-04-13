@@ -576,13 +576,13 @@ type UseFuseCardsVariables = {
 
 /// fuse cards
 export const useFuseCards = () => {
-  const { wax } = useWax()
+  const { account, api } = useWax()
   const qc = useQueryClient()
 
   return useMutation<any, any, UseFuseCardsVariables>({
     mutationKey: 'wax/fuse_cards',
     mutationFn: ({ primeCards, secondaryCards }) =>
-      wax!.api.transact(
+      api!.transact(
         {
           actions: [
             {
@@ -590,12 +590,12 @@ export const useFuseCards = () => {
               account: 'atomicassets',
               authorization: [
                 {
-                  actor: wax?.userAccount!,
+                  actor: account!,
                   permission: 'active',
                 },
               ],
               data: {
-                from: wax?.userAccount!,
+                from: account,
                 to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
                 asset_ids: [...primeCards, ...secondaryCards],
                 memo: 'fuse_waifu',
@@ -606,12 +606,12 @@ export const useFuseCards = () => {
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
               authorization: [
                 {
-                  actor: wax?.userAccount!,
+                  actor: account!,
                   permission: 'active',
                 },
               ],
               data: {
-                username: wax?.userAccount,
+                username: account,
                 primary_asset_ids: primeCards,
                 secondary_asset_ids: secondaryCards,
               },
