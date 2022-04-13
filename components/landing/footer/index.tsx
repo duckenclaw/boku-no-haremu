@@ -8,9 +8,9 @@ export const Footer = () => (
     <div className={s.inner}>
       <div className={s.left}>
         <Socials className={s.socials} />
-        <p className={s.privateDesktop}>
+        <div className={s.privateDesktop}>
           © 2022 BOKU NO COMPANY LIMITED. Private Limited Company
-        </p>
+        </div>
       </div>
       <div className={s.contact_text}>
         <div className={s.heading}>

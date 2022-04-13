@@ -43,25 +43,13 @@
 }
 
 .left {
-  padding-top: 15px;
+  display: flex;
   margin-right: 25px;
+  flex-direction: column;
+  justify-content: space-between;
 
   @media (max-width: 1048px) {
     margin-right: 0;
-  }
-
-  p {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #FFFFFF;
-    text-align: left;
-    margin-left: 20px;
-    margin-top: 32px;
-
-    @media (max-width: 1048px) {
-      margin-left: 0;
-    }
   }
 }
 
@@ -75,6 +63,10 @@
 
 .privateDesktop {
   white-space: nowrap;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+
   @media (max-width: 1048px) {
     display: none;
   }
@@ -88,6 +80,10 @@
 }
 
 .socials {
+  li:first-child{ 
+    margin:0
+  }
+
   @media (max-width: 1048px) {
     margin-bottom: 25px;
   }

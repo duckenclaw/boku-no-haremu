@@ -15,7 +15,7 @@
   align-items: center;
   position: fixed;
   top: 15px;
-  left: 25px;
+  right: 25px;
   width: 46px;
   height: 46px;
   cursor: pointer;
@@ -60,14 +60,39 @@
   padding: 80px 0;
   list-style: none;
   text-align: center;
-  background-color: #191B2F;
+  background-color: #32133E;
   box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
 }
 
 .menu__item {
   display: block;
   padding: 12px 24px;
-  color: #fff;
+  color: #FF418A;
+  text-shadow: -0 -1.2px 0 #FFFFFF,
+    0 -1.2px 0 #FFFFFF,
+    -0 1.2px 0 #FFFFFF,
+    0 1.2px 0 #FFFFFF,
+    -1.2px -0 0 #FFFFFF,
+    1.2px -0 0 #FFFFFF,
+    -1.2px 0 0 #FFFFFF,
+    1.2px 0 0 #FFFFFF,
+    -1px -1.2px 0 #FFFFFF,
+    1px -1.2px 0 #FFFFFF,
+    -1px 1.2px 0 #FFFFFF,
+    1px 1.2px 0 #FFFFFF,
+    -1.2px -1px 0 #FFFFFF,
+    1.2px -1px 0 #FFFFFF,
+    -1.2px 1px 0 #FFFFFF,
+    1.2px 1px 0 #FFFFFF,
+    -1.2px -1.2px 0 #FFFFFF,
+    1.2px -1.2px 0 #FFFFFF,
+    -1.2px 1.2px 0 #FFFFFF,
+    1.2px 1.2px 0 #FFFFFF,
+    -1.2px -1.2px 0 #FFFFFF,
+    1.2px -1.2px 0 #FFFFFF,
+    -1.2px 1.2px 0 #FFFFFF,
+    1.2px 1.2px 0 #FFFFFF;
+
 
   font-size: 30px;
   font-weight: 600;
@@ -75,7 +100,8 @@
 }
 
 .menu__item:hover {
-  background-color: #3c406d;
+  //background-color: #3c406d;
+  color: #479EC5;
 }
 
 .menu__toggle:checked~.menu__btn>span {
