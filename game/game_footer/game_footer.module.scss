@@ -13,7 +13,8 @@
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+        gap: 1rem;
         background: radial-gradient(58.13% 34.13% at 50% 50%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%);
         backdrop-filter: blur(10px);
         border-radius: 100%;
@@ -21,15 +22,18 @@
         -moz-border-radius: 100%;
         -ms-border-radius: 100%;
         -o-border-radius: 100%;
+        padding-left: 55px;
+        padding-right: 55px;
     }
 }
 
 .link {
+    width: 100%;
     font-weight: 400;
     font-size: 32px;
     line-height: 34px;
     color: #FFFFFF;
-    width: -webkit-fill-available;
+    text-align: center;
 
     &.active {
         background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
