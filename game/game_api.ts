@@ -102,11 +102,13 @@ export const useGetAllBanknotesTemplates = () => {
     queryKey: ['wax/getAllBanknotes'],
     enabled: isConnected,
     queryFn: ({ pageParam }) =>
-      AtomicHubApi.post('/templates', {
-        page: String(pageParam ?? 1),
-        limit: '40',
-        collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
-        schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+      AtomicHubApi.get('/templates', {
+        params: {
+          page: String(pageParam ?? 1),
+          limit: '40',
+          collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
+          schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+        },
       }).then((res) => res.data as GetAllBanknotesResponseType),
     getNextPageParam: (page, pages) => {
       if (page.data.length === 20) {
@@ -124,7 +126,7 @@ export const useGetBanknotesBalances = () => {
     enabled: isConnected,
 
     queryFn: () =>
-      AtomicHubApi.post(
+      AtomicHubApi.get(
         `/accounts/${account}/${process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION}`
       ).then((res) => res.data as GetBanknoteBalancesResponseType),
   })
@@ -143,11 +145,13 @@ export const useGetBanknotesByTemplateId = ({
     queryKey: ['wax/getBanknotesByTemplateId', { account, template_id }],
     enabled: isConnected,
     queryFn: ({ pageParam }) =>
-      AtomicHubApi.post('/assets', {
-        owner: account,
-        page: String(pageParam ?? 1),
-        limit: '20',
-        template_id,
+      AtomicHubApi.get('/assets', {
+        params: {
+          owner: account,
+          page: String(pageParam ?? 1),
+          limit: '20',
+          template_id,
+        },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
       if (page.data.length === 20) {
@@ -177,14 +181,21 @@ export const useGetResources = () => {
         .then((res) => {
           if (res?.rows[0]) {
             const row = res.rows[0]
+            const balances = (row.resource_balances as string[] | null)?.reduce(
+              (dict, balanceStr) => {
+                const b = balanceStringToObject(balanceStr)
+                if (b.currency) {
+                  dict[b.currency.toLowerCase()] = b
+                }
+                return dict
+              },
+              {} as { [key: string]: BalanceType }
+            )
             return {
               isUserInitialized: true,
-              smp: balanceStringToObject(row.resource_balances[0], 'SMP'),
-              nya: balanceStringToObject(row.resource_balances[1], 'NYA'),
-              bnt: balanceStringToObject(row.resource_balances[2], 'BHT'),
-              cht: balanceStringToObject(row.resource_balances[3], 'CHT'),
               is_blocked: row.is_blocked > 0,
-            }
+              ...balances,
+            } as UseGetResourcesResponseType
           }
           return {
             isUserInitialized: false,
@@ -193,7 +204,7 @@ export const useGetResources = () => {
             bnt: balanceStringToObject('0', 'BHT'),
             cht: balanceStringToObject('0', 'CHT'),
             is_blocked: false,
-          }
+          } as UseGetResourcesResponseType
         }),
   })
 }
@@ -229,7 +240,7 @@ export const useGetCardByAssetId = ({
     queryKey: ['wax/getCardByAssetId', { asset_id }],
     enabled: !!asset_id,
     queryFn: () =>
-      AtomicHubApi.post(`/assets/${asset_id}`).then(
+      AtomicHubApi.get(`/assets/${asset_id}`).then(
         (res) => res.data as GetCardByIdResponseType
       ),
   })

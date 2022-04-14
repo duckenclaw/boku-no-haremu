@@ -131,6 +131,15 @@ type MineRecordType = {
   username: string
 }
 
+type UseGetResourcesResponseType = {
+  isUserInitialized: boolean
+  smp: BalanceType
+  nya: BalanceType
+  bnt: BalanceType
+  cht: BalanceType
+  is_blocked: boolean
+}
+
 type MiningRecipeRecordType = {
   asset_template_id: number
   cost: BalanceType[]
