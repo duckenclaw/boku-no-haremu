@@ -27,19 +27,25 @@ const loginWithAnchor = () => {
         s ||
         link.login(process.env.NEXT_PUBLIC_WAX_CONTRACT!).then((l) => l.session)
     )
-    .then((s) => ({
-      api: new Api({
+    .then((s) => {
+      let api: any = new Api({
         rpc: new JsonRpc('https://wax.greymass.com'),
         signatureProvider: s?.makeSignatureProvider(),
-      }),
-      account: s.identifier.toString(),
-      logout: () =>
-        link.removeSession(
-          process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-          s.auth,
-          s.chainId
-        ),
-    }))
+      })
+      api['transact'] = (...ars: any[]) => {
+        return (s as any).transact(...ars)
+      }
+      return {
+        api,
+        account: s.auth.actor.toString(),
+        logout: () =>
+          link.removeSession(
+            process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+            s.auth,
+            s.chainId
+          ),
+      }
+    })
 }
 
 const loginWithWax = () => {

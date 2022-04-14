@@ -15,9 +15,9 @@
   align-items: center;
   position: fixed;
   top: 15px;
-  right: 25px;
-  width: 46px;
-  height: 46px;
+  right: 21px;
+  width: 24px;
+  height: 16px;
   cursor: pointer;
   z-index: 1;
 
@@ -32,20 +32,19 @@
   width: 100%;
   justify-content: center;
   height: 100%;
-  max-height: 6px;
-  border: solid 1px #fff;
-  border-radius: 3px;
-  background-color: #479EC5;
+  max-height: 3.5px;
+  border: solid 0.5px #fff;
+  background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
 }
 
 .menu__btn>span::before {
   content: '';
-  top: -15px;
+  top: -7px;
 }
 
 .menu__btn>span::after {
   content: '';
-  top: 13px;
+  top: 5px;
 }
 
 .menu__box {

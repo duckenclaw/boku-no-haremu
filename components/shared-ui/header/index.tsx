@@ -14,7 +14,7 @@ type Props = {
 const Header: React.FC<Props> = ({ className }) => (
   <header className={classNames(className, s.container)}>
     <Container className={s.wrapper}>
-      <Logo />
+      <img className={s.logo} src="/images/svg/logo.svg" />
       <Navigation />
       <MobileMenu />
       <div className={s.socials}>
