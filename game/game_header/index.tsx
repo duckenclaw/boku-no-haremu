@@ -29,13 +29,13 @@ const res: Res[] = [
 ]
 
 export const GameHeader = () => {
-  const { wax } = useWax()
+  const { account } = useWax()
   const { data: resourcesData } = useGetResources()
   const { data: balanceData } = useWaxBalance()
   return (
     <header className={s.container}>
       <div className={s.profile_info}>
-        <span className={s.user}>{wax?.userAccount}</span>
+        <span className={s.user}>{account}</span>
         <span>
           {balanceData?.balance} {balanceData?.currency}
         </span>

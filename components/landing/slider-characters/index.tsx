@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './slider_characters.module.scss'
 import Slider from 'react-slick'
 import { SliderItem } from 'components/shared-ui/slider-item'
@@ -11,6 +11,8 @@ import Character1 from 'public/images/characters/character1.png'
 import Character2 from 'public/images/characters/character2.png'
 import Character3 from 'public/images/characters/character3.png'
 import Character4 from 'public/images/characters/character4.png'
+import FirstDot from 'public/images/svg/first-dot.svg'
+import LastDot from 'public/images/svg/last-dot.svg'
 
 const characters: CharacterSlider[] = [
   {
@@ -94,9 +96,29 @@ export const SliderCharacters = () => {
     ),
     customPaging: (i: number) => (
       <div>
-        <div className={classNames(styles.dot, 'slider-character-dot')}>
-          {characters[i].title}
-        </div>
+        {i === 0 && (
+          <div className={classNames(styles.sideDot, 'slider-character-dot')}>
+            <div className={classNames(styles.dotText, styles.dotTextFirst)}>
+              {' '}
+              {characters[i].title}
+            </div>
+            <FirstDot />
+          </div>
+        )}
+        {i !== 0 && i !== characters.length - 1 && (
+          <div className={classNames(styles.dot, 'slider-character-dot')}>
+            {characters[i].title}
+          </div>
+        )}
+        {i == characters.length - 1 && (
+          <div className={classNames(styles.sideDot, 'slider-character-dot')}>
+            <div className={classNames(styles.dotText, styles.dotTextLast)}>
+              {' '}
+              {characters[i].title}
+            </div>
+            <LastDot />
+          </div>
+        )}
         <div
           className={classNames(
             styles.dotMobile,
