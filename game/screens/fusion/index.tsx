@@ -64,7 +64,7 @@ export const Fusion = () => {
         onClick={() =>
           mutateAsync({
             primeCards: (mode === '3to1'
-              ? cards[1]
+              ? [cards[1]]
               : cards.slice(0, 2)) as string[],
             secondaryCards: (mode === '3to1'
               ? [cards[0], cards[2]]

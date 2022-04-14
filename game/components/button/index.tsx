@@ -1,19 +1,20 @@
-import type {
+import {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
+  forwardRef,
   HTMLAttributes,
 } from 'react'
 import cn from 'classnames'
 
 import s from './button.module.scss'
 
-type ButtonProps = {
+type BaseButtonProps = {
   size?: 'medium' | 'small' | 'xsmall'
   color?: 'purple' | 'blue' | 'darkblue'
-} & DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->
+}
+
+type ButtonProps = BaseButtonProps &
+  DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
 export const Button = ({
   children,
@@ -36,7 +37,23 @@ export const Button = ({
   )
 }
 
-type SkewButtonProps = {} & DetailedHTMLProps<
+type LinkButtonProps = BaseButtonProps & React.ComponentProps<'a'>
+
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
+  ({ size, color, children, ...props }, ref) => {
+    return (
+      <a {...props} ref={ref}>
+        <Button size={size} color={color}>
+          {children}
+        </Button>
+      </a>
+    )
+  }
+)
+
+LinkButton.displayName = 'LinkButton'
+
+type SkewButtonProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
