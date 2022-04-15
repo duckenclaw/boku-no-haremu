@@ -22,7 +22,6 @@ const Navigation: React.FC<Props> = ({ className }) => {
   const router = useRouter()
   const onUpdate = (elem: HTMLElement) => {
     if (elem?.id && `/#${elem?.id}` !== router.asPath) {
-      console.log(elem.id)
       router.push(
         {
           pathname: `#${elem?.id}`,

@@ -8,15 +8,6 @@ import IconCross from 'public/images/svg/cross.svg'
 import { Socials } from 'components/shared-ui/socials'
 import { Navigation } from '../navigation'
 
-const items = [
-  { value: 'GROWTH', href: 'growth' },
-  { value: 'RESOURCES', href: 'resources' },
-  // { value: 'TRADE', href: 'trade' },
-  { value: 'NFTS', href: 'nfts' },
-  { value: 'FUSION', href: 'fusion' },
-  // { value: 'ROADMAP', href: 'roadmap' },
-]
-
 export const MobileMenu = () => {
   const [isChecked, setIsChecked] = useState(false)
 
