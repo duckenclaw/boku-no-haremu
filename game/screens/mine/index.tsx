@@ -1,12 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
-import { GameModal } from 'game/game_modal'
-import { CardsSelection } from './cards'
 import { Slot } from './slot'
 
 import s from './mine.module.scss'
-import { useGetMiningCards, useInitMine, useMine } from 'game/game_api'
+import { useGetMiningCards, useInitMine } from 'game/game_api'
 import { Loader } from 'components/shared-ui/loader'
+import { CardModal } from 'game/components/card_modal'
 
 const MAX_SLOTS_COUNT = 5
 
@@ -23,13 +22,13 @@ export const Mine = () => {
 
   return (
     <>
-      <GameModal
-        title="CHOOSE CARD FOR STAKE"
+      <CardModal
+        title={'WHat DO YOU Want to mine?'}
+        subtitle={'select the nft you want to use'}
         isOpen={isOpenModal}
-        onRequestClose={() => setIsOpen(false)}
-      >
-        <CardsSelection onSelect={onSelectCard} />
-      </GameModal>
+        onClose={() => setIsOpen(false)}
+        onSelect={onSelectCard}
+      />
       <div className={s.slots}>
         <Loader isLoading={isCardsLoading}>
           {data?.map((s) => (

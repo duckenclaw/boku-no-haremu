@@ -10,7 +10,7 @@ import { ipfsToUrlSafe } from 'utils'
 
 import s from './withdraw.module.scss'
 import { useState } from 'react'
-import { GameModal } from 'game/game_modal'
+import { GameModal } from 'game/components/game_modal'
 import { Loader } from 'components/shared-ui/loader'
 
 type BanknoteSelectionProps = {
