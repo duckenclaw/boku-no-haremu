@@ -29,6 +29,7 @@ export const FusionSlot = ({
   const { data: cardData, isLoading: isCardLoading } = useGetCardByAssetId({
     asset_id: assetId,
   })
+
   return (
     <>
       <GameModal
@@ -39,7 +40,7 @@ export const FusionSlot = ({
         }}
       >
         <CardsSelection
-          blockedCards={blockedCards}
+          blockedCards={[...blockedCards]}
           onSelect={(assetId) => {
             onSetCard?.(assetId)
             setIsOpenModal(false)
@@ -49,6 +50,7 @@ export const FusionSlot = ({
       <BaseSlot
         className={classnames(s.slot, { [s.prime_slot]: isPrime })}
         isEmpty={!assetId}
+        isLoading={isCardLoading}
         onClick={() => {
           setIsOpenModal(true)
         }}

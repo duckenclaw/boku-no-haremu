@@ -21,11 +21,6 @@ export const Mine = () => {
   }
   const isLoading = isCardsLoading || isInitMineLoading
 
-  const blockedCards = useMemo(
-    () => data?.map((s) => s.staked_asset_id) ?? [],
-    [data]
-  )
-
   return (
     <>
       <GameModal
@@ -33,7 +28,7 @@ export const Mine = () => {
         isOpen={isOpenModal}
         onRequestClose={() => setIsOpen(false)}
       >
-        <CardsSelection blockedCards={blockedCards} onSelect={onSelectCard} />
+        <CardsSelection onSelect={onSelectCard} />
       </GameModal>
       <div className={s.slots}>
         <Loader isLoading={isCardsLoading}>
