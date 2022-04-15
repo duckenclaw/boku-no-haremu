@@ -43,13 +43,9 @@ const cards: Card[] = [
 ]
 
 export const TokenisedEconomy: React.FC<Props> = () => (
-  <section className={s.section}>
+  <section className={s.section} id="resources">
     <Container className={s.container}>
-      <TextHeader
-        className={s.textHeader}
-        title="in-game resources"
-        id="resources"
-      />
+      <TextHeader className={s.textHeader} title="in-game resources" />
       <div className={s.cards}>
         {cards?.map((card: Card) => (
           <div key={card.title} className={s.card}>
