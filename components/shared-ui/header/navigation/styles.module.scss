@@ -53,8 +53,11 @@
     -1.2px 1.2px 0 #FFFFFF,
     1.2px 1.2px 0 #FFFFFF;
 
-  @media(max-width: 1024px) {
+  @media(max-width: 1200px) {
     margin-right: 0px;
+  }
+
+  @media(max-width: 1024px) {
     padding-top: 24px;
     padding-bottom: 24px;
     font-style: normal;
@@ -99,15 +102,18 @@
     -1.2px 1.2px 0 #FFFFFF,
     1.2px 1.2px 0 #FFFFFF;
 
-  @media(max-width: 1200px) {
-    margin-right: 0px;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 20px;
-  }
+    @media(max-width: 1200px) {
+      margin-right: 0px;
+    }
+  
+    @media(max-width: 1024px) {
+      padding-top: 24px;
+      padding-bottom: 24px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+    }
 }
 
 .navLink {
