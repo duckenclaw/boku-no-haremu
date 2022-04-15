@@ -16,20 +16,6 @@ import LastDot from 'public/images/svg/last-dot.svg'
 
 const characters: CharacterSlider[] = [
   {
-    background: 'character-background1',
-    characterImg: Character1,
-    title: 'Chantress',
-    description:
-      'Enchant the reality to shift according to her will. So can you, if she presents her power to you in small boxes called Chantments.',
-    logo: 'string',
-    price: {
-      nyan: 'string',
-      simptetix: 'string',
-      crystal: 'string',
-    },
-    imageDesktop: imageDesktop1,
-  },
-  {
     background: 'character-background2_peace',
     characterImg: Character2,
     title: 'mimi-chan',
@@ -42,6 +28,20 @@ const characters: CharacterSlider[] = [
       crystal: 'string',
     },
     imageDesktop: imageDesktop2,
+  },
+  {
+    background: 'character-background1',
+    characterImg: Character1,
+    title: 'Chantress',
+    description:
+      'Enchant the reality to shift according to her will. So can you, if she presents her power to you in small boxes called Chantments.',
+    logo: 'string',
+    price: {
+      nyan: 'string',
+      simptetix: 'string',
+      crystal: 'string',
+    },
+    imageDesktop: imageDesktop1,
   },
   {
     background: 'character-background4_peace',

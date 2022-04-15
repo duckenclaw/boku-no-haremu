@@ -15,14 +15,15 @@
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        background: radial-gradient(58.13% 34.13% at 50% 50%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%);
+        background: url('/footer_bg.svg') center no-repeat;
+        background-size: 100%;
         backdrop-filter: blur(10px);
         border-radius: 100%;
         -webkit-border-radius: 100%;
         -moz-border-radius: 100%;
         -ms-border-radius: 100%;
         -o-border-radius: 100%;
-        padding-left: 55px;
+        padding-left: 20px;
         padding-right: 55px;
     }
 }

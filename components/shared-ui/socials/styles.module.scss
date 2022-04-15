@@ -3,9 +3,7 @@
   justify-content: center;
   flex-flow: row nowrap;
 
-  @media(max-width: 1048px) {
-    margin-left: -10px;
-  }
+  @media(max-width: 1048px) {}
 
   li {
     width: 24px;
