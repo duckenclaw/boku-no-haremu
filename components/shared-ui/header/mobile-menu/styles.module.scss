@@ -21,30 +21,6 @@
   cursor: pointer;
   z-index: 100;
 }
-
-.menu__btn>span,
-.menu__btn>span::before,
-.menu__btn>span::after {
-  display: flex;
-  position: absolute;
-  width: 100%;
-  justify-content: center;
-  height: 100%;
-  max-height: 3.5px;
-  border: solid 0.5px #fff;
-  background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
-}
-
-.menu__btn>span::before {
-  content: '';
-  top: -7px;
-}
-
-.menu__btn>span::after {
-  content: '';
-  top: 5px;
-}
-
 .menu__box {
   position: fixed;
   visibility: hidden;
@@ -58,112 +34,9 @@
   background-color: #32133E;
 }
 
-.menu__list {
-  display: block;
-  width: 100%;
-  padding: 80px 0;
-  list-style: none;
-  text-align: center;
-}
-
-.menu__item {
-  display: block;
-  padding: 12px 24px;
-  color: #FF418A;
-  text-shadow: -0 -1.2px 0 #FFFFFF,
-    0 -1.2px 0 #FFFFFF,
-    -0 1.2px 0 #FFFFFF,
-    0 1.2px 0 #FFFFFF,
-    -1.2px -0 0 #FFFFFF,
-    1.2px -0 0 #FFFFFF,
-    -1.2px 0 0 #FFFFFF,
-    1.2px 0 0 #FFFFFF,
-    -1px -1.2px 0 #FFFFFF,
-    1px -1.2px 0 #FFFFFF,
-    -1px 1.2px 0 #FFFFFF,
-    1px 1.2px 0 #FFFFFF,
-    -1.2px -1px 0 #FFFFFF,
-    1.2px -1px 0 #FFFFFF,
-    -1.2px 1px 0 #FFFFFF,
-    1.2px 1px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF;
-
-
-  font-size: 30px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.menu__item_active {
-  display: block;
-  padding: 12px 24px;
-  color: #2E92BF;
-  text-shadow: -0 -1.2px 0 #FFFFFF,
-    0 -1.2px 0 #FFFFFF,
-    -0 1.2px 0 #FFFFFF,
-    0 1.2px 0 #FFFFFF,
-    -1.2px -0 0 #FFFFFF,
-    1.2px -0 0 #FFFFFF,
-    -1.2px 0 0 #FFFFFF,
-    1.2px 0 0 #FFFFFF,
-    -1px -1.2px 0 #FFFFFF,
-    1px -1.2px 0 #FFFFFF,
-    -1px 1.2px 0 #FFFFFF,
-    1px 1.2px 0 #FFFFFF,
-    -1.2px -1px 0 #FFFFFF,
-    1.2px -1px 0 #FFFFFF,
-    -1.2px 1px 0 #FFFFFF,
-    1.2px 1px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF;
-
-
-  font-size: 30px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.menu__item:hover {
-  //background-color: #3c406d;
-  color: #479EC5;
-}
-
-.menu__toggle:checked~.menu__btn>span {
-  transform: rotate(45deg);
-}
-
-.menu__toggle:checked~.menu__btn>span::before {
-  top: 0;
-  transform: rotate(0);
-}
-
-.menu__toggle:checked~.menu__btn>span::after {
-  top: 0;
-  transform: rotate(90deg);
-}
-
 .menu__toggle:checked~.menu__box {
   visibility: visible;
   top: 0;
-}
-
-.menu__btn>span,
-.menu__btn>span::before,
-.menu__btn>span::after {
-  transition-duration: .50s;
 }
 
 .menu__box {
@@ -172,4 +45,13 @@
 
 .menu__item {
   transition-duration: .50s;
+}
+
+.menu__social{
+  margin-top: 24px;
+  width: 100%;
+  padding: 32px;
+  border-top: 0.1px solid #FF418A;
+  position: absolute;
+  bottom: 0;
 }

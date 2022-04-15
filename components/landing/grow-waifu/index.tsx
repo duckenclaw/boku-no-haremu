@@ -16,13 +16,9 @@ type GrowWaifuProps = {
 
 export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
   return (
-    <section className={classNames(className, s.section)}>
+    <section className={classNames(className, s.section)} id="growth">
       <Container>
-        <TextHeader
-          title="GROW YOUR UNIQUE WAIFU"
-          className={s.textHeader}
-          id="growth"
-        />
+        <TextHeader title="GROW YOUR UNIQUE WAIFU" className={s.textHeader} />
         <div className={s.content}>
           <img src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
           <div className={s.arrow}>

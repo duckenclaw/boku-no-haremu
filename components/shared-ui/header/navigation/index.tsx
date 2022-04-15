@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import s from './styles.module.scss'
 import { default as NextLink } from 'next/link'
 import { useRouter } from 'next/router'
+import Scrollspy from 'react-scrollspy'
 
 type Props = {
   className?: string
@@ -14,20 +15,33 @@ const items = [
   // { value: 'TRADE', href: 'trade' },
   { value: 'NFTS', href: 'nfts' },
   { value: 'FUSION', href: 'fusion' },
-  // { value: 'ROADMAP', href: 'roadmap' },
+  { value: 'ROADMAP', href: 'roadmap' },
 ]
 
 const Navigation: React.FC<Props> = ({ className }) => {
   const router = useRouter()
-
-  const styleLink = (href: string) =>
-    router.asPath != href ? { color: '#FF418A' } : { color: '#2E92BF' }
-
+  const onUpdate = (elem: HTMLElement) => {
+    if (elem?.id && `/#${elem?.id}` !== router.asPath) {
+      console.log(elem.id)
+      router.push(
+        {
+          pathname: `#${elem?.id}`,
+        },
+        `#${elem?.id}`,
+        { shallow: true }
+      )
+    }
+  }
   return (
     <nav className={classNames(className, s.container)}>
-      <ul className={s.navList}>
+      <Scrollspy
+        items={items.map((el) => el.href)}
+        className={s.navList}
+        currentClassName={s.navItem_active}
+        onUpdate={onUpdate}
+      >
         {items.map((el, i) => (
-          <li className={s.navItem} key={i} style={styleLink(`/#${el.href}`)}>
+          <li className={s.navItem} key={i}>
             <NextLink href={`/#${el.href}`} scroll={false}>
               {el.value}
             </NextLink>
@@ -42,7 +56,7 @@ const Navigation: React.FC<Props> = ({ className }) => {
             WHITE PAPER
           </a>
         </li>
-      </ul>
+      </Scrollspy>
     </nav>
   )
 }

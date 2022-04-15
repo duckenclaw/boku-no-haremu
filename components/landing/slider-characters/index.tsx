@@ -130,7 +130,7 @@ export const SliderCharacters = () => {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} id="nfts">
       <Slider className={styles.slider} {...settings}>
         {characters.map((character, index) => (
           <SliderItem key={index} data={character} />
