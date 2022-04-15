@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import s from './styles.module.scss'
 import disableScroll from 'disable-scroll'
+import { useMediaQuery } from 'react-responsive'
 
 import IconBurger from 'public/images/svg/humburger.svg'
 import IconCross from 'public/images/svg/cross.svg'
@@ -23,6 +24,10 @@ export const MobileMenu = () => {
     setIsChecked(!isChecked)
   }
 
+  const isMobile = useMediaQuery({
+    query: '(min-width: 1024px)',
+  })
+
   useEffect(() => {
     if (isChecked) {
       disableScroll['on']()
@@ -30,6 +35,10 @@ export const MobileMenu = () => {
       disableScroll['off']()
     }
   }, [isChecked])
+
+  // useEffect(() => {
+  //   if (!isMobile) setIsChecked(false)
+  // }, [isMobile])
 
   return (
     <div className={s.container}>
