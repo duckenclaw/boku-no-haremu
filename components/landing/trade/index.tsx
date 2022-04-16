@@ -33,7 +33,7 @@ export const Trade = () => {
         <TextHeader
           title="Trade resource assets"
           className={s.textHeader}
-          id="trade"
+          // id="trade"
         />
         <div className={s.resource}>
           {rows?.map((row: Row) => (
