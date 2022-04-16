@@ -15,7 +15,9 @@ const Header: React.FC<Props> = ({ className }) => (
   <header className={classNames(className, s.container)}>
     <Container className={s.wrapper}>
       <img className={s.logo} src="/images/svg/logo.svg" />
-      <Navigation />
+      <div className={s.nav}>
+        <Navigation />
+      </div>
       <MobileMenu />
       <div className={s.socials}>
         <Socials />

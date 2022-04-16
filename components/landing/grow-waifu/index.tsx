@@ -8,40 +8,39 @@ import { Container } from 'components/shared-ui/container'
 import Mimi1 from 'public/images/mimi1.png'
 import Mimi2 from 'public/images/mimi2_new.png'
 import Mimi3 from 'public/images/mimi3_new.png'
+import { useRouter } from 'next/router'
 
 type GrowWaifuProps = {
   className?: string
 }
 
-export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => (
-  <section className={classNames(className, s.section)}>
-    <Container>
-      <TextHeader
-        title="GROW YOUR UNIQUE WAIFU"
-        className={s.textHeader}
-        id="growth"
-      />
-      <div className={s.content}>
-        <img src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
-        <div className={s.arrow}>
-          <Image
-            src="/images/svg/arrow.svg"
-            alt="arrow"
-            width={90}
-            height={36}
-          />
+export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
+  return (
+    <section className={classNames(className, s.section)} id="growth">
+      <Container>
+        <TextHeader title="GROW YOUR UNIQUE WAIFU" className={s.textHeader} />
+        <div className={s.content}>
+          <img src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
+          <div className={s.arrow}>
+            <Image
+              src="/images/svg/arrow.svg"
+              alt="arrow"
+              width={90}
+              height={36}
+            />
+          </div>
+          <img src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
+          <div className={s.arrow}>
+            <Image
+              src="/images/svg/arrow.svg"
+              alt="arrow"
+              width={90}
+              height={36}
+            />
+          </div>
+          <img src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />
         </div>
-        <img src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
-        <div className={s.arrow}>
-          <Image
-            src="/images/svg/arrow.svg"
-            alt="arrow"
-            width={90}
-            height={36}
-          />
-        </div>
-        <img src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />
-      </div>
-    </Container>
-  </section>
-)
+      </Container>
+    </section>
+  )
+}

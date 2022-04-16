@@ -27,6 +27,7 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => (
           height={526}
         />
       </div>
+      <div className={s.background}></div>
     </Container>
   </div>
 )
