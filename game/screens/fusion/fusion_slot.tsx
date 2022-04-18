@@ -3,10 +3,8 @@ import Image from 'next/image'
 import classnames from 'classnames'
 
 import { BaseSlot } from 'game/components/base_slot'
-import { GameModal } from 'game/game_modal'
 import { useGetCardByAssetId } from 'game/game_api'
-// TODO: refactor to separate modal component
-import { CardsSelection } from 'game/screens/mine/cards'
+import { CardModal } from 'game/components/card_modal'
 
 import { ipfsToUrlSafe } from 'utils'
 
@@ -32,21 +30,18 @@ export const FusionSlot = ({
 
   return (
     <>
-      <GameModal
+      <CardModal
         title={'WHAT DO YOU WANT TO FUSE?'}
         isOpen={isOpenModal}
-        onRequestClose={() => {
+        onClose={() => {
           setIsOpenModal(false)
         }}
-      >
-        <CardsSelection
-          blockedCards={[...blockedCards]}
-          onSelect={(assetId) => {
-            onSetCard?.(assetId)
-            setIsOpenModal(false)
-          }}
-        />
-      </GameModal>
+        blockedCards={[...blockedCards]}
+        onSelect={(assetId) => {
+          onSetCard?.(assetId)
+          setIsOpenModal(false)
+        }}
+      />
       <BaseSlot
         className={classnames(s.slot, { [s.prime_slot]: isPrime })}
         isEmpty={!assetId}
