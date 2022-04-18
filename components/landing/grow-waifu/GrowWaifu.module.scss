@@ -1,21 +1,26 @@
-.section {
+.section{
+  margin-top: -100px;
+  border-top: 100px solid transparent;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.container {
   position: relative;
   margin-bottom: 80px;
-  padding-top: 150px;
   padding-bottom: 150px;
-
   background: linear-gradient(to bottom, #2B0A37, transparent, #2B0A37),
     url('/images/wayfu_bg_peace.png') repeat;
 
-
   @media(max-width: 768px) {
-    padding-top: 120px;
+    
     padding-bottom: 40px;
     margin-bottom: 40px;
   }
 
   @media(max-width: 425px) {
-    padding-top: 80px;
+    
     padding-bottom: 40px;
   }
 }

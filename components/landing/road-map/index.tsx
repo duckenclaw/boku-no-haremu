@@ -33,7 +33,7 @@ export const RoadMap = () => {
   ]
 
   return (
-    <section id="roadmap">
+    <section className={s.section} id="roadmap">
       <Container className={s.wrap}>
         <TextHeader title="ROADMAP" className={s.textHeader} />
         <div className={s.columns_wrapper}>

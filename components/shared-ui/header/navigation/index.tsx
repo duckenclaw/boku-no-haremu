@@ -7,6 +7,7 @@ import Scrollspy from 'react-scrollspy'
 
 type Props = {
   className?: string
+  setIsChecked?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const items = [
@@ -18,17 +19,21 @@ const items = [
   { value: 'ROADMAP', href: 'roadmap' },
 ]
 
-const Navigation: React.FC<Props> = ({ className }) => {
+const Navigation: React.FC<Props> = ({ className, setIsChecked }) => {
+  const handleOnChange = () => {
+    if (setIsChecked) setIsChecked(false)
+  }
+
   const router = useRouter()
   const onUpdate = (elem: HTMLElement) => {
     if (elem?.id && `/#${elem?.id}` !== router.asPath) {
-      router.push(
-        {
-          pathname: `#${elem?.id}`,
-        },
-        `#${elem?.id}`,
-        { shallow: true }
-      )
+      // router.push(
+      //   {
+      //     pathname: `#${elem?.id}`,
+      //   },
+      //   `#${elem?.id}`,
+      //   { shallow: true }
+      // )
     }
   }
   return (
@@ -37,10 +42,11 @@ const Navigation: React.FC<Props> = ({ className }) => {
         items={items.map((el) => el.href)}
         className={s.navList}
         currentClassName={s.navItem_active}
+        offset={-150}
         onUpdate={onUpdate}
       >
         {items.map((el, i) => (
-          <li className={s.navItem} key={i}>
+          <li className={s.navItem} key={i} onClick={handleOnChange}>
             <NextLink href={`/#${el.href}`} scroll={false}>
               {el.value}
             </NextLink>
