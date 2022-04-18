@@ -69,6 +69,12 @@
   }
 }
 
+.card:last-child {
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+  }
+}
+
 .cardLogo {
   position: absolute;
   right: -13%;
