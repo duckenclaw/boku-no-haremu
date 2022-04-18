@@ -1,19 +1,24 @@
 .list {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-flow: row nowrap;
 
-  @media(max-width: 1048px) {
-    margin-left: -10px;
-  }
+  @media(max-width: 1048px) {}
 
   li {
     width: 24px;
     height: 24px;
-    margin-left: 22px;
+    margin-right: 12px;
 
-    @media(max-width: 1048px) {
-      margin-left: 10px;
+    @media(max-width: 1024px) {
+      height: 32px;
+      width: 32px;
+      margin-right: 32px;
     }
+  }
+  li:last-child {
+    margin-right: 0px;    
   }
 }
 
@@ -21,7 +26,6 @@
   display: block;
   width: 24px;
   height: 24px;
-  // margin-left: 20px;
 
   svg {
     height: 100%;
@@ -32,4 +36,8 @@
 .icon {
   height: 24px;
   width: 24px;
+  @media(max-width: 1024px) {
+    height: 32px;
+    width: 32px;
+  }
 }
