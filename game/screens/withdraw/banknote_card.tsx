@@ -94,7 +94,7 @@ export const BanknoteCard = ({
           objectFit="contain"
         />
         <div>
-          {immutable_data.amount} {immutable_data.symbol}
+          {Number(immutable_data.amount) / 10000} {immutable_data.symbol}
         </div>
         <div>You own: {isLoadingAmount ? '...' : amount}</div>
         <Button
