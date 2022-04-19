@@ -7,20 +7,17 @@ import { Loader } from 'components/shared-ui/loader'
 import { Button } from 'components/shared-ui/button'
 
 // TODO loader
-const GameComponent = dynamic(
-  () => import('game').then((m) => m.GameComponent as any),
-  {
-    ssr: false,
-    loading: ({ isLoading, error, retry }) => {
-      return (
-        <Loader isLoading={isLoading}>
-          {error && <div>There was an error</div>}
-          {retry && <Button onClick={retry}>Try Again</Button>}
-        </Loader>
-      )
-    },
-  }
-)
+const GameComponent = dynamic(() => import('game').then((m) => m.Game as any), {
+  ssr: false,
+  loading: ({ isLoading, error, retry }) => {
+    return (
+      <Loader isLoading={isLoading}>
+        {error && <div>There was an error</div>}
+        {retry && <Button onClick={retry}>Try Again</Button>}
+      </Loader>
+    )
+  },
+})
 
 const Game: NextPage = () => {
   return (

@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Modal from 'react-modal'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ToastContainer } from 'react-toastify'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
-import { useWax } from 'contexts/wax_context'
+import { useWax, WaxProvider } from 'contexts/wax_context'
 import { GameContextProvider } from './game_context'
-import { GameFooter } from './game_footer'
-import { GameHeader } from './game_header'
+import { GameFooter } from 'game/components/game_footer'
+import { GameHeader } from 'game/components/game_header'
+
 import { Router } from './router'
 import { Button } from 'game/components/button'
 import { useGetResources, useInitAccount } from './game_api'
@@ -11,6 +16,30 @@ import { GameLayout } from './game_layout'
 import { Loader } from 'components/shared-ui/loader'
 
 import s from './game_component.module.scss'
+
+Modal.setAppElement('#__next')
+
+export const Game = () => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  )
+  return (
+    <QueryClientProvider client={queryClient}>
+      <WaxProvider>
+        <GameComponent />
+        <ReactQueryDevtools />
+        <ToastContainer />
+      </WaxProvider>
+    </QueryClientProvider>
+  )
+}
 
 export const GameComponent = () => {
   const { isLoading: isLoadingWax, isConnected, login } = useWax()

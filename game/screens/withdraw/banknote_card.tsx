@@ -10,7 +10,7 @@ import { ipfsToUrlSafe } from 'utils'
 
 import s from './withdraw.module.scss'
 import { useState } from 'react'
-import { GameModal } from 'game/game_modal'
+import { GameModal } from 'game/components/game_modal'
 import { Loader } from 'components/shared-ui/loader'
 
 type BanknoteSelectionProps = {
@@ -94,7 +94,7 @@ export const BanknoteCard = ({
           objectFit="contain"
         />
         <div>
-          {immutable_data.amount} {immutable_data.symbol}
+          {Number(immutable_data.amount) / 10000} {immutable_data.symbol}
         </div>
         <div>You own: {isLoadingAmount ? '...' : amount}</div>
         <Button
