@@ -3,6 +3,11 @@
   background-size: cover;
   background: linear-gradient(to bottom, #2B0A37, transparent, #2B0A37);
 
+  border-top: 100px solid transparent;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+
   @media (max-width: 768px) {
     margin-top: 0px;
   }

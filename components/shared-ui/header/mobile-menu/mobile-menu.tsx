@@ -44,7 +44,7 @@ export const MobileMenu = () => {
         {isChecked ? <IconCross /> : <IconBurger />}
       </label>
       <div className={s.menu__box}>
-        <Navigation />
+        <Navigation setIsChecked={setIsChecked} />
         <div className={s.menu__social}>
           <Socials />
         </div>

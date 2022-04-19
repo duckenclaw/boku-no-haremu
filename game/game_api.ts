@@ -52,8 +52,13 @@ export const useWaxBalance = () => {
 }
 
 // get all Waifu NFTs for user
-export const useGetAllCards = () => {
-  const { api, isConnected, account } = useWax()
+
+type UseGetAllCardsOptions = {
+  limit?: number
+}
+
+export const useGetAllCards = ({ limit = 8 }: UseGetAllCardsOptions) => {
+  const { isConnected, account } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllCards', { account }],
     enabled: isConnected,
@@ -62,13 +67,13 @@ export const useGetAllCards = () => {
         params: {
           owner: account,
           page: String(pageParam ?? 1),
-          limit: '20',
+          limit,
           collection_name: process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION,
           schema_name: process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA,
         },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
-      if (page.data.length === 20) {
+      if (page.data.length === limit) {
         return pages.length + 1
       } else return false
     },

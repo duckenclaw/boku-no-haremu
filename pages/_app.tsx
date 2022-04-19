@@ -2,31 +2,12 @@ import '../styles/globals.scss'
 import 'react-toastify/dist/ReactToastify.css'
 
 import type { AppProps } from 'next/app'
-import { useState } from 'react'
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import Head from 'next/head'
 import Script from 'next/script'
-import Modal from 'react-modal'
-import { ToastContainer } from 'react-toastify'
-import { ReactQueryDevtools } from 'react-query/devtools'
-
-import { WaxProvider } from 'contexts/wax_context'
-
-Modal.setAppElement('#__next')
 
 function App({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            refetchOnWindowFocus: false,
-          },
-        },
-      })
-  )
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Head>
         <title>Boku No Haremu</title>
         <link
@@ -71,14 +52,8 @@ function App({ Component, pageProps }: AppProps) {
   gtag('js', new Date());
   gtag('config', 'G-8DC1F0GW4R');`}
       </Script>
-      <Hydrate state={pageProps.dehydratedState}>
-        <WaxProvider>
-          <Component {...pageProps} />
-        </WaxProvider>
-      </Hydrate>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <ToastContainer />
-    </QueryClientProvider>
+      <Component {...pageProps} />
+    </>
   )
 }
 
