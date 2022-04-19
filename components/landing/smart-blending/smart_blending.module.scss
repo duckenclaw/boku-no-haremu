@@ -48,7 +48,7 @@
 }
 
 .column:last-child {
-  margin-left: 39px;
+  margin-left: 29px;
 
   @media (max-width: 1113px) {
     margin-left: 0;
@@ -78,6 +78,7 @@
 .imageTop {
   height: 245px;
   max-width: 100%;
+  object-fit: contain;
 }
 
 .imageTop:last-child {
