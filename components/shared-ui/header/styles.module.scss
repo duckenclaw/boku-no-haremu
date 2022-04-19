@@ -14,6 +14,8 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: flex-end;
+    background: none;
+    backdrop-filter: none;
   }
 }
 
@@ -35,11 +37,26 @@
   }
 
   @media (max-width: 1024px) {
+    position: relative;
     padding-right: 15px;
     padding-left: 15px;
     .logo{
+      position: relative;
+      z-index: 100;
       width: 140px;
       height: 18px;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      width: 100%;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(251, 200, 215, 0.2);
+      backdrop-filter: blur(50px);
     }
   }
 }
