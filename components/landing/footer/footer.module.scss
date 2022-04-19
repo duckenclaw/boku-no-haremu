@@ -128,8 +128,6 @@
   }
 
   @media (max-width: 375px) {
-    max-width: 268px;
-    width: 100%;
     margin: auto;
   }
 }
@@ -138,6 +136,10 @@
   justify-content: flex-start;
   margin-top: 12px;
   margin-bottom: 24px;
+
+  li {
+    margin-right: 13px;
+  }
 
   li:first-child {
     margin-left: 0;
