@@ -11,6 +11,11 @@
   position: relative;
   width: 100%;
   margin-bottom: 100px;
+  margin-top: -100px;
+  border-top: 100px solid transparent;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
 }
 
 .textHeader {
