@@ -16,6 +16,10 @@
 .textHeader {
   padding-top: 37px;
   margin-top: 0;
+
+  @media (max-width: 768px) {
+    padding-top: 0;
+  }
 }
 
 .background_top {
@@ -46,7 +50,7 @@
   margin-bottom: 80px;
 
   @media (max-width: 768px) {
-    margin-bottom: 42px;
+    margin-bottom: 10px;
   }
 }
 
@@ -75,8 +79,12 @@
 
   @media (max-width: 768px) {
     display: block;
-    width: 63%;
+    width: 82%;
     margin: auto;
+  }
+
+  @media (max-width: 425px) {
+    width: 87%;
   }
 }
 
@@ -87,6 +95,7 @@
 
   @media (max-width: 768px) {
     display: none;
+
   }
 }
 
@@ -95,6 +104,7 @@
 
   @media (max-width: 768px) {
     display: block;
+    margin: 7px auto;
     width: 60%;
   }
 }
