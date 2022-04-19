@@ -25,8 +25,8 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
             <Image
               src="/images/svg/arrow.svg"
               alt="arrow"
-              width={90}
-              height={36}
+              width={55}
+              height={70}
             />
           </div>
           <img src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
@@ -34,8 +34,8 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
             <Image
               src="/images/svg/arrow.svg"
               alt="arrow"
-              width={90}
-              height={36}
+              width={55}
+              height={70}
             />
           </div>
           <img src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />

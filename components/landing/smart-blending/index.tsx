@@ -31,8 +31,9 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
               />
             </div>
           </div>
-
-          <Image src="/images/mimi_1.png" alt="" width={151} height={228} />
+          <div className={s.single_image}>
+            <Image src="/images/mimi_1.png" alt="" width={151} height={228} />
+          </div>
         </div>
         <div className={s.column}>
           <img className={s.imageTop} alt="" src="/images/cantress_5.png" />
@@ -49,12 +50,14 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
               />
             </div>
           </div>
-          <Image
-            alt=""
-            src="/images/chantress_2.png"
-            width={233}
-            height={228}
-          />
+          <div className={s.single_image}>
+            <Image
+              alt=""
+              src="/images/chantress_2.png"
+              width={233}
+              height={228}
+            />
+          </div>
         </div>
       </div>
     </Container>
