@@ -71,6 +71,10 @@
                 visibility: hidden;
                 cursor: unset;
             }
+
+            &.disabled {
+                filter: brightness(0.5) grayscale(0.5);
+            }
         }
 
         .cards {
@@ -90,6 +94,17 @@
                     cursor: not-allowed;
                     filter: brightness(0.5) grayscale(0.5);
                 }
+            }
+        }
+
+        .banknotes {
+            flex: 1;
+            display: grid;
+            gap: 51px 17px;
+            grid-template-columns: 1fr 1fr 1fr;
+
+            .banknote {
+                cursor: pointer;
             }
         }
     }

@@ -7,6 +7,7 @@ import { Craft } from 'game/screens/craft'
 import { Mine } from 'game/screens/mine'
 import { Withdraw } from 'game/screens/withdraw'
 import { Fusion } from 'game/screens/fusion'
+import { Inventory } from 'game/screens/inventory'
 
 export const Router = () => {
   const { screen } = useGame()
@@ -19,6 +20,8 @@ export const Router = () => {
       return <Withdraw />
     case 'fusion':
       return <Fusion />
+    case 'inventory':
+      return <Inventory />
     default:
       return <Placeholder />
   }

@@ -39,9 +39,7 @@ export const GameFooter = () => {
         <ScreenLink screen="craft">CRAFT</ScreenLink>
         <ScreenLink screen="fusion">FUSION</ScreenLink>
         <ScreenLink screen="withdraw">ATM</ScreenLink>
-        <ScreenLink screen="convert" disabled>
-          INVENTORY
-        </ScreenLink>
+        <ScreenLink screen="inventory">INVENTORY</ScreenLink>
       </nav>
     </footer>
   )
