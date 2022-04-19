@@ -1,39 +1,72 @@
+.container {
+  max-width: 1176px;
+  width: 100%;
+  background: #24183C;
+  box-shadow: 0px 0px 25px 1px rgba(242, 75, 81, 0.4),
+    0px 20px 40px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(40px);
+  border-radius: 15px;
+  padding-top: 53px;
+  padding-bottom: 53px;
+  margin-top: 73px;
+
+  @media (max-width: 1178px) {
+    margin-top: 0;
+  }
+
+
+}
+
 .section {
   position: relative;
   margin-bottom: 80px;
-  padding-top: 150px;
   padding-bottom: 150px;
+  padding-left: 40px;
+  padding-right: 40px;
 
-  background: linear-gradient(to bottom, #2B0A37, transparent, #2B0A37),
-    url('/images/wayfu_bg_peace.png') repeat;
+  @media (max-width: 1178px) {
+    margin-top: -262px;
+  }
 
 
   @media(max-width: 768px) {
-    padding-top: 120px;
-    padding-bottom: 40px;
     margin-bottom: 40px;
+    padding: 48px 16px 40px 16px;
+  }
+
+  @media(max-width: 640px) {
+    margin-top: -217px;
+  }
+
+  @media (max-width: 540px) {
+    margin-top: -186px;
   }
 
   @media(max-width: 425px) {
-    padding-top: 80px;
     padding-bottom: 40px;
+    margin-top: -175px;
+  }
+
+  @media(max-width: 330px) {
+    margin-top: -155px;
   }
 }
 
 .textHeader {
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 
   @media(max-width: 768px) {
     margin-bottom: 42px;
   }
 }
 
+
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  @media(max-width: 900px) {
+  @media (max-width: 1178px) {
     flex-direction: column;
 
   }
@@ -81,4 +114,9 @@
 .mimi_card {
   width: 244px;
   height: 362px;
+
+  @media (max-width: 768px) {
+    width: 168px;
+    height: 254px;
+  }
 }
