@@ -48,7 +48,8 @@ const cards: Card[] = [
 ]
 
 export const TokenisedEconomy: React.FC<Props> = () => (
-  <section className={s.section} id="resources">
+  <section className={s.section}>
+    <a className="anchor" id="resources" />
     <Container className={s.container}>
       <TextHeader
         className={s.textHeader}

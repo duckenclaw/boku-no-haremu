@@ -59,8 +59,8 @@ const cards = [
 ]
 
 export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
-  <section className={classNames(className, s.section)} id="nfts">
-    <div className={s.background_top}></div>
+  <section className={classNames(className, s.section)}>
+    <a className="anchor" id="nfts" />
     <Container className={s.container}>
       <TextHeader title="EXCLUSIVE NFTS" className={s.textHeader} />
       <div className={s.imageContainer}>
@@ -70,6 +70,5 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
       <img src="/images/nft4.png" className={s.nfts4} alt="" />
       <img src="/images/svg/ellipse.svg" className={s.ellipse_mobile} />
     </Container>
-    <div className={s.background_bottom}></div>
   </section>
 )
