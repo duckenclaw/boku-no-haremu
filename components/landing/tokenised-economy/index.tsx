@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import classNames from 'classnames'
 import { Button } from 'components/shared-ui//button'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
@@ -47,12 +48,12 @@ const cards: Card[] = [
   },
 ]
 
-export const TokenisedEconomy: React.FC<Props> = () => (
+export const TokenisedEconomy: React.FC<Props> = (className) => (
   <section className={s.section}>
     <a className="anchor" id="resources" />
     <Container className={s.container}>
       <TextHeader
-        className={s.textHeader}
+        className={classNames(className, s.text_header)}
         title="in-game resources and trade"
       />
       <div className={s.cards}>

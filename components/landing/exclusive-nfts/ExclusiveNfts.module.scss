@@ -33,6 +33,7 @@
     background: url(/images/nfts_bg.svg) no-repeat center/contain;
     width: 2650px;
     height: 1200px;
+
     @media (max-width: 768px) {
       top: 50%;
       transform: translate(-50%, -50%);
@@ -42,14 +43,15 @@
   }
 }
 
-.textHeader {
-  margin-bottom: 52px;
+.text_header {
+  margin-bottom: 80px;
 
   @media (max-width: 768px) {
     padding-top: 0;
-    @media (max-width: 768px) {
-      margin-bottom: 12px;
-    }
+  }
+
+  @media (max-width: 576px) {
+    margin-bottom: 40px;
   }
 }
 
