@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import { default as NextLink } from 'next/link'
 import { useRouter } from 'next/router'
-import Scrollspy from 'react-scrollspy'
+import { Scrollspy } from '@makotot/ghostui'
 
 type Props = {
   className?: string
@@ -24,43 +24,45 @@ const Navigation: React.FC<Props> = ({ className, setIsChecked }) => {
     if (setIsChecked) setIsChecked(false)
   }
 
-  const router = useRouter()
-  const onUpdate = (elem: HTMLElement) => {
-    if (elem?.id && `/#${elem?.id}` !== router.asPath) {
-      // router.push(
-      //   {
-      //     pathname: `#${elem?.id}`,
-      //   },
-      //   `#${elem?.id}`,
-      //   { shallow: true }
-      // )
-    }
-  }
+  const sectionRefs = [
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+  ]
+
   return (
     <nav className={classNames(className, s.container)}>
-      <Scrollspy
-        items={items.map((el) => el.href)}
-        className={s.navList}
-        currentClassName={s.navItem_active}
-        offset={-150}
-        onUpdate={onUpdate}
-      >
-        {items.map((el, i) => (
-          <li className={s.navItem} key={i} onClick={handleOnChange}>
-            <NextLink href={`/#${el.href}`} scroll={false}>
-              {el.value}
-            </NextLink>
-          </li>
-        ))}
-        <li className={s.navItem}>
-          <a
-            href="https://bokunoharemu.notion.site/bokunoharemu/Boku-no-Haremu-Whitepaper-417e138e88b949098bbbe71e5c74631e"
-            target="_blank"
-            rel="noreferrer"
-          >
-            WHITE PAPER
-          </a>
-        </li>
+      <Scrollspy sectionRefs={sectionRefs}>
+        {({ currentElementIndexInViewport }) => (
+          <ul className={s.navList}>
+            {items.map((el, i) => (
+              <li
+                className={
+                  currentElementIndexInViewport === i
+                    ? s.navItem_active
+                    : s.navItem
+                }
+                key={i}
+                onClick={handleOnChange}
+              >
+                <NextLink href={`/#${el.href}`} scroll={false}>
+                  {el.value}
+                </NextLink>
+              </li>
+            ))}
+            <li className={s.navItem}>
+              <a
+                href="https://bokunoharemu.notion.site/bokunoharemu/Boku-no-Haremu-Whitepaper-417e138e88b949098bbbe71e5c74631e"
+                target="_blank"
+                rel="noreferrer"
+              >
+                WHITE PAPER
+              </a>
+            </li>
+          </ul>
+        )}
       </Scrollspy>
     </nav>
   )
