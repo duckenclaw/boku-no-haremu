@@ -127,3 +127,14 @@ a {
 html {
   scroll-behavior: smooth;
 }
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -80px;
+  visibility: hidden;
+
+  &#growth {
+    top: -50px;
+  }
+}

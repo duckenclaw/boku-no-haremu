@@ -12,7 +12,8 @@ type SmartBlendingProps = {
 }
 
 export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
-  <section className={classNames(className, s.section)} id="fusion">
+  <section className={classNames(className, s.section)}>
+    <a className="anchor" id="fusion" />
     <Container className={s.container}>
       <TextHeader title="SMART FUSION" className={s.textHeader} />
       <div className={s.content}>
