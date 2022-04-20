@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 70px;
+  margin-top: 144px;
   padding-left: 172px;
   padding-right: 22px;
 
@@ -11,6 +11,7 @@
     flex-direction: column;
     padding-left: 123px;
     padding-right: 123px;
+    margin-top: 80px;
   }
 
   @media (max-width: 768px) {
@@ -29,9 +30,14 @@
   color: #FFFFFF;
   margin-bottom: 48px;
 
+  @media (max-width: 1200px) {
+    line-height: 35px;
+  }
+
   @media (max-width: 633px) {
     margin-bottom: 24px;
     font-size: 22px;
+
   }
 
   @media (max-width: 346px) {
