@@ -43,7 +43,7 @@
   //   -2px 2px 0 #FFFFFF,
   //   2px 2px 0 #FFFFFF;
 
-  @media (max-width: 425px) {
+  @media (max-width: 576px) {
     font-size: 24px;
     line-height: 31px;
   }
@@ -56,7 +56,7 @@
   color: #FFFFFF;
   max-width: 65%;
 
-  @media (max-width: 425px) {
+  @media (max-width: 576px) {
     font-size: 14px;
     line-height: 17px;
   }
