@@ -69,7 +69,7 @@
 
   @media (max-width: 375px) {
     width: 162px;
-    height: 314px;
+    height: 313px;
     min-height: initial;
     margin-top: 0;
     padding: 78px 16px 16px 16px;
@@ -77,6 +77,8 @@
 
   @media (max-width: 371px) {
     width: 135px;
+    height: 290px !important;
+    padding: 55px 16px 5px 16px !important;
   }
 }
 
@@ -92,13 +94,17 @@
       top: 51%;
     }
 
+    @media (max-width: 907px) {
+      top: 53%;
+    }
+
     @media (max-width: 375px) {
       top: 61%;
       left: 42%;
     }
 
     @media (max-width: 371px) {
-      top: 63%;
+      top: 62%;
     }
   }
 
@@ -138,12 +144,12 @@
     }
 
     @media (max-width: 375px) {
-      top: 61%;
+      top: 58%;
       left: 42%;
     }
 
     @media (max-width: 371px) {
-      top: 63%;
+      top: 58%;
     }
   }
 
@@ -168,8 +174,53 @@
   }
 }
 
+
+.card:nth-child(2) {
+  transform: translateY(10%);
+  -webkit-transform: translateY(10%);
+  -moz-transform: translateY(10%);
+  -ms-transform: translateY(10%);
+  -o-transform: translateY(10%);
+
+  @media (max-width: 1200px) {
+    transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+  }
+
+  .arrow {
+    @media (max-width: 907px) {
+      top: 53%;
+    }
+
+    @media (max-width: 375px) {
+      top: 61%;
+    }
+
+    @media (max-width: 371px) {
+      top: 62%;
+    }
+  }
+}
+
 .card:nth-child(3) {
-  @media (max-width: 907px) {
+  transform: translateY(10%);
+  -webkit-transform: translateY(10%);
+  -moz-transform: translateY(10%);
+  -ms-transform: translateY(10%);
+  -o-transform: translateY(10%);
+
+  @media (max-width: 1200px) {
+    transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+  }
+
+  @media(max-width: 907px) {
     margin-top: 140px;
   }
 
@@ -182,6 +233,11 @@
     margin-top: 0px;
   }
 
+  .arrow {
+    @media (max-width: 375px) {
+      top: 58%;
+    }
+  }
 }
 
 .cardLogo {
