@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Image from 'next/image'
+import { Image } from 'components/shared-ui/image'
 import classnames from 'classnames'
 
 import { BaseSlot } from 'game/components/base_slot'
@@ -54,7 +54,7 @@ export const FusionSlot = ({
           <Image
             width={234}
             height={352}
-            objectFit="cover"
+            style={{ objectFit: 'cover' }}
             alt={cardData.data.name}
             src={ipfsToUrlSafe(cardData.data.data.img)}
           />

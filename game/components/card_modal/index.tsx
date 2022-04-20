@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import Image from 'next/image'
 import cn from 'classnames'
 
+import { Image } from 'components/shared-ui/image'
 import { LinkButton } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
 import { Button } from 'game/components/button'
@@ -104,9 +104,9 @@ export const CardModal = ({
                   <Image
                     height={215}
                     width={120}
-                    objectFit="cover"
                     alt={c.name}
                     src={ipfsToUrlSafe(c.data.img)}
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
               ))}

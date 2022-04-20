@@ -1,7 +1,7 @@
 import { Container } from 'components/shared-ui/container'
 import React from 'react'
 import s from './preview_text.module.scss'
-import Image from 'next/image'
+import { Image } from 'components/shared-ui/image'
 
 export const PreviewText = () => {
   return (

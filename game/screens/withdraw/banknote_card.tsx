@@ -1,5 +1,4 @@
-import Image from 'next/image'
-
+import { Image } from 'components/shared-ui/image'
 import { Button } from 'game/components/button'
 import {
   useBurnBanknote,
@@ -37,7 +36,7 @@ export const BanknoteSelection = ({
               <Image
                 width={195}
                 height={240}
-                objectFit="cover"
+                style={{ objectFit: 'cover' }}
                 alt={c.name}
                 src={ipfsToUrlSafe(c.data.img)}
               />
@@ -91,7 +90,7 @@ export const BanknoteCard = ({
           alt={templateData.template_id}
           width={204}
           height={325}
-          objectFit="contain"
+          style={{ objectFit: 'contain' }}
         />
         <div>
           {Number(immutable_data.amount) / 10000} {immutable_data.symbol}
