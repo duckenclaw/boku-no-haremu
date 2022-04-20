@@ -70,6 +70,5 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
       <img src="/images/nft4.png" className={s.nfts4} alt="" />
       <img src="/images/svg/ellipse.svg" className={s.ellipse_mobile} />
     </Container>
-    <div className={s.background_bottom}></div>
   </section>
 )

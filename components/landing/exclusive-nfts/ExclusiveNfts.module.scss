@@ -1,27 +1,55 @@
 .container {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: url('/images/nfts_bg.svg') center no-repeat;
   background-size: cover;
 }
 
 .section {
   position: relative;
   width: 100%;
+  margin-top: 140px;
   margin-bottom: 100px;
-  padding-top: 37px;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+
+  @media (max-width: 768px) {
+    margin-top: 80px;
+    margin-bottom: 70px
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: -310px;
+    transform: translateX(-50%);
+    display: block;
+    background: url(/images/nfts_bg.svg) no-repeat center/contain;
+    width: 2650px;
+    height: 1200px;
+    @media (max-width: 768px) {
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 950px;
+      height: 500px;
+    }
+  }
 }
 
 .textHeader {
-  margin-top: 0;
+  margin-bottom: 52px;
 
   @media (max-width: 768px) {
     padding-top: 0;
+    @media (max-width: 768px) {
+      margin-bottom: 12px;
+    }
   }
 }
 
@@ -49,20 +77,13 @@
   }
 }
 
-.textHeader {
-  margin-bottom: 80px;
-
-  @media (max-width: 768px) {
-    margin-bottom: 10px;
-  }
-}
-
 .imageContainer {
   max-width: 960px;
+  width: 100%;
 }
 
 .nfts3 {
-  width: 90%;
+  width: 100%;
   display: block;
   margin: auto;
 
@@ -82,19 +103,16 @@
 
   @media (max-width: 768px) {
     display: block;
-    width: 82%;
+    max-width: 290px;
+    width: 100%;
     margin: auto;
-  }
-
-  @media (max-width: 425px) {
-    width: 87%;
   }
 }
 
 .ellipse,
 .ellipse_mobile {
   display: block;
-  margin: 25px auto;
+  margin: 25px auto 0;
 
   @media (max-width: 768px) {
     display: none;
@@ -107,7 +125,8 @@
 
   @media (max-width: 768px) {
     display: block;
-    margin: 7px auto;
-    width: 60%;
+    margin: 20px auto 0;
+    max-width: 269px;
+    width: 100%;
   }
 }
