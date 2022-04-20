@@ -52,14 +52,17 @@
   width: 100%;
   margin-top: 64px;
   position: relative;
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 }
 
 .item_left {
   position: relative;
   width: 50%;
-  padding-left: 50px;
+  padding-left: 80px;
   @media (max-width: 768px) {
-    padding-left: 20px;
+    padding-left: 25px;
   }
   
   
@@ -124,8 +127,8 @@
 }
 
 .circle {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -134,8 +137,8 @@
   z-index: 1;
   background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
   position: absolute;
-  left: calc(50% - 12px);
-  top: calc(40px - 12px);
+  left: calc(50% - 10px);
+  top: calc(40px - 10px);
   
 
   @media (max-width: 768px) {
@@ -166,6 +169,6 @@
   @media (max-width: 768px) {
     font-size: 12px;
     line-height: 14px;
-    margin-left: 10;
+    margin-left: 10px;
   }
 }

@@ -33,7 +33,7 @@
   bottom: -100px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 100%;
+  max-width: 160%;
   z-index: 10;
 
   @media (max-width: 425px) {
@@ -165,5 +165,12 @@
 
   @media (max-width: 768px) {
     font-size: 28px;
+  }
+}
+
+.text_wrap{
+  @media (max-width: 768px) {
+    padding: 34px 0px;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(58, 29, 65, 0.63) 30.73%, rgba(196, 196, 196, 0) 100%);
   }
 }
