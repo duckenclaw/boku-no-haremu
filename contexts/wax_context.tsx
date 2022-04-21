@@ -38,7 +38,7 @@ const loginWithAnchor = () => {
       return {
         api,
         account: s.auth.actor.toString(),
-        auth: s.auth,
+        auth: s.auth as any as { actor: string; permission: string }, // anchor has special auth object so we force it
         logout: () =>
           link.removeSession(
             process.env.NEXT_PUBLIC_WAX_CONTRACT!,
@@ -68,7 +68,7 @@ const loginWithTestnet = () =>
         process.env.NEXT_PUBLIC_OWNER_KEY_PRIV!,
       ]),
     }),
-    auth: { actor: process.env.NEXT_PUBLIC_ACCOUNT, permission: 'active' },
+    auth: { actor: process.env.NEXT_PUBLIC_ACCOUNT!, permission: 'active' },
     account: process.env.NEXT_PUBLIC_ACCOUNT,
     logout: () => Promise.resolve(),
   })
