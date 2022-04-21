@@ -1,4 +1,3 @@
-import { TextHeader } from 'components/shared-ui/text-header'
 import React from 'react'
 import s from './rules.module.scss'
 import Image from 'next/image'
@@ -16,7 +15,7 @@ export const Rules = () => (
         Develop the economy building not only relationships between actors on
         the market, but also with your precious waifus.
       </p>
-      <p className={s.after_all}>
+      <p className={s.paragraph}>
         After all, LOVE is the main currency in this world…
       </p>
       <a href="https://discord.gg/S3rbu5GXGQ" className={s.desktop_btn}>

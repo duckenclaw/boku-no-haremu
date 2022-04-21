@@ -12,7 +12,7 @@
   @media(max-width: 1024px) {
     display: block;
     width: 100%;
-    padding-top: 62px;
+    padding-top: 72px;
     margin: 0;
     text-align: center;
   }
@@ -68,52 +68,7 @@
 }
 
 .navItem_active {
-  margin-right: 30px;
   color: #2E92BF;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  display: block;
-  padding: 10px;
-  cursor: pointer;
-  text-shadow: -0 -1.2px 0 #FFFFFF,
-    0 -1.2px 0 #FFFFFF,
-    -0 1.2px 0 #FFFFFF,
-    0 1.2px 0 #FFFFFF,
-    -1.2px -0 0 #FFFFFF,
-    1.2px -0 0 #FFFFFF,
-    -1.2px 0 0 #FFFFFF,
-    1.2px 0 0 #FFFFFF,
-    -1px -1.2px 0 #FFFFFF,
-    1px -1.2px 0 #FFFFFF,
-    -1px 1.2px 0 #FFFFFF,
-    1px 1.2px 0 #FFFFFF,
-    -1.2px -1px 0 #FFFFFF,
-    1.2px -1px 0 #FFFFFF,
-    -1.2px 1px 0 #FFFFFF,
-    1.2px 1px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF;
-
-    @media(max-width: 1200px) {
-      margin-right: 0px;
-    }
-  
-    @media(max-width: 1024px) {
-      padding-top: 24px;
-      padding-bottom: 24px;
-      font-style: normal;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 20px;
-    }
 }
 
 .navLink {

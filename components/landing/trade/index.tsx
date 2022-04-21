@@ -30,11 +30,7 @@ export const Trade = () => {
   return (
     <section>
       <Container className={s.wrap}>
-        <TextHeader
-          title="Trade resource assets"
-          className={s.textHeader}
-          // id="trade"
-        />
+        <TextHeader title="Trade resource assets" className={s.textHeader} />
         <div className={s.resource}>
           {rows?.map((row: Row) => (
             <div key={row.title} className={s.row}>
