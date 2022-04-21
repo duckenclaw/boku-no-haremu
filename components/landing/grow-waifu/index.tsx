@@ -19,7 +19,10 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
     <section className={classNames(className, s.section, 'section')}>
       <a className="anchor" id="growth" />
       <Container className={s.container}>
-        <TextHeader title="GROW YOUR UNIQUE WAIFU" className={s.textHeader} />
+        <TextHeader
+          title="GROW YOUR UNIQUE WAIFU"
+          className={classNames(className, s.text_header)}
+        />
         <div className={s.content}>
           <img src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
           <div className={s.arrow}>

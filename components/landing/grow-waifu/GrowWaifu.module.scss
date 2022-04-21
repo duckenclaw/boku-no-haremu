@@ -52,11 +52,11 @@
   }
 }
 
-.textHeader {
-  margin-bottom: 16px;
+.text_header {
+  margin-bottom: 40px;
 
-  @media(max-width: 425px) {
-    margin-bottom: 0;
+  @media(max-width: 576px) {
+    margin-bottom: 24px;
   }
 }
 

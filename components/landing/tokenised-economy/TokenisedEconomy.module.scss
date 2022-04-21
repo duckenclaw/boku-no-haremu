@@ -36,15 +36,16 @@
   }
 }
 
-.textHeader {
-  margin-bottom: 180px;
+.text_header {
+  margin-bottom: 184px;
 
-  @media (max-width: 768px) {
-    margin-bottom: 100px;
+
+  @media (max-width: 576px) {
+    margin-bottom: 132px;
   }
 
   @media (max-width: 375px) {
-    margin-bottom: 53px;
+    margin-bottom: 90px;
   }
 }
 
