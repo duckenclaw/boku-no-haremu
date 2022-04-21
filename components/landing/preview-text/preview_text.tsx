@@ -1,11 +1,12 @@
 import { Container } from 'components/shared-ui/container'
 import React from 'react'
-import s from './preview_text.module.scss'
 import Image from 'next/image'
+import cn from 'classnames'
+import s from './preview_text.module.scss'
 
 export const PreviewText = () => {
   return (
-    <Container className={s.container}>
+    <Container className={cn(s.container)}>
       <div className={s.image}>
         <Image src="/images/wizard.png" alt="wizard" width={924} height={916} />
       </div>

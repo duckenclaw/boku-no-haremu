@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import { default as NextLink } from 'next/link'
-import { useRouter } from 'next/router'
-import { Scrollspy } from '@makotot/ghostui'
+import useScrollSpy from 'react-use-scrollspy'
+// import { Scrollspy } from '@makotot/ghostui'
 
 type Props = {
   className?: string
@@ -20,50 +20,70 @@ const items = [
 ]
 
 const Navigation: React.FC<Props> = ({ className, setIsChecked }) => {
+  const [isScrollspyActive, setIsScrollspyActive] = useState(false)
   const handleOnChange = () => {
     if (setIsChecked) setIsChecked(false)
   }
-
   const sectionRefs = [
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
+    useRef<HTMLElement | null>(null),
+    useRef<HTMLElement | null>(null),
+    useRef<HTMLElement | null>(null),
+    useRef<HTMLElement | null>(null),
+    useRef<HTMLElement | null>(null),
   ]
+
+  useEffect(() => {
+    const sections = document.querySelectorAll<HTMLElement>('.section')
+    const handleScroll = () => {
+      if (90 <= sections[0].getBoundingClientRect().top) {
+        setIsScrollspyActive(false)
+      } else {
+        setIsScrollspyActive(true)
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    sectionRefs.forEach(
+      (item, i) => (item.current = sections[i] as HTMLElement)
+    )
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  const activeSection = useScrollSpy({
+    activeSectionDefault: -1,
+    sectionElementRefs: sectionRefs,
+    offsetPx: -90,
+  })
 
   return (
     <nav className={classNames(className, s.container)}>
-      <Scrollspy sectionRefs={sectionRefs}>
-        {({ currentElementIndexInViewport }) => (
-          <ul className={s.navList}>
-            {items.map((el, i) => (
-              <li
-                className={
-                  currentElementIndexInViewport === i
-                    ? s.navItem_active
-                    : s.navItem
-                }
-                key={i}
-                onClick={handleOnChange}
-              >
-                <NextLink href={`/#${el.href}`} scroll={false}>
+      <ul className={s.navList}>
+        {items.map((el, i) => {
+          return (
+            <li className={s.navItem} key={i} onClick={handleOnChange}>
+              <NextLink href={`/#${el.href}`} scroll={false}>
+                <a
+                  className={classNames(
+                    activeSection === i && isScrollspyActive && s.navItem_active
+                  )}
+                >
                   {el.value}
-                </NextLink>
-              </li>
-            ))}
-            <li className={s.navItem}>
-              <a
-                href="https://bokunoharemu.notion.site/bokunoharemu/Boku-no-Haremu-Whitepaper-417e138e88b949098bbbe71e5c74631e"
-                target="_blank"
-                rel="noreferrer"
-              >
-                WHITE PAPER
-              </a>
+                </a>
+              </NextLink>
             </li>
-          </ul>
-        )}
-      </Scrollspy>
+          )
+        })}
+        <li className={s.navItem}>
+          <a
+            href="https://bokunoharemu.notion.site/bokunoharemu/Boku-no-Haremu-Whitepaper-417e138e88b949098bbbe71e5c74631e"
+            target="_blank"
+            rel="noreferrer"
+          >
+            WHITE PAPER
+          </a>
+        </li>
+      </ul>
     </nav>
   )
 }

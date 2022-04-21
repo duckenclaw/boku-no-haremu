@@ -2,6 +2,7 @@ import React from 'react'
 import s from './road_map.module.scss'
 import { TextHeader } from 'components/shared-ui/text-header'
 import { Container } from 'components/shared-ui/container'
+import cn from 'classnames'
 
 export const RoadMap = () => {
   const row = [
@@ -33,7 +34,7 @@ export const RoadMap = () => {
   ]
 
   return (
-    <section className={s.section}>
+    <section className={cn(s.section, 'section')}>
       <a className="anchor" id="roadmap" />
       <Container className={s.wrap}>
         <TextHeader title="ROADMAP" className={s.textHeader} />
