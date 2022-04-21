@@ -2,7 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react'
 import { useReducer } from 'react'
 
 export type GameState = {
-  screen: 'mine' | 'craft' | 'fusion' | 'withdraw' | 'convert'
+  screen: 'mine' | 'craft' | 'fusion' | 'withdraw' | 'inventory'
 }
 
 type GameContextValue = {

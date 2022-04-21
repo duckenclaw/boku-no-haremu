@@ -138,23 +138,27 @@ export const useGetBanknotesBalances = () => {
 }
 
 type useGetBanknotesByTemplateIdOptions = {
-  template_id: string
+  template_id?: string
+  limit?: number
 }
 
 // get all NFTs of specific banknote for user
-export const useGetBanknotesByTemplateId = ({
+export const useGetAllBanknotes = ({
   template_id,
+  limit = 9,
 }: useGetBanknotesByTemplateIdOptions) => {
   const { account, isConnected } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
-    queryKey: ['wax/getBanknotesByTemplateId', { account, template_id }],
+    queryKey: ['wax/getAllBanknotes', { account, template_id }],
     enabled: isConnected,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/assets', {
         params: {
           owner: account,
           page: String(pageParam ?? 1),
-          limit: '20',
+          collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
+          schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+          limit: limit,
           template_id,
         },
       }).then((res) => res.data as GetAllCardsResponseType),
