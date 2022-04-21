@@ -97,6 +97,11 @@
   text-align: center;
   margin-left: 3px;
   margin-right: 3px;
+  transform: rotate(250deg);
+  -webkit-transform: rotate(250deg);
+  -moz-transform: rotate(250deg);
+  -ms-transform: rotate(250deg);
+  -o-transform: rotate(250deg);
 
   img {
     width: 100%;
@@ -105,11 +110,11 @@
   }
 
   @media(max-width: 1178px) {
-    transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
   }
 }
 
