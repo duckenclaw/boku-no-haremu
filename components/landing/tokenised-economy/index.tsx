@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button } from 'components/shared-ui//button'
+import { Image } from 'components/shared-ui/image'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
 
@@ -49,7 +49,7 @@ export const TokenisedEconomy: React.FC<Props> = () => (
       <div className={s.cards}>
         {cards?.map((card: Card) => (
           <div key={card.title} className={s.card}>
-            <img
+            <Image
               className={s.cardLogo}
               src={`images/currencies/${card.logo}.png`}
               alt={card.title}

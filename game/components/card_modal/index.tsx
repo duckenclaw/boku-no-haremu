@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import Image from 'next/image'
 import cn from 'classnames'
 
+import { Image } from 'components/shared-ui/image'
 import { LinkButton } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
 import { Button } from 'game/components/button'
@@ -244,12 +244,12 @@ export const BanknoteInventory = ({
                 onClick={() => onSelect?.(c.asset_id)}
               >
                 <Image
-                  width={162}
-                  height={76}
-                  objectFit="cover"
-                  alt={c.name}
-                  src={ipfsToUrlSafe(c.data.img)}
-                />
+                    height={215}
+                    width={120}
+                    alt={c.name}
+                    src={ipfsToUrlSafe(c.data.img)}
+                    style={{ objectFit: 'cover' }}
+                  />
               </div>
             ))}
           </Loader>

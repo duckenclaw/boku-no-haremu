@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import s from './ExclusiveNfts.module.scss'
 import { TextHeader } from 'components/shared-ui/text-header'
 import { Container } from 'components/shared-ui/container'
+import { Image } from 'components/shared-ui/image'
 
 type ExclusiveNftsProps = {
   className?: string
@@ -60,12 +61,16 @@ const cards = [
 
 export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
   <section className={classNames(className, s.section)} id="nfts">
+    <div className={s.background_top}></div>
     <Container className={s.container}>
       <TextHeader title="EXCLUSIVE NFTS" className={s.textHeader} />
       <div className={s.imageContainer}>
-        <img src="/images/nft3.webp" className={s.nfts3} alt="" />
+        <Image src="/images/nft3.webp" className={s.nfts3} alt="" />
+        <Image src="/images/svg/ellipse.svg" className={s.ellipse} />
       </div>
-      <img src="/images/nft4.png" className={s.nfts4} alt="" />
+      <Image src="/images/nft4.png" className={s.nfts4} alt="" />
+      <Image src="/images/svg/ellipse.svg" className={s.ellipse_mobile} />
     </Container>
+    <div className={s.background_bottom}></div>
   </section>
 )

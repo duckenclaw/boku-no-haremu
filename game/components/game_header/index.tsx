@@ -4,6 +4,7 @@ import { useGetResources, useWaxBalance } from 'game/game_api'
 import IconInfo from 'public/game/svg/IconInfo.svg'
 import IconSound from 'public/game/svg/IconSound.svg'
 import s from './game_header.module.scss'
+import { Image } from 'components/shared-ui/image'
 
 type ResourceBalanceProps = {
   value?: number
@@ -36,7 +37,7 @@ export const GameHeader = () => {
 
       <div className={s.cards}>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="nya"
             src={`images/currencies/nyan.png`}
@@ -44,7 +45,7 @@ export const GameHeader = () => {
           <ResourceBalance value={nya} />
         </div>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="crystal"
             src={`images/currencies/crystal.png`}
@@ -52,7 +53,7 @@ export const GameHeader = () => {
           <ResourceBalance value={cht} />
         </div>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="simptetix"
             src={`images/currencies/simptetix.png`}
@@ -60,7 +61,7 @@ export const GameHeader = () => {
           <ResourceBalance value={smp} />
         </div>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="bento"
             src={`images/currencies/bento.png`}
