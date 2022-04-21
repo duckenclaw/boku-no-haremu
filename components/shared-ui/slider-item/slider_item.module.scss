@@ -43,19 +43,20 @@
   width: 100%;
   height: 525px;
 
-  img {
+  .image {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
 
   @media(max-width: 1440px) {
     position: absolute;
-    top: 7%;
-    right: 7%;
+    top: 15%;
+    right: 15%;
   }
 
   @media(max-width: 1380px) {
-    right: 20px;
+    right: 15%;
     top: 20%;
     max-width: 600px;
   }
@@ -104,7 +105,7 @@
   width: 100%;
   height: 770px;
 
-  img {
+  .image {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -120,9 +121,10 @@
     height: 511px;
 
 
-    img {
+    .image {
       width: 100%;
       height: 100%;
+      object-fit: contain;
     }
   }
 
