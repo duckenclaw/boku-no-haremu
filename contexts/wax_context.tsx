@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
 import { WaxJS } from '@waxio/waxjs/dist'
 
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'
@@ -38,6 +38,7 @@ const loginWithAnchor = () => {
       return {
         api,
         account: s.auth.actor.toString(),
+        auth: s.auth,
         logout: () =>
           link.removeSession(
             process.env.NEXT_PUBLIC_WAX_CONTRACT!,
@@ -53,6 +54,7 @@ const loginWithWax = () => {
   return wax.login().then(() => ({
     api: wax.api,
     account: wax.userAccount,
+    auth: { actor: wax.userAccount, permission: 'active' },
     logout: () => Promise.resolve(),
   }))
 }
@@ -66,6 +68,7 @@ const loginWithTestnet = () =>
         process.env.NEXT_PUBLIC_OWNER_KEY_PRIV!,
       ]),
     }),
+    auth: { actor: process.env.NEXT_PUBLIC_ACCOUNT, permission: 'active' },
     account: process.env.NEXT_PUBLIC_ACCOUNT,
     logout: () => Promise.resolve(),
   })
@@ -95,6 +98,10 @@ type WaxContextState = {
   isConnected: boolean
   api?: Api
   account?: string
+  auth?: {
+    actor: string
+    permission: string
+  }
   logout?: () => Promise<void>
 }
 
