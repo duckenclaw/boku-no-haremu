@@ -4,6 +4,8 @@ import s from './styles.module.scss'
 import { default as NextLink } from 'next/link'
 import useScrollSpy from 'react-use-scrollspy'
 
+const OFFSET = 90
+
 type Props = {
   className?: string
   setIsChecked?: React.Dispatch<React.SetStateAction<boolean>>
@@ -33,7 +35,7 @@ const Navigation: React.FC<Props> = ({ className, setIsChecked }) => {
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>('.section')
     const handleScroll = () => {
-      if (90 <= sections[0].getBoundingClientRect().top) {
+      if (OFFSET <= sections[0].getBoundingClientRect().top) {
         setIsScrollspyActive(false)
       } else {
         setIsScrollspyActive(true)
@@ -51,7 +53,7 @@ const Navigation: React.FC<Props> = ({ className, setIsChecked }) => {
   const activeSection = useScrollSpy({
     activeSectionDefault: -1,
     sectionElementRefs: sectionRefs,
-    offsetPx: -90,
+    offsetPx: -OFFSET,
   })
 
   return (
