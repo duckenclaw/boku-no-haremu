@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Button } from 'components/shared-ui//button'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
+import cn from 'classnames'
 import Image from 'next/image'
 import s from './TokenisedEconomy.module.scss'
 
@@ -49,7 +50,7 @@ const cards: Card[] = [
 ]
 
 export const TokenisedEconomy: React.FC<Props> = (className) => (
-  <section className={s.section}>
+  <section className={cn(s.section, 'section')}>
     <a className="anchor" id="resources" />
     <Container className={s.container}>
       <TextHeader

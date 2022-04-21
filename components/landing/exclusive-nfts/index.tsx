@@ -59,7 +59,7 @@ const cards = [
 ]
 
 export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
-  <section className={classNames(className, s.section)}>
+  <section className={classNames(className, s.section, 'section')}>
     <a className="anchor" id="nfts" />
     <Container className={s.container}>
       <TextHeader
