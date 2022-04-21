@@ -61,21 +61,18 @@ export const TokenisedEconomy: React.FC<Props> = ({ className }) => (
           <div key={card.title} className={s.card}>
             <Image
               className={s.cardLogo}
+              raw
               src={`images/currencies/${card.logo}.png`}
               alt={card.title}
             />
             <div className={s.cardTitle}>{card.title}</div>
             <div className={s.cardDescription}>{card.description}</div>
             <div className={s.arrow}>
-              <Image
-                src="/images/svg/arrow.svg"
-                alt="arrow"
-                width={55}
-                height={70}
-              />
+              <Image raw src="/images/svg/arrow.svg" alt="arrow" />
             </div>
             <Image
               className={s.cash}
+              raw
               src={`images/${card.cash}.png`}
               alt={card.title}
             />

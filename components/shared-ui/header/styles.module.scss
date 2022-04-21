@@ -32,6 +32,7 @@
   align-items: center;
   z-index: 100;
   .logo{
+    display: block;
     width: 200px;
     height: 26px;
   }
@@ -61,7 +62,7 @@
   }
 }
 
-.nav{
+.nav {
   @media(max-width: 1024px) {
     display: none;
   }

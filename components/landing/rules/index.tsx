@@ -23,7 +23,13 @@ export const Rules = () => (
       </a>
     </div>
     <div className={s.image}>
-      <Image src="/images/become.png" alt="person" width={683} height={683} />
+      <Image
+        raw
+        src="/images/become.png"
+        alt="person"
+        width={683}
+        height={683}
+      />
     </div>
     <a href="https://discord.gg/S3rbu5GXGQ" className={s.mobile_btn}>
       open your heart

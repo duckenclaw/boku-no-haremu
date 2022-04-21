@@ -65,11 +65,11 @@ export const ExclusiveNfts: React.FC<ExclusiveNftsProps> = ({ className }) => (
     <Container className={s.container}>
       <TextHeader title="EXCLUSIVE NFTS" className={s.text_header} />
       <div className={s.imageContainer}>
-        <Image src="/images/nft3.webp" className={s.nfts3} alt="" />
-        <Image src="/images/svg/ellipse.svg" className={s.ellipse} />
+        <Image raw src="/images/nft3.webp" className={s.nfts3} alt="" />
+        <Image raw src="/images/svg/ellipse.svg" className={s.ellipse} />
       </div>
-      <Image src="/images/nft4.png" className={s.nfts4} alt="" />
-      <Image src="/images/svg/ellipse.svg" className={s.ellipse_mobile} />
+      <Image raw src="/images/nft4.png" className={s.nfts4} alt="" />
+      <Image raw src="/images/svg/ellipse.svg" className={s.ellipse_mobile} />
     </Container>
   </section>
 )

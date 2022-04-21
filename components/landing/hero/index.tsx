@@ -13,6 +13,7 @@ const Hero: React.FC<Props> = ({ className }) => (
   <section className={classNames(className, s.section)}>
     <SakuraAnimation className={s.canvas} />
     <Image
+      raw
       className={s.characters_img}
       src={'images/characters.webp'}
       alt="characters"

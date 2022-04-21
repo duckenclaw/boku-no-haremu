@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import s from './styles.module.scss'
 import { default as NextLink } from 'next/link'
 import useScrollSpy from 'react-use-scrollspy'
-// import { Scrollspy } from '@makotot/ghostui'
 
 type Props = {
   className?: string
@@ -13,7 +12,6 @@ type Props = {
 const items = [
   { value: 'GROWTH', href: 'growth' },
   { value: 'RESOURCES', href: 'resources' },
-  // { value: 'TRADE', href: 'trade' },
   { value: 'NFTS', href: 'nfts' },
   { value: 'FUSION', href: 'fusion' },
   { value: 'ROADMAP', href: 'roadmap' },

@@ -20,12 +20,13 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
       />
       <div className={s.content}>
         <div className={s.column}>
-          <Image className={s.imageTop} alt="" src="/images/mimi_3.png" />
+          <Image raw className={s.imageTop} alt="" src="/images/mimi_3.png" />
           <div className={s.arrowText}>
             <div className={s.multiplier}>x1</div>
             <div className={s.nextLvl}>next lvl</div>
             <div className={s.arrow}>
               <Image
+                raw
                 className={s.arrow}
                 src="/images/svg/arrow2.svg"
                 alt="arrow"
@@ -35,17 +36,29 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
             </div>
           </div>
           <div className={s.single_image}>
-            <Image src="/images/mimi_1.png" alt="" width={151} height={228} />
+            <Image
+              raw
+              src="/images/mimi_1.png"
+              alt=""
+              width={151}
+              height={228}
+            />
           </div>
         </div>
         <div className={s.column}>
-          <Image className={s.imageTop} alt="" src="/images/cantress_5.png" />
+          <Image
+            raw
+            className={s.imageTop}
+            alt=""
+            src="/images/cantress_5.png"
+          />
 
           <div className={s.arrowText}>
             <div className={s.multiplier}>x2</div>
             <div className={s.nextLvl}>next lvl</div>
             <div className={s.arrow}>
               <Image
+                raw
                 src="/images/svg/arrow2.svg"
                 alt="arrow"
                 width={28}
@@ -55,6 +68,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
           </div>
           <div className={s.single_image}>
             <Image
+              raw
               alt=""
               src="/images/chantress_2.png"
               width={233}

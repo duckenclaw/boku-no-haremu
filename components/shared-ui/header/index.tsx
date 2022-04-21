@@ -1,11 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
-import s from './styles.module.scss'
-import { Navigation } from './navigation'
-import { Socials } from '../socials'
 import { Container } from 'components/shared-ui/container'
-import { MobileMenu } from './mobile-menu/mobile-menu'
 import { Image } from 'components/shared-ui/image'
+import { Navigation } from './navigation'
+import { MobileMenu } from './mobile-menu/mobile-menu'
+import { Socials } from '../socials'
+import s from './styles.module.scss'
 
 type Props = {
   className?: string
@@ -14,7 +14,7 @@ type Props = {
 const Header: React.FC<Props> = ({ className }) => (
   <header className={classNames(className, s.container)}>
     <Container className={s.wrapper}>
-      <Image className={s.logo} src="/images/svg/logo.svg" />
+      <Image raw className={s.logo} src="/images/svg/logo.svg" alt="logo" />
       <div className={s.nav}>
         <Navigation />
       </div>
