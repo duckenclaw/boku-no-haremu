@@ -4,7 +4,7 @@ import { Image } from 'components/shared-ui/image'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
 
-import s from './_TokenisedEconomy.module.scss'
+import s from './tokenised_economy.module.scss'
 
 type Props = {
   className?: string
@@ -48,7 +48,7 @@ const cards: Card[] = [
   },
 ]
 
-export const TokenisedEconomy: React.FC<Props> = (className) => (
+export const TokenisedEconomy: React.FC<Props> = ({ className }) => (
   <section className={cn(s.section, 'section')}>
     <a className="anchor" id="resources" />
     <Container className={s.container}>
