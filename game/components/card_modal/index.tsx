@@ -138,7 +138,7 @@ export const CardsInventory = ({
                 <Image
                   height={215}
                   width={120}
-                  objectFit="cover"
+                  style={{ objectFit: 'cover' }}
                   alt={c.name}
                   src={ipfsToUrlSafe(c.data.img)}
                 />
@@ -244,12 +244,12 @@ export const BanknoteInventory = ({
                 onClick={() => onSelect?.(c.asset_id)}
               >
                 <Image
-                    height={215}
-                    width={120}
-                    alt={c.name}
-                    src={ipfsToUrlSafe(c.data.img)}
-                    style={{ objectFit: 'cover' }}
-                  />
+                  width={162}
+                  height={76}
+                  alt={c.name}
+                  src={ipfsToUrlSafe(c.data.img)}
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
             ))}
           </Loader>

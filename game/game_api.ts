@@ -316,7 +316,7 @@ export const useCraftRecipes = () => {
 /// MUTATIONS
 
 export const useInitAccount = () => {
-  const { api, account } = useWax()
+  const { api, account, auth } = useWax()
   const qc = useQueryClient()
   return useMutation({
     mutationKey: 'wax/login',
@@ -327,12 +327,7 @@ export const useInitAccount = () => {
             {
               name: 'login',
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 username: account,
               },
@@ -360,7 +355,7 @@ type useMineArguments = {
 }
 // place card into slot
 export const useInitMine = () => {
-  const { api, account } = useWax()
+  const { api, account, auth } = useWax()
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/initMine',
@@ -371,12 +366,7 @@ export const useInitMine = () => {
             {
               name: 'initmine',
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 username: account!,
                 asset_id,
@@ -402,7 +392,7 @@ export const useInitMine = () => {
 
 // place card into slot
 export const useUnsetMine = () => {
-  const { api, account } = useWax()
+  const { api, account, auth } = useWax()
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/unsetMine',
@@ -413,12 +403,7 @@ export const useUnsetMine = () => {
             {
               name: 'unsetmine',
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 username: account!,
                 asset_id,
@@ -444,7 +429,7 @@ export const useUnsetMine = () => {
 
 // mine card in the slot
 export const useMine = () => {
-  const { api, account } = useWax()
+  const { api, account, auth } = useWax()
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/start_mine',
@@ -455,12 +440,7 @@ export const useMine = () => {
             {
               name: 'startmine',
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 username: account,
                 asset_id,
@@ -487,7 +467,7 @@ export const useMine = () => {
 
 // claimed mined card
 export const useClaim = () => {
-  const { api, account } = useWax()
+  const { api, account, auth } = useWax()
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/claim',
@@ -498,12 +478,7 @@ export const useClaim = () => {
             {
               name: 'claim',
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 username: account,
                 asset_id,
@@ -534,7 +509,7 @@ type useMintBanknoteOptions = {
 
 // mint banknote by template_id
 export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
-  const { account, api } = useWax()
+  const { account, api, auth } = useWax()
   const qc = useQueryClient()
   return useMutation({
     mutationKey: 'wax/mintBanknote',
@@ -545,12 +520,7 @@ export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
             {
               name: 'buybanknote',
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 username: account!,
                 banknote_template_id: template_id,
@@ -582,7 +552,7 @@ type UseBurnBanknoteVariables = {
 
 /// burn selected user banknote
 export const useBurnBanknote = () => {
-  const { api, account } = useWax()
+  const { api, account, auth } = useWax()
   const qc = useQueryClient()
   return useMutation<any, any, UseBurnBanknoteVariables>({
     mutationKey: 'wax/burn_banknote',
@@ -593,12 +563,7 @@ export const useBurnBanknote = () => {
             {
               name: 'burnasset',
               account: 'atomicassets',
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 asset_id,
                 asset_owner: account,
@@ -632,7 +597,7 @@ type UseFuseCardsVariables = {
 
 /// fuse cards
 export const useFuseCards = () => {
-  const { account, api } = useWax()
+  const { account, api, auth } = useWax()
   const qc = useQueryClient()
 
   return useMutation<any, any, UseFuseCardsVariables>({
@@ -644,12 +609,7 @@ export const useFuseCards = () => {
             {
               name: 'transfer',
               account: 'atomicassets',
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 from: account,
                 to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
@@ -696,7 +656,7 @@ type UseCraftCardOptions = {
 
 // mint banknote by template_id
 export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
-  const { account, api } = useWax()
+  const { account, api, auth } = useWax()
   const qc = useQueryClient()
   return useMutation({
     mutationKey: 'wax/craftasset',
@@ -707,12 +667,7 @@ export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
             {
               name: 'craftasset',
               account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
-                },
-              ],
+              authorization: [auth!],
               data: {
                 username: account,
                 asset_template_id: template_id,

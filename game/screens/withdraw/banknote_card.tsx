@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-
 import { Button } from 'game/components/button'
 import { BanknoteModal } from 'game/components/card_modal'
 import { Image } from 'components/shared-ui/image'
@@ -8,8 +7,6 @@ import { useBurnBanknote, useMintBanknote } from 'game/game_api'
 import { ipfsToUrlSafe } from 'utils'
 
 import s from './withdraw.module.scss'
-
-
 
 type BanknoteCardProps = {
   templateData: AtomicTemplate
@@ -48,9 +45,9 @@ export const BanknoteCard = ({
         <Image
           src={ipfsToUrlSafe(immutable_data.img)}
           alt={templateData.template_id}
-          width={204}
-          height={325}
-          style={{ objectFit: 'contain' }}
+          width={162}
+          height={76}
+          style={{ objectFit: 'cover' }}
         />
         <div>
           {Number(immutable_data.amount) / 10000} {immutable_data.symbol}
