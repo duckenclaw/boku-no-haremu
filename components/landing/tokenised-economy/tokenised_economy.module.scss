@@ -91,6 +91,18 @@
 
   transform: translateY(10%);
 
+  .cardLogo {
+    top: -27%;
+
+    @media (max-width: 1200px) {
+      top: -30%;
+    }
+
+    @media (max-width: 768px) {
+      top: -27%;
+    }
+  }
+
   .arrow {
     bottom: 172px;    
 
@@ -99,7 +111,7 @@
     }
 
     @media (max-width: 768px) {
-      bottom: 96px; 
+      bottom: 98px; 
     }
 
   }
@@ -125,6 +137,10 @@
 
 .card:nth-child(3),
 .card:nth-child(4) {
+  .cardLogo {
+    transform: translateX(-45%);
+  }
+
   @media (max-width: 1200px) {
     margin-bottom: 0;
   }
@@ -133,15 +149,22 @@
 
 .cardLogo {
   position: absolute;
-  right: -13%;
+  left: 50%;
+  transform: translateX(-50%);
   top: -33%;
   display: block;
+  width: 297px;
+  height: 282px;
+  object-fit: contain;
+
+  @media (max-width: 1200px) {
+    top: -30%;
+  }
 
   @media (max-width: 768px) {
-    width: 206px;
-    height: 200px;
-    object-fit: contain;
-    top: -30%;
+    width: 182px;
+    height: 172px;
+    top: -27%;
   }
 }
 
@@ -155,7 +178,7 @@
   margin-bottom: 24px;
 
   @media (max-width: 768px) {
-    margin-bottom: 16px;
+    margin-bottom: 13px;
     font-size: 18px;
     line-height: 21px;
   }
@@ -191,7 +214,7 @@
   @media (max-width: 768px) {
     width: 28px;
     height: 28px;
-    bottom: 96px; 
+    bottom: 98px; 
 
     img {
       width: 100%;
