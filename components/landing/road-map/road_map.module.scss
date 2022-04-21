@@ -11,6 +11,16 @@
   padding-right: 20px;
 }
 
+.textHeader {
+  margin-bottom: 36px;
+
+  @media (max-width: 768px) {
+    .textHeader {
+      margin-bottom: 36px;
+    }
+  }
+}
+
 .columns_wrapper {
   max-width: 840px;
   position: relative;

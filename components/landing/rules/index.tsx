@@ -1,4 +1,3 @@
-import { TextHeader } from 'components/shared-ui/text-header'
 import React from 'react'
 import s from './rules.module.scss'
 import Image from 'next/image'

@@ -8,13 +8,6 @@ type TextHeaderProps = {
   subtitle?: string
 }
 
-export const TextHeader: React.FC<TextHeaderProps> = ({
-  className,
-  title,
-  subtitle,
-}) => (
-  <div className={classNames(className, s.container)}>
-    {title && <div className={s.title}>{title}</div>}
-    {subtitle && <div className={s.subtitle}>{subtitle}</div>}
-  </div>
+export const TextHeader: React.FC<TextHeaderProps> = ({ className, title }) => (
+  <h2 className={classNames(className, s.container)}>{title}</h2>
 )

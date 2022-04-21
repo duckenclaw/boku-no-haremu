@@ -11,7 +11,7 @@
 .section {
   position: relative;
   width: 100%;
-  margin-top: 140px;
+  margin-top: 170px;
   margin-bottom: 100px;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
@@ -44,14 +44,14 @@
 }
 
 .text_header {
-  margin-bottom: 80px;
+  margin-bottom: 76px;
 
   @media (max-width: 768px) {
     padding-top: 0;
   }
 
   @media (max-width: 576px) {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 }
 
