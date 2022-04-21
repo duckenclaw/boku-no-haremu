@@ -1,11 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
-import classNames from 'classnames'
-import { Button } from 'components/shared-ui//button'
+import cn from 'classnames'
+
+import { Image } from 'components/shared-ui/image'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
-import cn from 'classnames'
-import Image from 'next/image'
-import s from './TokenisedEconomy.module.scss'
+
+import s from './_TokenisedEconomy.module.scss'
 
 type Props = {
   className?: string
@@ -54,13 +53,13 @@ export const TokenisedEconomy: React.FC<Props> = (className) => (
     <a className="anchor" id="resources" />
     <Container className={s.container}>
       <TextHeader
-        className={classNames(className, s.text_header)}
+        className={cn(className, s.text_header)}
         title="in-game resources and trade"
       />
       <div className={s.cards}>
         {cards?.map((card: Card) => (
           <div key={card.title} className={s.card}>
-            <img
+            <Image
               className={s.cardLogo}
               src={`images/currencies/${card.logo}.png`}
               alt={card.title}
@@ -75,7 +74,7 @@ export const TokenisedEconomy: React.FC<Props> = (className) => (
                 height={70}
               />
             </div>
-            <img
+            <Image
               className={s.cash}
               src={`images/${card.cash}.png`}
               alt={card.title}

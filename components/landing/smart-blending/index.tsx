@@ -3,8 +3,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { Container } from 'components/shared-ui/container'
 import { TextHeader } from 'components/shared-ui/text-header'
-import Image from 'next/image'
-
+import { Image } from 'components/shared-ui/image'
 import s from './smart_blending.module.scss'
 
 type SmartBlendingProps = {
@@ -21,7 +20,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
       />
       <div className={s.content}>
         <div className={s.column}>
-          <img className={s.imageTop} alt="" src="/images/mimi_3.png" />
+          <Image className={s.imageTop} alt="" src="/images/mimi_3.png" />
           <div className={s.arrowText}>
             <div className={s.multiplier}>x1</div>
             <div className={s.nextLvl}>next lvl</div>
@@ -40,7 +39,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
           </div>
         </div>
         <div className={s.column}>
-          <img className={s.imageTop} alt="" src="/images/cantress_5.png" />
+          <Image className={s.imageTop} alt="" src="/images/cantress_5.png" />
 
           <div className={s.arrowText}>
             <div className={s.multiplier}>x2</div>

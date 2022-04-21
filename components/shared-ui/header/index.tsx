@@ -5,7 +5,7 @@ import { Navigation } from './navigation'
 import { Socials } from '../socials'
 import { Container } from 'components/shared-ui/container'
 import { MobileMenu } from './mobile-menu/mobile-menu'
-import Logo from 'public/images/svg/logo.svg'
+import { Image } from 'components/shared-ui/image'
 
 type Props = {
   className?: string
@@ -14,7 +14,7 @@ type Props = {
 const Header: React.FC<Props> = ({ className }) => (
   <header className={classNames(className, s.container)}>
     <Container className={s.wrapper}>
-      <img className={s.logo} src="/images/svg/logo.svg" />
+      <Image className={s.logo} src="/images/svg/logo.svg" />
       <div className={s.nav}>
         <Navigation />
       </div>

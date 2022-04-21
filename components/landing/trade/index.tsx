@@ -2,6 +2,7 @@ import React from 'react'
 import s from './styles.module.scss'
 import { TextHeader } from 'components/shared-ui/text-header'
 import { Container } from 'components/shared-ui/container'
+import { Image } from 'components/shared-ui/image'
 
 export const Trade = () => {
   type Row = {
@@ -34,13 +35,17 @@ export const Trade = () => {
         <div className={s.resource}>
           {rows?.map((row: Row) => (
             <div key={row.title} className={s.row}>
-              <img
+              <Image
                 className={s.rowLogo}
                 src={`images/${row.logo}.png`}
                 alt={row.title}
               />
-              <img className={s.arrow} src="images/svg/arrow.svg" alt="arrow" />
-              <img className={s.bill} src="images/bill.png" alt="bill" />
+              <Image
+                className={s.arrow}
+                src="images/svg/arrow.svg"
+                alt="arrow"
+              />
+              <Image className={s.bill} src="images/bill.png" alt="bill" />
             </div>
           ))}
         </div>

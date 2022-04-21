@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './rules.module.scss'
-import Image from 'next/image'
+import { Image } from 'components/shared-ui/image'
 import { Container } from 'components/shared-ui/container'
 
 export const Rules = () => (

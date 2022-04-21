@@ -8,8 +8,7 @@ import { useWax, WaxProvider } from 'contexts/wax_context'
 import { GameContextProvider } from './game_context'
 import { GameFooter } from 'game/components/game_footer'
 import { GameHeader } from 'game/components/game_header'
-
-import { Router } from './router'
+import { Router } from 'game/screens/router'
 import { Button } from 'game/components/button'
 import { useGetResources, useInitAccount } from './game_api'
 import { GameLayout } from './game_layout'
@@ -35,7 +34,7 @@ export const Game = () => {
       <WaxProvider>
         <GameComponent />
         <ReactQueryDevtools />
-        <ToastContainer />
+        <ToastContainer toastStyle={{ top: 100 }} />
       </WaxProvider>
     </QueryClientProvider>
   )

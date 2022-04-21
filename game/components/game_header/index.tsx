@@ -1,37 +1,31 @@
+import { animated, useSpring } from '@react-spring/web'
 import { useWax } from 'contexts/wax_context'
 import { useGetResources, useWaxBalance } from 'game/game_api'
 import IconInfo from 'public/game/svg/IconInfo.svg'
 import IconSound from 'public/game/svg/IconSound.svg'
 import s from './game_header.module.scss'
+import { Image } from 'components/shared-ui/image'
 
-type Res = {
-  value: string
-  logo: string
+type ResourceBalanceProps = {
+  value?: number
 }
-
-const res: Res[] = [
-  {
-    value: '0',
-    logo: 'nyan',
-  },
-  {
-    value: '0',
-    logo: 'crystal',
-  },
-  {
-    value: '0',
-    logo: 'simptetix',
-  },
-  {
-    value: '0',
-    logo: 'bento',
-  },
-]
+const ResourceBalance = animated(({ value = 0 }: ResourceBalanceProps) => {
+  return <>{value.toFixed(0)}</>
+})
 
 export const GameHeader = () => {
   const { account } = useWax()
   const { data: resourcesData } = useGetResources()
   const { data: balanceData } = useWaxBalance()
+
+  const { bnt, cht, nya, smp } = useSpring({
+    to: {
+      bnt: resourcesData?.bnt.balance,
+      cht: resourcesData?.cht.balance,
+      nya: resourcesData?.nya.balance,
+      smp: resourcesData?.smp.balance,
+    },
+  })
   return (
     <header className={s.container}>
       <div className={s.profile_info}>
@@ -43,36 +37,36 @@ export const GameHeader = () => {
 
       <div className={s.cards}>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="nya"
             src={`images/currencies/nyan.png`}
           />
-          {resourcesData?.nya.balance ?? 0}
+          <ResourceBalance value={nya} />
         </div>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="crystal"
             src={`images/currencies/crystal.png`}
           />
-          {resourcesData?.cht.balance ?? 0}
+          <ResourceBalance value={cht} />
         </div>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="simptetix"
             src={`images/currencies/simptetix.png`}
           />
-          {resourcesData?.smp.balance ?? 0}
+          <ResourceBalance value={smp} />
         </div>
         <div className={s.res}>
-          <img
+          <Image
             className={s.cardPriceIcon}
             alt="bento"
             src={`images/currencies/bento.png`}
           />
-          {resourcesData?.bnt.balance ?? 0}
+          <ResourceBalance value={bnt} />
         </div>
       </div>
       <div className={s.info}>
