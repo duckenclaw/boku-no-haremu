@@ -5,7 +5,7 @@ import {
   useMine,
   useUnsetMine,
 } from 'game/game_api'
-import Image from 'next/image'
+import { Image } from 'components/shared-ui/image'
 import { Button } from 'game/components/button'
 import { useEffect, useMemo, useState } from 'react'
 import { Duration } from 'luxon'

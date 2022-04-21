@@ -3,6 +3,7 @@ import React from 'react'
 import classNames from 'classnames'
 import s from './styles.module.scss'
 import { SakuraAnimation } from './sakura_animation'
+import { Image } from 'components/shared-ui/image'
 
 type Props = {
   className?: string
@@ -11,7 +12,7 @@ type Props = {
 const Hero: React.FC<Props> = ({ className }) => (
   <section className={classNames(className, s.section)}>
     <SakuraAnimation className={s.canvas} />
-    <img
+    <Image
       className={s.characters_img}
       src={'images/characters.webp'}
       alt="characters"

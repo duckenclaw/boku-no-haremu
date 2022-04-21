@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import s from './slider_item.module.scss'
-import Image from 'next/image'
+import { Image } from 'components/shared-ui/image'
 import { Container } from '../container'
 
 type SliderItemProps = {
@@ -17,7 +17,7 @@ export const SliderItem: React.FC<SliderItemProps> = ({ data }) => (
   >
     <Container className={s.container}>
       <div className={s.personImg}>
-        <img className={s.image} alt="" src={`${data.characterImg.src}`} />
+        <Image className={s.image} alt="" src={`${data.characterImg.src}`} />
       </div>
       <div className={s.characterInfoWrapperDesktop}>
         <Image

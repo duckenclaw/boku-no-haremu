@@ -3,17 +3,43 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background: url('/images/nfts_bg.svg') center no-repeat;
+  background-size: cover;
 }
 
 .section {
+  position: relative;
   width: 100%;
-  margin-bottom: 150px;
+  margin-bottom: 100px;
+}
 
-  margin-top: -100px;
-  border-top: 100px solid transparent;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
+.textHeader {
+  padding-top: 37px;
+  margin-top: 0;
+}
+
+.background_top {
+  position: absolute;
+  top: -39px;
+  width: 100%;
+  height: 68px;
+  background: linear-gradient(308deg, rgba(43, 10, 55, 0) 0%, rgba(43, 10, 55, 0.42) 30.73%, rgba(43, 10, 55, 0.58) 41.65%, rgba(43, 10, 55, 0.96) 68.4%, rgba(43, 10, 55, 0.96) 100%);
+}
+
+
+.background_bottom {
+  position: absolute;
+  bottom: -23px;
+  width: 100%;
+  height: 68px;
+  background: linear-gradient(180deg, rgba(43, 10, 55, 0) 0%, rgba(43, 10, 55, 0.42) 30.73%, rgba(43, 10, 55, 0.58) 41.65%, rgba(43, 10, 55, 0.96) 68.4%, rgba(43, 10, 55, 0.96) 100%);
+}
+
+.background_top,
+.background_bottom {
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .textHeader {
@@ -54,154 +80,21 @@
   }
 }
 
-.cards {
+.ellipse,
+.ellipse_mobile {
+  display: block;
+  margin: 25px auto;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.ellipse_mobile {
   display: none;
-  flex-wrap: wrap;
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-  }
-
-
-}
-
-.card {
-  margin-right: 58px;
-  max-width: 212px;
-  width: 100%;
-  height: 314px;
-
-  img {
-    width: 100%;
-  }
 
   @media (max-width: 768px) {
-    margin-right: 29px;
-    max-width: 123px;
-    height: 200px;
-  }
-
-  @media (max-width: 320px) {
-    margin-right: 21px;
-  }
-}
-
-.cardContainer {
-  width: 100% !important;
-  display: flex;
-  align-items: center;
-  flex: 1 1 50%;
-  width: max-content;
-  margin-bottom: 78px;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-    flex-wrap: wrap;
-
-  }
-}
-
-.cardInfo {
-  //margin-top: 42px;
-  max-width: 50%;
-}
-
-.cardTitle {
-  font-family: 'AA BadaBoom BB';
-  font-size: 45px;
-  line-height: 48px;
-  -webkit-text-fill-color: #479EC5;
-  -webkit-text-stroke-color: white;
-  -webkit-text-stroke-width: 2px;
-
-  @media (max-width: 768px) {
-    font-size: 30px;
-  }
-}
-
-.cardTitleWrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
-
-  @media (max-width: 768px) {
-    flex-direction: column-reverse;
-    align-items: baseline;
-  }
-}
-
-.cardDescription {
-  font-size: 16px;
-  line-height: 19px;
-  color: #FFFFFF;
-  margin-bottom: 24px;
-}
-
-.cardIcon {
-  width: 60px;
-  height: 60px;
-  margin-left: 10px;
-  -webkit-filter: drop-shadow(0 0 20px #D5436F);
-  filter: drop-shadow(0 0 20px #D5436F);
-}
-
-.cardSubTitle {
-  font-family: 'AA BadaBoom BB';
-  font-size: 28px;
-  line-height: 30px;
-  -webkit-text-fill-color: #E669A3;
-  -webkit-text-stroke-color: white;
-  -webkit-text-stroke-width: 1px;
-  margin-bottom: 20px;
-}
-
-.cardPrices {
-  display: flex;
-  //justify-content:space-around;
-}
-
-.cardPrice {
-  background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
-  background-blend-mode: overlay, normal;
-  backdrop-filter: blur(80px);
-  border-radius: 6px;
-  border: solid 1px #479EC5;
-  height: 28.7px;
-  width: 75px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-right: 30px;
-  position: relative;
-}
-
-.cardPrice :last-child {
-  margin-right: 0px;
-}
-
-.cardPriceContent {
-  position: absolute;
-  font-family: 'AA BadaBoom BB';
-  font-size: 18px;
-  line-height: 19px;
-  color: #FFFFFF;
-  margin-left: 5px;
-}
-
-.cardPriceIcon {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  left: -30%;
-  top: -30%;
-}
-
-.card_image {
-  width: 220px;
-  height: 320px;
-
-  @media (max-width: 768px) {
-    width: 150px;
-    height: 200px;
+    display: block;
+    width: 60%;
   }
 }

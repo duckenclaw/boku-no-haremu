@@ -1,80 +1,135 @@
-.section {
+.container {
+  position: relative;
   display: flex;
-  padding: 270px 0;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: url(/images/LooperGroup.webp) no-repeat center;
-  background-size: contain;
+  justify-content: space-between;
+  margin-top: 80px;
+  padding-left: 172px;
+  padding-right: 22px;
 
-  @media (max-width: 1100px) {
-    background-size: auto;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    padding-left: 123px;
+    padding-right: 123px;
+  }
+
+  @media (max-width: 768px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.title {
+  font-family: 'Kamikaze';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 49px;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  margin-bottom: 48px;
+
+  @media (max-width: 425px) {
+    margin-bottom: 24px;
+    font-size: 22px;
+  }
+
+  @media (max-width: 346px) {
+    font-size: 20px;
   }
 }
 
 .text {
   font-family: 'SF Pro Display';
-  font-size: 40px;
-  line-height: 48px;
+  font-size: 20px;
+  line-height: 24px;
   text-align: center;
   color: #FFFFFF;
-  max-width: 60%;
   margin-bottom: 64px;
-
-  @media (max-width: 1200px) {
-    padding-top: 0;
-    max-width: 70%;
-  }
-
-  @media (max-width: 768px) {
-    max-width: 90%;
-    font-size: 24px;
-    line-height: 40px;
-    padding: 20px;
-    padding-bottom: 0;
-  }
+  text-align: left;
 
   @media(max-width: 425px) {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  @media (max-width: 346px) {
+    font-size: 16px;
   }
 }
 
-.title {
-  margin-bottom: 20px;
-  font-size: 50px;
-  line-height: 50px;
+.image {
+  position: absolute;
+  right: 0;
+  max-width: 683px;
+  width: 100%;
+  height: 683px;
 
-  @media (max-width: 768px) {
-    font-size: 34px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
-  @media(max-width: 425px) {
-    font-size: 30px;
+  @media (max-width: 1200px) {
+    position: initial;
+    max-width: fit-content;
+    width: fit-content;
+    height: fit-content;
+    margin-top: -100px;
+  }
+
+  @media (max-width: 375px) {
+    margin-top: -90px;
   }
 }
 
 .paragraph {
-  margin: 10px 0;
+  max-width: 529px;
+  width: 100%;
+  margin-bottom: 12px;
 }
 
-.button {
+.after_all {
+  margin-top: 32px;
+}
+
+.desktop_btn,
+.mobile_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
   border-radius: 8px;
   font-size: 22px;
-  line-height: 26px;
   text-transform: uppercase;
   font-family: 'SF Pro Display';
   color: #FFFFFF;
-  padding: 17px 32px;
-  min-width: 190px;
+  max-width: 258px;
+  height: 60px;
   border: none;
+  margin-top: 64px;
 
-  @media (max-width: 768px) {
-    padding: 12px 19px;
-    font-size: 17px;
-    line-height: 40px;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+
+
+}
+
+.mobile_btn {
+  display: none;
+
+  @media (max-width: 1200px) {
+    display: flex;
+    width: inherit;
+    margin-top: -40px;
+    z-index: 1000;
+  }
+
+  @media (max-width: 375px) {
+    // margin-top: -44px;
   }
 }

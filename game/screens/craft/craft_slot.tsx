@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { Image } from 'components/shared-ui/image'
 import { BaseSlot } from 'game/components/base_slot'
 import { useCraftCard, useGetTemplateById } from 'game/game_api'
 
