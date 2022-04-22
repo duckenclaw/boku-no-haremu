@@ -15,29 +15,35 @@ type GrowWaifuProps = {
 
 export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
   return (
-    <section className={classNames(className, s.section)} id="growth">
+    <section className={classNames(className, s.section, 'section')}>
+      <a className="anchor" id="growth" />
       <Container className={s.container}>
-        <TextHeader title="GROW YOUR UNIQUE WAIFU" className={s.textHeader} />
+        <TextHeader
+          title="GROW YOUR UNIQUE WAIFU"
+          className={classNames(className, s.text_header)}
+        />
         <div className={s.content}>
           <Image src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
           <div className={s.arrow}>
             <Image
+              raw
               src="/images/svg/arrow.svg"
               alt="arrow"
-              width={90}
-              height={36}
+              width={55}
+              height={70}
             />
           </div>
-          <Image src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
+          <Image raw src={Mimi2.src} className={s.mimi_card} alt="mimi_card" />
           <div className={s.arrow}>
             <Image
+              raw
               src="/images/svg/arrow.svg"
               alt="arrow"
-              width={90}
-              height={36}
+              width={55}
+              height={70}
             />
           </div>
-          <Image src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />
+          <Image raw src={Mimi3.src} className={s.mimi_card} alt="mimi_card" />
         </div>
       </Container>
     </section>

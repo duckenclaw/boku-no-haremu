@@ -11,17 +11,17 @@ const Socials: React.FC<Props> = ({ className }) => (
   <ul className={classNames(s.list, className)}>
     <li>
       <a href="https://discord.gg/S3rbu5GXGQ" className={s.item}>
-        <Image src="/images/svg/discord.svg" className={s.icon} />
+        <Image raw src="/images/svg/discord.svg" className={s.icon} />
       </a>
     </li>
     <li>
       <a href="https://medium.com/@bokunoharemu" className={s.item}>
-        <Image src="/images/svg/medium.svg" className={s.icon} />
+        <Image raw src="/images/svg/medium.svg" className={s.icon} />
       </a>
     </li>
     <li>
       <a href="https://twitter.com/bokunoharemu" className={s.item}>
-        <Image src="/images/svg/twitter.svg" className={s.icon} />
+        <Image raw src="/images/svg/twitter.svg" className={s.icon} />
       </a>
     </li>
     {/*<li>

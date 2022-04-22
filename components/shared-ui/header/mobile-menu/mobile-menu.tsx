@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './styles.module.scss'
 import disableScroll from 'disable-scroll'
 import { useMediaQuery } from 'react-responsive'
@@ -26,10 +26,6 @@ export const MobileMenu = () => {
       disableScroll['off']()
     }
   }, [isChecked])
-
-  // useEffect(() => {
-  //   if (!isMobile) setIsChecked(false)
-  // }, [isMobile])
 
   return (
     <div className={s.container}>

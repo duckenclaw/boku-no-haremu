@@ -31,25 +31,23 @@ export const Trade = () => {
   return (
     <section>
       <Container className={s.wrap}>
-        <TextHeader
-          title="Trade resource assets"
-          className={s.textHeader}
-          // id="trade"
-        />
+        <TextHeader title="Trade resource assets" className={s.textHeader} />
         <div className={s.resource}>
           {rows?.map((row: Row) => (
             <div key={row.title} className={s.row}>
               <Image
+                raw
                 className={s.rowLogo}
                 src={`images/${row.logo}.png`}
                 alt={row.title}
               />
               <Image
+                raw
                 className={s.arrow}
                 src="images/svg/arrow.svg"
                 alt="arrow"
               />
-              <Image className={s.bill} src="images/bill.png" alt="bill" />
+              <Image raw className={s.bill} src="images/bill.png" alt="bill" />
             </div>
           ))}
         </div>

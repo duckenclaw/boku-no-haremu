@@ -7,7 +7,7 @@ export const PreviewText = () => {
   return (
     <Container className={s.container}>
       <div className={s.image}>
-        <Image src="/images/wizard.png" alt="wizard" />
+        <Image raw src="/images/wizard.png" alt="wizard" />
       </div>
       <div className={s.text}>
         <div className={s.title}>

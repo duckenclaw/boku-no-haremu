@@ -1,9 +1,10 @@
 .section {
+  position: relative;
   margin-top: 100px;
   background-size: cover;
   background: linear-gradient(to bottom, #2B0A37, transparent, #2B0A37);
 
-  border-top: 100px solid transparent;
+  // border-top: 100px solid transparent;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
@@ -11,13 +12,29 @@
   @media (max-width: 768px) {
     margin-top: 0px;
   }
+
+  @media (max-width: 375px) {
+    margin-top: 103px;
+  }
+
+  @media (max-width: 320px) {
+    margin-top: 20px;
+  }
+}
+
+.text_header {
+  margin-bottom: 36px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+  }
 }
 
 
 .content {
-  margin-top: 80px;
   display: flex;
   justify-content: center;
+  margin-top: 14px;
 
   @media (max-width: 1113px) {
     flex-direction: column;
@@ -44,11 +61,22 @@
   box-shadow: 0px 0px 18px 6px rgb(113 31 80 / 26%);
   backdrop-filter: blur(40px);
   border-radius: 15px;
+
+  @media (max-width: 768px) {
+    min-height: 605px;
+  }
+
+  @media (max-width: 320px) {
+    // padding-top: 24px;
+    // padding-bottom: 24px;
+
+  }
+
   // padding: 42px 120px 42px 120px;
 }
 
 .column:last-child {
-  margin-left: 39px;
+  margin-left: 29px;
 
   @media (max-width: 1113px) {
     margin-left: 0;
@@ -58,11 +86,24 @@
 
 .column:last-child {
   @media (max-width: 1024px) {
-    margin-top: 70px;
+    margin-top: 40px;
+  }
+
+
+
+  @media (max-width: 320px) {
+    min-height: 560px;
+  }
+
+  .imageTop {
+    @media (max-width: 394px) {
+      height: initial;
+    }
+
   }
 }
 
-@media (max-width: 555px) {}
+
 
 
 .imageTopContainer {
@@ -78,13 +119,22 @@
 .imageTop {
   height: 245px;
   max-width: 100%;
+  object-fit: contain;
+
+
+
 }
 
-.imageTop:last-child {
-  @media (max-width: 768px) {
-    max-width: 300px;
-  }
-}
+// .imageTop:last-child {
+//   @media (max-width: 768px) {
+//     max-width: 300px;
+//   }
+
+//   @media (max-width: 390px) {
+//     // height: initial !important;
+//     display: none;
+//   }
+// }
 
 .arrow {
   text-align: center;

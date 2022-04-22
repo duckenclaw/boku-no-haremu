@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { Img, ImgProps } from 'react-image'
 import { Loader } from '../loader'
 
-type ImageProps = {} & ImgProps
+type ImageProps = { raw?: boolean; src: string } & ImgProps
 
 export const Image: React.FC<ImageProps> = ({
+  raw = false,
   src,
   children,
   width,
@@ -12,7 +15,9 @@ export const Image: React.FC<ImageProps> = ({
   ...props
 }) => {
   const style = { width, height, ...propsStyle }
-  return (
+  return raw ? (
+    <img src={src ?? '/images/mimi_1.png'} style={style} {...props} />
+  ) : (
     <Img
       loader={
         <div {...props}>
