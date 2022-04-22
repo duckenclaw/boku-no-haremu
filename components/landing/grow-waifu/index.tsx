@@ -23,7 +23,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
           className={classNames(className, s.text_header)}
         />
         <div className={s.content}>
-          <Image src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
+          <Image raw src={Mimi1.src} className={s.mimi_card} alt="mimi_card" />
           <div className={s.arrow}>
             <Image
               raw
