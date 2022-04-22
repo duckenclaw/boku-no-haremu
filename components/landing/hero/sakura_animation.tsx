@@ -13,7 +13,6 @@ export const SakuraAnimation = ({ className }: SakuraAnimationProps) => {
   })
   useLayoutEffect(() => {
     runSakuraAnimation(canvasRef.current)
-    !isMobile && unmountSakuraAnimation()
     return () => {
       unmountSakuraAnimation()
     }
