@@ -70,6 +70,7 @@
   .title {
     font-size: 80px;
     line-height: 66px;
+    font-weight: 600;
     background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -93,7 +94,7 @@
       font-size: 40px;
       line-height: 33px;
       -webkit-text-stroke-width: 2px;
-      margin-bottom: 10px;
+      margin-bottom: 0px;
     }
 
     @media (max-width: 320px) {
@@ -121,6 +122,7 @@
   .subtitle {
     font-size: 40px;
     line-height: 33px;
+    font-weight: 600;
     -webkit-text-fill-color: #2E92BF;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 2px;
@@ -134,7 +136,7 @@
 
 
     @media (max-width: 768px) {
-      font-size: 24px;
+      font-size: 20px;
       line-height: 20px;
       -webkit-text-stroke-width: 1px;
     }
@@ -170,7 +172,6 @@
 
 .text_wrap {
   @media (max-width: 576px) {
-    padding: 34px 0px;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(58, 29, 65, 0.63) 30.73%, rgba(196, 196, 196, 0) 100%);
+    background: radial-gradient(50% 50% at 50% 50%, rgba(58, 29, 65, 0.43) 30.73%, rgba(196, 196, 196, 0) 100%);
   }
 }
