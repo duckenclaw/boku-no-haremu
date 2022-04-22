@@ -16,7 +16,7 @@ export const Layout: React.FC = ({ children }) => (
     <Hero />
     <main className={s.main}>
       <div className={s.wave_gr}>
-        <Image src="/images/clouds.png" className={s.wave} />
+        <div className={s.wave} />
       </div>
       <div className={cn(s.sections, 'sections')}>{children}</div>
       <Footer />
