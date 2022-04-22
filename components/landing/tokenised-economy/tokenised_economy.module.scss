@@ -33,7 +33,9 @@
 
   @media (max-width: 768px) {
     max-width: 400px;
-    justify-content: space-between;
+    justify-content: center;
+    column-gap: 19px;
+    row-gap: 118px;
   }
 }
 
@@ -41,7 +43,7 @@
   margin-bottom: 184px;
 
 
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     margin-bottom: 132px;
   }
 
@@ -80,7 +82,7 @@
     font-size: 12px;
     line-height: 14px;
 
-    margin-bottom: 116px;
+    margin-bottom: 0;
   }
 }
 
