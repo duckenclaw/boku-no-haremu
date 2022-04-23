@@ -105,7 +105,7 @@ export const sakura_point_fsh = `${prefix}
 uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
 uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
 
-const vec3 fadeCol = vec3(0.08, 0.03, 0.06);
+const vec3 fadeCol = vec3(0.949, 0.216, 0.647);
 
 varying vec3 pposition;
 varying float psize;
@@ -198,9 +198,9 @@ void main(void) {
     vec3 col;
     float c;
     vec2 tmpv = texCoord * vec2(0.8, 1.0) - vec2(0.95, 1.0);
-    c = exp(-pow(length(tmpv) * 1.8, 2.0));
-    col = mix(vec3(0.02, 0.0, 0.03), vec3(0.96, 0.98, 1.0) * 1.5, c);
-    gl_FragColor = vec4(col * 0.5, 1.0);
+    c = exp(-pow(length(tmpv) * 3.0, 3.0));
+    col = mix(vec3(0.153, 0.063, 0.267), vec3(0.933, 0.753, 0.776)  * 2.0, c);
+    gl_FragColor = vec4(col * 0.4, 1.0);
 }
 `
 
