@@ -3,13 +3,18 @@
 import { Img, ImgProps } from 'react-image'
 import { Loader } from '../loader'
 
-type ImageProps = { raw?: boolean; src: string } & ImgProps
+type ImageProps = {
+  raw?: boolean
+  src: string
+  onLoad?: () => void
+} & ImgProps
 
 export const Image: React.FC<ImageProps> = ({
   raw = false,
   src,
   children,
   width,
+  onLoad,
   height,
   style: propsStyle,
   ...props
@@ -25,6 +30,7 @@ export const Image: React.FC<ImageProps> = ({
         </div>
       }
       src={src ?? '/images/mimi_1.png'}
+      onLoad={onLoad ?? onLoad}
       unloader={<Img {...props} style={style} src={'/images/mimi_1.png'} />}
       style={style}
       {...props}
