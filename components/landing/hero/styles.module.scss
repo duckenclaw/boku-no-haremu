@@ -32,9 +32,11 @@
   height: 100%;
   bottom: -100px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%,50%) scale(0.6);
+  opacity: 0;
   max-width: 160%;
   z-index: 10;
+  transition: transform 0.8s ease-in-out,opacity 0.8s ease-in-out,;
 
   @media (max-width: 425px) {
     bottom: 10px;
@@ -43,9 +45,13 @@
   @media (min-width: 1450px) {
     max-width: 80%;
   }
+
+  &.loaded {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+
+  }
 }
-
-
 
 
 .content {

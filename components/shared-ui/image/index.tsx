@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
-import { Img, ImgProps } from 'react-image'
+import { Img } from 'react-image'
 import { Loader } from 'components/shared-ui/loader'
 
 import s from './image.module.scss'
 
-type ImageProps = { raw?: boolean; src: string } & ImgProps
+type ImageProps = {
+  raw?: boolean
+  src: string
+} & React.ComponentProps<typeof Img>
 
 export const Image: React.FC<ImageProps> = ({
   raw = false,
