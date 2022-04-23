@@ -12,10 +12,6 @@ type Props = {
 const Hero: React.FC<Props> = ({ className }) => {
   const [isClient, setIsClient] = useState(false)
   const [isCharactersLoaded, setIsCharactersLoaded] = useState(false)
-  console.log(
-    '🚀 ~ file: index.tsx ~ line 15 ~ isCharactersLoaded',
-    isCharactersLoaded
-  )
 
   useEffect(() => {
     setIsClient(true)
