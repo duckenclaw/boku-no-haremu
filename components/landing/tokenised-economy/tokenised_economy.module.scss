@@ -106,14 +106,14 @@
   }
 
   .arrow {
-    bottom: 172px;    
+    bottom: 172px;
 
     @media (max-width: 1200px) {
-      bottom: 164px; 
+      bottom: 164px;
     }
 
     @media (max-width: 768px) {
-      bottom: 98px; 
+      bottom: 98px;
     }
 
   }
@@ -209,14 +209,14 @@
   transform: translateX(-50%);
 
   @media (max-width: 1200px) {
-    bottom: 164px; 
+    bottom: 164px;
   }
-  
-  
+
+
   @media (max-width: 768px) {
     width: 28px;
     height: 28px;
-    bottom: 98px; 
+    bottom: 98px;
 
     img {
       width: 100%;
@@ -228,6 +228,7 @@
 
 .cash {
   margin-top: auto;
+  object-fit: contain;
 
   @media (max-width: 768px) {
     width: 150px;

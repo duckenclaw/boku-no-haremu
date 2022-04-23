@@ -13,6 +13,14 @@
   background-clip: text;
   text-fill-color: transparent;
 
+  @media (max-width: 768px) {
+    // background: linear-gradient(180deg, #EA748F -200%, #FF418A 53.65%, #F237A5 100%);
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
+    // background-clip: text;
+    // text-fill-color: transparent;
+  }
+
   @media (max-width: 576px) {
     font-size: 24px;
     line-height: 31px;
