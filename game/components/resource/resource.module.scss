@@ -1,0 +1,31 @@
+.balance {
+    font-family: 'Bangers';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #FFFFFF;
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .image_container {
+        position: relative;
+        width: 30px;
+        height: 30px;
+
+        .image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .sign {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60%;
+        }
+    }
+
+}
