@@ -9,9 +9,9 @@
   position: relative;
 }
 
-.wave_gr {
+.clouds {
   position: absolute;
-  top: -100px;
+  top: -60px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -21,7 +21,7 @@
   background: linear-gradient(180deg, rgba(57, 18, 64, 0) -49.11%, rgba(57, 18, 64, 0) 2.34%, rgba(44, 11, 56, 0.4) 18.1%, #2C0B38 24.74%, rgba(44, 11, 56, 0.85) 100%);
 }
 
-.wave {
+.clouds_pic {
   position: absolute;
   object-fit: contain;
   top: -100px;
