@@ -44,16 +44,16 @@
     }
 }
 
-
-
-
 .cards {
     display: flex;
+    flex-flow: row wrap;
     justify-content: center;
-    flex-wrap: wrap;
+    column-gap: 40px;
+    background: url('/header_bg.svg') no-repeat center/contain;
 }
 
 .res {
+    min-width: 164px;
     color: white;
     font-style: normal;
     font-weight: 400;
@@ -62,11 +62,7 @@
     text-align: center;
     display: flex;
     align-items: center;
-    margin-right: 50px;
-
-    @media (max-width: 1100px) {
-        margin-right: 30px;
-    }
+    
 }
 
 .res:last-child {
@@ -83,4 +79,5 @@
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
+    flex-shrink: 0;
 }
