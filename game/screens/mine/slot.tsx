@@ -5,12 +5,14 @@ import {
   useMine,
   useUnsetMine,
 } from 'game/game_api'
-import { Image } from 'components/shared-ui/image'
 import { Button } from 'game/components/button'
 import { useEffect, useMemo, useState } from 'react'
 import { Duration } from 'luxon'
 import { ipfsToUrlSafe } from 'utils'
 import { BaseSlot } from 'game/components/base_slot'
+import { CardImage } from 'game/components/card_image'
+
+import s from './mine.module.scss'
 
 type SlotProps = {
   className?: string
@@ -69,6 +71,7 @@ export const Slot = ({
       onClick={asset_id ? undefined : onPlaceCard}
       isLoading={isLoading || isMetadataLoading}
       isEmpty={!asset_id || !card}
+      contentClassName={s.slot}
       overlayChildren={
         <>
           {status == 1 && !showTimer && (
@@ -117,12 +120,7 @@ export const Slot = ({
       }
     >
       {card && (
-        <Image
-          width={234}
-          height={352}
-          alt={card.asset_id}
-          src={ipfsToUrlSafe(card.data.img)}
-        />
+        <CardImage alt={card.asset_id} src={ipfsToUrlSafe(card.data.img)} />
       )}
       {status == 1 && showTimer && (
         <div>

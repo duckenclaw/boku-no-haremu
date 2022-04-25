@@ -5,6 +5,7 @@ import { Header } from 'components/shared-ui/header'
 import s from './layout.module.scss'
 import cn from 'classnames'
 import { Footer } from '../footer'
+import { Image } from 'components/shared-ui/image'
 
 export const Layout: React.FC = ({ children }) => (
   <>
@@ -14,7 +15,9 @@ export const Layout: React.FC = ({ children }) => (
     <Header />
     <Hero />
     <main className={s.main}>
-      <div className={s.wave} />
+      <div className={s.clouds}>
+        <div className={s.clouds_pic} />
+      </div>
       <div className={cn(s.sections, 'sections')}>{children}</div>
       <Footer />
     </main>

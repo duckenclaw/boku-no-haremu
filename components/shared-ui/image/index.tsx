@@ -1,9 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import { Img, ImgProps } from 'react-image'
-import { Loader } from '../loader'
+import classNames from 'classnames'
+import { Img } from 'react-image'
+import { Loader } from 'components/shared-ui/loader'
 
-type ImageProps = { raw?: boolean; src: string } & ImgProps
+import s from './image.module.scss'
+
+type ImageProps = {
+  raw?: boolean
+  src: string
+} & React.ComponentProps<typeof Img>
 
 export const Image: React.FC<ImageProps> = ({
   raw = false,
@@ -20,12 +26,16 @@ export const Image: React.FC<ImageProps> = ({
   ) : (
     <Img
       loader={
-        <div {...props}>
+        <div style={style} className={classNames(s.unloader, props.className)}>
           <Loader isLoading={true} />
         </div>
       }
       src={src ?? '/images/mimi_1.png'}
-      unloader={<Img {...props} style={style} src={'/images/mimi_1.png'} />}
+      unloader={
+        <div style={style} className={classNames(s.unloader, props.className)}>
+          ?
+        </div>
+      }
       style={style}
       {...props}
     />

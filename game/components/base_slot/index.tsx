@@ -10,6 +10,7 @@ type BaseSlotProps = {
   overlayChildren?: React.ReactNode
   isEmpty?: boolean
   isLoading?: boolean
+  contentClassName?: string
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -21,12 +22,13 @@ export const BaseSlot = ({
   isEmpty = false,
   overlayChildren,
   isLoading = false,
+  contentClassName,
   ...props
 }: BaseSlotProps) => {
   return (
     <div className={cn(className, s.slot)} {...props}>
       <div className={s.background} />
-      <div className={s.content}>
+      <div className={cn(s.content, contentClassName)}>
         <Loader isLoading={isLoading}>
           {isEmpty ? (
             <>
