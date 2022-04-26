@@ -13,6 +13,7 @@ import { BaseSlot } from 'game/components/base_slot'
 import { CardImage } from 'game/components/card_image'
 
 import s from './mine.module.scss'
+import { Resource } from 'game/components/resource'
 
 type SlotProps = {
   className?: string
@@ -83,15 +84,6 @@ export const Slot = ({
               Claim
             </Button>
           )}
-          {status == 1 && mineRecipe && (
-            <div>
-              {mineRecipe.cost
-                .map((c) => `${c.balance} ${c.currency}`)
-                .join('+')}
-              =&gt;{mineRecipe.mined_resource.balance}{' '}
-              {mineRecipe.mined_resource.currency}
-            </div>
-          )}
           {status == 0 && (
             <Button
               size="small"
@@ -110,6 +102,7 @@ export const Slot = ({
           {status == 0 && (
             <Button
               size="small"
+              color="blue"
               disabled={isUnsetLoading || isMineLoading}
               onClick={() => unsetMine({ asset_id: asset_id! })}
             >
@@ -120,12 +113,35 @@ export const Slot = ({
       }
     >
       {card && (
-        <CardImage alt={card.asset_id} src={ipfsToUrlSafe(card.data.img)} />
+        <CardImage
+          alt={card.asset_id}
+          disabled={status === 1 && showTimer}
+          src={ipfsToUrlSafe(card.data.img)}
+        />
       )}
       {status == 1 && showTimer && (
-        <div>
+        <div className={s.timer}>
           {Duration.fromMillis(finishing_at.getTime() - now.getTime()).toFormat(
             'hh:mm:ss'
+          )}
+        </div>
+      )}
+      {mineRecipe && (
+        <div className={s.lower_content}>
+          <div className={s.row}>
+            <Resource
+              sign="plus"
+              size="large"
+              color="purple"
+              balance={mineRecipe.mined_resource}
+            />
+          </div>
+          {status === 0 && (
+            <div className={s.row}>
+              {mineRecipe.cost.map((c, index) => (
+                <Resource sign="minus" balance={c} key={index} />
+              ))}
+            </div>
           )}
         </div>
       )}
