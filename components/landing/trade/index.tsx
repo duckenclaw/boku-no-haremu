@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './styles.module.scss'
+import cn from 'classnames'
 import { TextHeader } from 'components/shared-ui/text-header'
 import { Container } from 'components/shared-ui/container'
 import { Image } from 'components/shared-ui/image'
@@ -29,7 +30,7 @@ export const Trade = () => {
     },
   ]
   return (
-    <section>
+    <section className={cn(s.section, 'section')}>
       <Container className={s.wrap}>
         <TextHeader title="Trade resource assets" className={s.textHeader} />
         <div className={s.resource}>
