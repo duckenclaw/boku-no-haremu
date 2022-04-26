@@ -106,7 +106,7 @@
   }
 
   .arrow {
-    bottom: 172px;
+    bottom: 32%;
 
     @media (max-width: 1200px) {
       bottom: 164px;
@@ -204,7 +204,7 @@
 
 .arrow {
   position: absolute;
-  bottom: 142px;
+  bottom: 32%;
   left: 50%;
   transform: translateX(-50%);
 
