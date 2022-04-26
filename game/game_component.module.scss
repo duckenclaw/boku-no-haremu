@@ -12,4 +12,12 @@
         flex-direction: column;
         gap: 20px;
     }
+
+    .wallets {
+        min-height: 100vh;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+    }
 }

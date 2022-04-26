@@ -15,6 +15,7 @@ import { GameLayout } from './game_layout'
 import { Loader } from 'components/shared-ui/loader'
 
 import s from './game_component.module.scss'
+import { Wallets } from './components/game_wallets'
 
 Modal.setAppElement('#__next')
 
@@ -41,7 +42,7 @@ export const Game = () => {
 }
 
 export const GameComponent = () => {
-  const { isLoading: isLoadingWax, isConnected, login } = useWax()
+  const { isLoading: isLoadingWax, isConnected } = useWax()
   const { data: resourcesData, isLoading: isLoadingResources } =
     useGetResources()
   const { mutateAsync: initAccount, isLoading: isInitAccountLoading } =
@@ -69,28 +70,8 @@ export const GameComponent = () => {
             </div>
           )
         ) : (
-          <div className={s.login}>
-            <Button onClick={() => login('waxjs')} disabled={isLoadingWax}>
-              Login WCW
-            </Button>
-            <Button
-              disabled={isLoadingWax}
-              onClick={() => {
-                login('anchor')
-              }}
-            >
-              Login Anchor
-            </Button>
-            {process.env.NEXT_PUBLIC_TESTNET === 'true' && (
-              <Button
-                disabled={isLoadingWax}
-                onClick={() => {
-                  login('testnet')
-                }}
-              >
-                Login Testnet
-              </Button>
-            )}
+          <div className={s.wallets}>
+            <Wallets />
           </div>
         )}
       </Loader>
