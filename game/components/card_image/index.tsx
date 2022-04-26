@@ -4,8 +4,17 @@ import cn from 'classnames'
 import { Image } from 'components/shared-ui/image'
 import s from './card_image.module.scss'
 
-type CardImageProps = React.ComponentProps<typeof Image>
+type CardImageProps = { disabled?: boolean } & React.ComponentProps<
+  typeof Image
+>
 
-export const CardImage = ({ className, ...props }: CardImageProps) => (
-  <Image {...props} className={cn(s.image, className)} />
+export const CardImage = ({
+  className,
+  disabled = false,
+  ...props
+}: CardImageProps) => (
+  <Image
+    {...props}
+    className={cn(s.image, className, { [s.disabled]: disabled })}
+  />
 )
