@@ -60,7 +60,7 @@
 
         .side {
             align-self: center;
-            margin: 0 40px;
+            margin: 0 20px;
             cursor: pointer;
 
             &.rotate {
@@ -116,6 +116,70 @@
 
         .buy {
             margin: 10px auto;
+        }
+    }
+}
+
+.filter {
+    position: relative;
+
+    .dropdown {
+
+        position: absolute;
+        left: 0;
+        top: calc(100% + 16px);
+        display: none;
+        opacity: 0;
+        min-width: 182px;
+        transition: opacity 0.3s ease-in-out;
+
+        background: #111622;
+        border-radius: 8px;
+        border: 3px solid #5092AD;
+        padding: 18px 32px;
+
+        &.open {
+            display: flex;
+            opacity: 1;
+        }
+
+
+    }
+}
+
+.templates {
+    flex-direction: column;
+    gap: 17px;
+
+    .template {
+        display: flex;
+        font-family: 'Bangers';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        color: #FFFFFF;
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #81C8DE;
+            padding: 2px;
+            margin-right: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &.checked::before {
+                content: ' ';
+                display: flex;
+                background: #81C8DE;
+                border-radius: 2px;
+                width: 8px;
+                height: 8px;
+            }
+
+
         }
     }
 }
