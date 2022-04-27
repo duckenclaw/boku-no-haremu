@@ -28,7 +28,7 @@ const InitAccount: React.FC<InitAccountProps> = ({ className }) => {
         size="medium"
         color="blue"
       >
-        init Game Account
+        Init game account
       </Button>
     </BlurContainer>
   )
