@@ -55,12 +55,16 @@ export const useWaxBalance = () => {
 
 type UseGetAllCardsOptions = {
   limit?: number
+  template_id?: string
 }
 
-export const useGetAllCards = ({ limit = 8 }: UseGetAllCardsOptions) => {
+export const useGetAllCards = ({
+  limit = 8,
+  template_id,
+}: UseGetAllCardsOptions) => {
   const { isConnected, account } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
-    queryKey: ['wax/getAllCards', { account }],
+    queryKey: ['wax/getAllCards', { account, template_id, limit }],
     enabled: isConnected,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/assets', {
@@ -68,6 +72,7 @@ export const useGetAllCards = ({ limit = 8 }: UseGetAllCardsOptions) => {
           owner: account,
           page: String(pageParam ?? 1),
           limit,
+          template_id,
           collection_name: process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION,
           schema_name: process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA,
         },
@@ -310,6 +315,31 @@ export const useCraftRecipes = () => {
           }))
           return res.rows as CraftRecipe[]
         }),
+  })
+}
+
+//
+
+type UseGetTemplateOptions = {
+  mode: 'card' | 'banknote'
+}
+
+export const useGetTemplates = ({ mode }: UseGetTemplateOptions) => {
+  return useQuery({
+    queryKey: ['wax/getTemplates', { mode }],
+    queryFn: () =>
+      AtomicHubApi.get(`/templates`, {
+        params: {
+          collection_name:
+            mode === 'card'
+              ? process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION
+              : process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
+          schema_name:
+            mode === 'card'
+              ? process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA
+              : process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+        },
+      }).then((res) => res.data as GetTemplatesResponseType),
   })
 }
 
