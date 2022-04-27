@@ -1,30 +1,48 @@
 import cn from 'classnames'
-import s from './styles.module.scss'
+import { useWax } from 'contexts/wax_context'
 import { Image } from 'components/shared-ui/image'
+import { useMemo } from 'react'
+import s from './styles.module.scss'
 
 type WalletProps = {
   className?: string
-  title: string
-  action: () => void
-  disabled?: boolean
-  logoSrc?: string
+  type: 'wax' | 'anchor' | 'test'
 }
 
-const Wallet: React.FC<WalletProps> = ({
-  className,
-  title,
-  logoSrc,
-  action,
-  disabled = false,
-}) => {
+const Wallet: React.FC<WalletProps> = ({ className, type }) => {
+  const { isLoading: isLoadingWax, login } = useWax()
+
+  const imageSrc = useMemo(() => {
+    if (type === 'wax') {
+      return '/game/svg/logo_wax.svg'
+    }
+    if (type === 'anchor') {
+      return '/game/svg/logo_anchor.svg'
+    }
+
+    return null
+  }, [type])
+
+  const makeAction = () => {
+    if (type === 'wax') {
+      return login('waxjs')
+    }
+    if (type === 'anchor') {
+      return login('anchor')
+    }
+    if (type === 'test') {
+      return login('testnet')
+    }
+  }
+
   return (
     <button
       className={cn(className, s.wallet)}
-      onClick={action}
-      disabled={disabled}
+      onClick={() => makeAction()}
+      disabled={isLoadingWax}
     >
-      {logoSrc && <Image className={s.walletLogo} src={logoSrc} alt="logo" />}
-      <div className={s.walletTitle}>{title}</div>
+      {imageSrc && <Image className={s.walletLogo} src={imageSrc} alt="logo" />}
+      <div className={s.walletTitle}>{`${type} wallet`}</div>
     </button>
   )
 }
