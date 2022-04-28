@@ -31,7 +31,6 @@ export const Loader: React.FC<LoaderProps> = ({
         </Button>
       )
     }
-    console.log('aaaa')
     return <>{children}</>
   }
 
