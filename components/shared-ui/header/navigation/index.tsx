@@ -13,7 +13,7 @@ type Props = {
 
 const items = [
   { value: 'GROWTH', href: 'growth' },
-  { value: 'RESOURCES', href: 'resources' },
+  { value: 'RESOURCES & TRADE', href: 'resources' },
   { value: 'NFTS', href: 'nfts' },
   { value: 'FUSION', href: 'fusion' },
   { value: 'ROADMAP', href: 'roadmap' },
@@ -25,6 +25,7 @@ const Navigation: React.FC<Props> = ({ className, setIsChecked }) => {
     if (setIsChecked) setIsChecked(false)
   }
   const sectionRefs = [
+    useRef<HTMLElement | null>(null),
     useRef<HTMLElement | null>(null),
     useRef<HTMLElement | null>(null),
     useRef<HTMLElement | null>(null),

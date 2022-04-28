@@ -1,8 +1,8 @@
 import { animated, useSpring } from '@react-spring/web'
 import { useWax } from 'contexts/wax_context'
 import { useGetResources, useWaxBalance } from 'game/game_api'
-import IconInfo from 'public/game/svg/IconInfo.svg'
-import IconSound from 'public/game/svg/IconSound.svg'
+import IconInfo from 'public/game/svg/icon_info.svg'
+import IconSound from 'public/game/svg/icon_sound.svg'
 import s from './game_header.module.scss'
 import { Image } from 'components/shared-ui/image'
 

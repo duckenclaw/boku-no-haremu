@@ -9,12 +9,13 @@ import { GameContextProvider } from './game_context'
 import { GameFooter } from 'game/components/game_footer'
 import { GameHeader } from 'game/components/game_header'
 import { Router } from 'game/screens/router'
-import { Button } from 'game/components/button'
 import { useGetResources, useInitAccount } from './game_api'
 import { GameLayout } from './game_layout'
 import { Loader } from 'components/shared-ui/loader'
 
 import s from './game_component.module.scss'
+import { Wallets } from './components/game_wallets'
+import { InitAccount } from './components/game_init_account'
 
 Modal.setAppElement('#__next')
 
@@ -41,11 +42,10 @@ export const Game = () => {
 }
 
 export const GameComponent = () => {
-  const { isLoading: isLoadingWax, isConnected, login } = useWax()
+  const { isLoading: isLoadingWax, isConnected } = useWax()
   const { data: resourcesData, isLoading: isLoadingResources } =
     useGetResources()
-  const { mutateAsync: initAccount, isLoading: isInitAccountLoading } =
-    useInitAccount()
+  const { isLoading: isInitAccountLoading } = useInitAccount()
   return (
     <GameLayout>
       <Loader
@@ -59,39 +59,10 @@ export const GameComponent = () => {
               <GameFooter />
             </GameContextProvider>
           ) : (
-            <div className={s.login}>
-              <Button
-                onClick={() => initAccount()}
-                disabled={isInitAccountLoading}
-              >
-                init Game Account
-              </Button>
-            </div>
+            <InitAccount />
           )
         ) : (
-          <div className={s.login}>
-            <Button onClick={() => login('waxjs')} disabled={isLoadingWax}>
-              Login WCW
-            </Button>
-            <Button
-              disabled={isLoadingWax}
-              onClick={() => {
-                login('anchor')
-              }}
-            >
-              Login Anchor
-            </Button>
-            {process.env.NEXT_PUBLIC_TESTNET === 'true' && (
-              <Button
-                disabled={isLoadingWax}
-                onClick={() => {
-                  login('testnet')
-                }}
-              >
-                Login Testnet
-              </Button>
-            )}
-          </div>
+          <Wallets />
         )}
       </Loader>
     </GameLayout>

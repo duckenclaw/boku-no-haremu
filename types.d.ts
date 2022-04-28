@@ -159,3 +159,9 @@ type GetTemplateByIdResponseType = {
   query_time: number
   success: boolean
 }
+
+type GetTemplatesResponseType = {
+  data: AtomicTemplate[]
+  query_time: number
+  success: boolean
+}

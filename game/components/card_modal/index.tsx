@@ -4,13 +4,13 @@ import cn from 'classnames'
 import { Image } from 'components/shared-ui/image'
 import { LinkButton } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
-import { Button } from 'game/components/button'
 import { Loader } from 'components/shared-ui/loader'
 
 import {
   useGetMiningCards,
   useGetAllCards,
   useGetAllBanknotes,
+  useGetTemplates,
 } from 'game/game_api'
 import { ipfsToUrlSafe } from 'utils'
 
@@ -18,6 +18,7 @@ import CrossIcon from 'public/game/svg/modal_cross.svg'
 import SlideIcon from 'public/game/svg/modal_slide.svg'
 
 import s from './card_modal.module.scss'
+import { CardFilter } from './card_filter'
 
 type CardModalProps = {
   isOpen?: boolean
@@ -66,14 +67,24 @@ export const CardsInventory = ({
   title,
   subtitle,
 }: CardsInventoryProps) => {
+  const [page, setPage] = useState(1)
+  const [templateFilter, setTemplateFilter] = useState<null | string>(null)
+
+  useEffect(() => {
+    setPage(1)
+  }, [templateFilter])
+
   const { data: miningData, isLoading: isMiningDataLoading } =
     useGetMiningCards()
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useGetAllCards({
       limit: 8,
+      template_id: templateFilter ?? undefined,
     })
 
-  const [page, setPage] = useState(1)
+  const { data: templatesData, isLoading: isTemplatesLoading } =
+    useGetTemplates({ mode: 'card' })
+
   useEffect(() => {
     if (
       !isLoading &&
@@ -106,9 +117,28 @@ export const CardsInventory = ({
     <div className={s.container}>
       <div className={s.header}>
         <div className={s.side}>
-          <Button className={s.filter} color="blue" size="small">
-            FILTER
-          </Button>
+          <CardFilter className={s.filter} contentClassName={s.templates}>
+            <Loader isLoading={isTemplatesLoading}>
+              {templatesData?.data.map((t) => (
+                <div
+                  className={s.template}
+                  key={t.template_id}
+                  onClick={() => {
+                    if (templateFilter === t.template_id) {
+                      setTemplateFilter(null)
+                    } else setTemplateFilter(t.template_id)
+                  }}
+                >
+                  <div
+                    className={cn(s.checkbox, {
+                      [s.checked]: t.template_id === templateFilter,
+                    })}
+                  />
+                  {t.immutable_data.name}
+                </div>
+              ))}
+            </Loader>
+          </CardFilter>
         </div>
         <div className={s.center}>
           {title && <h1>{title}</h1>}
@@ -186,13 +216,22 @@ export const BanknoteInventory = ({
   subtitle,
   template_id,
 }: BanknoteInventoryProps) => {
+  const [page, setPage] = useState(1)
+  const [templateFilter, setTemplateFilter] = useState<null | string>(null)
+
+  useEffect(() => {
+    setPage(1)
+  }, [templateFilter])
+
+  const { data: templatesData, isLoading: isTemplatesLoading } =
+    useGetTemplates({ mode: 'banknote' })
+
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useGetAllBanknotes({
       limit: 9,
-      template_id,
+      template_id: template_id ?? templateFilter ?? undefined,
     })
 
-  const [page, setPage] = useState(1)
   useEffect(() => {
     if (
       !isLoading &&
@@ -216,9 +255,28 @@ export const BanknoteInventory = ({
     <div className={s.container}>
       <div className={s.header}>
         <div className={s.side}>
-          <Button className={s.filter} color="blue" size="small">
-            FILTER
-          </Button>
+          <CardFilter className={s.filter} contentClassName={s.templates}>
+            <Loader isLoading={isTemplatesLoading}>
+              {templatesData?.data.map((t) => (
+                <div
+                  className={s.template}
+                  key={t.template_id}
+                  onClick={() => {
+                    if (templateFilter === t.template_id) {
+                      setTemplateFilter(null)
+                    } else setTemplateFilter(t.template_id)
+                  }}
+                >
+                  <div
+                    className={cn(s.checkbox, {
+                      [s.checked]: t.template_id === templateFilter,
+                    })}
+                  />
+                  {t.immutable_data.name}
+                </div>
+              ))}
+            </Loader>
+          </CardFilter>
         </div>
         <div className={s.center}>
           {title && <h1>{title}</h1>}

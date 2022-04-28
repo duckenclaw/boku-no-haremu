@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  max-width: 774px;
+  width: 100%;
+  padding: 73px 16px 80px;
+  margin: auto;
+}
+
+.title {
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  max-width: 397px;
+  width: 100%;
+  margin-bottom: 40px;
+  text-align: center;
+
+  font-weight: 400;
+  color: #ffffff;
+  font-family: 'Bangers';
+  font-size: 28px;
+  line-height: 30px;
+}
+
+.initButton {
+  height: 76px !important;
+  max-width: 439px !important;
+  font-size: 48px !important;
+}

@@ -105,18 +105,18 @@
     }
   }
 
-  .arrow {
-    bottom: 172px;
+  // .arrow {
+  //   bottom: 32%;
 
-    @media (max-width: 1200px) {
-      bottom: 164px;
-    }
+  //   @media (max-width: 1200px) {
+  //     bottom: 164px;
+  //   }
 
-    @media (max-width: 768px) {
-      bottom: 98px;
-    }
+  //   @media (max-width: 768px) {
+  //     bottom: 98px;
+  //   }
 
-  }
+  // }
 
   @media (max-width: 1200px) {
     transform: translateY(0);
@@ -132,6 +132,7 @@
 
 .card:nth-child(1),
 .card:nth-child(2) {
+
   @media (max-width: 768px) {
     padding-top: 80px;
   }
@@ -204,19 +205,15 @@
 
 .arrow {
   position: absolute;
-  bottom: 142px;
+  bottom: 74%;
   left: 50%;
   transform: translateX(-50%);
-
-  @media (max-width: 1200px) {
-    bottom: 164px;
-  }
 
 
   @media (max-width: 768px) {
     width: 28px;
     height: 28px;
-    bottom: 98px;
+    bottom: 77%;
 
     img {
       width: 100%;
@@ -225,9 +222,15 @@
 }
 
 
+.cash_block {
+  position: relative;
+  margin-top: auto;
+}
+
 
 .cash {
-  margin-top: auto;
+  width: 100%;
+
   object-fit: contain;
 
   @media (max-width: 768px) {

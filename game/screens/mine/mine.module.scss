@@ -5,7 +5,7 @@
     padding: 48px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 
     &>* {
@@ -15,5 +15,33 @@
 
 .slot {
     padding: 12px;
+    position: relative;
 
+    .timer {
+        position: absolute;
+        top: 157px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Bangers';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 45px;
+        text-align: center;
+        color: #FFFFFF;
+
+    }
+
+
+    .lower_content {
+        height: 74px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
 }

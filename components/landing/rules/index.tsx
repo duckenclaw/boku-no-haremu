@@ -25,10 +25,9 @@ export const Rules = () => (
     <div className={s.image}>
       <Image
         raw
+        className={s.image_pic}
         src="/images/become.png"
         alt="person"
-        width={683}
-        height={683}
       />
     </div>
     <a href="https://discord.gg/S3rbu5GXGQ" className={s.mobile_btn}>

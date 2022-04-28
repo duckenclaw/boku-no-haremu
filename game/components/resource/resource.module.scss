@@ -2,8 +2,6 @@
     font-family: 'Bangers';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    color: #FFFFFF;
     width: max-content;
     display: flex;
     flex-direction: row;
@@ -22,10 +20,38 @@
 
         .sign {
             position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 60%;
+            bottom: 4px;
+            right: 4px;
         }
     }
 
+    &.color {
+        &__default {
+            color: #FFFFFF;
+        }
+
+        &__purple {
+            color: #FE468B;
+        }
+    }
+
+    &.size {
+        &__default {
+            font-size: 18px;
+
+            .image_container {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        &__large {
+            font-size: 24px;
+
+            .image_container {
+                width: 37px;
+                height: 37px;
+            }
+        }
+    }
 }
