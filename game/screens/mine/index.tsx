@@ -11,7 +11,12 @@ const MAX_SLOTS_COUNT = 5
 
 export const Mine = () => {
   const [isOpenModal, setIsOpen] = useState(false)
-  const { data, isLoading: isCardsLoading } = useGetMiningCards()
+  const {
+    data,
+    refetch,
+    isLoading: isCardsLoading,
+    isError: isErrorCards,
+  } = useGetMiningCards()
   const { mutateAsync: initMine, isLoading: isInitMineLoading } = useInitMine()
 
   const onSelectCard = (id: string) => {
@@ -30,7 +35,11 @@ export const Mine = () => {
         onSelect={onSelectCard}
       />
       <div className={s.slots}>
-        <Loader isLoading={isCardsLoading}>
+        <Loader
+          isLoading={isCardsLoading}
+          isError={isErrorCards}
+          onRetry={refetch}
+        >
           {data?.map((s) => (
             <Slot
               key={s.staked_asset_id}
@@ -38,7 +47,7 @@ export const Mine = () => {
               asset_data={s}
             />
           ))}
-          {!isLoading && data!.length < MAX_SLOTS_COUNT && (
+          {!isLoading && data && data?.length < MAX_SLOTS_COUNT && (
             <Slot
               onPlaceCard={() => {
                 setIsOpen(true)
