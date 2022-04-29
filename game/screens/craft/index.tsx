@@ -8,10 +8,15 @@ import { CraftSlot } from './craft_slot'
 import s from './craft.module.scss'
 
 export const Craft = () => {
-  const { data: recipeData, isLoading: isRecipesLoading } = useCraftRecipes()
+  const {
+    data: recipeData,
+    isLoading: isRecipesLoading,
+    isError,
+    refetch,
+  } = useCraftRecipes()
   return (
     <ScreenContainer className={s.slots}>
-      <Loader isLoading={isRecipesLoading}>
+      <Loader isLoading={isRecipesLoading} isError={isError} onRetry={refetch}>
         {recipeData?.map((r) => (
           <CraftSlot
             key={r.result_template_id}

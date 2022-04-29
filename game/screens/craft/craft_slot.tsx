@@ -15,8 +15,12 @@ type CraftSlotProps = {
 }
 
 export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
-  const { data: templateData, isLoading: isTemplateLoading } =
-    useGetTemplateById({ template_id })
+  const {
+    data: templateData,
+    isLoading: isTemplateLoading,
+    isError: templateIsError,
+    refetch: refetchTemplate,
+  } = useGetTemplateById({ template_id })
   const { mutateAsync: craft, isLoading: isCraftLoading } = useCraftCard({
     template_id,
   })
@@ -25,6 +29,8 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
   return (
     <BaseSlot
       isLoading={isLoading}
+      isError={templateIsError}
+      onRetry={refetchTemplate}
       overlayChildren={
         <Button size="small" onClick={() => craft()}>
           Craft

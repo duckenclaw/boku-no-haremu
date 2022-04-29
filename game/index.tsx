@@ -43,13 +43,19 @@ export const Game = () => {
 
 export const GameComponent = () => {
   const { isLoading: isLoadingWax, isConnected } = useWax()
-  const { data: resourcesData, isLoading: isLoadingResources } =
-    useGetResources()
+  const {
+    data: resourcesData,
+    isLoading: isLoadingResources,
+    isError: isErrorResources,
+    refetch: refetchResources,
+  } = useGetResources()
   const { isLoading: isInitAccountLoading } = useInitAccount()
   return (
     <GameLayout>
       <Loader
         isLoading={isLoadingWax || isLoadingResources || isInitAccountLoading}
+        isError={isErrorResources}
+        onRetry={refetchResources}
       >
         {isConnected ? (
           resourcesData?.isUserInitialized ? (
