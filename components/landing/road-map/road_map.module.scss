@@ -23,12 +23,9 @@
 }
 
 .columns_wrapper {
-  max-width: 840px;
   position: relative;
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
-  justify-content: center;
   color: #FFFFFF;
   margin: 0 auto;
   margin-bottom: 6%;
@@ -45,8 +42,8 @@
     content: '';
     position: absolute;
     top: 0px;
-    left: calc(50% - 2px);
-
+    // left: calc(50% - 2px);
+    left: 0;
     width: 4px;
     height: 110%;
     background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 76.56%, rgba(0, 65, 94, 0) 100%);
@@ -60,9 +57,12 @@
 }
 
 .row {
+  display: flex;
+  align-items: center;
   width: 100%;
   margin-top: 64px;
   position: relative;
+  padding-left: 43px;
 
   @media (max-width: 768px) {
     margin-top: 10px;
@@ -70,66 +70,62 @@
 }
 
 .item_left {
+  display: flex;
+  align-items: center;
   position: relative;
-  width: 50%;
-  padding-left: 80px;
-
-  @media (max-width: 768px) {
-    padding-left: 25px;
-  }
 
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: calc(40px - 2px);
-    right: 0;
-    width: 100%;
-    height: 4px;
-    border-radius: 8px;
-    z-index: 0;
-    background: linear-gradient(-90deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(0, 65, 94, 0) 100%);
 
-    @media (max-width: 768px) {
-      height: 2px;
-      top: calc(40px - 1px);
-    }
-  }
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   top: calc(40px - 2px);
+  //   right: 0;
+  //   width: 100%;
+  //   height: 4px;
+  //   border-radius: 8px;
+  //   z-index: 0;
+  //   background: linear-gradient(-90deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(0, 65, 94, 0) 100%);
+
+  //   @media (max-width: 768px) {
+  //     height: 2px;
+  //     top: calc(40px - 1px);
+  //   }
+  // }
 }
 
 .item_right {
+  display: flex;
+  align-items: center;
   position: relative;
-  width: 50%;
-  padding-left: 50px;
-  margin-left: 50%;
 
   @media (max-width: 768px) {
     padding-left: 20px;
   }
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: calc(40px - 2px);
-    left: 0;
-    width: 100%;
-    height: 4px;
-    border-radius: 8px;
-    z-index: 0;
-    background: linear-gradient(90deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(0, 65, 94, 0) 100%);
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   top: calc(40px - 2px);
+  //   left: 0;
+  //   width: 100%;
+  //   height: 4px;
+  //   border-radius: 8px;
+  //   z-index: 0;
+  //   background: linear-gradient(90deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(0, 65, 94, 0) 100%);
 
-    @media (max-width: 768px) {
-      height: 2px;
-      top: calc(40px - 1px);
-    }
-  }
+  //   @media (max-width: 768px) {
+  //     height: 2px;
+  //     top: calc(40px - 1px);
+  //   }
+  // }
 }
 
 .number {
   font-family: 'Kamikaze';
   max-width: 196px;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 52px;
   line-height: 32px;
   text-align: start;
   background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, rgba(29, 115, 153, 0.61) 100%);
@@ -139,6 +135,34 @@
   @media (max-width: 768px) {
     font-size: 16px;
     line-height: 32px;
+  }
+}
+
+.text_block {
+  max-width: 50%;
+  text-align: left;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 57px;
+  margin-top: 42px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  margin-top: 42px;
+}
+
+.image_block {
+  max-width: 50%;
+
+  img {
+    width: 100%;
+    object-fit: contain;
   }
 }
 
@@ -153,7 +177,8 @@
   z-index: 1;
   background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
   position: absolute;
-  left: calc(50% - 10px);
+  // left: calc(50% - 10px);
+  left: calc(0% - 8px);
   top: calc(40px - 10px);
 
 
@@ -167,29 +192,8 @@
 
 }
 
-.text {
-  text-align: left;
-  margin: 30px;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
 
-  ul {
-    padding-left: 0;
-  }
-
-  li {
-    list-style-type: disc;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 12px;
-    line-height: 14px;
-    margin-left: 10px;
-  }
-}
-
-.first_shadow{
+.first_shadow {
   position: absolute;
   width: 534px;
   height: 535px;
@@ -199,12 +203,13 @@
   opacity: 0.2;
   filter: blur(200px);
   border-radius: 200px;
+
   @media (max-width: 768px) {
     display: none;
   }
 }
 
-.second_shadow{
+.second_shadow {
   position: absolute;
   width: 268.78px;
   height: 365.33px;
@@ -214,8 +219,8 @@
   opacity: 0.8;
   filter: blur(100px);
   border-radius: 150px;
+
   @media (max-width: 768px) {
     display: none;
   }
 }
-
