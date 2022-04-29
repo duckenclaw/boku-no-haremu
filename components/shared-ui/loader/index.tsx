@@ -8,7 +8,7 @@ type LoaderProps = {
   isError?: boolean
   onRetry?: () => void
   customRetryComponent?: React.ReactNode
-  noData?: boolean
+  isNoData?: boolean
   customNoDataComponent?: React.ReactNode
   children?: React.ReactNode
 }
@@ -20,55 +20,43 @@ export const Loader = ({
   isError,
   customRetryComponent,
   onRetry,
-  noData,
+  isNoData,
   customNoDataComponent,
 }: LoaderProps) => {
-  const renderNoDataState = () => {
-    if (customNoDataComponent) {
-      return customNoDataComponent
-    }
-
-    if (onRetry) {
-      return (
-        <Button className={s.retry} onClick={onRetry} size="xsmall">
-          Retry
-        </Button>
-      )
-    }
-
-    return <div>No data</div>
+  if (isLoading) return <LoaderIcon />
+  if (isError) {
+    return (
+      <>
+        {customRetryComponent ? (
+          customRetryComponent
+        ) : onRetry ? (
+          <Button className={s.retry} onClick={onRetry} size="xsmall">
+            Retry
+          </Button>
+        ) : (
+          <div>There was an error</div>
+        )}
+      </>
+    )
   }
 
-  const renderErrorState = () => {
-    if (customRetryComponent) {
-      return customRetryComponent
-    }
-
-    if (onRetry) {
-      return (
-        <Button className={s.retry} onClick={onRetry} size="xsmall">
-          Retry
-        </Button>
-      )
-    }
-    return <div>There was an error</div>
+  if (isNoData) {
+    return (
+      <>
+        {customNoDataComponent ? (
+          customNoDataComponent
+        ) : onRetry ? (
+          <Button className={s.retry} onClick={onRetry} size="xsmall">
+            Retry
+          </Button>
+        ) : (
+          <div>No data</div>
+        )}
+      </>
+    )
   }
 
-  const renderContent = () => {
-    if (isLoading) {
-      return <LoaderIcon />
-    }
-    if (isError) {
-      return renderErrorState()
-    }
-    if (noData) {
-      return renderNoDataState()
-    }
-
-    return <>{children}</>
-  }
-
-  return <>{renderContent()}</>
+  return <>{children}</>
 }
 
 type LoaderIconProps = {
