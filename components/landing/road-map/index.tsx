@@ -37,7 +37,7 @@ export const RoadMap = () => {
     },
     {
       number: 'Q5',
-      title: 'Secret event',
+      title: 'Secret Event',
       description:
         'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi nullam vehicula ipsum a. Feugiat in fermentum posuere urna nec tincidunt praesent semper.',
       image: 'images/road_map/image5.png',
@@ -128,7 +128,15 @@ export const RoadMap = () => {
                 <div className={s.text_block}>
                   <div className={s.number}>{item.number}</div>
                   <div className={s.title}>{item.title}</div>
-                  <div className={s.description}>{item.description}</div>
+                  <div
+                    className={
+                      item.title !== 'Secret Event'
+                        ? s.description
+                        : s.description_secret
+                    }
+                  >
+                    {item.description}
+                  </div>
                 </div>
                 {item.image && (
                   <div className={s.image_block}>

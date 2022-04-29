@@ -193,6 +193,22 @@
   }
 }
 
+.description_secret {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  margin-top: 42px;
+  margin-bottom: 100px;
+  filter: blur(10px);
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+    line-height: 24px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+  }
+}
+
 .image_block {
   width: 50%;
   @media (max-width: 768px) {
