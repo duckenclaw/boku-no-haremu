@@ -1,12 +1,13 @@
 import { Loader } from 'components/shared-ui/loader'
+import { Button } from 'game/components/button'
+import { GameDialog } from 'game/components/game_dialog'
 import { ScreenContainer } from 'game/components/screen_container'
 import {
   useGetAllBanknotesTemplates,
   useGetBanknotesBalances,
 } from 'game/game_api'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { BanknoteCard } from './banknote_card'
-import s from './withdraw.module.scss'
 
 export const Withdraw = () => {
   const {
@@ -37,6 +38,7 @@ export const Withdraw = () => {
   }
 
   const banknotes = templateData?.pages.map((p) => p.data).flat(1) ?? []
+
   return (
     <ScreenContainer>
       <Loader

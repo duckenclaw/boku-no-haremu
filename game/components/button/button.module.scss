@@ -64,29 +64,39 @@ button.button {
 
 }
 
-.button_container {
-    position: relative;
+.skew_button {
+    width: 264px;
+    height: 70px;
+    font-family: 'Bangers';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 17px 17px 23px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: url('/game/svg/skew_button.svg');
 
-    .background {
-        position: relative;
+    transition: transform 0.2s ease-in-out;
+
+    &.mirror {
+        transform: scaleX(-1);
+
+        span {
+            display: block;
+            transform: scaleX(-1);
+        }
+
+        &:active {
+            transform: scale(-0.9, 0.9);
+        }
     }
 
-    .text {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-family: 'Bangers';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 39px;
-        transform: rotate(3.77deg);
-        transform-origin: center;
-        color: #FFFFFF;
+
+    &:active {
+        transform: scale(0.9);
     }
+
 }
