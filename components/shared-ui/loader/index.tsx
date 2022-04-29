@@ -7,8 +7,10 @@ type LoaderProps = {
   className?: string
   isError: boolean
   onRetry?: () => void
-  children?: React.ReactNode
   customRetryComponent?: React.ReactNode
+  noData?: boolean
+  customNoDataComponent?: React.ReactNode
+  children?: React.ReactNode
 }
 
 export const Loader = ({
@@ -18,26 +20,51 @@ export const Loader = ({
   isError,
   customRetryComponent,
   onRetry,
+  noData,
+  customNoDataComponent,
 }: LoaderProps) => {
+  const renderNoDataState = () => {
+    if (customNoDataComponent) {
+      return customNoDataComponent
+    }
+
+    if (onRetry) {
+      return (
+        <Button className={s.retry} onClick={onRetry} size="xsmall">
+          Retry
+        </Button>
+      )
+    }
+
+    return <div>No data</div>
+  }
+
+  const renderErrorState = () => {
+    if (customRetryComponent) {
+      return customRetryComponent
+    }
+
+    if (onRetry) {
+      return (
+        <Button className={s.retry} onClick={onRetry} size="xsmall">
+          Retry
+        </Button>
+      )
+    }
+    return <div>There was an error</div>
+  }
+
   const renderContent = () => {
     if (isLoading) {
       return <LoaderIcon />
     }
     if (isError) {
-      if (customRetryComponent) {
-        return customRetryComponent
-      }
-
-      if (onRetry === undefined) {
-        return (
-          <Button className={s.retry} onClick={onRetry} size="xsmall">
-            Retry
-          </Button>
-        )
-      }
-
-      return <div>There was an error</div>
+      return renderErrorState()
     }
+    if (noData) {
+      return renderNoDataState()
+    }
+
     return <>{children}</>
   }
 
