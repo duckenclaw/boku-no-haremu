@@ -24,7 +24,12 @@ export const FusionSlot = ({
   isPrime,
 }: FusionSlotProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const { data: cardData, isLoading: isCardLoading } = useGetCardByAssetId({
+  const {
+    data: cardData,
+    isLoading: isCardLoading,
+    isError: isErrorCard,
+    refetch: refetchCard,
+  } = useGetCardByAssetId({
     asset_id: assetId,
   })
 
@@ -46,6 +51,8 @@ export const FusionSlot = ({
         className={classnames(s.slot, { [s.prime_slot]: isPrime })}
         isEmpty={!assetId}
         isLoading={isCardLoading}
+        isError={isErrorCard}
+        onRetry={refetchCard}
         onClick={() => {
           setIsOpenModal(true)
         }}

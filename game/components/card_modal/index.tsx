@@ -74,16 +74,31 @@ export const CardsInventory = ({
     setPage(1)
   }, [templateFilter])
 
-  const { data: miningData, isLoading: isMiningDataLoading } =
-    useGetMiningCards()
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useGetAllCards({
-      limit: 8,
-      template_id: templateFilter ?? undefined,
-    })
+  const {
+    data: miningData,
+    isLoading: isMiningDataLoading,
+    isError: isErrorMintingData,
+    refetch: refetchMintingData,
+  } = useGetMiningCards()
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+    isError: isErrorCards,
+    refetch: refetchCards,
+  } = useGetAllCards({
+    limit: 8,
+    template_id: templateFilter ?? undefined,
+  })
 
-  const { data: templatesData, isLoading: isTemplatesLoading } =
-    useGetTemplates({ mode: 'card' })
+  const {
+    data: templatesData,
+    isLoading: isTemplatesLoading,
+    isError: isTemplatesError,
+    refetch: templatesRefetch,
+  } = useGetTemplates({ mode: 'card' })
 
   useEffect(() => {
     if (
@@ -96,6 +111,11 @@ export const CardsInventory = ({
       fetchNextPage()
     }
   }, [page, data, isLoading, isFetchingNextPage, hasNextPage])
+
+  const refetchCardsData = () => {
+    Promise.all([refetchCards(), refetchMintingData()])
+  }
+
   const cards = useMemo(
     () =>
       data?.pages[page - 1].data.map((c) => ({
@@ -118,7 +138,11 @@ export const CardsInventory = ({
       <div className={s.header}>
         <div className={s.side}>
           <CardFilter className={s.filter} contentClassName={s.templates}>
-            <Loader isLoading={isTemplatesLoading}>
+            <Loader
+              isLoading={isTemplatesLoading}
+              isError={isTemplatesError}
+              onRetry={templatesRefetch}
+            >
               {templatesData?.data.map((t) => (
                 <div
                   className={s.template}
@@ -156,7 +180,11 @@ export const CardsInventory = ({
           onClick={page > 1 ? () => setPage(page - 1) : undefined}
         />
         <div className={s.cards}>
-          <Loader isLoading={isLoading || isMiningDataLoading}>
+          <Loader
+            isLoading={isLoading || isMiningDataLoading}
+            isError={isErrorMintingData || isErrorCards}
+            onRetry={refetchCardsData}
+          >
             {cards.map((c) => (
               <div
                 className={cn(s.card, {
@@ -223,14 +251,25 @@ export const BanknoteInventory = ({
     setPage(1)
   }, [templateFilter])
 
-  const { data: templatesData, isLoading: isTemplatesLoading } =
-    useGetTemplates({ mode: 'banknote' })
+  const {
+    data: templatesData,
+    isLoading: isTemplatesLoading,
+    isError: isErrorTemplates,
+    refetch: refetchTemplates,
+  } = useGetTemplates({ mode: 'banknote' })
 
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useGetAllBanknotes({
-      limit: 9,
-      template_id: template_id ?? templateFilter ?? undefined,
-    })
+  const {
+    data,
+    isLoading,
+    isError: isErrorBanknotes,
+    refetch: refetchBanknotes,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetAllBanknotes({
+    limit: 9,
+    template_id: template_id ?? templateFilter ?? undefined,
+  })
 
   useEffect(() => {
     if (
@@ -256,7 +295,11 @@ export const BanknoteInventory = ({
       <div className={s.header}>
         <div className={s.side}>
           <CardFilter className={s.filter} contentClassName={s.templates}>
-            <Loader isLoading={isTemplatesLoading}>
+            <Loader
+              isLoading={isTemplatesLoading}
+              isError={isErrorTemplates}
+              onRetry={refetchTemplates}
+            >
               {templatesData?.data.map((t) => (
                 <div
                   className={s.template}
@@ -294,7 +337,11 @@ export const BanknoteInventory = ({
           onClick={page > 1 ? () => setPage(page - 1) : undefined}
         />
         <div className={s.banknotes}>
-          <Loader isLoading={isLoading}>
+          <Loader
+            isLoading={isLoading}
+            isError={isErrorBanknotes}
+            onRetry={refetchBanknotes}
+          >
             {banknotes.map((c) => (
               <div
                 className={cn(s.banknote)}
