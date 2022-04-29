@@ -13,8 +13,7 @@ const GameComponent = dynamic(() => import('game').then((m) => m.Game as any), {
     return (
       <Loader
         isLoading={isLoading}
-        // isError={!!error}
-        isError={true}
+        isError={!!error}
         onRetry={retry}
         customRetryComponent={<Button onClick={retry}>Try Again</Button>}
       ></Loader>
