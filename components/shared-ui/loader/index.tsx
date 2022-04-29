@@ -6,33 +6,52 @@ type LoaderProps = {
   isLoading?: boolean
   className?: string
   isError: boolean
-  onRetry: () => void
+  onRetry?: () => void
+  children?: React.ReactNode
+  customRetryComponent?: React.ReactNode
 }
 
-export const Loader: React.FC<LoaderProps> = ({
+export const Loader = ({
   children,
   className,
   isLoading,
   isError,
+  customRetryComponent,
   onRetry,
-}) => {
+}: LoaderProps) => {
   const renderContent = () => {
     if (isLoading) {
-      return (
-        <div className={cn(className, s['lds-heart'])}>
-          <div />
-        </div>
-      )
+      return <LoaderIcon />
     }
     if (isError) {
-      return (
-        <Button className={s.retry} onClick={onRetry} size="xsmall">
-          Retry
-        </Button>
-      )
+      if (customRetryComponent) {
+        return customRetryComponent
+      }
+
+      if (onRetry === undefined) {
+        return (
+          <Button className={s.retry} onClick={onRetry} size="xsmall">
+            Retry
+          </Button>
+        )
+      }
+
+      return <div>There was an error</div>
     }
     return <>{children}</>
   }
 
-  return renderContent()
+  return <>{renderContent()}</>
+}
+
+type LoaderIconProps = {
+  className?: string
+}
+
+export const LoaderIcon: React.FC<LoaderIconProps> = ({ className }) => {
+  return (
+    <div className={cn(className, s['lds-heart'])}>
+      <div />
+    </div>
+  )
 }

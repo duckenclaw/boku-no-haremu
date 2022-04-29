@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import { Img } from 'react-image'
-import { Loader } from 'components/shared-ui/loader'
+import { LoaderIcon } from 'components/shared-ui/loader'
 
 import s from './image.module.scss'
 
@@ -27,7 +27,7 @@ export const Image: React.FC<ImageProps> = ({
     <Img
       loader={
         <div style={style} className={classNames(s.unloader, props.className)}>
-          <Loader isLoading={true} />
+          <LoaderIcon />
         </div>
       }
       src={src ?? '/images/mimi_1.png'}

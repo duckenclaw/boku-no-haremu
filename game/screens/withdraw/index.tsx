@@ -9,10 +9,18 @@ import { BanknoteCard } from './banknote_card'
 import s from './withdraw.module.scss'
 
 export const Withdraw = () => {
-  const { data: templateData, isLoading: isLoadingTemplates } =
-    useGetAllBanknotesTemplates()
-  const { data: balancesData, isLoading: isLoadingAmount } =
-    useGetBanknotesBalances()
+  const {
+    data: templateData,
+    isLoading: isLoadingTemplates,
+    isError: isErrorTemplate,
+    refetch: refetchTemplate,
+  } = useGetAllBanknotesTemplates()
+  const {
+    data: balancesData,
+    isLoading: isLoadingAmount,
+    isError: isErrorBalance,
+    refetch: refetchBalance,
+  } = useGetBanknotesBalances()
 
   const templateMapping = useMemo(
     () =>
@@ -24,10 +32,18 @@ export const Withdraw = () => {
     [balancesData]
   )
 
+  const onRetry = () => {
+    Promise.all([refetchTemplate(), refetchBalance()])
+  }
+
   const banknotes = templateData?.pages.map((p) => p.data).flat(1) ?? []
   return (
     <ScreenContainer>
-      <Loader isLoading={isLoadingTemplates}>
+      <Loader
+        isLoading={isLoadingTemplates}
+        isError={isErrorTemplate || isErrorBalance}
+        onRetry={onRetry}
+      >
         {banknotes.map((b) => (
           <BanknoteCard
             templateData={b}

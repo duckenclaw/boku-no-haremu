@@ -11,10 +11,13 @@ const GameComponent = dynamic(() => import('game').then((m) => m.Game as any), {
   ssr: false,
   loading: ({ isLoading, error, retry }) => {
     return (
-      <Loader isLoading={isLoading}>
-        {error && <div>There was an error</div>}
-        {retry && <Button onClick={retry}>Try Again</Button>}
-      </Loader>
+      <Loader
+        isLoading={isLoading}
+        // isError={!!error}
+        isError={true}
+        onRetry={retry}
+        customRetryComponent={<Button onClick={retry}>Try Again</Button>}
+      ></Loader>
     )
   },
 })

@@ -44,6 +44,8 @@ export const Mine = () => {
             <Slot
               key={s.staked_asset_id}
               isLoading={isLoading}
+              isError={false}
+              onRetry={() => null}
               asset_data={s}
             />
           ))}
@@ -52,6 +54,8 @@ export const Mine = () => {
               onPlaceCard={() => {
                 setIsOpen(true)
               }}
+              isError={false}
+              onRetry={() => null}
             />
           )}
         </Loader>
