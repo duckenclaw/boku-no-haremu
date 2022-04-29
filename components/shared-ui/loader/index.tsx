@@ -5,7 +5,7 @@ import s from './loader.module.scss'
 type LoaderProps = {
   isLoading?: boolean
   className?: string
-  isError: boolean
+  isError?: boolean
   onRetry?: () => void
   customRetryComponent?: React.ReactNode
   noData?: boolean
