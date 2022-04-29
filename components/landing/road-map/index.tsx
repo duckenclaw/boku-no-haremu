@@ -60,13 +60,13 @@ export const RoadMap = () => {
       title: 'Secret Event',
       description:
         'Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi',
-      image: 'images/road_map/image7.png',
     },
     {
       number: 'Q9',
       title: 'Secret Event',
       description:
         'Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra',
+      image: 'images/road_map/image7.png',
     },
     {
       number: 'Q10',
@@ -105,6 +105,13 @@ export const RoadMap = () => {
     },
   ]
 
+  const stage = 2
+  const line_class = (index: number) => {
+    if (index < stage) return s.before
+    if (index === stage) return s.gradient
+    if (index > stage) return s.after
+  }
+
   return (
     <section className={cn(s.section, 'section')}>
       <a className="anchor" id="roadmap" />
@@ -115,9 +122,15 @@ export const RoadMap = () => {
         <div className={s.columns_wrapper}>
           {row.map((item, index) => (
             <div className={s.row} key={index}>
-              <div className={s.circle}></div>
-              {index % 2 ? (
-                <div className={s.item_right}>
+              <div className={index <= stage ? s.circle : s.ring} />
+              <div className={index % 2 ? s.item_right : s.item_left}>
+                <div className={line_class(index)} />
+                <div className={s.text_block}>
+                  <div className={s.number}>{item.number}</div>
+                  <div className={s.title}>{item.title}</div>
+                  <div className={s.description}>{item.description}</div>
+                </div>
+                {item.image && (
                   <div className={s.image_block}>
                     <Image
                       className={s.road_map__image}
@@ -125,28 +138,8 @@ export const RoadMap = () => {
                       src={item.image}
                     />
                   </div>
-                  <div className={s.text_block}>
-                    <div className={s.number}>{item.number}</div>
-                    <div className={s.title}>{item.title}</div>
-                    <div className={s.description}>{item.description}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className={s.item_left}>
-                  <div className={s.text_block}>
-                    <div className={s.number}>{item.number}</div>
-                    <div className={s.title}>{item.title}</div>
-                    <div className={s.description}>{item.description}</div>
-                  </div>
-                  <div className={s.image_block}>
-                    <Image
-                      className={s.road_map__image}
-                      alt="image"
-                      src={item.image}
-                    />
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           ))}
         </div>
