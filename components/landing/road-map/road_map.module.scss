@@ -211,13 +211,17 @@
 
 .image_block {
   width: 50%;
+  position: relative;
   @media (max-width: 768px) {
     width: 100%;
   }
 
   img {
-    width: 100%;
+    width: 200%;
     object-fit: contain;
+    position: absolute;
+    top: -280px;
+    right: -280px;
   }
 }
 

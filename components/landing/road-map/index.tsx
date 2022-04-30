@@ -60,13 +60,13 @@ export const RoadMap = () => {
       title: 'Secret Event',
       description:
         'Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi',
+      image: 'images/road_map/image7.png',
     },
     {
       number: 'Q9',
       title: 'Secret Event',
       description:
         'Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra',
-      image: 'images/road_map/image7.png',
     },
     {
       number: 'Q10',
@@ -123,7 +123,13 @@ export const RoadMap = () => {
           {row.map((item, index) => (
             <div className={s.row} key={index}>
               <div className={index <= stage ? s.circle : s.ring} />
-              <div className={index % 2 ? s.item_right : s.item_left}>
+              <div
+                className={
+                  index % 2 && item.title !== 'Secret Event'
+                    ? s.item_right
+                    : s.item_left
+                }
+              >
                 <div className={line_class(index)} />
                 <div className={s.text_block}>
                   <div className={s.number}>{item.number}</div>
