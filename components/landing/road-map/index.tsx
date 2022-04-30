@@ -37,7 +37,7 @@ export const RoadMap = () => {
     },
     {
       number: 'Q5',
-      title: 'Secret Event',
+      title: 'Secret event',
       description:
         'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi nullam vehicula ipsum a. Feugiat in fermentum posuere urna nec tincidunt praesent semper.',
       image: 'images/road_map/image5.png',
@@ -60,13 +60,13 @@ export const RoadMap = () => {
       title: 'Secret Event',
       description:
         'Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi',
-      image: 'images/road_map/image7.png',
     },
     {
       number: 'Q9',
       title: 'Secret Event',
       description:
         'Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra',
+      image: 'images/road_map/image7.png',
     },
     {
       number: 'Q10',
@@ -123,20 +123,14 @@ export const RoadMap = () => {
           {row.map((item, index) => (
             <div className={s.row} key={index}>
               <div className={index <= stage ? s.circle : s.ring} />
-              <div
-                className={
-                  index % 2 && item.title !== 'Secret Event'
-                    ? s.item_right
-                    : s.item_left
-                }
-              >
+              <div className={index % 2 ? s.item_right : s.item_left}>
                 <div className={line_class(index)} />
                 <div className={s.text_block}>
                   <div className={s.number}>{item.number}</div>
                   <div className={s.title}>{item.title}</div>
                   <div
                     className={
-                      item.title !== 'Secret Event'
+                      item.title.toLowerCase() !== 'secret event'
                         ? s.description
                         : s.description_secret
                     }
