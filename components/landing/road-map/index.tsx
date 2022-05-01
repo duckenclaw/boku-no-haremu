@@ -141,7 +141,9 @@ export const RoadMap = () => {
                 {item.image && (
                   <div className={s.image_block}>
                     <Image
-                      className={s.road_map__image}
+                      className={
+                        index === 8 ? s.secret_image : s.road_map__image
+                      }
                       alt="image"
                       src={item.image}
                     />
