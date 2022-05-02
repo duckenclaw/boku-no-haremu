@@ -20,10 +20,49 @@
         font-family: 'Bangers';
         font-style: normal;
         font-weight: 400;
-        font-size: 27px;
+        font-size: 40px;
         text-align: center;
         color: #FFFFFF;
-
     }
 
+    &.disabled {
+        filter: brightness(0.5) grayscale(0.5);
+        cursor: not-allowed;
+    }
+
+    .cross {
+        padding: 10px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        box-sizing: content-box;
+        cursor: pointer;
+
+        &:active {
+            transform: scale(0.9)
+        }
+    }
+
+}
+
+.overlay {
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    inset: 0px;
+    overflow: scroll;
+
+
+    @media screen and (max-height:1024px) {
+        &::after {
+            content: ' ';
+            display: flex;
+            height: calc(100% + min(27vw, 400px));
+        }
+
+    }
+}
+
+.bodyOpen {
+    overflow: hidden;
 }

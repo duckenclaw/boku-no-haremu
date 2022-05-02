@@ -5,7 +5,7 @@ import s from './game_dialog.module.scss'
 
 type GameDialogProps = {
   children?: React.ReactNode
-  show?: boolean
+  isOpen?: boolean
   onOk?: () => void
   onCancel?: () => void
   onClickOutside?: () => void
@@ -15,16 +15,16 @@ export const GameDialog = ({
   children,
   onOk,
   onCancel,
-  show,
+  isOpen,
 }: GameDialogProps) => {
-  const transitions = useTransition(show, {
+  const transitions = useTransition(isOpen, {
     from: { opacity: 0, translateY: '100%', translateX: '-50%' },
     enter: { opacity: 1, translateY: '0', translateX: '-50%' },
     leave: { opacity: 0, translateY: '100%', translateX: '-50%' },
   })
   return transitions(
-    ({ opacity, translateY, translateX }, show) =>
-      show && (
+    ({ opacity, translateY, translateX }, isOpen) =>
+      isOpen && (
         <animated.div
           style={{ opacity, translateY, translateX }}
           className={s.dialog}
