@@ -644,7 +644,7 @@ export const useFuseCards = () => {
                 from: account,
                 to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
                 asset_ids: [...primeCards, ...secondaryCards],
-                memo: 'fuse_waifu',
+                memo: 'Fuse waifu',
               },
             },
             {
