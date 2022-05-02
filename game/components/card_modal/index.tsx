@@ -188,7 +188,7 @@ export const CardsInventory = ({
           <div className={s.cards}>
             {cards.map((c) => (
               <CardImage
-                className={s.card}
+                className={cn(s.card, { [s.blocked]: c.is_blocked_by_game })}
                 style={{ objectFit: 'cover' }}
                 alt={c.name}
                 src={ipfsToUrlSafe(c.data.img)}
