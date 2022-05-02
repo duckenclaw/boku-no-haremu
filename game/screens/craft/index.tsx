@@ -1,17 +1,24 @@
 import React from 'react'
 
 import { ScreenContainer } from 'game/components/screen_container'
+import { ConfirmModal } from 'game/components/confirm_modal'
 import { useCraftRecipes } from 'game/game_api'
 import { Loader } from 'components/shared-ui/loader'
+
 import { CraftSlot } from './craft_slot'
 
 import s from './craft.module.scss'
 
 export const Craft = () => {
-  const { data: recipeData, isLoading: isRecipesLoading } = useCraftRecipes()
+  const {
+    data: recipeData,
+    isLoading: isRecipesLoading,
+    isError,
+    refetch,
+  } = useCraftRecipes()
   return (
     <ScreenContainer className={s.slots}>
-      <Loader isLoading={isRecipesLoading}>
+      <Loader isLoading={isRecipesLoading} isError={isError} onRetry={refetch}>
         {recipeData?.map((r) => (
           <CraftSlot
             key={r.result_template_id}

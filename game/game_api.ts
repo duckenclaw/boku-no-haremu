@@ -644,7 +644,7 @@ export const useFuseCards = () => {
                 from: account,
                 to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
                 asset_ids: [...primeCards, ...secondaryCards],
-                memo: 'fuse_waifu',
+                memo: 'Fuse waifu',
               },
             },
             {
@@ -673,8 +673,7 @@ export const useFuseCards = () => {
       toast.success('New Waifu NFT created!')
       qc.invalidateQueries('wax/getAllCards')
     },
-    onError: (e) => {
-      console.log('error', e)
+    onError: () => {
       toast.error('Error occurred during transaction')
     },
   })

@@ -4,6 +4,7 @@ import cn from 'classnames'
 import { Image } from 'components/shared-ui/image'
 import { LinkButton } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
+import { CardImage } from 'game/components/card_image'
 import { Loader } from 'components/shared-ui/loader'
 
 import {
@@ -74,16 +75,31 @@ export const CardsInventory = ({
     setPage(1)
   }, [templateFilter])
 
-  const { data: miningData, isLoading: isMiningDataLoading } =
-    useGetMiningCards()
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useGetAllCards({
-      limit: 8,
-      template_id: templateFilter ?? undefined,
-    })
+  const {
+    data: miningData,
+    isLoading: isMiningDataLoading,
+    isError: isErrorMintingData,
+    refetch: refetchMintingData,
+  } = useGetMiningCards()
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+    isError: isErrorCards,
+    refetch: refetchCards,
+  } = useGetAllCards({
+    limit: 8,
+    template_id: templateFilter ?? undefined,
+  })
 
-  const { data: templatesData, isLoading: isTemplatesLoading } =
-    useGetTemplates({ mode: 'card' })
+  const {
+    data: templatesData,
+    isLoading: isTemplatesLoading,
+    isError: isTemplatesError,
+    refetch: templatesRefetch,
+  } = useGetTemplates({ mode: 'card' })
 
   useEffect(() => {
     if (
@@ -96,6 +112,11 @@ export const CardsInventory = ({
       fetchNextPage()
     }
   }, [page, data, isLoading, isFetchingNextPage, hasNextPage])
+
+  const refetchCardsData = () => {
+    Promise.all([refetchCards(), refetchMintingData()])
+  }
+
   const cards = useMemo(
     () =>
       data?.pages[page - 1].data.map((c) => ({
@@ -118,7 +139,11 @@ export const CardsInventory = ({
       <div className={s.header}>
         <div className={s.side}>
           <CardFilter className={s.filter} contentClassName={s.templates}>
-            <Loader isLoading={isTemplatesLoading}>
+            <Loader
+              isLoading={isTemplatesLoading}
+              isError={isTemplatesError}
+              onRetry={templatesRefetch}
+            >
               {templatesData?.data.map((t) => (
                 <div
                   className={s.template}
@@ -155,27 +180,24 @@ export const CardsInventory = ({
           className={cn(s.side, { [s.hide]: page <= 1 })}
           onClick={page > 1 ? () => setPage(page - 1) : undefined}
         />
-        <div className={s.cards}>
-          <Loader isLoading={isLoading || isMiningDataLoading}>
+        <Loader
+          isLoading={isLoading || isMiningDataLoading}
+          isError={isErrorMintingData || isErrorCards}
+          onRetry={refetchCardsData}
+        >
+          <div className={s.cards}>
             {cards.map((c) => (
-              <div
-                className={cn(s.card, {
-                  [s.blocked]: c.is_blocked_by_game,
-                })}
+              <CardImage
+                className={cn(s.card, { [s.blocked]: c.is_blocked_by_game })}
+                style={{ objectFit: 'cover' }}
+                alt={c.name}
+                src={ipfsToUrlSafe(c.data.img)}
                 key={c.asset_id}
                 onClick={() => !c.is_blocked_by_game && onSelect?.(c.asset_id)}
-              >
-                <Image
-                  height={215}
-                  width={120}
-                  style={{ objectFit: 'cover' }}
-                  alt={c.name}
-                  src={ipfsToUrlSafe(c.data.img)}
-                />
-              </div>
+              />
             ))}
-          </Loader>
-        </div>
+          </div>
+        </Loader>
         <SlideIcon
           className={cn(s.side, s.rotate, {
             [s.hide]: !canClickNextPage,
@@ -189,6 +211,7 @@ export const CardsInventory = ({
       <div className={s.footer}>
         <LinkButton
           className={s.buy}
+          size="small"
           href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
             process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION ?? ''
           )}`}
@@ -223,14 +246,25 @@ export const BanknoteInventory = ({
     setPage(1)
   }, [templateFilter])
 
-  const { data: templatesData, isLoading: isTemplatesLoading } =
-    useGetTemplates({ mode: 'banknote' })
+  const {
+    data: templatesData,
+    isLoading: isTemplatesLoading,
+    isError: isErrorTemplates,
+    refetch: refetchTemplates,
+  } = useGetTemplates({ mode: 'banknote' })
 
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useGetAllBanknotes({
-      limit: 9,
-      template_id: template_id ?? templateFilter ?? undefined,
-    })
+  const {
+    data,
+    isLoading,
+    isError: isErrorBanknotes,
+    refetch: refetchBanknotes,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetAllBanknotes({
+    limit: 9,
+    template_id: template_id ?? templateFilter ?? undefined,
+  })
 
   useEffect(() => {
     if (
@@ -256,7 +290,11 @@ export const BanknoteInventory = ({
       <div className={s.header}>
         <div className={s.side}>
           <CardFilter className={s.filter} contentClassName={s.templates}>
-            <Loader isLoading={isTemplatesLoading}>
+            <Loader
+              isLoading={isTemplatesLoading}
+              isError={isErrorTemplates}
+              onRetry={refetchTemplates}
+            >
               {templatesData?.data.map((t) => (
                 <div
                   className={s.template}
@@ -293,8 +331,12 @@ export const BanknoteInventory = ({
           className={cn(s.side, { [s.hide]: page <= 1 })}
           onClick={page > 1 ? () => setPage(page - 1) : undefined}
         />
-        <div className={s.banknotes}>
-          <Loader isLoading={isLoading}>
+        <Loader
+          isLoading={isLoading}
+          isError={isErrorBanknotes}
+          onRetry={refetchBanknotes}
+        >
+          <div className={s.banknotes}>
             {banknotes.map((c) => (
               <div
                 className={cn(s.banknote)}
@@ -310,8 +352,8 @@ export const BanknoteInventory = ({
                 />
               </div>
             ))}
-          </Loader>
-        </div>
+          </div>
+        </Loader>
         <SlideIcon
           className={cn(s.side, s.rotate, {
             [s.hide]: !canClickNextPage,
@@ -325,6 +367,7 @@ export const BanknoteInventory = ({
       <div className={s.footer}>
         <LinkButton
           className={s.buy}
+          size="small"
           href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
             process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION ?? ''
           )}`}

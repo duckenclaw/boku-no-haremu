@@ -19,6 +19,8 @@ type SlotProps = {
   className?: string
   asset_data?: MineRecordType
   isLoading?: boolean
+  isError: boolean
+  onRetry: () => void
   onPlaceCard?: () => void
 }
 
@@ -37,13 +39,19 @@ const useTime = (interval: number | boolean = 1000) => {
 export const Slot = ({
   className,
   isLoading = false,
+  isError,
+  onRetry,
   asset_data,
   onPlaceCard,
 }: SlotProps) => {
   const asset_id = asset_data?.staked_asset_id
   const status = asset_data?.status_code ?? 0
 
-  const { data: cardData, isLoading: isMetadataLoading } = useGetCardByAssetId({
+  const {
+    data: cardData,
+    isLoading: isMetadataLoading,
+    isError: isErrorMetadata,
+  } = useGetCardByAssetId({
     asset_id,
   })
   const { data: mineRecipe } = useGetMiningRecipe({
@@ -72,6 +80,8 @@ export const Slot = ({
       onClick={asset_id ? undefined : onPlaceCard}
       isLoading={isLoading || isMetadataLoading}
       isEmpty={!asset_id || !card}
+      isError={isError || isErrorMetadata}
+      onRetry={onRetry}
       contentClassName={s.slot}
       overlayChildren={
         <>
@@ -114,6 +124,7 @@ export const Slot = ({
     >
       {card && (
         <CardImage
+          isActive
           alt={card.asset_id}
           disabled={status === 1 && showTimer}
           src={ipfsToUrlSafe(card.data.img)}
