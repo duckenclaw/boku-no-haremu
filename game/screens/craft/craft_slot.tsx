@@ -39,6 +39,7 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
       contentClassName={s.craft_content}
     >
       <CardImage
+        isActive
         alt={template_id.toString()}
         src={ipfsToUrlSafe(templateData?.data.immutable_data.img)}
       />
