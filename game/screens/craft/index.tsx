@@ -1,8 +1,10 @@
 import React from 'react'
 
 import { ScreenContainer } from 'game/components/screen_container'
+import { ConfirmModal } from 'game/components/confirm_modal'
 import { useCraftRecipes } from 'game/game_api'
 import { Loader } from 'components/shared-ui/loader'
+
 import { CraftSlot } from './craft_slot'
 
 import s from './craft.module.scss'
