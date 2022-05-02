@@ -124,6 +124,7 @@ export const Slot = ({
     >
       {card && (
         <CardImage
+          isActive
           alt={card.asset_id}
           disabled={status === 1 && showTimer}
           src={ipfsToUrlSafe(card.data.img)}

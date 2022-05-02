@@ -4,6 +4,7 @@ import cn from 'classnames'
 import { Image } from 'components/shared-ui/image'
 import { LinkButton } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
+import { CardImage } from 'game/components/card_image'
 import { Loader } from 'components/shared-ui/loader'
 
 import {
@@ -179,31 +180,24 @@ export const CardsInventory = ({
           className={cn(s.side, { [s.hide]: page <= 1 })}
           onClick={page > 1 ? () => setPage(page - 1) : undefined}
         />
-        <div className={s.cards}>
-          <Loader
-            isLoading={isLoading || isMiningDataLoading}
-            isError={isErrorMintingData || isErrorCards}
-            onRetry={refetchCardsData}
-          >
+        <Loader
+          isLoading={isLoading || isMiningDataLoading}
+          isError={isErrorMintingData || isErrorCards}
+          onRetry={refetchCardsData}
+        >
+          <div className={s.cards}>
             {cards.map((c) => (
-              <div
-                className={cn(s.card, {
-                  [s.blocked]: c.is_blocked_by_game,
-                })}
+              <CardImage
+                className={s.card}
+                style={{ objectFit: 'cover' }}
+                alt={c.name}
+                src={ipfsToUrlSafe(c.data.img)}
                 key={c.asset_id}
                 onClick={() => !c.is_blocked_by_game && onSelect?.(c.asset_id)}
-              >
-                <Image
-                  height={215}
-                  width={120}
-                  style={{ objectFit: 'cover' }}
-                  alt={c.name}
-                  src={ipfsToUrlSafe(c.data.img)}
-                />
-              </div>
+              />
             ))}
-          </Loader>
-        </div>
+          </div>
+        </Loader>
         <SlideIcon
           className={cn(s.side, s.rotate, {
             [s.hide]: !canClickNextPage,
@@ -217,6 +211,7 @@ export const CardsInventory = ({
       <div className={s.footer}>
         <LinkButton
           className={s.buy}
+          size="small"
           href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
             process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION ?? ''
           )}`}
@@ -336,12 +331,12 @@ export const BanknoteInventory = ({
           className={cn(s.side, { [s.hide]: page <= 1 })}
           onClick={page > 1 ? () => setPage(page - 1) : undefined}
         />
-        <div className={s.banknotes}>
-          <Loader
-            isLoading={isLoading}
-            isError={isErrorBanknotes}
-            onRetry={refetchBanknotes}
-          >
+        <Loader
+          isLoading={isLoading}
+          isError={isErrorBanknotes}
+          onRetry={refetchBanknotes}
+        >
+          <div className={s.banknotes}>
             {banknotes.map((c) => (
               <div
                 className={cn(s.banknote)}
@@ -357,8 +352,8 @@ export const BanknoteInventory = ({
                 />
               </div>
             ))}
-          </Loader>
-        </div>
+          </div>
+        </Loader>
         <SlideIcon
           className={cn(s.side, s.rotate, {
             [s.hide]: !canClickNextPage,
@@ -372,6 +367,7 @@ export const BanknoteInventory = ({
       <div className={s.footer}>
         <LinkButton
           className={s.buy}
+          size="small"
           href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
             process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION ?? ''
           )}`}

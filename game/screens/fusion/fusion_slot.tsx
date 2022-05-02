@@ -36,7 +36,7 @@ export const FusionSlot = ({
   return (
     <>
       <CardModal
-        title={'WHAT DO YOU WANT TO FUSE?'}
+        title="WHAT DO YOU WANT TO FUSE?"
         isOpen={isOpenModal}
         onClose={() => {
           setIsOpenModal(false)
