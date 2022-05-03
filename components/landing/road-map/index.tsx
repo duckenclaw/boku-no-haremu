@@ -112,7 +112,7 @@ export const RoadMap = () => {
     },
   ]
 
-  const stage = 2
+  const stage = 1
   const line_class = (index: number) => {
     if (index < stage) return s.before
     if (index === stage) return s.gradient
@@ -128,12 +128,12 @@ export const RoadMap = () => {
         <div className={s.second_shadow} />
         <div className={s.columns_wrapper}>
           {row.map((item, index) => (
-            <div className={s.row} key={index}>
+            <div className={cn(s.row, [s[`row-${index}`]])} key={index}>
               <div className={index <= stage ? s.circle : s.ring} />
               <div className={index % 2 ? s.item_right : s.item_left}>
                 <div className={line_class(index)} />
                 <div className={s.text_block}>
-                  {item.number.length > 0 && (
+                  {!!item.number && (
                     <div className={s.number}>{item.number}</div>
                   )}
                   <div className={s.title}>{item.title}</div>
