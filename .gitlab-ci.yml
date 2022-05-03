@@ -23,7 +23,8 @@ build_landing:
     - develop
   artifacts:
     name: haremu_front_build
-    paths: ./out
+    paths:
+      - out
 
 # build_game:
 #   image: node:lts
