@@ -31,7 +31,7 @@ staging:
   image: node:lts-alpine
   stage: deploy
   script:
-    - apk add --no-cache openssh
+    - apk add --no-cache rsync openssh
     - apk add --update bash
     - apk add --update git
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
@@ -40,8 +40,6 @@ staging:
     - mkdir -p ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - chmod 700 ~/.ssh
-    - npm install -g npm@latest
-    - npm list -g pm2 || npm i -g pm2
     - rsync -avz --delete -e ssh ./out/ "$STAGING_SERVER:haremu_front"
   only:
     - feature/ci-cd
