@@ -1,5 +1,6 @@
 import '../styles/globals.scss'
 import 'react-toastify/dist/ReactToastify.css'
+import '../styles/toasts.scss'
 
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
