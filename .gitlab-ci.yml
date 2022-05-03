@@ -1,6 +1,6 @@
 stages:
   - build
-  - deploy_production
+  - deploy
 
 build_landing:
   image: node:lts
