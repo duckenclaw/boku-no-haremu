@@ -21,29 +21,11 @@ build_landing:
   only:
     - main
     - develop
+    - feature/ci-cd
   artifacts:
     name: haremu_front_build
     paths:
       - out
-
-# build_game:
-#   image: node:lts
-#   stage: build
-#   script:
-#     - export NEXT_PUBLIC_ENABLE_GAME=true
-#     - export NEXT_PUBLIC_WAX_CONTRACT=$NEXT_PUBLIC_WAX_CONTRACT
-#     - export NEXT_PUBLIC_CARDS_NFT_COLLECTION=$NEXT_PUBLIC_CARDS_NFT_COLLECTION
-#     - export NEXT_PUBLIC_CARDS_NFT_SCHEMA=$NEXT_PUBLIC_CARDS_NFT_SCHEMA
-#     - export NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION=$NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION
-#     - export NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA=$NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA
-#     - rm -f package-lock.json
-#     - npm install -g npm@latest
-#     - npm install --progress=false
-#     - npm -v && node -v
-#     - npm run build
-#   only:
-#     - main
-#     - develop
 
 staging:
   image: node:lts-alpine
@@ -85,3 +67,23 @@ production:
     - pm2 deploy ecosystem.config.js game_production
   only:
     - main
+
+
+# build_game:
+#   image: node:lts
+#   stage: build
+#   script:
+#     - export NEXT_PUBLIC_ENABLE_GAME=true
+#     - export NEXT_PUBLIC_WAX_CONTRACT=$NEXT_PUBLIC_WAX_CONTRACT
+#     - export NEXT_PUBLIC_CARDS_NFT_COLLECTION=$NEXT_PUBLIC_CARDS_NFT_COLLECTION
+#     - export NEXT_PUBLIC_CARDS_NFT_SCHEMA=$NEXT_PUBLIC_CARDS_NFT_SCHEMA
+#     - export NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION=$NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION
+#     - export NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA=$NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA
+#     - rm -f package-lock.json
+#     - npm install -g npm@latest
+#     - npm install --progress=false
+#     - npm -v && node -v
+#     - npm run build
+#   only:
+#     - main
+#     - develop
