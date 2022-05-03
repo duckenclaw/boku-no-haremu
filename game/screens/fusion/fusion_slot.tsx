@@ -11,6 +11,7 @@ import s from './fusion.module.scss'
 import { CardImage } from 'game/components/card_image'
 
 type FusionSlotProps = {
+  slotsData: ({ asset_id: string; template_id: string } | null)[]
   slotData: { asset_id: string; template_id: string } | null
   blockedCards: string[]
   onSetCard?: (assetId: string | null, templateId: string | null) => void
@@ -19,6 +20,7 @@ type FusionSlotProps = {
 
 export const FusionSlot = ({
   slotData,
+  slotsData,
   onSetCard,
   blockedCards,
   isPrime,
@@ -39,11 +41,17 @@ export const FusionSlot = ({
     useFuseRecipes()
 
   const allowedTemplateIds = useMemo(() => {
-    if (template_id) return [template_id]
+    // if already template id is set by at least some card then enforce this template id
+    const chosenCard = slotsData.find((s) => s?.template_id)
+    if (chosenCard) return [chosenCard.template_id]
+    // if none cards are chosen enforce only available template ids from recipes
     if (fuseRecipesData) {
-      return fuseRecipesData.map((f) => String(f.source_template_id))
+      return fuseRecipesData
+        .filter((f) => f.source_template_id)
+        .map((f) => String(f.source_template_id))
     }
-    return undefined
+    // if no fuseRecipes available then no templates are allowed
+    return []
   }, [fuseRecipesData, template_id])
 
   return (

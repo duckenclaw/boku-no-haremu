@@ -53,6 +53,7 @@ export const Fusion = () => {
             isPrime={mode === '3to1' ? index === 1 : index <= 1}
             blockedCards={blockedCards}
             slotData={c}
+            slotsData={cards}
             key={index}
             onSetCard={(asset_id, template_id) => {
               cards[index] = { asset_id: asset_id!, template_id: template_id! }

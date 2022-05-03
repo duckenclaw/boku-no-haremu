@@ -96,7 +96,7 @@ export const CardsInventory = ({
     refetch: refetchCards,
   } = useGetAllCards({
     limit: 8,
-    template_id: allowedTemplateIds?.[0] ?? templateFilter ?? undefined,
+    template_id: templateFilter ?? undefined,
   })
 
   const {
@@ -145,34 +145,32 @@ export const CardsInventory = ({
     <div className={s.container}>
       <div className={s.header}>
         <div className={s.side}>
-          {!allowedTemplateIds && (
-            <CardFilter className={s.filter} contentClassName={s.templates}>
-              <Loader
-                isLoading={isTemplatesLoading}
-                isError={isTemplatesError}
-                onRetry={templatesRefetch}
-              >
-                {templatesData?.data.map((t) => (
+          <CardFilter className={s.filter} contentClassName={s.templates}>
+            <Loader
+              isLoading={isTemplatesLoading}
+              isError={isTemplatesError}
+              onRetry={templatesRefetch}
+            >
+              {templatesData?.data.map((t) => (
+                <div
+                  className={s.template}
+                  key={t.template_id}
+                  onClick={() => {
+                    if (templateFilter === t.template_id) {
+                      setTemplateFilter(null)
+                    } else setTemplateFilter(t.template_id)
+                  }}
+                >
                   <div
-                    className={s.template}
-                    key={t.template_id}
-                    onClick={() => {
-                      if (templateFilter === t.template_id) {
-                        setTemplateFilter(null)
-                      } else setTemplateFilter(t.template_id)
-                    }}
-                  >
-                    <div
-                      className={cn(s.checkbox, {
-                        [s.checked]: t.template_id === templateFilter,
-                      })}
-                    />
-                    {t.immutable_data.name}
-                  </div>
-                ))}
-              </Loader>
-            </CardFilter>
-          )}
+                    className={cn(s.checkbox, {
+                      [s.checked]: t.template_id === templateFilter,
+                    })}
+                  />
+                  {t.immutable_data.name}
+                </div>
+              ))}
+            </Loader>
+          </CardFilter>
         </div>
         <div className={s.center}>
           {title && <h1>{title}</h1>}
