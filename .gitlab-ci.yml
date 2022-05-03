@@ -73,6 +73,27 @@ deploy_staging:
   only:
     - feature/ci-cd
 
+# deploy_production:
+#   image: node:lts-alpine
+#   stage: deploy
+#   extends: .before_script_staging_template
+#   script:
+#     - apk add --no-cache rsync openssh
+#     - apk add --update bash
+#     - apk add --update git
+#     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+#     - eval $(ssh-agent -s)
+#     - echo "$PRODUCTION_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#     - mkdir -p ~/.ssh
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#     - chmod 700 ~/.ssh
+#     - npm run build
+#     - npm run export
+#     - rsync -avz --delete -e ssh ./out/ "$PRODUCTION_SERVER:bokunoharemu_stage/haremu_front"
+#   only:
+#     - feature/ci-cd
+
+
 # production:
 #   image: node:lts-alpine
 #   stage: deploy
