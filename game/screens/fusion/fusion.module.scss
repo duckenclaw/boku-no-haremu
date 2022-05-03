@@ -39,17 +39,34 @@
 }
 
 .slot {
-    height: 358px;
-    width: 240px;
+    width: 234px;
+    height: 352px;
+    max-width: 234px;
+    max-height: 352px;
+    cursor: pointer;
 
-    min-height: 358px;
-    min-width: 240px;
+
+
+    .content {
+        padding: 12px 13px;
+    }
+
 
     &.prime_slot {
         border: 6px solid #D36696;
-        width: 276px;
         height: 414px;
+        width: 276px;
+        max-height: 414px;
+        max-width: 276px;
+        padding: 16px;
+
+        .content {
+            padding: 12px 13px;
+        }
+
     }
+
+
 }
 
 .modes {

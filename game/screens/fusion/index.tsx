@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Button } from 'game/components/button'
 import { ScreenContainer } from 'game/components/screen_container'
-import { useFuseCards } from 'game/game_api'
+import { useFuseCards, useFuseRecipes } from 'game/game_api'
 import { useEffect, useMemo, useState } from 'react'
 
 import s from './fusion.module.scss'
@@ -12,14 +12,16 @@ type FusionMode = '3to1' | '5to2'
 
 export const Fusion = () => {
   const [mode, setMode] = useState<FusionMode>('3to1')
-  const [cards, setCards] = useState<(string | null)[]>([null, null, null])
+  const [cards, setCards] = useState<
+    ({ asset_id: string; template_id: string } | null)[]
+  >([null, null, null])
 
   useEffect(() => {
     setCards(Array(mode === '3to1' ? 3 : 5).fill(null))
   }, [mode])
 
   const blockedCards = useMemo(
-    () => cards.filter((c) => c),
+    () => cards.filter((c) => c).map((c) => c?.asset_id!),
     [cards]
   ) as string[]
 
@@ -50,10 +52,10 @@ export const Fusion = () => {
           <FusionSlot
             isPrime={mode === '3to1' ? index === 1 : index <= 1}
             blockedCards={blockedCards}
+            slotData={c}
             key={index}
-            assetId={c}
-            onSetCard={(assetId) => {
-              cards[index] = assetId
+            onSetCard={(asset_id, template_id) => {
+              cards[index] = { asset_id: asset_id!, template_id: template_id! }
               setCards([...cards])
             }}
           />
@@ -64,10 +66,10 @@ export const Fusion = () => {
         onClick={() =>
           mutateAsync({
             primeCards: (mode === '3to1'
-              ? [cards[1]]
-              : cards.slice(0, 2)) as string[],
+              ? [cards[1]?.asset_id]
+              : cards.slice(0, 2).map((c) => c?.asset_id)) as string[],
             secondaryCards: (mode === '3to1'
-              ? [cards[0], cards[2]]
+              ? [cards[0]?.asset_id, cards[2]?.asset_id]
               : cards.slice(2)) as string[],
           }).then(() => setCards(Array(mode === '3to1' ? 3 : 5).fill(null)))
         }

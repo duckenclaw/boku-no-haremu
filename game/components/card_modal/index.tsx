@@ -24,8 +24,9 @@ import { CardFilter } from './card_filter'
 type CardModalProps = {
   isOpen?: boolean
   onClose?: () => void
-  onSelect?: (asset_id: string) => void
+  onSelect?: (asset_id: string, card: AtomicAsset) => void
   blockedCards?: string[]
+  allowedTemplateIds?: string[]
   title?: string
   subtitle?: string
 }
@@ -35,6 +36,7 @@ export const CardModal = ({
   onClose,
   onSelect,
   blockedCards,
+  allowedTemplateIds,
   title,
   subtitle,
 }: CardModalProps) => {
@@ -43,6 +45,7 @@ export const CardModal = ({
       {isOpen && (
         <CardsInventory
           onSelect={onSelect}
+          allowedTemplateIds={allowedTemplateIds}
           blockedCards={blockedCards}
           title={title}
           subtitle={subtitle}
@@ -54,10 +57,11 @@ export const CardModal = ({
 }
 
 type CardsInventoryProps = {
-  onSelect?: (asset_id: string) => void
+  onSelect?: (asset_id: string, card: AtomicAsset) => void
   onCloseClick?: () => void
   blockedCards?: string[]
   title?: string
+  allowedTemplateIds?: string[]
   subtitle?: string
 }
 
@@ -66,6 +70,7 @@ export const CardsInventory = ({
   onCloseClick,
   blockedCards,
   title,
+  allowedTemplateIds,
   subtitle,
 }: CardsInventoryProps) => {
   const [page, setPage] = useState(1)
@@ -91,7 +96,7 @@ export const CardsInventory = ({
     refetch: refetchCards,
   } = useGetAllCards({
     limit: 8,
-    template_id: templateFilter ?? undefined,
+    template_id: allowedTemplateIds?.[0] ?? templateFilter ?? undefined,
   })
 
   const {
@@ -123,7 +128,9 @@ export const CardsInventory = ({
         ...c,
         is_blocked_by_game:
           blockedCards?.includes(c.asset_id) ||
-          miningData?.find((d) => d.staked_asset_id === c.asset_id),
+          miningData?.find((d) => d.staked_asset_id === c.asset_id) ||
+          (allowedTemplateIds &&
+            !allowedTemplateIds.includes(c.template.template_id)),
       })) ?? [],
     [data, blockedCards, miningData, page]
   )
@@ -138,32 +145,34 @@ export const CardsInventory = ({
     <div className={s.container}>
       <div className={s.header}>
         <div className={s.side}>
-          <CardFilter className={s.filter} contentClassName={s.templates}>
-            <Loader
-              isLoading={isTemplatesLoading}
-              isError={isTemplatesError}
-              onRetry={templatesRefetch}
-            >
-              {templatesData?.data.map((t) => (
-                <div
-                  className={s.template}
-                  key={t.template_id}
-                  onClick={() => {
-                    if (templateFilter === t.template_id) {
-                      setTemplateFilter(null)
-                    } else setTemplateFilter(t.template_id)
-                  }}
-                >
+          {!allowedTemplateIds && (
+            <CardFilter className={s.filter} contentClassName={s.templates}>
+              <Loader
+                isLoading={isTemplatesLoading}
+                isError={isTemplatesError}
+                onRetry={templatesRefetch}
+              >
+                {templatesData?.data.map((t) => (
                   <div
-                    className={cn(s.checkbox, {
-                      [s.checked]: t.template_id === templateFilter,
-                    })}
-                  />
-                  {t.immutable_data.name}
-                </div>
-              ))}
-            </Loader>
-          </CardFilter>
+                    className={s.template}
+                    key={t.template_id}
+                    onClick={() => {
+                      if (templateFilter === t.template_id) {
+                        setTemplateFilter(null)
+                      } else setTemplateFilter(t.template_id)
+                    }}
+                  >
+                    <div
+                      className={cn(s.checkbox, {
+                        [s.checked]: t.template_id === templateFilter,
+                      })}
+                    />
+                    {t.immutable_data.name}
+                  </div>
+                ))}
+              </Loader>
+            </CardFilter>
+          )}
         </div>
         <div className={s.center}>
           {title && <h1>{title}</h1>}
@@ -193,7 +202,9 @@ export const CardsInventory = ({
                 alt={c.name}
                 src={ipfsToUrlSafe(c.data.img)}
                 key={c.asset_id}
-                onClick={() => !c.is_blocked_by_game && onSelect?.(c.asset_id)}
+                onClick={() =>
+                  !c.is_blocked_by_game && onSelect?.(c.asset_id, c)
+                }
               />
             ))}
           </div>

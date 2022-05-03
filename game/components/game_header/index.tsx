@@ -40,7 +40,7 @@ export const GameHeader = () => {
           <Image
             className={s.cardPriceIcon}
             alt="nya"
-            src={`images/currencies/nyan.png`}
+            src={`/images/currencies/nyan.png`}
           />
           <ResourceBalance value={nya} />
         </div>
@@ -48,7 +48,7 @@ export const GameHeader = () => {
           <Image
             className={s.cardPriceIcon}
             alt="crystal"
-            src={`images/currencies/crystal.png`}
+            src={`/images/currencies/crystal.png`}
           />
           <ResourceBalance value={cht} />
         </div>
@@ -56,7 +56,7 @@ export const GameHeader = () => {
           <Image
             className={s.cardPriceIcon}
             alt="simptetix"
-            src={`images/currencies/simptetix.png`}
+            src={`/images/currencies/simptetix.png`}
           />
           <ResourceBalance value={smp} />
         </div>
@@ -64,7 +64,7 @@ export const GameHeader = () => {
           <Image
             className={s.cardPriceIcon}
             alt="bento"
-            src={`images/currencies/bento.png`}
+            src={`/images/currencies/bento.png`}
           />
           <ResourceBalance value={bnt} />
         </div>

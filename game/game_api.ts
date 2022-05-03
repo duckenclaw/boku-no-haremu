@@ -318,6 +318,26 @@ export const useCraftRecipes = () => {
   })
 }
 
+export const useFuseRecipes = () => {
+  const { api, isConnected } = useWax()
+  return useQuery({
+    queryKey: ['wax/fuse_recipes'],
+    enabled: isConnected,
+    queryFn: () =>
+      api?.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          table: 'fuserecipes',
+          limit: 100,
+        })
+        .then((res) => {
+          return res.rows as FuseRecipe[]
+        }),
+  })
+}
+
 //
 
 type UseGetTemplateOptions = {
