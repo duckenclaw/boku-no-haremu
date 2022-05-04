@@ -325,6 +325,37 @@
   .image_block {
     top: 100px;
     left: 40px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 373px;
+      height: 373px;
+      background: radial-gradient(
+        53.9% 53.9% at 77.01% 30.21%,
+        rgba(31, 195, 231, 0.84375) 0%,
+        #1f34e7 100%
+      );
+      opacity: 0.2;
+      filter: blur(300px);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 200px;
+      display: block;
+      width: 373px;
+      height: 373px;
+      background: radial-gradient(
+        53.9% 53.9% at 77.01% 30.21%,
+        #479ec5 0%,
+        #ff1cf7 100%
+      );
+      opacity: 0.2;
+      filter: blur(300px);
+    }
   }
 }
 
@@ -371,6 +402,24 @@
   .image_block {
     top: -66px;
     right: 24px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: 583px;
+      height: 483px;
+      background: radial-gradient(
+        46.35% 41.76% at 50% 50%,
+        rgba(105, 55, 243, 0.6) 0%,
+        rgba(199, 179, 254, 0) 100%
+      );
+      opacity: 0.7;
+      filter: blur(82px);
+    }
   }
 }
 
@@ -425,6 +474,40 @@
 
     @media (max-width: 1024px) {
       left: 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -134px;
+      left: 67px;
+      display: block;
+      width: 455px;
+      height: 455px;
+      background: radial-gradient(
+        53.9% 53.9% at 77.01% 30.21%,
+        rgba(31, 195, 231, 0.84375) 0%,
+        #1f34e7 100%
+      );
+      opacity: 0.2;
+      filter: blur(300px);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -134px;
+      left: 67px;
+      display: block;
+      width: 366px;
+      height: 366px;
+      background: radial-gradient(
+        53.9% 53.9% at 77.01% 30.21%,
+        #479ec5 0%,
+        #ff1cf7 100%
+      );
+      opacity: 0.2;
+      filter: blur(300px);
     }
   }
 
