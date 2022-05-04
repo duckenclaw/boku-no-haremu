@@ -22,7 +22,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
         <div className={s.content}>
           <Image
             raw
-            src="images/mimi1.png"
+            src="images/mimi1.webp"
             className={s.mimi_card}
             alt="mimi_card"
           />
@@ -37,7 +37,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
           </div>
           <Image
             raw
-            src="images/mimi2_new.png"
+            src="images/mimi2_new.webp"
             className={s.mimi_card}
             alt="mimi_card"
           />
@@ -52,7 +52,7 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
           </div>
           <Image
             raw
-            src="images/mimi3_new.png"
+            src="images/mimi3_new.webp"
             className={s.mimi_card}
             alt="mimi_card"
           />
