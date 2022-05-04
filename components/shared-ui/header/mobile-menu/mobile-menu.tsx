@@ -19,6 +19,9 @@ export const MobileMenu = () => {
     if (isChecked && $scrollableElement) {
       disablePageScroll($scrollableElement)
     }
+    if (!isChecked && $scrollableElement) {
+      enablePageScroll($scrollableElement)
+    }
   })
 
   return (
