@@ -4,16 +4,17 @@ import classnames from 'classnames'
 import { BaseSlot } from 'game/components/base_slot'
 import { useFuseRecipes, useGetCardByAssetId } from 'game/game_api'
 import { CardModal } from 'game/components/card_modal'
-
-import { ipfsToUrlSafe } from 'utils'
-
-import s from './fusion.module.scss'
 import { CardImage } from 'game/components/card_image'
 import { Button } from 'game/components/button'
 
+import { ipfsToUrlSafe } from 'utils'
+
+import { FusionSlotData } from '.'
+
+import s from './fusion.module.scss'
+
 type FusionSlotProps = {
-  slotsData: ({ asset_id: string; template_id: string } | null)[]
-  slotData: { asset_id: string; template_id: string } | null
+  slotData: FusionSlotData
   blockedCards: string[]
   onSetCard?: (assetId: string | null, templateId: string | null) => void
   isPrime?: boolean
@@ -21,7 +22,6 @@ type FusionSlotProps = {
 
 export const FusionSlot = ({
   slotData,
-  slotsData,
   onSetCard,
   blockedCards,
   isPrime,

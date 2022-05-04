@@ -9,15 +9,16 @@ import s from './fusion.module.scss'
 
 import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
+import { FusionTraits } from './fusion_traits'
 
 type FusionMode = '3to1' | '5to2'
+
+export type FusionSlotData = { asset_id: string; template_id: string } | null
 
 export const Fusion = () => {
   const [fusionCount, setFusionCount] = useState(0)
   const [mode, setMode] = useState<FusionMode>('3to1')
-  const [cards, setCards] = useState<
-    ({ asset_id: string; template_id: string } | null)[]
-  >([null, null, null])
+  const [cards, setCards] = useState<FusionSlotData[]>([null, null, null])
 
   useEffect(() => {
     setCards(Array(mode === '3to1' ? 3 : 5).fill(null))
@@ -66,7 +67,6 @@ export const Fusion = () => {
             isPrime={mode === '3to1' ? index === 1 : index <= 1}
             blockedCards={blockedCards}
             slotData={c}
-            slotsData={cards}
             key={index}
             onSetCard={(asset_id, template_id) => {
               cards[index] = { asset_id: asset_id!, template_id: template_id! }
@@ -93,6 +93,11 @@ export const Fusion = () => {
       >
         Fuse
       </Button>
+      <FusionTraits
+        disabled={disableFuse}
+        slotData={cards}
+        className={s.traits_button}
+      />
     </ScreenContainer>
   )
 }
