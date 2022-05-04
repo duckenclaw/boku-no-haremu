@@ -290,6 +290,12 @@
   }
 }
 
+.image_block .imageGradient {
+  z-index: 0;
+  width: 900px;
+  height: 900px;
+}
+
 .second_shadow {
   position: absolute;
   width: 268.78px;
@@ -340,7 +346,7 @@
   }
 
   .image_block {
-    top: 20px;
+    top: 55px;
     left: -44px;
   }
 }
@@ -583,6 +589,11 @@
 }
 
 .row-14 {
+  .item_left,
+  .item_right {
+    padding-bottom: 150px;
+  }
+
   .image_block {
     left: 60px;
   }
@@ -699,6 +710,13 @@
       }
     }
 
+    &.tow-14 {
+      .item_left,
+      .item_right {
+        padding-bottom: 0;
+      }
+    }
+
     &.row-9,
     &.row-10,
     &.row-11,
@@ -709,6 +727,13 @@
         width: 130%;
         max-height: 370px;
       }
+    }
+
+    .image_block .imageGradient {
+      z-index: 0;
+      width: 700px;
+      height: 700px;
+      max-width: fit-content;
     }
   }
 }

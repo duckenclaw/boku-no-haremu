@@ -13,6 +13,7 @@ export const RoadMap = () => {
       description:
         'We assembled the team, finished ideation of our project and started working on the game. We launched a Discord server, Twitter page and Medium of Boku no Haremu. It is only a start on our journey to give you the Waifus you deserve.',
       image: 'images/road_map/image1.png',
+      gradient: 'images/road_map/image1-gradient.png',
     },
     {
       number: 'April 2022',
@@ -34,6 +35,7 @@ export const RoadMap = () => {
       description:
         'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi nullam vehicula ipsum a. Feugiat in fermentum posuere urna nec tincidunt praesent semper.',
       image: 'images/road_map/image5.png',
+      gradient: 'images/road_map/image5-gradient.png',
     },
     {
       number: '',
@@ -67,6 +69,7 @@ export const RoadMap = () => {
       description:
         'Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra',
       image: 'images/road_map/image7.png',
+      gradient: 'images/road_map/image7-gradient.png',
     },
     {
       number: '',
@@ -149,6 +152,14 @@ export const RoadMap = () => {
                 </div>
                 {item.image && (
                   <div className={s.image_block}>
+                    {item.gradient && (
+                      <Image
+                        raw
+                        className={s.imageGradient}
+                        src={item.gradient}
+                        alt="gradient"
+                      />
+                    )}
                     <Image
                       className={
                         index === 8 ? s.secret_image : s.road_map__image
