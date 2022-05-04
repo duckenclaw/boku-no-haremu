@@ -13,6 +13,7 @@ export const RoadMap = () => {
       description:
         'We assembled the team, finished ideation of our project and started working on the game. We launched a Discord server, Twitter page and Medium of Boku no Haremu. It is only a start on our journey to give you the Waifus you deserve.',
       image: 'images/road_map/image1.png',
+      gradient: 'images/road_map/image1-gradient.png',
     },
     {
       number: 'April 2022',
@@ -34,6 +35,7 @@ export const RoadMap = () => {
       description:
         'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi nullam vehicula ipsum a. Feugiat in fermentum posuere urna nec tincidunt praesent semper.',
       image: 'images/road_map/image5.png',
+      gradient: 'images/road_map/image5-gradient.png',
     },
     {
       number: '',
@@ -67,6 +69,7 @@ export const RoadMap = () => {
       description:
         'Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra',
       image: 'images/road_map/image7.png',
+      gradient: 'images/road_map/image7-gradient.png',
     },
     {
       number: '',
@@ -112,7 +115,7 @@ export const RoadMap = () => {
     },
   ]
 
-  const stage = 2
+  const stage = 1
   const line_class = (index: number) => {
     if (index < stage) return s.before
     if (index === stage) return s.gradient
@@ -128,12 +131,12 @@ export const RoadMap = () => {
         <div className={s.second_shadow} />
         <div className={s.columns_wrapper}>
           {row.map((item, index) => (
-            <div className={s.row} key={index}>
+            <div className={cn(s.row, [s[`row-${index}`]])} key={index}>
               <div className={index <= stage ? s.circle : s.ring} />
               <div className={index % 2 ? s.item_right : s.item_left}>
                 <div className={line_class(index)} />
                 <div className={s.text_block}>
-                  {item.number.length > 0 && (
+                  {!!item.number && (
                     <div className={s.number}>{item.number}</div>
                   )}
                   <div className={s.title}>{item.title}</div>
@@ -149,6 +152,14 @@ export const RoadMap = () => {
                 </div>
                 {item.image && (
                   <div className={s.image_block}>
+                    {item.gradient && (
+                      <Image
+                        raw
+                        className={s.imageGradient}
+                        src={item.gradient}
+                        alt="gradient"
+                      />
+                    )}
                     <Image
                       className={
                         index === 8 ? s.secret_image : s.road_map__image
