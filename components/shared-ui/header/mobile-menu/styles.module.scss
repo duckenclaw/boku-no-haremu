@@ -1,7 +1,7 @@
 .container {
   display: none;
 
-  @media(max-width: 1024px) {
+  @media (max-width: 1024px) {
     display: flex;
   }
 }
@@ -30,24 +30,25 @@
   width: 100%;
   height: 100%;
   margin: 0;
-  box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+  box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
   z-index: -1;
-  background-color: #32133E;
+  background-color: #32133e;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
-.menu__toggle:checked~.menu__box {
+.menu__toggle:checked ~ .menu__box {
   visibility: visible;
   top: 0;
 }
 
 .menu__box {
-  transition-duration: .50s;
+  transition-duration: 0.5s;
 }
 
 .menu__item {
-  transition-duration: .50s;
+  transition-duration: 0.5s;
 }
 
 .menu__social {

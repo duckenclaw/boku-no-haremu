@@ -16,7 +16,6 @@
     "anchor-link-browser-transport": "^3.3.0",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
-    "disable-scroll": "^0.6.0",
     "eosjs": "^22.1.0",
     "luxon": "^2.3.1",
     "next": "12.1.0",
@@ -30,6 +29,7 @@
     "react-toastify": "^8.2.0",
     "react-use-scrollspy": "^3.0.2",
     "sass": "^1.49.9",
+    "scroll-lock": "^2.1.5",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
@@ -41,6 +41,7 @@
     "@types/react-modal": "^3.13.1",
     "@types/react-scrollspy": "^3.3.5",
     "@types/react-slick": "^0.23.8",
+    "@types/scroll-lock": "^2.1.0",
     "eslint": "8.9.0",
     "eslint-config-next": "12.0.10",
     "typescript": "4.5.5"
