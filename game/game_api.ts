@@ -338,6 +338,26 @@ export const useFuseRecipes = () => {
   })
 }
 
+export const useFuseQueue = () => {
+  const { api, isConnected, account } = useWax()
+  return useQuery({
+    queryKey: ['wax/fuse_queue', { account }],
+    enabled: isConnected,
+    queryFn: () =>
+      api?.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          // scope: account,
+          table: 'fusingqueue',
+          limit: 100,
+        })
+        .then((res) => {
+          return res.rows as any[]
+        }),
+  })
+}
+
 //
 
 type UseGetTemplateOptions = {

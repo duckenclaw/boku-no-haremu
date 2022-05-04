@@ -9,6 +9,7 @@ import { ipfsToUrlSafe } from 'utils'
 
 import s from './fusion.module.scss'
 import { CardImage } from 'game/components/card_image'
+import { Button } from 'game/components/button'
 
 type FusionSlotProps = {
   slotsData: ({ asset_id: string; template_id: string } | null)[]
@@ -41,9 +42,6 @@ export const FusionSlot = ({
     useFuseRecipes()
 
   const allowedTemplateIds = useMemo(() => {
-    // if already template id is set by at least some card then enforce this template id
-    const chosenCard = slotsData.find((s) => s?.template_id)
-    if (chosenCard) return [chosenCard.template_id]
     // if none cards are chosen enforce only available template ids from recipes
     if (fuseRecipesData) {
       return fuseRecipesData
@@ -79,6 +77,29 @@ export const FusionSlot = ({
           setIsOpenModal(true)
         }}
         contentClassName={s.content}
+        overlayChildren={
+          <div className={s.buttons}>
+            <Button
+              color="blue"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsOpenModal(true)
+              }}
+            >
+              Change Card
+            </Button>
+            <Button
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation()
+                onSetCard?.(null, null)
+              }}
+            >
+              Remove
+            </Button>
+          </div>
+        }
       >
         {cardData && <CardImage src={ipfsToUrlSafe(cardData.data.data.img)} />}
       </BaseSlot>
