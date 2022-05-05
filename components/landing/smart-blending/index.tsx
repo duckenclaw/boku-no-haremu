@@ -20,7 +20,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
       />
       <div className={s.content}>
         <div className={s.column}>
-          <Image raw className={s.imageTop} alt="" src="/images/mimi_3.png" />
+          <Image raw className={s.imageTop} alt="" src="/images/mimi_3.webp" />
           <div className={s.arrowText}>
             <div className={s.multiplier}>x1</div>
             <div className={s.nextLvl}>next lvl</div>
@@ -38,7 +38,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
           <div className={s.single_image}>
             <Image
               raw
-              src="/images/mimi2_new.png"
+              src="/images/mimi2_new.webp"
               alt=""
               width={151}
               height={228}
@@ -50,7 +50,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
             raw
             className={s.imageTop}
             alt=""
-            src="/images/cantress_5.png"
+            src="/images/chantress_5.webp"
           />
 
           <div className={s.arrowText}>
@@ -70,7 +70,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
             <Image
               raw
               alt=""
-              src="/images/chantress_2.png"
+              src="/images/chantress_2.webp"
               width={233}
               height={228}
             />
