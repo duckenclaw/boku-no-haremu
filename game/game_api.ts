@@ -260,6 +260,21 @@ export const useGetCardByAssetId = ({
   })
 }
 
+type useGetCardsByAssetIds = {
+  assetIds?: string[] | null
+}
+
+export const useGetCardsByAssetIds = ({ assetIds }: useGetCardsByAssetIds) => {
+  return useQuery({
+    queryKey: ['wax/getCardsByAssetIds'],
+    enabled: !!assetIds,
+    queryFn: () =>
+      AtomicHubApi.get(`/assets`, {
+        params: { ids: assetIds?.join(',') },
+      }).then((res) => res.data as GetCardsByIdsResponseType),
+  })
+}
+
 type useGetMiningRecipeOptions = {
   template_id?: string
 }

@@ -159,6 +159,12 @@ type GetCardByIdResponseType = {
   success: boolean
 }
 
+type GetCardsByIdsResponseType = {
+  data: AtomicAsset[]
+  query_time: number
+  success: boolean
+}
+
 type GetTemplateByIdResponseType = {
   data: AtomicTemplate
   query_time: number
