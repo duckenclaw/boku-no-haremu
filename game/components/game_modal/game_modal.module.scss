@@ -1,14 +1,40 @@
-.modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.overlay {
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    inset: 0px;
     overflow: scroll;
-    max-width: 904px;
+
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-height:1024px) {
+
+        &::after {
+            content: ' ';
+            display: block;
+            min-height: min(27vw, 400px);
+        }
+
+
+
+    }
+}
+
+
+.modal {
+
+    position: relative;
+    margin: min(10vw, 100px) auto 0;
+
+    max-width: min(904px, 90vw);
     width: 100%;
-    max-height: 90vh;
+    min-height: 60vh;
+
     padding: 40px 48px 48px;
-    margin: auto;
+
     background: #2D0D3B;
     border-radius: 8px;
     border: 3px solid #71B2CF;
@@ -45,23 +71,7 @@
 
 }
 
-.overlay {
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    inset: 0px;
-    overflow: scroll;
 
-
-    @media screen and (max-height:1024px) {
-        &::after {
-            content: ' ';
-            display: flex;
-            height: calc(100% + min(27vw, 400px));
-        }
-
-    }
-}
 
 .bodyOpen {
     overflow: hidden;

@@ -26,13 +26,21 @@ export const Image: React.FC<ImageProps> = ({
   ) : (
     <Img
       loader={
-        <div style={style} className={classNames(s.unloader, props.className)}>
+        <div
+          {...props}
+          style={style}
+          className={classNames(s.unloader, props.className)}
+        >
           <LoaderIcon />
         </div>
       }
       src={src ?? '/images/mimi_1.png'}
       unloader={
-        <div style={style} className={classNames(s.unloader, props.className)}>
+        <div
+          {...props}
+          style={style}
+          className={classNames(s.unloader, props.className)}
+        >
           ?
         </div>
       }

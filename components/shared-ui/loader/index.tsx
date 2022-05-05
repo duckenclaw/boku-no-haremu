@@ -43,14 +43,15 @@ export const Loader = ({
   if (isNoData) {
     return (
       <>
-        {customNoDataComponent ? (
-          customNoDataComponent
-        ) : onRetry ? (
-          <Button className={s.retry} onClick={onRetry} size="xsmall">
-            Retry
-          </Button>
-        ) : (
-          <div>No data</div>
+        {customNoDataComponent ?? (
+          <>
+            <div className={s.nodata}>No data</div>
+            {onRetry && (
+              <Button className={s.retry} onClick={onRetry} size="xsmall">
+                Retry
+              </Button>
+            )}
+          </>
         )}
       </>
     )
