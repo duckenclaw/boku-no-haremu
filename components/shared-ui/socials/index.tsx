@@ -49,6 +49,16 @@ const Socials: React.FC<Props> = ({ className }) => (
         <Image raw src="/images/svg/twitter.svg" className={s.icon} />
       </a>
     </li>
+    <li>
+      <a
+        href="https://t.me/bokunoharemu"
+        className={s.item}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Image src="/images/svg/telegram.svg" className={s.icon} />
+      </a>
+    </li>
     {/*<li>
       <a className={s.item}>
         <Image src="/images/svg/nefty.svg" className={s.icon} />
