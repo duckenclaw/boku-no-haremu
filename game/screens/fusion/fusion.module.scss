@@ -1,95 +1,129 @@
 .cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 
-    &>* {
-        margin: 24px
-    }
+  & > * {
+    margin: 24px;
+  }
 }
 
 .header {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    margin: 0 0 24px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  margin: 0 0 24px;
 
-    .side {
-        flex: 1
-    }
+  .side {
+    flex: 1;
+  }
 
-    .title {
-        margin: 0;
-        font-family: 'Bangers';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 54px;
+  .title {
+    margin: 0;
+    font-family: 'Bangers';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 54px;
 
-        text-align: center;
-        background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        -webkit-text-stroke-color: white;
-        -webkit-text-stroke-width: 2px;
-    }
-
+    text-align: center;
+    background: linear-gradient(
+      180deg,
+      #ea748f 0%,
+      #ff418a 53.65%,
+      #f237a5 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 2px;
+  }
 }
 
 .slot {
-    width: 234px;
-    height: 352px;
-    max-width: 234px;
-    max-height: 352px;
-    cursor: pointer;
+  width: 234px;
+  height: 352px;
+  max-width: 234px;
+  max-height: 352px;
+  cursor: pointer;
 
+  .content {
+    padding: 12px 13px;
+  }
 
+  &.prime_slot {
+    border: 6px solid #d36696;
+    height: 414px;
+    width: 276px;
+    max-height: 414px;
+    max-width: 276px;
+    padding: 16px;
 
     .content {
-        padding: 12px 13px;
+      padding: 12px 13px;
     }
+  }
 
-
-    &.prime_slot {
-        border: 6px solid #D36696;
-        height: 414px;
-        width: 276px;
-        max-height: 414px;
-        max-width: 276px;
-        padding: 16px;
-
-        .content {
-            padding: 12px 13px;
-        }
-    }
-
-    .buttons {
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-    }
+  .buttons {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
 }
 
 .modes {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
 }
 
 .fusion_queue {
-    position: relative;
+  position: relative;
 
-    .counter {
-        position: absolute;
-        top: 50%;
-        left: 100%;
-        transform: translateY(-50%);
-        font-family: 'Bangers';
-        font-size: 28px;
-        text-align: center;
-        color: #FFFFFF;
-    }
+  .counter {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    font-family: 'Bangers';
+    font-size: 28px;
+    text-align: center;
+    color: #ffffff;
+  }
+}
+
+.modal {
+  min-height: 505px;
+  padding-bottom: 100px;
+  font-family: 'Bangers';
+}
+
+.modalSubtitle {
+  margin-bottom: 36px;
+  margin-top: 12px;
+
+  text-align: center;
+  font-size: 24px;
+  line-height: 26px;
+  color: #d5436f;
+}
+
+.modalCards {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 27px 27px;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modalCard {
+  max-width: 156px;
+  width: 100%;
+  height: 234px;
 }

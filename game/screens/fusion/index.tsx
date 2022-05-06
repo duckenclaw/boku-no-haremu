@@ -88,17 +88,19 @@ export const Fusion = () => {
         }
       >
         <div className={s.modal}>
+          <div className={s.modalSubtitle}>you will lose forever</div>
           <Loader isLoading={isCardsLoading} isError={isCardsError}>
-            <div className={s.modalTitle}>you will lose forever</div>
-            {cardsData?.data?.map((card) => (
-              <CardImage
-                className={s.card}
-                style={{ objectFit: 'cover' }}
-                alt={card.name}
-                src={ipfsToUrlSafe(card.data.img)}
-                key={card.asset_id}
-              />
-            ))}
+            <div className={s.modalCards}>
+              {cardsData?.data?.map((card) => (
+                <CardImage
+                  className={s.modalCard}
+                  style={{ objectFit: 'cover' }}
+                  alt={card.name}
+                  src={ipfsToUrlSafe(card.data.img)}
+                  key={card.asset_id}
+                />
+              ))}
+            </div>
           </Loader>
         </div>
       </ConfirmModal>
