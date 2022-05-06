@@ -1,30 +1,39 @@
 .dialog {
-    position: fixed;
-    bottom: 0;
-    z-index: 10000;
-    width: 1440px;
-    max-width: 100%;
-    min-height: min(27vw, 400px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: url('/game/svg/dialog_background_right.svg') 94% bottom / 81% 73% no-repeat, url('/game/dialog_girl.png') 0 36% / 28.19% 84.75% no-repeat, url('/game/svg/dialog_background_left.svg') 0 bottom / 89.58% 70.75% no-repeat;
+  position: fixed;
+  bottom: 0;
+  z-index: 10000;
+  width: 1440px;
+  max-width: 100%;
+  min-height: min(27vw, 400px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: url('/game/svg/dialog_background_right.svg') 94% bottom / 81% 73%
+      no-repeat,
+    url('/game/dialog_girl.png') 0 36% / 28.19% 84.75% no-repeat,
+    url('/game/svg/dialog_background_left.svg') 0 bottom / 89.58% 70.75%
+      no-repeat;
 
-    .buttons {
-        position: absolute;
-        bottom: 3%;
-        left: 38.5%;
-        display: flex;
-        gap: 10px;
-    }
+  pointer-events: none;
 
-    .content {
-        margin-left: 24.72%;
-        margin-top: 12%;
-        max-width: 60.5%;
-        font-family: 'Bangers';
-        font-size: 24px;
-        color: #FFFFFF;
+  .buttons {
+    position: absolute;
+    bottom: 3%;
+    left: 38.5%;
+    display: flex;
+    gap: 10px;
+    pointer-events: all;
+  }
 
-    }
-
+  .content {
+    overflow: auto;
+    height: 10vw;
+    max-height: 160px;
+    margin-left: 24.72%;
+    margin-top: 12%;
+    max-width: 60.5%;
+    font-family: 'Bangers';
+    font-size: 24px;
+    color: #ffffff;
+    pointer-events: all;
+  }
 }
