@@ -19,7 +19,6 @@ const FusionModalCard: React.FC<Props> = ({ className, asset_id }) => {
       style={{ objectFit: 'cover' }}
       alt={data?.data.name}
       src={ipfsToUrlSafe(data?.data.data.img)}
-      key={data?.data.asset_id}
     />
   )
 }
