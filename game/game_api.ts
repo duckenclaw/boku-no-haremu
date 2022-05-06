@@ -266,7 +266,7 @@ type useGetCardsByAssetIds = {
 
 export const useGetCardsByAssetIds = ({ assetIds }: useGetCardsByAssetIds) => {
   return useQuery({
-    queryKey: ['wax/getCardsByAssetIds'],
+    queryKey: ['wax/getCardsByAssetIds', assetIds],
     enabled: !!assetIds,
     queryFn: () =>
       AtomicHubApi.get(`/assets`, {

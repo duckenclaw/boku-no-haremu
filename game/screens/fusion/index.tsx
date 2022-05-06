@@ -2,14 +2,13 @@ import classNames from 'classnames'
 import { Loader } from 'components/shared-ui/loader'
 
 import { Button, Toggle } from 'game/components/button'
-import { CardImage } from 'game/components/card_image'
 import { ConfirmModal } from 'game/components/confirm_modal'
 import { ScreenContainer } from 'game/components/screen_container'
-import { useFuseCards, useGetCardsByAssetIds } from 'game/game_api'
+import { useFuseCards } from 'game/game_api'
 import { useEffect, useMemo, useState } from 'react'
-import { ipfsToUrlSafe } from 'utils'
 
 import s from './fusion.module.scss'
+import { FusionModalCard } from './fusion_modal_card'
 
 import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
@@ -46,16 +45,6 @@ export const Fusion = () => {
     [cards, isFuseLoading]
   )
 
-  const {
-    data: cardsData,
-    isLoading: isCardsLoading,
-    isError: isCardsError,
-  } = useGetCardsByAssetIds({
-    assetIds: cards.every((item) => !!item)
-      ? cards.map((item) => item!.asset_id)
-      : null,
-  })
-
   const onConfirm = () => {
     return mutateAsync({
       primeCards: (mode === '3to1'
@@ -63,12 +52,14 @@ export const Fusion = () => {
         : cards.slice(0, 2).map((c) => c?.asset_id)) as string[],
       secondaryCards: (mode === '3to1'
         ? [cards[0]?.asset_id, cards[2]?.asset_id]
-        : cards.slice(2)) as string[],
-    }).then(() => {
-      setFusionCount((c) => c + 1)
-      setCards(Array(mode === '3to1' ? 3 : 5).fill(null))
-      setModalIsOpen(false)
+        : cards.slice(2).map((c) => c?.asset_id)) as string[],
     })
+      .then(() => {
+        setFusionCount((c) => c + 1)
+        setCards(Array(mode === '3to1' ? 3 : 5).fill(null))
+        setModalIsOpen(false)
+      })
+      .catch(() => setModalIsOpen(false))
   }
 
   return (
@@ -89,19 +80,15 @@ export const Fusion = () => {
       >
         <div className={s.modal}>
           <div className={s.modalSubtitle}>you will lose forever</div>
-          <Loader isLoading={isCardsLoading} isError={isCardsError}>
-            <div className={s.modalCards}>
-              {cardsData?.data?.map((card) => (
-                <CardImage
-                  className={s.modalCard}
-                  style={{ objectFit: 'cover' }}
-                  alt={card.name}
-                  src={ipfsToUrlSafe(card.data.img)}
-                  key={card.asset_id}
-                />
-              ))}
-            </div>
-          </Loader>
+          <div className={s.modalCards}>
+            {cards.map((card, index) => (
+              <FusionModalCard
+                className={s.modalCard}
+                key={index}
+                asset_id={card?.asset_id}
+              />
+            ))}
+          </div>
         </div>
       </ConfirmModal>
       <ScreenContainer vertical>
@@ -120,7 +107,7 @@ export const Fusion = () => {
             isLeft={mode === '3to1'}
             onChange={(isLeft) => setMode(isLeft ? '3to1' : '5to2')}
             leftLabel={'3 to 1'}
-            rightLabel={'5 to 1'}
+            rightLabel={'5 to 2'}
           />
         </div>
         <div className={s.cards}>
@@ -131,10 +118,15 @@ export const Fusion = () => {
               slotData={c}
               key={index}
               onSetCard={(asset_id, template_id) => {
-                cards[index] = {
-                  asset_id: asset_id!,
-                  template_id: template_id!,
+                if (asset_id && template_id) {
+                  cards[index] = {
+                    asset_id: asset_id!,
+                    template_id: template_id!,
+                  }
+                } else {
+                  cards[index] = null
                 }
+
                 setCards([...cards])
               }}
             />
@@ -146,7 +138,7 @@ export const Fusion = () => {
         <FusionTraits
           disabled={disableFuse}
           slotData={cards}
-          className={s.traits_button}
+          className={s.traitsButton}
         />
       </ScreenContainer>
     </>

@@ -96,8 +96,8 @@
 }
 
 .modal {
-  min-height: 505px;
-  padding-bottom: 100px;
+  min-height: 360px;
+  padding-bottom: 52px;
   font-family: 'Bangers';
 }
 
@@ -126,4 +126,8 @@
   max-width: 156px;
   width: 100%;
   height: 234px;
+}
+
+.traitsButton {
+  margin-top: 12px;
 }
