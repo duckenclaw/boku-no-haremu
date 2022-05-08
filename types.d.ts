@@ -124,6 +124,11 @@ type CraftRecipe = {
   cost: BalanceType[]
 }
 
+type FuseRecipe = {
+  result_template_id: number
+  source_template_id: number
+}
+
 type MineRecordType = {
   finishing_at: number
   staked_asset_id: string
@@ -150,6 +155,12 @@ type MiningRecipeRecordType = {
 
 type GetCardByIdResponseType = {
   data: AtomicAsset
+  query_time: number
+  success: boolean
+}
+
+type GetCardsByIdsResponseType = {
+  data: AtomicAsset[]
   query_time: number
   success: boolean
 }

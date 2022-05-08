@@ -1,28 +1,33 @@
-import { useState } from 'react'
-import { Image } from 'components/shared-ui/image'
+import { useMemo, useState } from 'react'
 import classnames from 'classnames'
 
 import { BaseSlot } from 'game/components/base_slot'
-import { useGetCardByAssetId } from 'game/game_api'
+import { useFuseRecipes, useGetCardByAssetId } from 'game/game_api'
 import { CardModal } from 'game/components/card_modal'
+import { CardImage } from 'game/components/card_image'
+import { Button } from 'game/components/button'
 
 import { ipfsToUrlSafe } from 'utils'
+
+import { FusionSlotData } from '.'
 
 import s from './fusion.module.scss'
 
 type FusionSlotProps = {
-  assetId: string | null
+  slotData: FusionSlotData
   blockedCards: string[]
-  onSetCard?: (assetId: string | null) => void
+  onSetCard?: (assetId: string | null, templateId: string | null) => void
   isPrime?: boolean
 }
 
 export const FusionSlot = ({
-  assetId,
+  slotData,
   onSetCard,
   blockedCards,
   isPrime,
 }: FusionSlotProps) => {
+  const asset_id = slotData?.asset_id ?? null
+  const template_id = slotData?.template_id ?? null
   const [isOpenModal, setIsOpenModal] = useState(false)
   const {
     data: cardData,
@@ -30,8 +35,22 @@ export const FusionSlot = ({
     isError: isErrorCard,
     refetch: refetchCard,
   } = useGetCardByAssetId({
-    asset_id: assetId,
+    asset_id,
   })
+
+  const { data: fuseRecipesData, isLoading: isFuseRecipesData } =
+    useFuseRecipes()
+
+  const allowedTemplateIds = useMemo(() => {
+    // if none cards are chosen enforce only available template ids from recipes
+    if (fuseRecipesData) {
+      return fuseRecipesData
+        .filter((f) => f.source_template_id)
+        .map((f) => String(f.source_template_id))
+    }
+    // if no fuseRecipes available then no templates are allowed
+    return []
+  }, [fuseRecipesData, template_id])
 
   return (
     <>
@@ -41,31 +60,48 @@ export const FusionSlot = ({
         onClose={() => {
           setIsOpenModal(false)
         }}
-        blockedCards={[...blockedCards]}
-        onSelect={(assetId) => {
-          onSetCard?.(assetId)
+        allowedTemplateIds={allowedTemplateIds}
+        blockedCards={blockedCards}
+        onSelect={(assetId, card) => {
+          onSetCard?.(assetId, card.template.template_id)
           setIsOpenModal(false)
         }}
       />
       <BaseSlot
         className={classnames(s.slot, { [s.prime_slot]: isPrime })}
-        isEmpty={!assetId}
-        isLoading={isCardLoading}
+        isEmpty={!asset_id}
+        isLoading={isCardLoading || isFuseRecipesData}
         isError={isErrorCard}
         onRetry={refetchCard}
         onClick={() => {
           setIsOpenModal(true)
         }}
+        contentClassName={s.content}
+        overlayChildren={
+          <div className={s.buttons}>
+            <Button
+              color="blue"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsOpenModal(true)
+              }}
+            >
+              Change Card
+            </Button>
+            <Button
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation()
+                onSetCard?.(null, null)
+              }}
+            >
+              Remove
+            </Button>
+          </div>
+        }
       >
-        {cardData && (
-          <Image
-            width={234}
-            height={352}
-            style={{ objectFit: 'cover' }}
-            alt={cardData.data.name}
-            src={ipfsToUrlSafe(cardData.data.data.img)}
-          />
-        )}
+        {cardData && <CardImage src={ipfsToUrlSafe(cardData.data.data.img)} />}
       </BaseSlot>
     </>
   )

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import s from './styles.module.scss'
-import disableScroll from 'disable-scroll'
-import { useMediaQuery } from 'react-responsive'
-
 import IconBurger from 'public/images/svg/humburger.svg'
 import IconCross from 'public/images/svg/cross.svg'
 import { Socials } from 'components/shared-ui/socials'
 import { Navigation } from '../navigation'
+import cn from 'classnames'
+import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 
 export const MobileMenu = () => {
   const [isChecked, setIsChecked] = useState(false)
@@ -15,17 +14,15 @@ export const MobileMenu = () => {
     setIsChecked(!isChecked)
   }
 
-  const isMobile = useMediaQuery({
-    query: '(min-width: 1024px)',
-  })
-
   useEffect(() => {
-    if (isChecked) {
-      disableScroll['on']()
-    } else {
-      disableScroll['off']()
+    const $scrollableElement = document.querySelector('.menu-box-scrollable')
+    if (isChecked && $scrollableElement) {
+      disablePageScroll($scrollableElement)
     }
-  }, [isChecked])
+    if (!isChecked && $scrollableElement) {
+      enablePageScroll($scrollableElement)
+    }
+  })
 
   return (
     <div className={s.container}>
@@ -39,7 +36,7 @@ export const MobileMenu = () => {
       <label className={s.menu__btn} htmlFor="menu__toggle">
         {isChecked ? <IconCross /> : <IconBurger />}
       </label>
-      <div className={s.menu__box}>
+      <div className={cn(s.menu__box, 'menu-box-scrollable')}>
         <Navigation setIsChecked={setIsChecked} />
         <div className={s.menu__social}>
           <Socials />

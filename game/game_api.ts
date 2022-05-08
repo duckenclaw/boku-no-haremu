@@ -260,6 +260,21 @@ export const useGetCardByAssetId = ({
   })
 }
 
+type useGetCardsByAssetIds = {
+  assetIds?: string[] | null
+}
+
+export const useGetCardsByAssetIds = ({ assetIds }: useGetCardsByAssetIds) => {
+  return useQuery({
+    queryKey: ['wax/getCardsByAssetIds', assetIds],
+    enabled: !!assetIds,
+    queryFn: () =>
+      AtomicHubApi.get(`/assets`, {
+        params: { ids: assetIds?.join(',') },
+      }).then((res) => res.data as GetCardsByIdsResponseType),
+  })
+}
+
 type useGetMiningRecipeOptions = {
   template_id?: string
 }
@@ -314,6 +329,46 @@ export const useCraftRecipes = () => {
             cost: r.cost.map((c: any) => balanceStringToObject(c)),
           }))
           return res.rows as CraftRecipe[]
+        }),
+  })
+}
+
+export const useFuseRecipes = () => {
+  const { api, isConnected } = useWax()
+  return useQuery({
+    queryKey: ['wax/fuse_recipes'],
+    enabled: isConnected,
+    queryFn: () =>
+      api?.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          table: 'fuserecipes',
+          limit: 100,
+        })
+        .then((res) => {
+          return res.rows as FuseRecipe[]
+        }),
+  })
+}
+
+export const useFuseQueue = () => {
+  const { api, isConnected, account } = useWax()
+  return useQuery({
+    queryKey: ['wax/fuse_queue', { account }],
+    enabled: isConnected,
+    queryFn: () =>
+      api?.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          // scope: account,
+          table: 'fusingqueue',
+          limit: 100,
+        })
+        .then((res) => {
+          return res.rows as any[]
         }),
   })
 }

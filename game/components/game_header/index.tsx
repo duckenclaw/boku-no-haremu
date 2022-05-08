@@ -3,8 +3,9 @@ import { useWax } from 'contexts/wax_context'
 import { useGetResources, useWaxBalance } from 'game/game_api'
 import IconInfo from 'public/game/svg/icon_info.svg'
 import IconSound from 'public/game/svg/icon_sound.svg'
-import s from './game_header.module.scss'
+import { Tooltip } from 'game/components/tooltip'
 import { Image } from 'components/shared-ui/image'
+import s from './game_header.module.scss'
 
 type ResourceBalanceProps = {
   value?: number
@@ -36,38 +37,39 @@ export const GameHeader = () => {
       </div>
 
       <div className={s.cards}>
-        <div className={s.res}>
+        <div className={s.res} data-tip="Nyan">
           <Image
             className={s.cardPriceIcon}
-            alt="nya"
-            src={`images/currencies/nyan.png`}
+            alt="nyan"
+            src={`/images/currencies/nyan.png`}
           />
           <ResourceBalance value={nya} />
         </div>
-        <div className={s.res}>
+        <div className={s.res} data-tip="Simptetix">
           <Image
             className={s.cardPriceIcon}
             alt="crystal"
-            src={`images/currencies/crystal.png`}
+            src={`/images/currencies/crystal.png`}
           />
           <ResourceBalance value={cht} />
         </div>
-        <div className={s.res}>
+        <div className={s.res} data-tip="Bento">
           <Image
             className={s.cardPriceIcon}
             alt="simptetix"
-            src={`images/currencies/simptetix.png`}
+            src={`/images/currencies/simptetix.png`}
           />
           <ResourceBalance value={smp} />
         </div>
-        <div className={s.res}>
+        <div className={s.res} data-tip="Chantment">
           <Image
             className={s.cardPriceIcon}
             alt="bento"
-            src={`images/currencies/bento.png`}
+            src={`/images/currencies/bento.png`}
           />
           <ResourceBalance value={bnt} />
         </div>
+        <Tooltip />
       </div>
       <div className={s.info}>
         <IconInfo className={s.icon_info} />

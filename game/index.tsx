@@ -8,14 +8,13 @@ import { useWax, WaxProvider } from 'contexts/wax_context'
 import { GameContextProvider } from './game_context'
 import { GameFooter } from 'game/components/game_footer'
 import { GameHeader } from 'game/components/game_header'
+import { Wallets } from 'game/components/game_wallets'
+import { InitAccount } from 'game/components/game_init_account'
 import { Router } from 'game/screens/router'
 import { useGetResources, useInitAccount } from './game_api'
 import { GameLayout } from './game_layout'
 import { Loader } from 'components/shared-ui/loader'
-
 import s from './game_component.module.scss'
-import { Wallets } from './components/game_wallets'
-import { InitAccount } from './components/game_init_account'
 
 Modal.setAppElement('#__next')
 
