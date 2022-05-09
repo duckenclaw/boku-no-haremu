@@ -70,7 +70,7 @@ deploy_staging:
     - chmod 700 ~/.ssh
     - npm run build
     - npm run export
-    - rsync -avz --delete -e ssh ./out/ "$STAGING_SERVER:haremu-front"
+    - rsync -avz --delete -e ssh ./out/ "$STAGING_SERVER:bokunoharemu-stage/haremu-front"
   only:
     - develop
 
