@@ -91,7 +91,7 @@ export const RoadMap = () => {
       number: '',
       title: 'Resource Packs sale',
       description:
-        'Gifts from your waifus gathered in one Resources are needed to start the mining the resources, you can check our <p>Whitepaper</p> to know the mechanics, so be ready for some more packs that will ensure prosperity of your Haremu.',
+        'Gifts from your waifus gathered in one Resources are needed to start the mining the resources, you can check our <b>Whitepaper</b> to know the mechanics, so be ready for some more packs that will ensure prosperity of your Haremu.',
       image: 'images/road_map/image8.webp',
     },
     {
