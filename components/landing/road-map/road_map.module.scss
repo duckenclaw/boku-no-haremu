@@ -176,10 +176,16 @@
 }
 
 .subtitle {
-  margin-top: 12px;
+  margin-top: 8px;
   font-size: 18px;
   line-height: 21px;
   color: #f237a5;
+
+  @media (max-width: 768px) {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 12px;
+  }
 }
 
 .clarification {
