@@ -16,7 +16,12 @@ const Socials: React.FC<Props> = ({ className }) => (
         target="_blank"
         rel="noreferrer"
       >
-        <Image raw src="/images/svg/discord.svg" className={s.icon} />
+        <Image
+          raw
+          src="/images/svg/discord.svg"
+          className={s.icon}
+          alt="atomic"
+        />
       </a>
     </li>
     <li>
@@ -26,7 +31,12 @@ const Socials: React.FC<Props> = ({ className }) => (
         target="_blank"
         rel="noreferrer"
       >
-        <Image raw src="/images/svg/atomic.svg" className={s.icon} />
+        <Image
+          raw
+          src="/images/svg/atomic.svg"
+          className={s.icon}
+          alt="atomic"
+        />
       </a>
     </li>
     <li>
@@ -36,7 +46,12 @@ const Socials: React.FC<Props> = ({ className }) => (
         target="_blank"
         rel="noreferrer"
       >
-        <Image raw src="/images/svg/medium.svg" className={s.icon} />
+        <Image
+          raw
+          src="/images/svg/medium.svg"
+          className={s.icon}
+          alt="medium"
+        />
       </a>
     </li>
     <li>
@@ -46,7 +61,12 @@ const Socials: React.FC<Props> = ({ className }) => (
         target="_blank"
         rel="noreferrer"
       >
-        <Image raw src="/images/svg/twitter.svg" className={s.icon} />
+        <Image
+          raw
+          src="/images/svg/twitter.svg"
+          className={s.icon}
+          alt="twitter"
+        />
       </a>
     </li>
     <li>
@@ -56,7 +76,12 @@ const Socials: React.FC<Props> = ({ className }) => (
         target="_blank"
         rel="noreferrer"
       >
-        <Image src="/images/svg/telegram.svg" className={s.icon} />
+        <Image
+          raw
+          src="/images/svg/telegram.svg"
+          className={s.icon}
+          alt="telegram"
+        />
       </a>
     </li>
     {/*<li>

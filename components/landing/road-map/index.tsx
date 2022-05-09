@@ -23,47 +23,52 @@ export const RoadMap = () => {
     },
     {
       number: 'May 2022',
-      title: '10 May. Mintpass sale day 1 ',
+      title: 'May 10 - Mintpass sale day 1 ',
       description:
-        'On the release day of the mintpasses there will be only 200 of them. This will be the lowest price in Boku no Haremu’s history so don’t miss out on your chance! Remember, that you can participate in the sale ONLY if you are WHITELISTED in our Discord server.',
+        'On the release day of the mintpasses you can buy them for 179 WAX and there will be 200 of them. This will be the lowest price in Boku no Haremu’s history so don’t miss out on your chance! Remember, that you can participate in the sale ONLY if you have WHITELIST NFT  in wallet.',
       image: 'images/road_map/image3.webp',
     },
     {
       number: '',
       title: 'Secret event',
+      subtitle: 'Powered by Polygon',
+      clarification: 'This will be open after the first day of sales',
       description:
         'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi nullam vehicula ipsum a. Feugiat in fermentum posuere urna nec tincidunt praesent semper.',
       image: 'images/road_map/image5.webp',
     },
     {
       number: '',
-      title: '13 May. Mintpass sale day 2',
+      title: 'May 13 - Mintpass sale day 2',
       description:
-        'On the second day of the sale the price will go up and there will be only 300 mintpasses for sale. The price will only go up from this point.',
+        'On the second day of the sale the price will go up to 359 WAX  and there will be only 300 mintpasses for sale. The price will only go up from this point.',
       image: 'images/road_map/image4.webp',
     },
     {
       number: '',
-      title: '14 May. Mintpass sale day 3',
+      title: 'May 15 - Mintpass sale day 3',
       description:
-        'It’s the final day of the mintpass sale, and the price is now even higher! There is only 300 of them! Get your mintpasses, this will be your last chance to get into the most progressive project on WAX - Boku no Haremu.',
+        'It’s the final day of the mintpass sale, and the price is now 589 WAX, there is only 300 of them! Get your mintpasses, this will be your last chance to get into the most progressive project on WAX - Boku no Haremu.',
       image: 'images/road_map/image6.webp',
     },
     {
       number: '',
       title: 'Secret Event',
+      clarification: 'This will be open after the first day of sales',
       description:
         'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum',
     },
     {
       number: '',
       title: 'Secret Event',
+      clarification: 'This will be open after the first day of sales',
       description:
         'Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi',
     },
     {
       number: '',
       title: 'Secret Event',
+      clarification: 'This will be open after the first day of sales',
       description:
         'Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra',
       image: 'images/road_map/image7.webp',
@@ -105,7 +110,7 @@ export const RoadMap = () => {
     },
     {
       number: '',
-      title: 'Bridge to the ETHEREUM blockchain',
+      title: 'Bridge to EVM blockchains',
       description:
         'We’re all set for the migration of your Harem, now you can have your Waifu on OpenSea so everyone can see what path you have taken, what happened in your journey and what obstacles you have overcome to get your Waifu!',
       image: 'images/road_map/image12.webp',
@@ -128,7 +133,14 @@ export const RoadMap = () => {
         <div className={s.second_shadow} />
         <div className={s.columns_wrapper}>
           {row.map((item, index) => (
-            <div className={cn(s.row, [s[`row-${index}`]])} key={index}>
+            <div
+              className={cn(
+                s.row,
+                [s[`row-${index}`]],
+                item.clarification && s.rowClarification
+              )}
+              key={index}
+            >
               <div className={index <= stage ? s.circle : s.ring} />
               <div className={index % 2 ? s.item_right : s.item_left}>
                 <div className={line_class(index)} />
@@ -136,7 +148,15 @@ export const RoadMap = () => {
                   {!!item.number && (
                     <div className={s.number}>{item.number}</div>
                   )}
-                  <div className={s.title}>{item.title}</div>
+                  <div className={s.title}>
+                    {item.title}
+                    {item.subtitle && (
+                      <div className={s.subtitle}>{item.subtitle}</div>
+                    )}
+                  </div>
+                  {item.clarification && (
+                    <div className={s.clarification}>{item.clarification}</div>
+                  )}
                   <div
                     className={
                       item.title.toLowerCase() !== 'secret event'
