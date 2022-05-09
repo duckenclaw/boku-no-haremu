@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { Loader } from 'components/shared-ui/loader'
 
 import { Button, Toggle } from 'game/components/button'
 import { ConfirmModal } from 'game/components/confirm_modal'
@@ -12,7 +11,7 @@ import { FusionModalCard } from './fusion_modal_card'
 
 import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
-import { FusionTraits } from './fusion_traits'
+import { FusionTraits } from './traits/fusion_traits'
 
 type FusionMode = '3to1' | '5to2'
 

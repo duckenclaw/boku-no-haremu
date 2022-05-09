@@ -1,7 +1,8 @@
 import { Button } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
-import { useState } from 'react'
-import { FusionSlotData } from '.'
+import { useGetCardByAssetId, useGetTemplateById } from 'game/game_api'
+import { useMemo, useState } from 'react'
+import { FusionSlotData } from '..'
 
 import s from './fusion_traits.module.scss'
 
@@ -17,6 +18,21 @@ export const FusionTraits = ({
   slotData,
 }: FusionTraitsProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const template_id = useMemo(() => {
+    const isCardsEqual = slotData.every((val, i, arr) =>
+      val?.template_id ? val.template_id === arr[0]!.template_id : false
+    )
+    if (isCardsEqual) {
+      return Number(slotData[0]!.template_id)
+    }
+    return undefined
+  }, [slotData])
+
+  const { data } = useGetTemplateById({
+    template_id,
+  })
+  console.log('🚀 ~ file: fusion_traits.tsx ~ line 29 ~ data', data)
+
   return (
     <>
       <Button
@@ -33,7 +49,9 @@ export const FusionTraits = ({
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
         title={'Your choice'}
-      ></GameModal>
+      >
+        <div className={s.modal}>content</div>
+      </GameModal>
     </>
   )
 }
