@@ -38,7 +38,7 @@ export const SmartBlending: React.FC<SmartBlendingProps> = ({ className }) => (
           <div className={s.single_image}>
             <Image
               raw
-              src="/images/mimi2_new.webp"
+              src="/images/shadow.webp"
               alt=""
               width={151}
               height={228}
