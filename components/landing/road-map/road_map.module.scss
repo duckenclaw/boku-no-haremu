@@ -116,7 +116,7 @@
   top: 0;
   left: -63px;
   width: 8px;
-  height: calc(100% + 152px);
+  height: calc(100% + 104px);
   border-radius: 8px;
   z-index: 0;
 
@@ -134,10 +134,10 @@
 
 .number {
   min-width: 400px;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
   font-family: 'Kamikaze';
   font-weight: 400;
-  font-size: 64px;
+  font-size: 54px;
   line-height: 52px;
   text-align: start;
   background: linear-gradient(
@@ -152,7 +152,7 @@
   @media (max-width: 768px) {
     min-width: 0;
     margin-bottom: 16px;
-    font-size: 32px;
+    font-size: 24px;
     line-height: 32px;
   }
 }
@@ -167,22 +167,51 @@
 
 .title {
   font-weight: 400;
-  font-size: 48px;
-  line-height: 57px;
+  font-size: 36px;
+  line-height: 43px;
   @media (max-width: 768px) {
-    font-size: 28px;
-    line-height: 33px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 21px;
+  color: #f237a5;
+
+  @media (max-width: 768px) {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 12px;
+  }
+}
+
+.clarification {
+  margin-top: 24px;
+  margin-bottom: 20px;
+
+  font-size: 28px;
+  line-height: 33px;
+  color: #7e7c7c;
+
+  @media (max-width: 768px) {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 21px;
   }
 }
 
 .description {
   font-weight: 400;
-  font-size: 32px;
-  line-height: 38px;
-  margin-top: 42px;
+  font-size: 28px;
+  line-height: 34px;
+  margin-top: 24px;
   @media (max-width: 768px) {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 22px;
     margin-top: 16px;
     margin-bottom: 10px;
   }
@@ -192,7 +221,7 @@
   font-weight: 400;
   font-size: 32px;
   line-height: 38px;
-  margin-top: 42px;
+  margin-top: 16px;
   filter: blur(10px);
 
   @media (max-width: 768px) {
@@ -313,13 +342,13 @@
 .row-0 .circle,
 .row-1 .circle,
 .row-2 .ring {
-  top: 160px;
+  top: 113px;
 }
 
 .row-0 {
   .item_left,
   .item_right {
-    padding-bottom: 165px;
+    padding-bottom: 171px;
   }
 
   .image_block {
@@ -365,11 +394,6 @@
     padding-bottom: 110px;
   }
 
-  .number {
-    position: relative;
-    left: -100%;
-  }
-
   .image_block {
     top: 55px;
     left: -44px;
@@ -383,8 +407,8 @@
   }
 
   .after {
-    top: 204px;
-    height: calc(100% - 213px);
+    top: 160px;
+    height: calc(100% - 171px);
   }
 
   .image_block {
@@ -533,7 +557,7 @@
   }
 
   .after {
-    height: calc(100% + 96px);
+    height: calc(100% + 60px);
   }
 
   @media (max-width: 1024px) {
@@ -551,12 +575,12 @@
   }
 
   .ring {
-    top: 156px;
+    top: 118px;
   }
 
   .after {
-    top: 204px;
-    height: calc(100% - 214px);
+    top: 167px;
+    height: calc(100% - 178px);
   }
 
   .image_block {
@@ -614,7 +638,7 @@
   }
 
   .after {
-    height: calc(100% + 139px);
+    height: calc(100% + 152px);
   }
 }
 
@@ -625,7 +649,7 @@
   }
 
   .ring {
-    top: 196px;
+    top: 208px;
   }
 
   .text_block {
@@ -634,8 +658,6 @@
   }
 
   .number {
-    position: relative;
-    left: -100%;
     margin-bottom: 155px;
   }
 
@@ -650,8 +672,8 @@
   }
 
   .after {
-    top: 240px;
-    height: calc(100% - 249px);
+    top: 253px;
+    height: calc(100% - 263px);
   }
 
   @media (max-width: 1024px) {
@@ -690,7 +712,7 @@
 .row {
   @media (max-width: 768px) {
     .circle {
-      top: 63px;
+      top: 61px;
     }
 
     .text_block {
@@ -719,18 +741,18 @@
 
     &.row-1 {
       .gradient {
-        height: calc(100% + 66px);
+        height: calc(100% + 63px);
       }
     }
 
     &.row-2 {
       .ring {
-        top: 64px;
+        top: 60px;
       }
 
       .after {
-        top: 89px;
-        height: calc(100% - 84px);
+        top: 85px;
+        height: calc(100% - 78px);
       }
     }
 
@@ -772,18 +794,18 @@
 
     &.row-12 {
       .after {
-        height: calc(100% + 40px);
+        height: calc(100% + 34px);
       }
     }
 
     &.row-13 {
       .ring {
-        top: 65px;
+        top: 59px;
       }
 
       .after {
-        top: 88px;
-        height: calc(100% - 83px);
+        top: 84px;
+        height: calc(100% - 77px);
       }
     }
 
