@@ -11,7 +11,7 @@ export const RoadMap = () => {
       number: 'March 2022',
       title: 'Pre-Production',
       description:
-        'We assembled the team, finished ideation of our project and started working on the game. We launched a <b>Discord server, Twitter</b> page and Medium of Boku no Haremu. It is only a start on our journey to give you the Waifus you deserve.',
+        'We assembled the team, finished ideation of our project and started working on the game. We launched a <b>Discord server, Twitter</b> page and <b>Medium</b> of <b>Boku no Haremu</b>. It is only a start on our journey to give you the Waifus you deserve.',
       image: 'images/road_map/image1.png',
     },
     {
@@ -30,25 +30,25 @@ export const RoadMap = () => {
     },
     {
       number: '',
-      title: 'Secret event',
-      subtitle: 'Powered by Polygon',
-      clarification: 'This will be open after the first day of sales',
+      title: 'Partnership with Polygon',
+      subtitle: '',
+      clarification: '',
       description:
-        'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum arcu vitae elementum curabitur vitae. Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi nullam vehicula ipsum a. Feugiat in fermentum posuere urna nec tincidunt praesent semper.',
+        'Boku no Haremu is the first game on WAX that is going to bridge NFTs to Polygon.',
       image: 'images/road_map/image5.webp',
     },
     {
       number: '',
       title: 'May 13 - Mintpass sale day 2',
       description:
-        'On the second day of the sale the price will go up to <span style="color: #6CCAF3">359 WAX</span> and there will be only 300 mintpasses for sale. The price will only go up from this point.',
+        'On the second day of the sale the price will go up to <span style="color: #6CCAF3">359 WAX</span> and there will be only <b>300</b> mintpasses for sale. The price will only go up from this point.',
       image: 'images/road_map/image4.webp',
     },
     {
       number: '',
       title: 'May 15 - Mintpass sale day 3',
       description:
-        'It’s the final day of the mintpass sale, and the price is now <span style="color: #6CCAF3">589 WAX</span>, there is only 300 of them! Get your mintpasses, this will be your <b>last chance</b> to get into the most <b>progressive project</b> on <b>WAX - Boku no Haremu</b>.',
+        'It’s the final day of the mintpass sale, and the price is now <span style="color: #6CCAF3">589 WAX</span>, there is only <b>300</b> of them! Get your mintpasses, this will be your <b>last chance</b> to get into the most <b>progressive project</b> on <b>WAX - Boku no Haremu</b>.',
       image: 'images/road_map/image6.webp',
     },
     {
@@ -89,16 +89,16 @@ export const RoadMap = () => {
     },
     {
       number: '',
-      title: 'Resource Packs sale',
+      title: 'Money Packs sale',
       description:
-        'Gifts from your waifus gathered in one Resources are needed to start the mining the resources, you can check our <b>Whitepaper</b> to know the mechanics, so be ready for some more packs that will ensure prosperity of your Haremu.',
+        'Gifts from your waifus gathered in one <b>Resources</b> are needed to start the mining the resources, you can check our <b>Whitepaper</b> to know the mechanics, so be ready for some more packs that will ensure prosperity of your <b>Haremu</b>.',
       image: 'images/road_map/image8.webp',
     },
     {
       number: '',
       title: 'Launch of the Boku no Haremu',
       description:
-        'The journey has started, all your Waifus are ready and you can now start developing your Harem! This is where your path begins, where all your triumphs lie and where the future of your waifus is decided... Your waifus can upgrade only up to the 3rd level at this point but no matter what your Waifu will be unique in the end!',
+        'The journey has started, all your <b>Waifus</b> are ready and you can now start developing your Harem! This is where your path begins, where all your triumphs lie and where the future of your waifus is decided... Your waifus can upgrade only up to the 3rd level at this point but no matter what your Waifu will be <b>unique</b> in the end!',
       image: 'images/road_map/image10.webp',
     },
     {
