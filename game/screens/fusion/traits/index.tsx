@@ -55,7 +55,7 @@ export const FusionTraits = ({
         <div className={s.content}>
           <SlideIcon
             className={cn(s.side, {
-              [s.disabled]: activeCard >= primeCards?.length,
+              [s.hide]: activeCard <= 0,
             })}
             onClick={prevSlide}
           />
@@ -67,7 +67,12 @@ export const FusionTraits = ({
                 key={card?.asset_id}
               />
             ))}
-          <SlideIcon className={cn(s.side, s.rotate)} onClick={nextSlide} />
+          <SlideIcon
+            className={cn(s.side, s.rotate, {
+              [s.hide]: activeCard >= primeCards.length - 1,
+            })}
+            onClick={nextSlide}
+          />
         </div>
       </GameModal>
     </>
