@@ -7,20 +7,16 @@ import {
   useQueryClient,
 } from 'react-query'
 import { toast } from 'react-toastify'
+import { Serialize } from 'eosjs'
 
 export const AtomicHubApi = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_TESTNET === 'true'
       ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
       : 'https://wax.api.atomicassets.io/atomicassets/v1/',
-  headers: {
-    'Cache-Control': 'no-cache',
-    Pragma: 'no-cache',
-    Expires: '0',
-  },
 })
 
-/// QUERIES
+/// HELPERS
 
 // balance string helper
 export const balanceStringToObject = (
@@ -37,6 +33,44 @@ export const balanceStringToObject = (
     currency: currency_str,
   } as BalanceType
 }
+
+const types = Serialize.createInitialTypes()
+
+const nameToUint64 = (name: string): string => {
+  let ser = new Serialize.SerialBuffer()
+  ser.pushName(name)
+  return types.get('uint64')?.deserialize(ser)
+}
+
+const uint64ToName = (num: string): string => {
+  let ser = new Serialize.SerialBuffer()
+  types.get('uint64')?.serialize(ser, num)
+  return ser.getName()
+}
+
+const uint64Plus1 = (num: string) => {
+  let reduceIndex = 0
+  return num
+    .split('')
+    .reduceRight((acc, char, index, array) => {
+      let currentNumber = Number(char)
+      acc[reduceIndex] =
+        (acc[reduceIndex] ?? 0) +
+        currentNumber +
+        (index === array.length - 1 ? 1 : 0)
+
+      if (acc[reduceIndex] > 9) {
+        acc[reduceIndex + 1] = 1
+        acc[reduceIndex] = acc[reduceIndex] % 10
+      }
+      reduceIndex += 1
+      return acc
+    }, [] as number[])
+    .reverse()
+    .join('')
+}
+
+/// QUERIES
 
 /// get WAX balance
 export const useWaxBalance = () => {
@@ -353,22 +387,31 @@ export const useFuseRecipes = () => {
   })
 }
 
-export const useFuseQueue = () => {
+type UseFuseQueueOptions = {
+  enabled?: boolean
+}
+
+export const useFuseQueue = ({ enabled = true }: UseFuseQueueOptions) => {
   const { api, isConnected, account } = useWax()
   return useQuery({
     queryKey: ['wax/fuse_queue', { account }],
-    enabled: isConnected,
+    enabled: enabled && isConnected,
+    refetchInterval: 5000,
     queryFn: () =>
       api?.rpc
         .get_table_rows({
           json: true,
           code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
-          // scope: account,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          index_position: 2,
+          key_type: 'name',
+          lower_bound: account,
+          upper_bound: uint64ToName(uint64Plus1(nameToUint64(account!))),
           table: 'fusingqueue',
           limit: 100,
         })
         .then((res) => {
-          return res.rows as any[]
+          return res.rows as FuseQueueRecordType[]
         }),
   })
 }

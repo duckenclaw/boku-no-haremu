@@ -136,6 +136,14 @@ type MineRecordType = {
   username: string
 }
 
+type FuseQueueRecordType = {
+  id: number
+  result_template_id: number
+  username: string
+  primary_asset_ids: string[]
+  secondary_asset_ids: string[]
+}
+
 type UseGetResourcesResponseType = {
   isUserInitialized: boolean
   smp: BalanceType
