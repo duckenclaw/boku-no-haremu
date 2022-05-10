@@ -11,11 +11,15 @@ import { FusionModalCard } from './fusion_modal_card'
 
 import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
-import { FusionTraits } from './traits/fusion_traits'
+import { FusionTraits } from './traits'
 
 type FusionMode = '3to1' | '5to2'
 
-export type FusionSlotData = { asset_id: string; template_id: string } | null
+export type FusionSlotData = {
+  asset_id: string
+  template_id: string
+  is_prime?: boolean
+} | null
 
 export const Fusion = () => {
   const [fusionCount, setFusionCount] = useState(0)
@@ -60,6 +64,9 @@ export const Fusion = () => {
       })
       .catch(() => setModalIsOpen(false))
   }
+
+  const checkIsPrime = (index: number) =>
+    mode === '3to1' ? index === 1 : index <= 1
 
   return (
     <>
@@ -112,7 +119,7 @@ export const Fusion = () => {
         <div className={s.cards}>
           {cards.map((c, index) => (
             <FusionSlot
-              isPrime={mode === '3to1' ? index === 1 : index <= 1}
+              isPrime={checkIsPrime(index)}
               blockedCards={blockedCards}
               slotData={c}
               key={index}
@@ -121,11 +128,11 @@ export const Fusion = () => {
                   cards[index] = {
                     asset_id: asset_id!,
                     template_id: template_id!,
+                    is_prime: checkIsPrime(index),
                   }
                 } else {
                   cards[index] = null
                 }
-
                 setCards([...cards])
               }}
             />

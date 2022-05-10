@@ -8,7 +8,17 @@ type AtomicAsset = {
   collection: AtomicCollection
   contract: string
   data: any
-  immutable_data: {}
+  immutable_data: {
+    clothes?: string
+    emotional?: string
+    eyes?: string
+    hair?: string
+    img?: string
+    passionate?: string
+    shy?: string
+    accessories?: string
+    background?: string
+  }
   is_burnable: boolean
   is_transferable: boolean
   minted_at_block: string
