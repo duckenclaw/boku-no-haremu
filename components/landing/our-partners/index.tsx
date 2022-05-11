@@ -12,13 +12,34 @@ export const OurPartners = () => {
         <TextHeader title="OUR PARTNERS" className={s.textHeader} />
         <div className={s.images}>
           <div className={s.image_item}>
-            <Image raw src="images/logo1.png" className={s.logo} alt="logo" />
+            <Image
+              raw
+              src="images/logo1.png"
+              className={s.logo}
+              alt="logo"
+              width={237}
+              height={64}
+            />
           </div>
           <div className={s.image_item}>
-            <Image raw src="images/logo2.png" className={s.logo} alt="logo" />
+            <Image
+              raw
+              src="images/logo2.png"
+              className={s.logo}
+              alt="logo"
+              width={171}
+              height={108}
+            />
           </div>
           <div className={s.image_item}>
-            <Image raw src="images/logo3.png" className={s.logo} alt="logo" />
+            <Image
+              raw
+              src="images/logo3.png"
+              className={s.logo}
+              alt="logo"
+              width={237}
+              height={58}
+            />
           </div>
         </div>
       </Container>
