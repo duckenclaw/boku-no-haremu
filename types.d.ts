@@ -33,7 +33,9 @@ type AtomicAsset = {
     template_id: string
     created_at_block: string
     created_at_time: string
-    immutable_data: any
+    immutable_data: {
+      [key: string]: string
+    }
     is_burnable: boolean
     is_transferable: boolean
     issued_supply: string

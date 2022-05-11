@@ -4,7 +4,7 @@ import { Button } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
 import SlideIcon from 'public/game/svg/modal_slide.svg'
 import s from './fusion_traits.module.scss'
-import { FusionTraitsCard } from './fusion_traits_card'
+import { FusionTraitsSlide } from './fusion_traits_slide'
 import { FusionSlotData } from '..'
 
 type FusionTraitsProps = {
@@ -59,14 +59,16 @@ export const FusionTraits = ({
             })}
             onClick={prevSlide}
           />
-          {primeCards
-            ?.filter((_, index) => index === activeCard)
-            .map((card) => (
-              <FusionTraitsCard
-                asset_id={card?.asset_id}
-                key={card?.asset_id}
-              />
-            ))}
+          <div className={s.slides}>
+            {primeCards
+              ?.filter((_, index) => index === activeCard)
+              .map((card) => (
+                <FusionTraitsSlide
+                  asset_id={card?.asset_id}
+                  key={card?.asset_id}
+                />
+              ))}
+          </div>
           <SlideIcon
             className={cn(s.side, s.rotate, {
               [s.hide]: activeCard >= primeCards.length - 1,
