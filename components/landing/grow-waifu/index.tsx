@@ -22,9 +22,9 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
         <div className={s.description}>
           <p>
             Every level your Waifu receives a new trait that will be with her
-            forever!!!
+            forever
           </p>
-          <p>You Raise your Waifu every level and see her grow!!!</p>
+          <p>You Raise your Waifu every level and see her grow!</p>
         </div>
         <div className={s.content}>
           <Image
