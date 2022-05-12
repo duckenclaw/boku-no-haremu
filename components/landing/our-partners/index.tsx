@@ -8,6 +8,7 @@ import { Image } from 'components/shared-ui/image'
 export const OurPartners = () => {
   return (
     <section className={cn(s.section, 'section')}>
+      <a className="anchor" id="partners" />
       <Container className={s.container}>
         <TextHeader title="OUR PARTNERS" className={s.textHeader} />
         <div className={s.images}>
