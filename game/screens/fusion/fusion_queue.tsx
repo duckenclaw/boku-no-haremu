@@ -32,8 +32,9 @@ export const FusionQueue = ({
     data: fuseQueueData,
     isLoading: isFuseQueueLoading,
     isError,
+    isFetching,
     refetch,
-  } = useFuseQueue()
+  } = useFuseQueue({ enabled: isOpen })
   const style = useSpring({
     to: {
       opacity: counter && counter > 0 ? 1 : 0,
@@ -62,6 +63,7 @@ export const FusionQueue = ({
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
         title="Fusion Queue"
+        showClose
       >
         <Loader
           isLoading={isFuseQueueLoading}
@@ -71,8 +73,12 @@ export const FusionQueue = ({
         >
           <div className={s.rows}>
             {fuseQueueData?.map((f, i) => (
-              <div key={i}>fuse row</div>
+              <div key={f.id} className={s.row}>
+                <span className={s.count}>#{f.id + 1}</span> waiting to mint NFT
+                of template ID: {f.result_template_id}
+              </div>
             ))}
+            {isFetching && <div className={s.updater}>UPDATING...</div>}
           </div>
         </Loader>
       </GameModal>

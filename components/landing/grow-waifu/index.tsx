@@ -16,9 +16,16 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
       <a className="anchor" id="growth" />
       <Container className={s.container}>
         <TextHeader
-          title="GROW YOUR UNIQUE WAIFU"
+          title="fully generated waifu"
           className={classNames(className, s.text_header)}
         />
+        <div className={s.description}>
+          <p>
+            Every level your Waifu receives a new trait that will be with her
+            forever
+          </p>
+          <p>You Raise your Waifu every level and see her grow!</p>
+        </div>
         <div className={s.content}>
           <Image
             raw
@@ -38,6 +45,21 @@ export const GrowWaifu: React.FC<GrowWaifuProps> = ({ className }) => {
           <Image
             raw
             src="images/mimi2_new.webp"
+            className={s.mimi_card}
+            alt="mimi_card"
+          />
+          <div className={s.arrow}>
+            <Image
+              raw
+              src="/images/svg/arrow.svg"
+              alt="arrow"
+              width={55}
+              height={70}
+            />
+          </div>
+          <Image
+            raw
+            src="images/mimi4.webp"
             className={s.mimi_card}
             alt="mimi_card"
           />

@@ -5,7 +5,7 @@
   align-items: center;
   flex-wrap: wrap;
 
-  & > * {
+  &>* {
     margin: 24px;
   }
 }
@@ -29,12 +29,10 @@
     font-size: 54px;
 
     text-align: center;
-    background: linear-gradient(
-      180deg,
-      #ea748f 0%,
-      #ff418a 53.65%,
-      #f237a5 100%
-    );
+    background: linear-gradient(180deg,
+        #ea748f 0%,
+        #ff418a 53.65%,
+        #f237a5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
@@ -93,6 +91,27 @@
     text-align: center;
     color: #ffffff;
   }
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 10px;
+
+  .row {
+    font-family: 'Bangers';
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+}
+
+.updater {
+  font-family: 'Bangers';
+  font-size: 22px;
+  text-align: center;
+  color: #ffffff;
 }
 
 .modal {

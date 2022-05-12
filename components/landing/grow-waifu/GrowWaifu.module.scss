@@ -6,8 +6,8 @@
     0px 20px 40px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(40px);
   border-radius: 15px;
-  padding-top: 53px;
-  padding-bottom: 53px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   margin-top: 73px;
 
   @media (max-width: 1178px) {
@@ -57,11 +57,42 @@
 }
 
 .text_header {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 
   @media(max-width: 576px) {
     margin-bottom: 24px;
   }
+}
+
+.description {
+
+  margin-bottom: 29px;
+
+  p {
+    margin: 0;
+    font-family: 'Kamikaze';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+
+    @media(max-width: 768px) {
+      font-size: 16px;
+      line-height: 13px;
+    }
+
+    &:nth-child(2) {
+      margin-top: 12px;
+
+      @media(max-width: 768px) {
+        margin-top: 10px;
+      }
+    }
+  }
+
+
 }
 
 
