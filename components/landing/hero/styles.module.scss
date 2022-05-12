@@ -1,5 +1,11 @@
 .section {
-  background:linear-gradient(375deg, rgba(73,47,94,1) 71%, rgba(139,119,142,1) 84%, rgba(184,142,174,1) 89%, rgba(231,191,206,1) 100%);
+  background: linear-gradient(
+    375deg,
+    rgba(73, 47, 94, 1) 71%,
+    rgba(139, 119, 142, 1) 84%,
+    rgba(184, 142, 174, 1) 89%,
+    rgba(231, 191, 206, 1) 100%
+  );
   position: fixed;
   left: 0;
   top: 0;
@@ -21,9 +27,9 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+    transition: opacity 0.5s ease-in-out;
   }
 }
-
 
 .characters_img {
   position: absolute;
@@ -37,8 +43,7 @@
   opacity: 0;
   max-width: 160%;
   z-index: 10;
-  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, ;
-
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
 
   @media (max-width: 425px) {
     bottom: 10px;
@@ -51,10 +56,8 @@
   &.loaded {
     opacity: 1;
     transform: translateX(-50%) scale(1);
-
   }
 }
-
 
 .content {
   font-family: 'Kamikaze';
@@ -83,24 +86,26 @@
     font-size: 80px;
     line-height: 66px;
     font-weight: 600;
-    background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
+    background: linear-gradient(
+      180deg,
+      #ea748f 0%,
+      #ff418a 53.65%,
+      #f237a5 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
-    color: #FF418A;
+    color: #ff418a;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 4px;
     padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 20px;
 
-
     @media (min-width: 1450px) {
       font-size: 92px;
     }
-
-
 
     @media (max-width: 768px) {
       font-size: 40px;
@@ -111,10 +116,8 @@
 
     @media (max-width: 320px) {
       font-size: 33px;
-
     }
   }
-
 
   .cta {
     max-width: 326px;
@@ -123,29 +126,29 @@
     margin-bottom: 30px;
 
     @media (max-width: 768px) {
-
       max-width: 226px;
       height: 48px;
     }
-
-
   }
 
   .subtitle {
     font-size: 40px;
     line-height: 33px;
     font-weight: 600;
-    -webkit-text-fill-color: #2E92BF;
+    -webkit-text-fill-color: #2e92bf;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 2px;
 
-    background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
+    background: linear-gradient(
+      180deg,
+      #6ccaf3 0%,
+      #2e92bf 50.52%,
+      #00415e 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
-
-
 
     @media (max-width: 768px) {
       font-size: 24px;
@@ -156,11 +159,8 @@
     @media (max-width: 320px) {
       font-size: 20px;
     }
-
   }
 }
-
-
 
 .button {
   font-family: 'Kamikaze';
@@ -169,14 +169,14 @@
   font-weight: 400;
   font-size: 42px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 12px 54px;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
-  border: 4px solid #FFFFFF;
+  background: linear-gradient(180deg, #6ccaf3 0%, #2e92bf 50.52%, #00415e 100%);
+  border: 4px solid #ffffff;
   box-sizing: border-box;
-  box-shadow: 0px 10px 20px #50B0DC;
+  box-shadow: 0px 10px 20px #50b0dc;
   border-radius: 30px;
 
   @media (max-width: 768px) {
@@ -188,6 +188,10 @@
 
 .text_wrap {
   @media (max-width: 576px) {
-    background: radial-gradient(50% 50% at 50% 50%, rgba(58, 29, 65, 0.43) 30.73%, rgba(196, 196, 196, 0) 100%);
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(58, 29, 65, 0.43) 30.73%,
+      rgba(196, 196, 196, 0) 100%
+    );
   }
 }
