@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { GameState, useGame } from 'game/game_context'
+import { GameRoutes, GameState, useGame } from 'game/game_context'
 
 import s from './game_footer.module.scss'
 
@@ -35,11 +35,11 @@ export const GameFooter = () => {
   return (
     <footer className={s.footer}>
       <nav className={s.nav_list}>
-        <ScreenLink screen="mine">MINE</ScreenLink>
-        <ScreenLink screen="craft">CRAFT</ScreenLink>
-        <ScreenLink screen="fusion">FUSION</ScreenLink>
-        <ScreenLink screen="withdraw">ATM</ScreenLink>
-        <ScreenLink screen="inventory">INVENTORY</ScreenLink>
+        {GameRoutes.map((s) => (
+          <ScreenLink screen={s} key={s}>
+            {s.toUpperCase()}
+          </ScreenLink>
+        ))}
       </nav>
     </footer>
   )
