@@ -117,7 +117,7 @@ export const RoadMap = () => {
     },
   ]
 
-  const stage = 1
+  const stage = 3
   const line_class = (index: number) => {
     if (index < stage) return s.before
     if (index === stage) return s.gradient
