@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useGame } from 'game/game_context'
 import { Placeholder } from 'game/screens/placeholder'
@@ -11,6 +11,7 @@ import { Inventory } from 'game/screens/inventory'
 
 export const Router = () => {
   const { screen } = useGame()
+
   switch (screen) {
     case 'mine':
       return <Mine />

@@ -1,8 +1,15 @@
-import React, { createContext, useContext, useMemo } from 'react'
+import { useRouter } from 'next/router'
+import React, { createContext, useContext, useEffect, useMemo } from 'react'
 import { useReducer } from 'react'
 
 export type GameState = {
-  screen: 'mine' | 'craft' | 'fusion' | 'withdraw' | 'inventory'
+  screen:
+    | 'mine'
+    | 'craft'
+    | 'fusion'
+    | 'withdraw'
+    | 'inventory'
+    | (string & Record<never, never>)
 }
 
 type GameContextValue = {
@@ -20,18 +27,44 @@ context.displayName = 'GameContext'
 const reducer = (state: GameState, action: Action) => {
   switch (action.type) {
     case 'setScreen':
-      return { ...state, screen: action.screen }
+      const screen = action.screen.trim()
+      if (screen && screen.length > 0 && state.screen !== screen)
+        return { ...state, screen: screen ?? 'mine' }
+      else return state
     default:
       throw new Error('Unknown action for GameContext')
   }
 }
 
-const init = (): GameState => ({
-  screen: 'mine',
-})
+type InitArgs = {
+  screen?: GameState['screen'] | null
+}
+
+const init = ({ screen: screenArg }: InitArgs): GameState => {
+  const screen = screenArg ? (screenArg ?? 'mine').trim() : 'mine'
+  return {
+    screen: screen as any,
+  }
+}
 
 export const GameContextProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, undefined, init)
+  const router = useRouter()
+  const [state, dispatch] = useReducer(
+    reducer,
+    { screen: window.location.hash.replace('#', '') as any },
+    init
+  )
+  useEffect(() => {
+    router.push(``, { hash: state.screen })
+  }, [state.screen])
+
+  useEffect(() => {
+    dispatch({
+      type: 'setScreen',
+      screen: window.location.hash.replace('#', '') as any,
+    })
+  }, [router.pathname])
+
   const value = useMemo(
     () => ({
       ...state,

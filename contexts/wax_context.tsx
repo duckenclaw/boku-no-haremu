@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { WaxJS } from '@waxio/waxjs/dist'
 
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'
@@ -7,6 +7,8 @@ import { Api, JsonRpc } from 'eosjs'
 import AnchorLink from 'anchor-link'
 import AnchorLinkBrowserTransport from 'anchor-link-browser-transport'
 import { toast } from 'react-toastify'
+
+const LS_TYPE_KEY = 'bokunoharemu_login_type'
 
 const loginWithAnchor = () => {
   const transport = new AnchorLinkBrowserTransport()
@@ -108,8 +110,9 @@ type WaxContextState = {
 export const WaxProvider: React.FC = ({ children }) => {
   const [state, setState] = useState<WaxContextState>(() => ({
     isConnected: false,
-    isLoading: false,
+    isLoading: true,
   }))
+
   const value: WaxContextValue = useMemo(
     () => ({
       ...state,
@@ -117,11 +120,25 @@ export const WaxProvider: React.FC = ({ children }) => {
         setState((s) => ({ ...s, isLoading: true }))
         return login(type)
           .then((loginResult) => {
+            localStorage.setItem(LS_TYPE_KEY, type)
             setState({
               ...state,
               ...loginResult,
               isLoading: false,
               isConnected: true,
+              logout: () => {
+                localStorage.removeItem(LS_TYPE_KEY)
+                setState({
+                  isLoading: true,
+                  isConnected: false,
+                })
+                return loginResult.logout().finally(() => {
+                  setState({
+                    isLoading: false,
+                    isConnected: false,
+                  })
+                })
+              },
             })
           })
           .catch(() => {
@@ -132,6 +149,18 @@ export const WaxProvider: React.FC = ({ children }) => {
     }),
     [state]
   )
+
+  useEffect(() => {
+    const type = localStorage.getItem(LS_TYPE_KEY)
+    if (type) {
+      value.login(type as any)
+    } else {
+      setState({
+        isConnected: false,
+        isLoading: false,
+      })
+    }
+  }, [])
 
   return <context.Provider value={value}>{children}</context.Provider>
 }
