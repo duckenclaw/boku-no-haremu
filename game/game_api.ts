@@ -16,9 +16,8 @@ export const AtomicHubApi = axios.create({
       : 'https://wax.api.atomicassets.io/atomicassets/v1/',
 })
 
-/// HELPERS
+//#region  HELPERS
 
-// balance string helper
 export const balanceStringToObject = (
   value?: string,
   fallbackCurrency?: string
@@ -69,8 +68,9 @@ const uint64Plus1 = (num: string) => {
     .reverse()
     .join('')
 }
+//#endregion
 
-/// QUERIES
+//#region QUERIES
 
 /// get WAX balance
 export const useWaxBalance = () => {
@@ -440,9 +440,9 @@ export const useGetTemplates = ({ mode }: UseGetTemplateOptions) => {
       }).then((res) => res.data as GetTemplatesResponseType),
   })
 }
+//#endregion
 
-/// MUTATIONS
-
+//#region MUTATIONS
 export const useInitAccount = () => {
   const { api, account, auth } = useWax()
   const qc = useQueryClient()
@@ -818,3 +818,5 @@ export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
     },
   })
 }
+
+//#endregion
