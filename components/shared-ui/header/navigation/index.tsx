@@ -16,6 +16,7 @@ const items = [
   { value: 'RESOURCES & TRADE', href: 'resources' },
   { value: 'NFTS', href: 'nfts' },
   { value: 'FUSION', href: 'fusion' },
+  { value: 'PARTNERS', href: 'partners' },
   { value: 'ROADMAP', href: 'roadmap' },
 ]
 

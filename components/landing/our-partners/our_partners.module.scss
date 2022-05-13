@@ -17,10 +17,16 @@
     position: absolute;
     content: '';
     width: 100%;
-    height: auto;
+    height: 230px;
     background: radial-gradient(29.98% 38.23% at 77.01% 30.21%, #E669A3 0%, #6A38F4 100%);
     opacity: 0.2;
     filter: blur(300px);
+
+    @media(max-width: 768px) {
+      transform: rotate(-90deg);
+      width: 67%;
+      height: 320px;
+    }
   }
 
   @media (max-width: 768px) {

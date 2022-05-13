@@ -1,10 +1,16 @@
+import { useEffect, useState, useRef } from 'react'
 import { animated, useSpring } from '@react-spring/web'
+import cn from 'classnames'
+
 import { useWax } from 'contexts/wax_context'
-import { useGetResources, useWaxBalance } from 'game/game_api'
-import IconInfo from 'public/game/svg/icon_info.svg'
-import IconSound from 'public/game/svg/icon_sound.svg'
 import { Tooltip } from 'game/components/tooltip'
 import { Image } from 'components/shared-ui/image'
+import { useGetResources, useWaxBalance } from 'game/game_api'
+
+import IconInfo from 'public/game/svg/icon_info.svg'
+import IconSound from 'public/game/svg/icon_sound.svg'
+import IconArrow from 'public/game/svg/dropdown_arrow.svg'
+
 import s from './game_header.module.scss'
 
 type ResourceBalanceProps = {
@@ -15,7 +21,7 @@ const ResourceBalance = animated(({ value = 0 }: ResourceBalanceProps) => {
 })
 
 export const GameHeader = () => {
-  const { account } = useWax()
+  const { account, logout } = useWax()
   const { data: resourcesData } = useGetResources()
   const { data: balanceData } = useWaxBalance()
 
@@ -27,13 +33,53 @@ export const GameHeader = () => {
       smp: resourcesData?.smp.balance,
     },
   })
+
+  ///TODO DROPDOWN LOGIC refactor out to header
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const cb = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!ref.current || ref.current.contains(target)) {
+        return
+      }
+      setIsDropdownOpen(false)
+    }
+    window.addEventListener('click', cb, { passive: true })
+    return () => window.removeEventListener('click', cb)
+  }, [])
+
   return (
     <header className={s.container}>
       <div className={s.profile_info}>
-        <span className={s.user}>{account}</span>
+        <div
+          className={s.user}
+          onClick={() => {
+            setIsDropdownOpen(!isDropdownOpen)
+          }}
+          ref={ref}
+        >
+          {account}
+          <IconArrow className={cn(s.arrow, { [s.open]: isDropdownOpen })} />
+        </div>
         <span>
           {balanceData?.balance} {balanceData?.currency}
         </span>
+        <div
+          className={cn(s.header_dropdown, { [s.open]: isDropdownOpen })}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <a href={`https://wax.bloks.io/account/${account}`}>My Wallet</a>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              logout?.()
+            }}
+          >
+            logout
+          </a>
+        </div>
       </div>
 
       <div className={s.cards}>
