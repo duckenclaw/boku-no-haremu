@@ -25,6 +25,8 @@ export const Game = () => {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
+            cacheTime: 1000,
+            staleTime: 1000,
           },
         },
       })

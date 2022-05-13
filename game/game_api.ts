@@ -14,10 +14,14 @@ export const AtomicHubApi = axios.create({
     process.env.NEXT_PUBLIC_TESTNET === 'true'
       ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
       : 'https://wax.api.atomicassets.io/atomicassets/v1/',
+  headers: {
+    'Cache-Control': 'no-cache',
+    Pragma: 'no-cache',
+    Expires: '0',
+  },
 })
 
 //#region  HELPERS
-
 export const balanceStringToObject = (
   value?: string,
   fallbackCurrency?: string
@@ -71,8 +75,7 @@ const uint64Plus1 = (num: string) => {
 //#endregion
 
 //#region QUERIES
-
-/// get WAX balance
+// get WAX balance
 export const useWaxBalance = () => {
   const { api, account, isConnected } = useWax()
   return useQuery({
