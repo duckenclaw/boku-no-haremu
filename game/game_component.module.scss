@@ -1,13 +1,12 @@
 .layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: url('/game_screen_bg.png') no-repeat center / cover fixed;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: url('/game_screen_bg.png') no-repeat center / cover fixed;
+  min-height: 100vh;
 
-    .login {
-        max-width: 402px;
-        width: 100%;
-    }
+  .login {
+    max-width: 402px;
+    width: 100%;
+  }
 }
-

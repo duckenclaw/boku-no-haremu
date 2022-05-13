@@ -103,6 +103,7 @@ export const useGetAllCards = ({
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllCards', { account, template_id, limit }],
     enabled: isConnected,
+    cacheTime: 500,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/assets', {
         params: {
@@ -193,6 +194,7 @@ export const useGetAllBanknotes = ({
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllBanknotes', { account, template_id }],
     enabled: isConnected,
+    cacheTime: 500,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/assets', {
         params: {
