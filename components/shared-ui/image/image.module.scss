@@ -1,6 +1,6 @@
 .unloader {
   display: flex;
-  background: #2D0D3B;
+  background: #2d0d3b;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -10,5 +10,16 @@
   font-weight: 400;
   font-size: 80px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
+}
+
+.animate {
+  transform: scale(0.6);
+  opacity: 0;
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+.animate.loaded {
+  opacity: 1;
+  transform: scale(1);
 }

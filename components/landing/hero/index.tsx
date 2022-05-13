@@ -10,27 +10,18 @@ type Props = {
 }
 
 const Hero: React.FC<Props> = ({ className }) => {
-  const [isClient, setIsClient] = useState(false)
   const [isCharactersLoaded, setIsCharactersLoaded] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
 
   return (
     <section className={classNames(className, s.section)}>
       <SakuraAnimation className={s.canvas} />
-      {isClient && (
-        <Image
-          className={classNames(
-            isCharactersLoaded && s.loaded,
-            s.characters_img
-          )}
-          src={'images/characters.webp'}
-          alt="characters"
-          onLoad={() => setIsCharactersLoaded(true)}
-        />
-      )}
+      <Image
+        className={classNames(isCharactersLoaded && s.loaded, s.characters_img)}
+        mode="scale-animate"
+        src={'images/characters.webp'}
+        alt="characters"
+        onLoad={() => setIsCharactersLoaded(true)}
+      />
       <div className={s.content}>
         <a href="https://discord.gg/S3rbu5GXGQ" className={s.cta}>
           <button className={s.button}>PLAY</button>

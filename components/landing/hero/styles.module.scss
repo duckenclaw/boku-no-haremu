@@ -43,7 +43,6 @@
   opacity: 0;
   max-width: 160%;
   z-index: 10;
-  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
 
   @media (max-width: 425px) {
     bottom: 10px;
