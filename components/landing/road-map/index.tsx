@@ -172,6 +172,7 @@ export const RoadMap = () => {
                       className={
                         index === 8 ? s.secret_image : s.road_map__image
                       }
+                      raw
                       alt="image"
                       src={item.image}
                     />
