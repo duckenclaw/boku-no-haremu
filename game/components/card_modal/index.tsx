@@ -144,7 +144,6 @@ export const CardsInventory = ({
     (!data.pages[page] || data.pages[page].data.length > 0)
   return (
     <>
-      {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
       <div className={s.container}>
         <div className={s.header}>
           <div className={s.side}>
@@ -186,6 +185,7 @@ export const CardsInventory = ({
           </div>
         </div>
         <div className={s.content}>
+          {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
           <SlideIcon
             className={cn(s.side, { [s.hide]: page <= 1 })}
             onClick={page > 1 ? () => setPage(page - 1) : undefined}
@@ -301,7 +301,6 @@ export const BanknoteInventory = ({
     (!data.pages[page] || data.pages[page].data.length > 0)
   return (
     <>
-      {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
       <div className={s.container}>
         <div className={s.header}>
           <div className={s.side}>
@@ -343,6 +342,7 @@ export const BanknoteInventory = ({
           </div>
         </div>
         <div className={s.content}>
+          {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
           <SlideIcon
             className={cn(s.side, { [s.hide]: page <= 1 })}
             onClick={page > 1 ? () => setPage(page - 1) : undefined}

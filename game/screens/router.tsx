@@ -22,7 +22,7 @@ const Screen = ({ screen }: ScreenProps) => {
       return <Craft />
     case 'atm':
       return <Withdraw />
-    case 'fusion':
+    case 'fuse':
       return <Fusion />
     case 'inventory':
       return <Inventory />
@@ -71,7 +71,14 @@ export const Router = () => {
     },
   })
   return (
-    <div style={{ position: 'relative', overflow: 'hidden', height: 'auto' }}>
+    <main
+      style={{
+        flex: 1,
+        position: 'relative',
+        overflow: 'hidden',
+        height: 'auto',
+      }}
+    >
       {transitions(({ move, ...style }, s, t) => {
         return (
           <animated.div
@@ -89,6 +96,6 @@ export const Router = () => {
           </animated.div>
         )
       })}
-    </div>
+    </main>
   )
 }

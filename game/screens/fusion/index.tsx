@@ -5,13 +5,13 @@ import { ConfirmModal } from 'game/components/confirm_modal'
 import { ScreenContainer } from 'game/components/screen_container'
 import { useFuseCards } from 'game/game_api'
 import { useEffect, useMemo, useState } from 'react'
-
-import s from './fusion.module.scss'
+import { ScreenTitle } from 'game/components/screen_title'
 import { FusionModalCard } from './fusion_modal_card'
 
 import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
 import { FusionTraits } from './traits'
+import s from './fusion.module.scss'
 
 type FusionMode = '3to1' | '5to2'
 
@@ -97,17 +97,23 @@ export const Fusion = () => {
           </div>
         </div>
       </ConfirmModal>
-      <ScreenContainer vertical>
-        <div className={s.header}>
-          <div className={s.side}>
-            <FusionQueue
-              counter={fusionCount}
-              onCounterReset={() => setFusionCount(0)}
-            />
+      <ScreenContainer
+        mode="slots"
+        header={
+          <div className={s.header}>
+            <div className={s.side}>
+              <FusionQueue
+                counter={fusionCount}
+                onCounterReset={() => setFusionCount(0)}
+              />
+            </div>
+            <ScreenTitle className={classNames(s.center, s.title)}>
+              FUSE
+            </ScreenTitle>
+            <div className={s.side}></div>
           </div>
-          <h1 className={classNames(s.center, s.title)}>FUSION</h1>
-          <div className={s.side}></div>
-        </div>
+        }
+      >
         <div className={s.modes}>
           <Toggle
             isLeft={mode === '3to1'}
@@ -116,36 +122,38 @@ export const Fusion = () => {
             rightLabel={'5 to 2'}
           />
         </div>
-        <div className={s.cards}>
-          {cards.map((c, index) => (
-            <FusionSlot
-              isPrime={checkIsPrime(index)}
-              blockedCards={blockedCards}
-              slotData={c}
-              key={index}
-              onSetCard={(asset_id, template_id) => {
-                if (asset_id && template_id) {
-                  cards[index] = {
-                    asset_id: asset_id!,
-                    template_id: template_id!,
-                    is_prime: checkIsPrime(index),
-                  }
-                } else {
-                  cards[index] = null
+
+        {cards.map((c, index) => (
+          <FusionSlot
+            isPrime={checkIsPrime(index)}
+            blockedCards={blockedCards}
+            slotData={c}
+            key={index}
+            onSetCard={(asset_id, template_id) => {
+              if (asset_id && template_id) {
+                cards[index] = {
+                  asset_id: asset_id!,
+                  template_id: template_id!,
+                  is_prime: checkIsPrime(index),
                 }
-                setCards([...cards])
-              }}
-            />
-          ))}
+              } else {
+                cards[index] = null
+              }
+              setCards([...cards])
+            }}
+          />
+        ))}
+
+        <div className={s.actions}>
+          <Button disabled={disableFuse} onClick={() => setModalIsOpen(true)}>
+            Fuse
+          </Button>
+          <FusionTraits
+            disabled={disableFuse}
+            slotData={cards}
+            className={s.traitsButton}
+          />
         </div>
-        <Button disabled={disableFuse} onClick={() => setModalIsOpen(true)}>
-          Fuse
-        </Button>
-        <FusionTraits
-          disabled={disableFuse}
-          slotData={cards}
-          className={s.traitsButton}
-        />
       </ScreenContainer>
     </>
   )

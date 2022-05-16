@@ -1,24 +1,33 @@
-import classNames from 'classnames'
-import { DetailedHTMLProps, HTMLAttributes } from 'react'
+import cn from 'classnames'
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
 
 import s from './screen_container.module.scss'
 
 type ScreenContainerProps = {
-  vertical?: boolean
+  mode?: 'slots'
+  header?: ReactNode
+  classes?: {
+    container?: string
+    content?: string
+  }
 } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
 export const ScreenContainer = ({
   className,
+  header,
   children,
-  vertical = false,
+  classes,
+  mode,
   ...props
 }: ScreenContainerProps) => (
-  <div
-    {...props}
-    className={classNames(s.container, className, {
-      [s.vertical]: vertical,
-    })}
-  >
-    {children}
-  </div>
+  <section className={cn(s.section, classes?.container)} {...props}>
+    {header}
+    <div
+      className={cn(s.content, classes?.content, {
+        [s.slots]: mode === 'slots',
+      })}
+    >
+      {children}
+    </div>
+  </section>
 )

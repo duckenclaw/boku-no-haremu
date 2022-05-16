@@ -6,6 +6,8 @@ import s from './mine.module.scss'
 import { useGetMiningCards, useInitMine } from 'game/game_api'
 import { Loader } from 'components/shared-ui/loader'
 import { CardModal } from 'game/components/card_modal'
+import { ScreenTitle } from 'game/components/screen_title'
+import { ScreenContainer } from 'game/components/screen_container'
 
 const MAX_SLOTS_COUNT = 5
 
@@ -34,7 +36,10 @@ export const Mine = () => {
         onClose={() => setIsOpen(false)}
         onSelect={onSelectCard}
       />
-      <div className={s.slots}>
+      <ScreenContainer
+        header={<ScreenTitle className={s.title}>MINE</ScreenTitle>}
+        mode="slots"
+      >
         <Loader
           isLoading={isCardsLoading}
           isError={isErrorCards}
@@ -59,7 +64,7 @@ export const Mine = () => {
             />
           )}
         </Loader>
-      </div>
+      </ScreenContainer>
     </>
   )
 }

@@ -52,6 +52,7 @@
   }
 
   .content {
+    position: relative;
     display: flex;
     flex-direction: row;
     min-height: 500px;
@@ -186,7 +187,7 @@
 
 .loaderIcon {
   position: absolute;
-  top: 94px;
+  top: 8px;
   left: 50%;
   transform: rotate(45deg) scale(0.6) translateX(-50%) translateX(-52px);
 }

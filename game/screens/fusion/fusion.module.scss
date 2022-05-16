@@ -1,21 +1,9 @@
-.cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-
-  &>* {
-    margin: 24px;
-  }
-}
-
 .header {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
-  margin: 0 0 24px;
+  margin: 0 0 36px 0;
 
   .side {
     flex: 1;
@@ -23,16 +11,18 @@
 
   .title {
     margin: 0;
-    font-family: 'Bangers';
+    font-family: 'Kamikaze';
     font-style: normal;
     font-weight: 400;
     font-size: 54px;
 
     text-align: center;
-    background: linear-gradient(180deg,
-        #ea748f 0%,
-        #ff418a 53.65%,
-        #f237a5 100%);
+    background: linear-gradient(
+      180deg,
+      #ea748f 0%,
+      #ff418a 53.65%,
+      #f237a5 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
@@ -104,7 +94,6 @@
     font-size: 20px;
     color: #ffffff;
   }
-
 }
 
 .updater {
@@ -145,6 +134,13 @@
   max-width: 156px;
   width: 100%;
   height: 234px;
+}
+
+.actions {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
 }
 
 .traitsButton {
