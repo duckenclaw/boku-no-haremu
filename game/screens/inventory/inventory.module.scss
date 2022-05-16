@@ -3,6 +3,11 @@
   max-width: 903px;
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   height: 70px;
   display: flex;

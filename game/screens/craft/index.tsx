@@ -18,8 +18,10 @@ export const Craft = () => {
   } = useCraftRecipes()
   return (
     <section className={s.section}>
-      <ScreenTitle className={s.title}>Craft a new nft</ScreenTitle>
-      <ScreenContainer className={s.slots}>
+      <ScreenContainer
+        header={<ScreenTitle className={s.title}>Craft a new nft</ScreenTitle>}
+        mode="slots"
+      >
         <Loader
           isLoading={isRecipesLoading}
           isError={isError}

@@ -1,25 +1,5 @@
-.section {
-  min-height: 500px;
-}
-
 .title {
-  margin-top: 50px;
-  margin-bottom: 6px;
-}
-
-.slots {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 48px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  & > * {
-    margin: 24px;
-  }
+  margin-bottom: 60px;
 }
 
 .slot {

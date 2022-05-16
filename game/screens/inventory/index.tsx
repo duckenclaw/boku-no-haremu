@@ -9,7 +9,7 @@ import s from './inventory.module.scss'
 export const Inventory = () => {
   const [mode, setMode] = useState<'cards' | 'banknote'>('cards')
   return (
-    <ScreenContainer vertical>
+    <ScreenContainer classes={{ content: s.content }}>
       <div className={s.sizer}>
         <div className={s.header}>
           <div
