@@ -22,7 +22,7 @@ const Screen = ({ screen }: ScreenProps) => {
       return <Craft />
     case 'atm':
       return <Withdraw />
-    case 'fusion':
+    case 'fuse':
       return <Fusion />
     case 'inventory':
       return <Inventory />

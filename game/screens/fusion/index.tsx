@@ -5,13 +5,13 @@ import { ConfirmModal } from 'game/components/confirm_modal'
 import { ScreenContainer } from 'game/components/screen_container'
 import { useFuseCards } from 'game/game_api'
 import { useEffect, useMemo, useState } from 'react'
-
-import s from './fusion.module.scss'
+import { ScreenTitle } from 'game/components/screen_title'
 import { FusionModalCard } from './fusion_modal_card'
 
 import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
 import { FusionTraits } from './traits'
+import s from './fusion.module.scss'
 
 type FusionMode = '3to1' | '5to2'
 
@@ -105,7 +105,9 @@ export const Fusion = () => {
               onCounterReset={() => setFusionCount(0)}
             />
           </div>
-          <h1 className={classNames(s.center, s.title)}>FUSION</h1>
+          <ScreenTitle className={classNames(s.center, s.title)}>
+            FUSE
+          </ScreenTitle>
           <div className={s.side}></div>
         </div>
         <div className={s.modes}>

@@ -2,13 +2,7 @@ import { useRouter } from 'next/router'
 import React, { createContext, useContext, useEffect, useMemo } from 'react'
 import { useReducer } from 'react'
 
-export const GameRoutes = [
-  'mine',
-  'craft',
-  'fusion',
-  'atm',
-  'inventory',
-] as const
+export const GameRoutes = ['mine', 'craft', 'fuse', 'atm', 'inventory'] as const
 
 export type GameState = {
   screen: typeof GameRoutes[number] | (string & Record<never, never>)
