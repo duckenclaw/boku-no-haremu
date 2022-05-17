@@ -83,6 +83,20 @@
   }
 }
 
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin-bottom: 42px;
+  margin-top: 42px;
+
+  &.five {
+    gap: 48px 12px;
+  }
+}
+
 .rows {
   display: flex;
   flex-direction: column;

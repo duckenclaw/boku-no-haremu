@@ -98,7 +98,6 @@ export const Fusion = () => {
         </div>
       </ConfirmModal>
       <ScreenContainer
-        mode="slots"
         header={
           <div className={s.header}>
             <div className={s.side}>
@@ -122,27 +121,28 @@ export const Fusion = () => {
             rightLabel={'5 to 2'}
           />
         </div>
-
-        {cards.map((c, index) => (
-          <FusionSlot
-            isPrime={checkIsPrime(index)}
-            blockedCards={blockedCards}
-            slotData={c}
-            key={index}
-            onSetCard={(asset_id, template_id) => {
-              if (asset_id && template_id) {
-                cards[index] = {
-                  asset_id: asset_id!,
-                  template_id: template_id!,
-                  is_prime: checkIsPrime(index),
+        <div className={classNames(s.cards, { [s.five]: mode === '5to2' })}>
+          {cards.map((c, index) => (
+            <FusionSlot
+              isPrime={checkIsPrime(index)}
+              blockedCards={blockedCards}
+              slotData={c}
+              key={index}
+              onSetCard={(asset_id, template_id) => {
+                if (asset_id && template_id) {
+                  cards[index] = {
+                    asset_id: asset_id!,
+                    template_id: template_id!,
+                    is_prime: checkIsPrime(index),
+                  }
+                } else {
+                  cards[index] = null
                 }
-              } else {
-                cards[index] = null
-              }
-              setCards([...cards])
-            }}
-          />
-        ))}
+                setCards([...cards])
+              }}
+            />
+          ))}
+        </div>
 
         <div className={s.actions}>
           <Button disabled={disableFuse} onClick={() => setModalIsOpen(true)}>

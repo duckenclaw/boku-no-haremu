@@ -106,7 +106,7 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         />
         <div className={s.cost}>
           {cost.map((c, i) => (
-            <Resource key={i} balance={c} />
+            <Resource key={i} balance={c} size="medium" vertical />
           ))}
         </div>
       </BaseSlot>

@@ -8,7 +8,8 @@ import Minus from 'public/game/svg/resource_minus.svg'
 type ResourceProps = {
   balance: BalanceType
   sign?: 'none' | 'plus' | 'minus'
-  size?: 'default' | 'large'
+  vertical?: boolean
+  size?: 'default' | 'large' | 'medium'
   color?: 'default' | 'purple'
 } & React.ComponentProps<'span'>
 
@@ -29,6 +30,7 @@ const currencyToImg = (c: string) => {
 export const Resource = ({
   balance,
   className,
+  vertical,
   sign = 'none',
   size = 'default',
   color = 'default',
@@ -41,7 +43,8 @@ export const Resource = ({
         className,
         s.balance,
         s['size__' + size],
-        s['color__' + color]
+        s['color__' + color],
+        vertical && s.vertical
       )}
     >
       <div className={cn(s.image_container)}>
