@@ -1,5 +1,5 @@
 import { CardImage } from 'game/components/card_image'
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 import { useGetCardByAssetId } from 'game/game_api'
 import s from './fusion.module.scss'
 
@@ -18,7 +18,10 @@ const FusionModalCard: React.FC<Props> = ({ className, asset_id }) => {
       className={className}
       style={{ objectFit: 'cover' }}
       alt={data?.data.name}
-      src={ipfsToUrlSafe(data?.data.data.img)}
+      src={[
+        ipfsToS3Url(data?.data.data.img),
+        ipfsToUrlSafe(data?.data.data.img),
+      ]}
     />
   )
 }

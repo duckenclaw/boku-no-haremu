@@ -1,6 +1,6 @@
 import { useGetCardByAssetId } from 'game/game_api'
 import { useMemo } from 'react'
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 import cn from 'classnames'
 
 import s from './fusion_traits.module.scss'
@@ -62,7 +62,10 @@ export const FusionTraitsSlide = ({
       <Loader isLoading={isLoading}>
         <CardImage
           className={s.image}
-          src={ipfsToUrlSafe(characterTraits?.img)}
+          src={[
+            ipfsToS3Url(characterTraits?.img),
+            ipfsToUrlSafe(characterTraits?.img),
+          ]}
         />
         <div className={s.info}>
           <div className={s.title}>you will receive</div>

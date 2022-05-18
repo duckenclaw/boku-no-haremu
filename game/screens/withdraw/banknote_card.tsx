@@ -4,7 +4,7 @@ import { Button } from 'game/components/button'
 import { BanknoteModal } from 'game/components/card_modal'
 import { Image } from 'components/shared-ui/image'
 import { useBurnBanknote, useMintBanknote } from 'game/game_api'
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
 import s from './withdraw.module.scss'
 
@@ -43,7 +43,10 @@ export const BanknoteCard = ({
       <div className={s.background} />
       <div className={s.content}>
         <Image
-          src={ipfsToUrlSafe(immutable_data.img)}
+          src={[
+            ipfsToS3Url(immutable_data.img),
+            ipfsToUrlSafe(immutable_data.img),
+          ]}
           alt={templateData.template_id}
           width={162}
           height={76}
