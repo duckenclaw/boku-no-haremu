@@ -10,8 +10,8 @@ import { useEffect, useMemo, useState } from 'react'
 
 type ImageProps = {
   raw?: boolean
-  src: string
   mode?: 'card' | 'scale-animate' | 'none'
+  src: string | string[]
 } & React.ComponentProps<typeof Img>
 
 export const Image: React.FC<ImageProps> = ({
@@ -42,7 +42,7 @@ export const Image: React.FC<ImageProps> = ({
   const renderImage = () =>
     raw ? (
       <img
-        src={src ?? '/images/mimi_1.png'}
+        src={Array.isArray(src) ? src[0] : src}
         style={style}
         onLoad={() => setIsLoaded(true)}
         {...props}
@@ -67,7 +67,7 @@ export const Image: React.FC<ImageProps> = ({
             />
           )
         }
-        src={src ?? '/images/mimi_1.png'}
+        src={src}
         unloader={
           <div
             {...props}

@@ -13,7 +13,7 @@ import {
   useGetAllBanknotes,
   useGetTemplates,
 } from 'game/game_api'
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
 import CrossIcon from 'public/game/svg/modal_cross.svg'
 import SlideIcon from 'public/game/svg/modal_slide.svg'
@@ -201,7 +201,7 @@ export const CardsInventory = ({
                   className={cn(s.card, { [s.blocked]: c.is_blocked_by_game })}
                   style={{ objectFit: 'cover' }}
                   alt={c.name}
-                  src={ipfsToUrlSafe(c.data.img)}
+                  src={[ipfsToS3Url(c.data.img), ipfsToUrlSafe(c.data.img)]}
                   key={c.asset_id}
                   onClick={() =>
                     !c.is_blocked_by_game && onSelect?.(c.asset_id, c)
@@ -363,7 +363,7 @@ export const BanknoteInventory = ({
                     width={162}
                     height={76}
                     alt={c.name}
-                    src={ipfsToUrlSafe(c.data.img)}
+                    src={[ipfsToS3Url(c.data.img), ipfsToUrlSafe(c.data.img)]}
                     style={{ objectFit: 'cover' }}
                   />
                 </div>

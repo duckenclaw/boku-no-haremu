@@ -7,7 +7,7 @@ import { CardModal } from 'game/components/card_modal'
 import { CardImage } from 'game/components/card_image'
 import { Button } from 'game/components/button'
 
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
 import { FusionSlotData } from '.'
 
@@ -101,7 +101,14 @@ export const FusionSlot = ({
           </div>
         }
       >
-        {cardData && <CardImage src={ipfsToUrlSafe(cardData.data.data.img)} />}
+        {cardData && (
+          <CardImage
+            src={[
+              ipfsToS3Url(cardData.data.data.img),
+              ipfsToUrlSafe(cardData.data.data.img),
+            ]}
+          />
+        )}
       </BaseSlot>
     </>
   )
