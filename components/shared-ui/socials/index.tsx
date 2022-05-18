@@ -18,6 +18,7 @@ const Socials: React.FC<Props> = ({ className }) => (
       >
         <Image
           raw
+          mode="none"
           src="/images/svg/discord.svg"
           className={s.icon}
           alt="atomic"
@@ -33,6 +34,7 @@ const Socials: React.FC<Props> = ({ className }) => (
       >
         <Image
           raw
+          mode="none"
           src="/images/svg/atomic.svg"
           className={s.icon}
           alt="atomic"
@@ -48,6 +50,7 @@ const Socials: React.FC<Props> = ({ className }) => (
       >
         <Image
           raw
+          mode="none"
           src="/images/svg/medium.svg"
           className={s.icon}
           alt="medium"
@@ -63,6 +66,7 @@ const Socials: React.FC<Props> = ({ className }) => (
       >
         <Image
           raw
+          mode="none"
           src="/images/svg/twitter.svg"
           className={s.icon}
           alt="twitter"
@@ -78,6 +82,7 @@ const Socials: React.FC<Props> = ({ className }) => (
       >
         <Image
           raw
+          mode="none"
           src="/images/svg/telegram.svg"
           className={s.icon}
           alt="telegram"

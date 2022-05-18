@@ -14,11 +14,14 @@ export const AtomicHubApi = axios.create({
     process.env.NEXT_PUBLIC_TESTNET === 'true'
       ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
       : 'https://wax.api.atomicassets.io/atomicassets/v1/',
+  headers: {
+    'Cache-Control': 'no-cache',
+    Pragma: 'no-cache',
+    Expires: '0',
+  },
 })
 
-/// HELPERS
-
-// balance string helper
+//#region  HELPERS
 export const balanceStringToObject = (
   value?: string,
   fallbackCurrency?: string
@@ -69,10 +72,10 @@ const uint64Plus1 = (num: string) => {
     .reverse()
     .join('')
 }
+//#endregion
 
-/// QUERIES
-
-/// get WAX balance
+//#region QUERIES
+// get WAX balance
 export const useWaxBalance = () => {
   const { api, account, isConnected } = useWax()
   return useQuery({
@@ -100,6 +103,7 @@ export const useGetAllCards = ({
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllCards', { account, template_id, limit }],
     enabled: isConnected,
+    cacheTime: 500,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/assets', {
         params: {
@@ -190,6 +194,7 @@ export const useGetAllBanknotes = ({
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllBanknotes', { account, template_id }],
     enabled: isConnected,
+    cacheTime: 500,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/assets', {
         params: {
@@ -440,9 +445,9 @@ export const useGetTemplates = ({ mode }: UseGetTemplateOptions) => {
       }).then((res) => res.data as GetTemplatesResponseType),
   })
 }
+//#endregion
 
-/// MUTATIONS
-
+//#region MUTATIONS
 export const useInitAccount = () => {
   const { api, account, auth } = useWax()
   const qc = useQueryClient()
@@ -818,3 +823,5 @@ export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
     },
   })
 }
+
+//#endregion

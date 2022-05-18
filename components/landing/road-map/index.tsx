@@ -117,7 +117,7 @@ export const RoadMap = () => {
     },
   ]
 
-  const stage = 1
+  const stage = 3
   const line_class = (index: number) => {
     if (index < stage) return s.before
     if (index === stage) return s.gradient
@@ -172,6 +172,7 @@ export const RoadMap = () => {
                       className={
                         index === 8 ? s.secret_image : s.road_map__image
                       }
+                      raw
                       alt="image"
                       src={item.image}
                     />

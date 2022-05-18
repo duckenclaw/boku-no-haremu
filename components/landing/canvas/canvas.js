@@ -797,7 +797,7 @@ function setViewports() {
 }
 
 let animating = true
-function animate(timestamp) {
+function animate(timestamp, onRender) {
   let curdate = new Date()
   timeInfo.elapsed = (curdate - timeInfo.start) / 1000.0
   timeInfo.delta = (curdate - timeInfo.prev) / 1000.0
@@ -805,6 +805,9 @@ function animate(timestamp) {
 
   if (animating) requestAnimationFrame(animate)
   renderScene()
+  if (onRender) {
+    onRender()
+  }
 }
 
 function makeCanvasFullScreen(canvas) {
@@ -895,11 +898,18 @@ export function runSakuraAnimation(canvas) {
     timeInfo.start = new Date()
     timeInfo.prev = timeInfo.start
     animating = true
-    requestAnimationFrame(animate)
+
+    const p = new Promise((resolve) => {
+      requestAnimationFrame((t) => {
+        animate(t, resolve)
+      })
+    })
+    return p
   } catch (e) {
     console.error(e)
     unmountSakuraAnimation()
   }
+  return promises.resolve()
 }
 
 export const unmountSakuraAnimation = () => {

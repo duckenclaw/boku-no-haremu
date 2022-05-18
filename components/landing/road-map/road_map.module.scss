@@ -348,11 +348,11 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 171px;
+    padding-bottom: 300px;
   }
 
   .image_block {
-    top: 100px;
+    top: 68px;
     left: 40px;
 
     &::before {
@@ -388,7 +388,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 110px;
+    padding-bottom: 280px;
   }
 
   .image_block {
@@ -401,7 +401,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 148px;
+    padding-bottom: 280px;
   }
 
   .after {
@@ -410,7 +410,7 @@
   }
 
   .image_block {
-    top: 30px;
+    top: 68px;
     left: 52px;
   }
 }
@@ -419,7 +419,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 213px;
+    padding-bottom: 250px;
   }
 
   .item_right {
@@ -493,11 +493,12 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 158px;
+    padding-bottom: 300px;
   }
 
   .image_block {
     left: 52px;
+    top: 10px;
 
   }
 }
@@ -506,7 +507,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 120px;
+    padding-bottom: 200px;
   }
 
   .image_block {
@@ -518,7 +519,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 106px;
+    padding-bottom: 130px;
   }
 }
 
@@ -526,7 +527,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 106px;
+    padding-bottom: 130px;
   }
 }
 
@@ -534,7 +535,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 182px;
+    padding-bottom: 230px;
   }
 
   .image_block {
@@ -595,7 +596,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 215px;
+    padding-bottom: 250px;
   }
 
   .image_block {
@@ -618,7 +619,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 223px;
+    padding-bottom: 340px;
   }
 
   .ring {
@@ -632,6 +633,7 @@
 
   .image_block {
     left: 60px;
+    top: 65px;
 
     @media (max-width: 1024px) {
       left: 20px;
@@ -650,11 +652,12 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 132px;
+    padding-bottom: 250px;
   }
 
   .image_block {
     left: -50px;
+    top: -10px;
   }
 
   @media (max-width: 1024px) {
@@ -669,11 +672,12 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 117px;
+    padding-bottom: 200px;
   }
 
   .image_block {
     left: 60px;
+    top: 28px;
   }
 
   @media (max-width: 1024px) {
@@ -696,7 +700,7 @@
 
   .item_left,
   .item_right {
-    padding-bottom: 197px;
+    padding-bottom: 250px;
   }
 
   .ring {
@@ -713,7 +717,7 @@
   }
 
   .image_block {
-    top: 60px;
+    top: 100px;
     left: -60px;
   }
 
@@ -747,6 +751,7 @@
 
   .image_block {
     left: 60px;
+    top: -32px;
   }
 
   @media (max-width: 1024px) {
@@ -806,6 +811,12 @@
       .after {
         top: 85px;
         height: calc(100% - 78px);
+      }
+    }
+
+    &.row-3 {
+      .circle {
+        top: -7px;
       }
     }
 

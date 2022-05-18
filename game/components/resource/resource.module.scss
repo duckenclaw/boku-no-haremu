@@ -1,57 +1,70 @@
 .balance {
-    font-family: 'Bangers';
-    font-style: normal;
-    font-weight: 400;
-    width: max-content;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    .image_container {
-        position: relative;
-        width: 30px;
-        height: 30px;
+  font-family: 'Bangers';
+  font-style: normal;
+  font-weight: 400;
+  width: max-content;
 
-        .image {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
+  &.vertical {
+    flex-flow: column nowrap;
+  }
 
-        .sign {
-            position: absolute;
-            bottom: 4px;
-            right: 4px;
-        }
+  .image_container {
+    position: relative;
+    width: 30px;
+    height: 30px;
+
+    .image {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
 
-    &.color {
-        &__default {
-            color: #FFFFFF;
-        }
+    .sign {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+    }
+  }
 
-        &__purple {
-            color: #FE468B;
-        }
+  &.color {
+    &__default {
+      color: #ffffff;
     }
 
-    &.size {
-        &__default {
-            font-size: 18px;
-
-            .image_container {
-                width: 25px;
-                height: 25px;
-            }
-        }
-
-        &__large {
-            font-size: 24px;
-
-            .image_container {
-                width: 37px;
-                height: 37px;
-            }
-        }
+    &__purple {
+      color: #fe468b;
     }
+  }
+
+  &.size {
+    &__default {
+      font-size: 18px;
+
+      .image_container {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    &__medium {
+      font-size: 20px;
+      .image_container {
+        width: 37px;
+        height: 37px;
+      }
+    }
+
+    &__large {
+      font-size: 24px;
+
+      .image_container {
+        width: 37px;
+        height: 37px;
+      }
+    }
+  }
 }

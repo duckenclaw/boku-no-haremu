@@ -5,7 +5,7 @@ import {
   useGetTemplateById,
 } from 'game/game_api'
 
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
 import { Resource } from 'game/components/resource'
 import { CardImage } from 'game/components/card_image'
@@ -58,7 +58,10 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         <div className={s.choice_container}>
           <CardImage
             className={s.image}
-            src={ipfsToUrlSafe(templateData?.data.immutable_data.img)}
+            src={[
+              ipfsToS3Url(templateData?.data.immutable_data.img),
+              ipfsToUrlSafe(templateData?.data.immutable_data.img),
+            ]}
           />
           <div className={s.info}>
             <div className={s.info_title}>
@@ -102,11 +105,14 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         <CardImage
           alt={template_id.toString()}
           className={classNames({ [s.blur]: isHovering })}
-          src={ipfsToUrlSafe(templateData?.data.immutable_data.img)}
+          src={[
+            ipfsToS3Url(templateData?.data.immutable_data.img),
+            ipfsToUrlSafe(templateData?.data.immutable_data.img),
+          ]}
         />
         <div className={s.cost}>
           {cost.map((c, i) => (
-            <Resource key={i} balance={c} />
+            <Resource key={i} balance={c} size="medium" vertical />
           ))}
         </div>
       </BaseSlot>

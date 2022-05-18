@@ -5,7 +5,7 @@ import { Image } from 'components/shared-ui/image'
 import { LinkButton } from 'game/components/button'
 import { GameModal } from 'game/components/game_modal'
 import { CardImage } from 'game/components/card_image'
-import { Loader } from 'components/shared-ui/loader'
+import { Loader, LoaderIcon } from 'components/shared-ui/loader'
 
 import {
   useGetMiningCards,
@@ -13,7 +13,7 @@ import {
   useGetAllBanknotes,
   useGetTemplates,
 } from 'game/game_api'
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
 import CrossIcon from 'public/game/svg/modal_cross.svg'
 import SlideIcon from 'public/game/svg/modal_slide.svg'
@@ -89,6 +89,7 @@ export const CardsInventory = ({
   const {
     data,
     isLoading,
+    isFetching,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
@@ -142,94 +143,97 @@ export const CardsInventory = ({
     (page < data.pages.length || hasNextPage) &&
     (!data.pages[page] || data.pages[page].data.length > 0)
   return (
-    <div className={s.container}>
-      <div className={s.header}>
-        <div className={s.side}>
-          <CardFilter className={s.filter} contentClassName={s.templates}>
-            <Loader
-              isLoading={isTemplatesLoading}
-              isError={isTemplatesError}
-              onRetry={templatesRefetch}
-            >
-              {templatesData?.data.map((t) => (
-                <div
-                  className={s.template}
-                  key={t.template_id}
-                  onClick={() => {
-                    if (templateFilter === t.template_id) {
-                      setTemplateFilter(null)
-                    } else setTemplateFilter(t.template_id)
-                  }}
-                >
+    <>
+      <div className={s.container}>
+        <div className={s.header}>
+          <div className={s.side}>
+            <CardFilter className={s.filter} contentClassName={s.templates}>
+              <Loader
+                isLoading={isTemplatesLoading}
+                isError={isTemplatesError}
+                onRetry={templatesRefetch}
+              >
+                {templatesData?.data.map((t) => (
                   <div
-                    className={cn(s.checkbox, {
-                      [s.checked]: t.template_id === templateFilter,
-                    })}
-                  />
-                  {t.immutable_data.name}
-                </div>
-              ))}
-            </Loader>
-          </CardFilter>
-        </div>
-        <div className={s.center}>
-          {title && <h1>{title}</h1>}
-          {subtitle && <h2>{subtitle}</h2>}
-        </div>
-        <div className={s.side}>
-          {onCloseClick && (
-            <CrossIcon className={s.close} onClick={onCloseClick} />
-          )}
-        </div>
-      </div>
-      <div className={s.content}>
-        <SlideIcon
-          className={cn(s.side, { [s.hide]: page <= 1 })}
-          onClick={page > 1 ? () => setPage(page - 1) : undefined}
-        />
-        <Loader
-          isLoading={isLoading || isMiningDataLoading}
-          isError={isErrorMintingData || isErrorCards}
-          onRetry={refetchCardsData}
-        >
-          <div className={s.cards}>
-            {cards.map((c) => (
-              <CardImage
-                className={cn(s.card, { [s.blocked]: c.is_blocked_by_game })}
-                style={{ objectFit: 'cover' }}
-                alt={c.name}
-                src={ipfsToUrlSafe(c.data.img)}
-                key={c.asset_id}
-                onClick={() =>
-                  !c.is_blocked_by_game && onSelect?.(c.asset_id, c)
-                }
-              />
-            ))}
+                    className={s.template}
+                    key={t.template_id}
+                    onClick={() => {
+                      if (templateFilter === t.template_id) {
+                        setTemplateFilter(null)
+                      } else setTemplateFilter(t.template_id)
+                    }}
+                  >
+                    <div
+                      className={cn(s.checkbox, {
+                        [s.checked]: t.template_id === templateFilter,
+                      })}
+                    />
+                    {t.immutable_data.name}
+                  </div>
+                ))}
+              </Loader>
+            </CardFilter>
           </div>
-        </Loader>
-        <SlideIcon
-          className={cn(s.side, s.rotate, {
-            [s.hide]: !canClickNextPage,
-            [s.disabled]: isLoadingNextPage,
-          })}
-          onClick={() => {
-            canClickNextPage && !isLoadingNextPage && setPage(page + 1)
-          }}
-        />
+          <div className={s.center}>
+            {title && <h1>{title}</h1>}
+            {subtitle && <h2>{subtitle}</h2>}
+          </div>
+          <div className={s.side}>
+            {onCloseClick && (
+              <CrossIcon className={s.close} onClick={onCloseClick} />
+            )}
+          </div>
+        </div>
+        <div className={s.content}>
+          {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
+          <SlideIcon
+            className={cn(s.side, { [s.hide]: page <= 1 })}
+            onClick={page > 1 ? () => setPage(page - 1) : undefined}
+          />
+          <Loader
+            isLoading={isLoading || isMiningDataLoading}
+            isError={isErrorMintingData || isErrorCards}
+            onRetry={refetchCardsData}
+          >
+            <div className={s.cards}>
+              {cards.map((c) => (
+                <CardImage
+                  className={cn(s.card, { [s.blocked]: c.is_blocked_by_game })}
+                  style={{ objectFit: 'cover' }}
+                  alt={c.name}
+                  src={[ipfsToS3Url(c.data.img), ipfsToUrlSafe(c.data.img)]}
+                  key={c.asset_id}
+                  onClick={() =>
+                    !c.is_blocked_by_game && onSelect?.(c.asset_id, c)
+                  }
+                />
+              ))}
+            </div>
+          </Loader>
+          <SlideIcon
+            className={cn(s.side, s.rotate, {
+              [s.hide]: !canClickNextPage,
+              [s.disabled]: isLoadingNextPage,
+            })}
+            onClick={() => {
+              canClickNextPage && !isLoadingNextPage && setPage(page + 1)
+            }}
+          />
+        </div>
+        <div className={s.footer}>
+          <LinkButton
+            className={s.buy}
+            size="small"
+            href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
+              process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION ?? ''
+            )}`}
+            target="_blank"
+          >
+            Buy Cards
+          </LinkButton>
+        </div>
       </div>
-      <div className={s.footer}>
-        <LinkButton
-          className={s.buy}
-          size="small"
-          href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
-            process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION ?? ''
-          )}`}
-          target="_blank"
-        >
-          Buy Cards
-        </LinkButton>
-      </div>
-    </div>
+    </>
   )
 }
 
@@ -267,6 +271,7 @@ export const BanknoteInventory = ({
     isLoading,
     isError: isErrorBanknotes,
     refetch: refetchBanknotes,
+    isFetching,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
@@ -295,97 +300,100 @@ export const BanknoteInventory = ({
     (page < data.pages.length || hasNextPage) &&
     (!data.pages[page] || data.pages[page].data.length > 0)
   return (
-    <div className={s.container}>
-      <div className={s.header}>
-        <div className={s.side}>
-          <CardFilter className={s.filter} contentClassName={s.templates}>
-            <Loader
-              isLoading={isTemplatesLoading}
-              isError={isErrorTemplates}
-              onRetry={refetchTemplates}
-            >
-              {templatesData?.data.map((t) => (
-                <div
-                  className={s.template}
-                  key={t.template_id}
-                  onClick={() => {
-                    if (templateFilter === t.template_id) {
-                      setTemplateFilter(null)
-                    } else setTemplateFilter(t.template_id)
-                  }}
-                >
+    <>
+      <div className={s.container}>
+        <div className={s.header}>
+          <div className={s.side}>
+            <CardFilter className={s.filter} contentClassName={s.templates}>
+              <Loader
+                isLoading={isTemplatesLoading}
+                isError={isErrorTemplates}
+                onRetry={refetchTemplates}
+              >
+                {templatesData?.data.map((t) => (
                   <div
-                    className={cn(s.checkbox, {
-                      [s.checked]: t.template_id === templateFilter,
-                    })}
+                    className={s.template}
+                    key={t.template_id}
+                    onClick={() => {
+                      if (templateFilter === t.template_id) {
+                        setTemplateFilter(null)
+                      } else setTemplateFilter(t.template_id)
+                    }}
+                  >
+                    <div
+                      className={cn(s.checkbox, {
+                        [s.checked]: t.template_id === templateFilter,
+                      })}
+                    />
+                    {t.immutable_data.name}
+                  </div>
+                ))}
+              </Loader>
+            </CardFilter>
+          </div>
+          <div className={s.center}>
+            {title && <h1>{title}</h1>}
+            {subtitle && <h2>{subtitle}</h2>}
+          </div>
+          <div className={s.side}>
+            {onCloseClick && (
+              <CrossIcon className={s.close} onClick={onCloseClick} />
+            )}
+          </div>
+        </div>
+        <div className={s.content}>
+          {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
+          <SlideIcon
+            className={cn(s.side, { [s.hide]: page <= 1 })}
+            onClick={page > 1 ? () => setPage(page - 1) : undefined}
+          />
+          <Loader
+            isLoading={isLoading}
+            isError={isErrorBanknotes}
+            onRetry={refetchBanknotes}
+          >
+            <div className={s.banknotes}>
+              {banknotes.map((c) => (
+                <div
+                  className={cn(s.banknote)}
+                  key={c.asset_id}
+                  onClick={() => onSelect?.(c.asset_id)}
+                >
+                  <Image
+                    width={162}
+                    height={76}
+                    alt={c.name}
+                    src={[ipfsToS3Url(c.data.img), ipfsToUrlSafe(c.data.img)]}
+                    style={{ objectFit: 'cover' }}
                   />
-                  {t.immutable_data.name}
                 </div>
               ))}
-            </Loader>
-          </CardFilter>
+            </div>
+          </Loader>
+          <SlideIcon
+            className={cn(s.side, s.rotate, {
+              [s.hide]: !canClickNextPage,
+              [s.disabled]: isLoadingNextPage,
+            })}
+            onClick={() => {
+              canClickNextPage && !isLoadingNextPage && setPage(page + 1)
+            }}
+          />
         </div>
-        <div className={s.center}>
-          {title && <h1>{title}</h1>}
-          {subtitle && <h2>{subtitle}</h2>}
-        </div>
-        <div className={s.side}>
-          {onCloseClick && (
-            <CrossIcon className={s.close} onClick={onCloseClick} />
-          )}
+        <div className={s.footer}>
+          <LinkButton
+            className={s.buy}
+            size="small"
+            href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
+              process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION ?? ''
+            )}`}
+            target="_blank"
+          >
+            Buy Banknotes
+          </LinkButton>
         </div>
       </div>
-      <div className={s.content}>
-        <SlideIcon
-          className={cn(s.side, { [s.hide]: page <= 1 })}
-          onClick={page > 1 ? () => setPage(page - 1) : undefined}
-        />
-        <Loader
-          isLoading={isLoading}
-          isError={isErrorBanknotes}
-          onRetry={refetchBanknotes}
-        >
-          <div className={s.banknotes}>
-            {banknotes.map((c) => (
-              <div
-                className={cn(s.banknote)}
-                key={c.asset_id}
-                onClick={() => onSelect?.(c.asset_id)}
-              >
-                <Image
-                  width={162}
-                  height={76}
-                  alt={c.name}
-                  src={ipfsToUrlSafe(c.data.img)}
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-            ))}
-          </div>
-        </Loader>
-        <SlideIcon
-          className={cn(s.side, s.rotate, {
-            [s.hide]: !canClickNextPage,
-            [s.disabled]: isLoadingNextPage,
-          })}
-          onClick={() => {
-            canClickNextPage && !isLoadingNextPage && setPage(page + 1)
-          }}
-        />
-      </div>
-      <div className={s.footer}>
-        <LinkButton
-          className={s.buy}
-          size="small"
-          href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
-            process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION ?? ''
-          )}`}
-          target="_blank"
-        >
-          Buy Banknotes
-        </LinkButton>
-      </div>
-    </div>
+    </>
   )
 }
 

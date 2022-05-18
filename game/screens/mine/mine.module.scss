@@ -1,45 +1,34 @@
-.slots {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 48px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-
-    &>* {
-        margin: 24px;
-    }
+.title {
+  margin-bottom: 60px;
 }
 
 .slot {
-    padding: 12px;
-    position: relative;
+  padding: 12px;
+  position: relative;
 
-    .timer {
-        position: absolute;
-        top: 157px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Bangers';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 45px;
-        text-align: center;
-        color: #FFFFFF;
+  .timer {
+    position: absolute;
+    top: 157px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Bangers';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .lower_content {
+    height: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
     }
-
-    .lower_content {
-        height: 74px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-        }
-    }
+  }
 }

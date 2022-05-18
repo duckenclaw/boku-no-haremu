@@ -8,7 +8,7 @@ import {
 import { Button } from 'game/components/button'
 import { useEffect, useMemo, useState } from 'react'
 import { Duration } from 'luxon'
-import { ipfsToUrlSafe } from 'utils'
+import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 import { BaseSlot } from 'game/components/base_slot'
 import { CardImage } from 'game/components/card_image'
 
@@ -127,7 +127,7 @@ export const Slot = ({
           isActive
           alt={card.asset_id}
           disabled={status === 1 && showTimer}
-          src={ipfsToUrlSafe(card.data.img)}
+          src={[ipfsToS3Url(card.data.img), ipfsToUrlSafe(card.data.img)]}
         />
       )}
       {status == 1 && showTimer && (

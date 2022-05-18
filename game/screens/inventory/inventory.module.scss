@@ -1,56 +1,60 @@
 .sizer {
-    width: 100%;
-    max-width: 903px;
+  width: 100%;
+  max-width: 903px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
 }
 
 .header {
-    height: 70px;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 32px;
+  align-items: flex-end;
+
+  .button {
+    background: #2d0d3b;
+    border: 3px solid #a5efff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-width: 0px;
+
+    width: 192px;
+    height: 54px;
+
+    font-family: 'Bangers';
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    text-align: center;
+
+    transition: width 0.2s, height 0.2s, font-size 0.2s;
+    transition-timing-function: ease-in-out;
+
+    margin-right: 8px;
+    cursor: pointer;
+
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    padding-right: 32px;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
 
-    .button {
-        background: #2D0D3B;
-        border: 3px solid #A5EFFF;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        border-bottom-width: 0px;
-
-        width: 192px;
-        height: 54px;
-
-        font-family: 'Bangers';
-        text-align: center;
-        color: #FFFFFF;
-        font-size: 24px;
-        text-align: center;
-
-        transition: width 0.2s, height 0.2s, font-size 0.2s;
-        transition-timing-function: ease-in-out;
-
-        margin-right: 8px;
-        cursor: pointer;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &.active {
-            width: 248px;
-            height: 70px;
-            font-size: 32px;
-            cursor: not-allowed;
-        }
+    &.active {
+      width: 248px;
+      height: 70px;
+      font-size: 32px;
+      cursor: not-allowed;
     }
-
-
+  }
 }
 
 .container {
-    background: #2D0D3B;
-    border-radius: 8px;
-    border: 3px solid #71B2CF;
-    padding: 42px;
+  position: relative;
+  background: #2d0d3b;
+  border-radius: 8px;
+  border: 3px solid #71b2cf;
+  padding: 42px;
 }
