@@ -1,0 +1,35 @@
+.withdrawCreate {
+  width: 100%;
+}
+
+.resourceModal {
+  padding-bottom: 90px;
+}
+
+.resources {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 26px;
+  margin-top: 55px;
+}
+
+.resource {
+  width: 135px;
+  cursor: pointer;
+}
+
+.resourceImage {
+  width: 100%;
+}
+
+.resourceName {
+  text-align: center;
+  font-size: 28px;
+  font-family: 'Bangers';
+  color: #ffffff;
+}
+
+.button {
+  margin-top: 140px;
+}

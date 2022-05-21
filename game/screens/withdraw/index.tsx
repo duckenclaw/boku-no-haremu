@@ -1,43 +1,47 @@
 import { Loader } from 'components/shared-ui/loader'
+import { Button, Toggle } from 'game/components/button'
 import { ScreenContainer } from 'game/components/screen_container'
 import { ScreenTitle } from 'game/components/screen_title'
 import {
   useGetAllBanknotesTemplates,
   useGetBanknotesBalances,
 } from 'game/game_api'
-import { useMemo } from 'react'
-import { BanknoteCard } from './banknote_card'
+import { useMemo, useState } from 'react'
 import s from './withdraw.module.scss'
+import { WithdrawCash } from './withdraw_cash'
+import { WithdrawCreate } from './withdraw_create'
+
+type WithdrawMode = 'create' | 'cashOut'
+
+export const RESOURCES: {
+  name: string
+  image: string
+  currency: 'NYA' | 'CHT' | 'SMP' | 'BNT'
+}[] = [
+  {
+    name: 'Nyan',
+    image: '/images/currencies/nyan.png',
+    currency: 'NYA',
+  },
+  {
+    name: 'Chantment',
+    image: '/images/currencies/crystal.png',
+    currency: 'CHT',
+  },
+  {
+    name: 'Symptrtix',
+    image: '/images/currencies/simptetix.png',
+    currency: 'SMP',
+  },
+  {
+    name: 'Bento',
+    image: '/images/currencies/bento.png',
+    currency: 'BNT',
+  },
+]
 
 export const Withdraw = () => {
-  const {
-    data: templateData,
-    isLoading: isLoadingTemplates,
-    isError: isErrorTemplate,
-    refetch: refetchTemplate,
-  } = useGetAllBanknotesTemplates()
-  const {
-    data: balancesData,
-    isLoading: isLoadingAmount,
-    isError: isErrorBalance,
-    refetch: refetchBalance,
-  } = useGetBanknotesBalances()
-
-  const templateMapping = useMemo(
-    () =>
-      (balancesData?.data.templates ?? []).reduce((map, val) => {
-        map[val.template_id] = Number.parseInt(val.assets)
-        return map
-      }, {} as { [key: string]: number }),
-
-    [balancesData]
-  )
-
-  const onRetry = () => {
-    Promise.all([refetchTemplate(), refetchBalance()])
-  }
-
-  const banknotes = templateData?.pages.map((p) => p.data).flat(1) ?? []
+  const [mode, setMode] = useState<WithdrawMode>('create')
 
   return (
     <ScreenContainer
@@ -46,20 +50,16 @@ export const Withdraw = () => {
         content: s.screenContent,
       }}
     >
-      <Loader
-        isLoading={isLoadingTemplates}
-        isError={isErrorTemplate || isErrorBalance}
-        onRetry={onRetry}
-      >
-        {banknotes.map((b) => (
-          <BanknoteCard
-            templateData={b}
-            isLoadingAmount={isLoadingAmount}
-            amount={templateMapping[b.template_id] ?? 0}
-            key={b.template_id}
-          />
-        ))}
-      </Loader>
+      <Toggle
+        className={s.toggle}
+        isLeft={mode === 'create'}
+        onChange={() =>
+          mode === 'create' ? setMode('cashOut') : setMode('create')
+        }
+        leftLabel="create"
+        rightLabel="cash out"
+      />
+      {mode === 'create' ? <WithdrawCreate /> : <WithdrawCash />}
     </ScreenContainer>
   )
 }

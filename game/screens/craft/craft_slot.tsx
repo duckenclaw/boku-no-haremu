@@ -100,7 +100,7 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
             <span className={s.overlay_text}>CRAFT</span>
           </div>
         }
-        contentClassName={s.craft_content}
+        classes={{ content: s.craft_content }}
       >
         <CardImage
           alt={template_id.toString()}
