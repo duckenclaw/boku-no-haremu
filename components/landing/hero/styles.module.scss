@@ -1,11 +1,9 @@
 .section {
-  background: linear-gradient(
-    375deg,
-    rgba(73, 47, 94, 1) 71%,
-    rgba(139, 119, 142, 1) 84%,
-    rgba(184, 142, 174, 1) 89%,
-    rgba(231, 191, 206, 1) 100%
-  );
+  background: linear-gradient(375deg,
+      rgba(73, 47, 94, 1) 71%,
+      rgba(139, 119, 142, 1) 84%,
+      rgba(184, 142, 174, 1) 89%,
+      rgba(231, 191, 206, 1) 100%);
   position: fixed;
   left: 0;
   top: 0;
@@ -85,12 +83,10 @@
     font-size: 80px;
     line-height: 66px;
     font-weight: 600;
-    background: linear-gradient(
-      180deg,
-      #ea748f 0%,
-      #ff418a 53.65%,
-      #f237a5 100%
-    );
+    background: linear-gradient(180deg,
+        #ea748f 0%,
+        #ff418a 53.65%,
+        #f237a5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -118,7 +114,19 @@
     }
   }
 
-  .cta {
+  .buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  .cta,
+  .bridge_btn {
     max-width: 326px;
     width: 100%;
     height: 60px;
@@ -130,6 +138,25 @@
     }
   }
 
+  .cta {
+    @media (max-width: 768px) {
+      margin-bottom: 8px;
+    }
+  }
+
+  .bridge_btn {
+    margin-left: 6px;
+
+    button {
+      background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #D22089 100%);
+      box-shadow: 0px 10px 25px #D5436F;
+    }
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+
   .subtitle {
     font-size: 40px;
     line-height: 33px;
@@ -138,12 +165,10 @@
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 2px;
 
-    background: linear-gradient(
-      180deg,
-      #6ccaf3 0%,
-      #2e92bf 50.52%,
-      #00415e 100%
-    );
+    background: linear-gradient(180deg,
+        #6ccaf3 0%,
+        #2e92bf 50.52%,
+        #00415e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -187,10 +212,8 @@
 
 .text_wrap {
   @media (max-width: 576px) {
-    background: radial-gradient(
-      50% 50% at 50% 50%,
-      rgba(58, 29, 65, 0.43) 30.73%,
-      rgba(196, 196, 196, 0) 100%
-    );
+    background: radial-gradient(50% 50% at 50% 50%,
+        rgba(58, 29, 65, 0.43) 30.73%,
+        rgba(196, 196, 196, 0) 100%);
   }
 }
