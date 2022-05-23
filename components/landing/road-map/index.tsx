@@ -53,10 +53,10 @@ export const RoadMap = () => {
     },
     {
       number: '',
-      title: 'Secret Event',
-      clarification: 'This will be open after the first day of sales',
+      title: 'Bridge to Polygon',
       description:
-        'Faucibus interdum posuere lorem ipsum dolor sit. Malesuada bibendum',
+        'Bridge is opened! Now you can transfer our NFTs from WAX to Polygon and from Polygon to WAX.',
+      image: 'images/road_map/image_secret_opened.png',
     },
     {
       number: '',
@@ -64,6 +64,7 @@ export const RoadMap = () => {
       clarification: 'This will be open after the first day of sales',
       description:
         'Viverra nibh cras pulvinar mattis nunc. Commodo nulla facilisi',
+      // image: 'images/road_map/image7.webp',
     },
     {
       number: '',
@@ -75,21 +76,21 @@ export const RoadMap = () => {
     },
     {
       number: '',
-      title: 'NFT Packs sale',
+      title: 'NFT Capsule Sale',
       description:
         'The beginning of a legendary tale of <b>Harem Masters</b>. What Waifu will you get? The launch of the game is coming up so you better be ready!',
       image: 'images/road_map/image13.webp',
     },
     {
       number: 'June 2022',
-      title: 'Opening of Packs',
+      title: 'Opening of Capsules',
       description:
         'This is what we all have been waiting for, you can find out what Waifus you get and plan your Harem progression strategy together with them!',
       image: 'images/road_map/image9.webp',
     },
     {
       number: '',
-      title: 'Money Packs sale',
+      title: 'Money Capsule Sale',
       description:
         'Gifts from your waifus gathered in one <b>Resources</b> are needed to start the mining the resources, you can check our <b>Whitepaper</b> to know the mechanics, so be ready for some more packs that will ensure prosperity of your <b>Haremu</b>.',
       image: 'images/road_map/image8.webp',
@@ -117,7 +118,7 @@ export const RoadMap = () => {
     },
   ]
 
-  const stage = 3
+  const stage = 6
   const line_class = (index: number) => {
     if (index < stage) return s.before
     if (index === stage) return s.gradient

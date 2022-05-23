@@ -23,9 +23,15 @@ const Hero: React.FC<Props> = ({ className }) => {
         onLoad={() => setIsCharactersLoaded(true)}
       />
       <div className={s.content}>
-        <a href="https://discord.gg/S3rbu5GXGQ" className={s.cta}>
-          <button className={s.button}>PLAY</button>
-        </a>
+        <div className={s.buttons}>
+          <a href="https://discord.gg/S3rbu5GXGQ" className={s.cta}>
+            <button className={s.button}>PLAY</button>
+          </a>
+          <a href="https://bridge.bokunoharemu.com/" className={s.bridge_btn}>
+            <button className={s.button}>Bridge</button>
+          </a>
+        </div>
+
         <div className={s.text_wrap}>
           <div className={s.title}>Boku no haremu</div>
           <div className={s.subtitle}>GROW YOUR UNIQUE WAIFU</div>
