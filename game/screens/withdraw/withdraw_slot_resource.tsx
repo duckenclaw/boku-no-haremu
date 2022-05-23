@@ -4,24 +4,24 @@ import { GameModal } from 'game/components/game_modal'
 import { useGetResources } from 'game/game_api'
 import { useState } from 'react'
 import { Image } from 'components/shared-ui/image'
-import baseStyles from './withdraw.module.scss'
-import createStyles from './withdraw_create.module.scss'
+import s from './withdraw.module.scss'
 import { CardImage } from 'game/components/card_image'
 import { CurrentResourceType } from './withdraw_create'
 import { RESOURCES } from '.'
+import { Button } from 'game/components/button'
 
 type withdrawSlotProps = {
   className?: string
   selectResource: (resource: CurrentResourceType) => void
   currentResource: CurrentResourceType
+  mode: 'create' | 'withdraw'
 }
-
-const s = { ...baseStyles, ...createStyles }
 
 const WithdrawSlotResource: React.FC<withdrawSlotProps> = ({
   className,
   selectResource,
   currentResource,
+  mode,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -60,29 +60,31 @@ const WithdrawSlotResource: React.FC<withdrawSlotProps> = ({
           ))}
         </div>
       </GameModal>
-      <BaseSlot
-        classes={{
-          container: s.slot,
-          content: s.slotContent,
-          emptyTitle: s.slotEmptyTitle,
-        }}
-        className={s.slot}
-        isEmpty={currentResource === null}
-        isLoading={isResourcesLoading}
-        isError={isResourcesError}
-        onRetry={() => null}
-        onClick={() => {
-          setIsModalOpen(true)
-        }}
-      >
-        {currentResource && (
-          <CardImage
-            className={s.slotImage}
-            alt={currentResource.name}
-            src={currentResource.image}
-          />
-        )}
-      </BaseSlot>
+      <div className={s.slotContainer}>
+        <BaseSlot
+          classes={{
+            container: s.slot,
+            content: s.slotContent,
+            emptyTitle: s.slotEmptyTitle,
+          }}
+          className={s.slot}
+          isEmpty={currentResource === null}
+          isLoading={isResourcesLoading}
+          isError={isResourcesError}
+          onRetry={() => null}
+          onClick={() => {
+            setIsModalOpen(true)
+          }}
+        >
+          {currentResource && (
+            <CardImage
+              className={s.slotImage}
+              alt={currentResource.name}
+              src={currentResource.image}
+            />
+          )}
+        </BaseSlot>
+      </div>
     </>
   )
 }

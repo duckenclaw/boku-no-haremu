@@ -16,8 +16,8 @@ type BaseSlotProps = {
   overlayChildren?: React.ReactNode
   isEmpty?: boolean
   isLoading?: boolean
-  isError: boolean
-  onRetry: () => void
+  isError?: boolean
+  onRetry?: () => void
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement

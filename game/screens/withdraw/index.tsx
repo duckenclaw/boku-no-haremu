@@ -1,5 +1,4 @@
-import { Loader } from 'components/shared-ui/loader'
-import { Button, Toggle } from 'game/components/button'
+import { Toggle } from 'game/components/button'
 import { ScreenContainer } from 'game/components/screen_container'
 import { ScreenTitle } from 'game/components/screen_title'
 import {

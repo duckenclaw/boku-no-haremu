@@ -1,8 +1,8 @@
 import cn from 'classnames'
-import { Button } from 'game/components/button'
-import { useGetAllBanknotesTemplates } from 'game/game_api'
 import { useState } from 'react'
-import s from './withdraw_create.module.scss'
+import { Button } from 'game/components/button'
+import { Image } from 'components/shared-ui/image'
+import s from './withdraw.module.scss'
 import { WithdrawSlotBanknote } from './withdraw_slot_banknote'
 import { WithdrawSlotResource } from './withdraw_slot_resource'
 
@@ -22,17 +22,30 @@ const WithdrawCreate: React.FC<Props> = ({ className }) => {
 
   return (
     <>
-      <WithdrawSlotResource
-        selectResource={setCurrentResource}
-        currentResource={currentResource}
-      />
-      {currentResource && <WithdrawSlotBanknote />}
+      <div className={s.slots}>
+        <WithdrawSlotResource
+          selectResource={setCurrentResource}
+          currentResource={currentResource}
+          mode="create"
+        />
+        {currentResource && (
+          <>
+            <Image
+              className={s.arrow}
+              src="/images/svg/arrow2.svg"
+              mode="none"
+              alt="arrow"
+            />
+            <WithdrawSlotBanknote currentResource={currentResource} />
+          </>
+        )}
+      </div>
       <Button
         className={s.button}
         disabled={true}
         onClick={() => console.log('create')}
       >
-        create
+        Create
       </Button>
     </>
   )
