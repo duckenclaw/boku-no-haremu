@@ -20,21 +20,6 @@
   width: 100%;
 }
 
-.slotContainer {
-  max-width: 335px;
-  width: 100%;
-}
-
-.slotContainerBanknote {
-  max-width: 417px;
-  width: 100%;
-
-  .slot {
-    max-width: 417px;
-    width: 100%;
-  }
-}
-
 .slot {
   max-width: 100%;
   width: 100%;
@@ -42,57 +27,9 @@
   cursor: pointer;
 }
 
-.slotImage {
-  width: 60%;
-  height: 80%;
-  object-fit: contain;
-  box-shadow: none !important;
-  border: none;
-}
-
-.slotBanknote {
-  width: 70%;
-  height: 125px;
-  object-fit: contain;
-  box-shadow: none !important;
-  border: none;
-}
-
 .slotEmptyTitle {
   margin-top: 50px !important;
   margin-bottom: 37px !important;
-}
-
-.withdrawCreate {
-  width: 100%;
-}
-
-.resourceModal {
-  padding-bottom: 90px;
-}
-
-.resources {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  gap: 26px;
-  margin-top: 55px;
-}
-
-.resource {
-  width: 135px;
-  cursor: pointer;
-}
-
-.resourceImage {
-  width: 100%;
-}
-
-.resourceName {
-  text-align: center;
-  font-size: 28px;
-  font-family: 'Bangers';
-  color: #ffffff;
 }
 
 .arrow {
@@ -100,21 +37,4 @@
   height: 85px;
   margin-top: 73px;
   transform: rotate(-90deg);
-}
-
-.button {
-  margin-top: 140px;
-}
-
-.banknoteValues {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  margin-top: 24px;
-}
-
-.banknoteValueButton {
-  max-width: 77px !important;
 }

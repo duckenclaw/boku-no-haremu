@@ -1,14 +1,13 @@
-import cn from 'classnames'
-import { BaseSlot } from 'game/components/base_slot'
+import { Image } from 'components/shared-ui/image'
+import { CardImage } from 'game/components/card_image'
 import { GameModal } from 'game/components/game_modal'
 import { useGetResources } from 'game/game_api'
 import { useState } from 'react'
-import { Image } from 'components/shared-ui/image'
-import s from './withdraw.module.scss'
-import { CardImage } from 'game/components/card_image'
-import { CurrentResourceType } from './withdraw_create'
-import { RESOURCES } from '.'
-import { Button } from 'game/components/button'
+import { WithdrawSlot } from '../withdraw_slots'
+import { CurrentResourceType } from '.'
+import { RESOURCES } from '..'
+
+import s from './withdraw_create.module.scss'
 
 type withdrawSlotProps = {
   className?: string
@@ -61,13 +60,7 @@ const WithdrawSlotResource: React.FC<withdrawSlotProps> = ({
         </div>
       </GameModal>
       <div className={s.slotContainer}>
-        <BaseSlot
-          classes={{
-            container: s.slot,
-            content: s.slotContent,
-            emptyTitle: s.slotEmptyTitle,
-          }}
-          className={s.slot}
+        <WithdrawSlot
           isEmpty={currentResource === null}
           isLoading={isResourcesLoading}
           isError={isResourcesError}
@@ -83,7 +76,7 @@ const WithdrawSlotResource: React.FC<withdrawSlotProps> = ({
               src={currentResource.image}
             />
           )}
-        </BaseSlot>
+        </WithdrawSlot>
       </div>
     </>
   )

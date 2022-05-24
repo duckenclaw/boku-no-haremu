@@ -22,9 +22,7 @@ export const BanknoteCard = ({
   const [isOpenModal, setIsModalOpen] = useState(false)
   const { immutable_data, template_id } = templateData
   const { mutateAsync: mintBanknote, isLoading: isMintLoading } =
-    useMintBanknote({
-      template_id,
-    })
+    useMintBanknote()
   const { mutateAsync: burnBanknote, isLoading: isBurnLoading } =
     useBurnBanknote()
 

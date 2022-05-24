@@ -634,17 +634,17 @@ export const useClaim = () => {
   })
 }
 
-type useMintBanknoteOptions = {
+type useMintBanknoteVariables = {
   template_id: string
 }
 
 // mint banknote by template_id
-export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
+export const useMintBanknote = () => {
   const { account, api, auth } = useWax()
   const qc = useQueryClient()
-  return useMutation({
+  return useMutation<any, any, useMintBanknoteVariables>({
     mutationKey: 'wax/mintBanknote',
-    mutationFn: () =>
+    mutationFn: ({ template_id }) =>
       api!.transact(
         {
           actions: [
@@ -664,6 +664,7 @@ export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
           expireSeconds: 30,
         }
       ),
+
     onSuccess: () => {
       toast.success('Banknote minted!')
       qc.invalidateQueries('wax/resources')

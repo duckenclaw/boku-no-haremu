@@ -1,23 +1,18 @@
 import cn from 'classnames'
-import { BaseSlot } from 'game/components/base_slot'
+import { Image } from 'components/shared-ui/image'
 import { Button } from 'game/components/button'
 import { useGetAllBanknotesTemplates } from 'game/game_api'
-import { useEffect, useMemo, useState } from 'react'
-import s from './withdraw.module.scss'
-import { Image } from 'components/shared-ui/image'
-import { WithdrawBanknoteValues } from './withdraw_bancnote_values'
-import { CurrentResourceType } from './withdraw_create'
+import { useEffect, useMemo } from 'react'
 import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
+import { Banknote, CurrentResourceType } from '.'
+import { WithdrawSlot } from '../withdraw_slots'
+import s from './withdraw_create.module.scss'
 
 type WithdrawSlotBanknoteProps = {
   className?: string
   currentResource: CurrentResourceType
-}
-
-export type Banknote = {
-  template_id: string
-  image: string
-  value: string
+  currentBanknote: Banknote | null
+  setCurrentBanknote: (banknote: Banknote | null) => void
 }
 
 type BanknotesType = { [k: string]: Banknote[] }
@@ -25,9 +20,9 @@ type BanknotesType = { [k: string]: Banknote[] }
 const WithdrawSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
   className,
   currentResource,
+  currentBanknote,
+  setCurrentBanknote,
 }) => {
-  const [currentBanknote, setCurrentBanknote] = useState<Banknote | null>(null)
-
   const {
     data: templateData,
     isLoading: isLoadingTemplates,
@@ -36,7 +31,15 @@ const WithdrawSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
   } = useGetAllBanknotesTemplates()
 
   const banknotes = useMemo(() => {
-    return templateData?.data.reduce<BanknotesType>((acc, item) => {
+    const orderedTemplateData = templateData?.data.sort((a, b) => {
+      if (Number(a.immutable_data?.amount) < Number(b.immutable_data?.amount))
+        return -1
+      if (Number(a.immutable_data?.amount) > Number(b.immutable_data?.amount))
+        return 1
+      return 0
+    })
+
+    return orderedTemplateData?.reduce<BanknotesType>((acc, item) => {
       const symbol: string = item?.immutable_data?.symbol
       if (symbol) {
         acc[symbol] = [
@@ -56,24 +59,15 @@ const WithdrawSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
     if (banknotes && currentResource?.currency) {
       setCurrentBanknote(banknotes[currentResource.currency][0])
     }
-  }, [banknotes, currentResource?.currency])
-  console.log('currentBanknote', currentBanknote)
+  }, [banknotes, currentResource?.currency, setCurrentBanknote])
 
   return (
     <div className={s.slotContainerBanknote}>
-      <BaseSlot
-        classes={{
-          container: s.slot,
-          content: s.slotContent,
-          emptyTitle: s.slotEmptyTitle,
-        }}
+      <WithdrawSlot
         isEmpty={!banknotes}
         isLoading={isLoadingTemplates}
         isError={isErrorTemplate}
         onRetry={() => null}
-        onClick={() => {
-          console.log('BaseSlot')
-        }}
       >
         {currentBanknote && (
           <Image
@@ -85,7 +79,7 @@ const WithdrawSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
             alt={currentBanknote.value}
           />
         )}
-      </BaseSlot>
+      </WithdrawSlot>
       {banknotes && currentResource && (
         <WithdrawBanknoteValues
           banknotes={banknotes[currentResource.currency]}
@@ -93,6 +87,40 @@ const WithdrawSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
           currentBanknote={currentBanknote}
         />
       )}
+    </div>
+  )
+}
+
+type WithdrawBanknoteValuesProps = {
+  className?: string
+  banknotes: Banknote[]
+  setCurrentBanknote: (banknote: Banknote) => void
+  currentBanknote?: Banknote | null
+}
+
+const WithdrawBanknoteValues: React.FC<WithdrawBanknoteValuesProps> = ({
+  className,
+  banknotes,
+  setCurrentBanknote,
+  currentBanknote,
+}) => {
+  return (
+    <div className={cn(s.banknoteValues, className)}>
+      {banknotes.map((item) => (
+        <Button
+          className={cn(s.banknoteValueButton)}
+          size="xsmall"
+          color={
+            currentBanknote?.template_id === item.template_id
+              ? 'purple'
+              : 'blue'
+          }
+          onClick={() => setCurrentBanknote(item)}
+          key={item.template_id}
+        >
+          {item.value}
+        </Button>
+      ))}
     </div>
   )
 }
