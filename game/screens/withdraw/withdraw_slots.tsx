@@ -6,21 +6,21 @@ import s from './withdraw.module.scss'
 // Slots
 
 type WithdrawSlotsProps = {
-  className?: string
+  classes?: { container?: string; arrow?: string }
   firstSlot?: React.ReactNode
   secondSlot?: React.ReactNode
 }
 
 const WithdrawSlots: React.FC<WithdrawSlotsProps> = ({
-  className,
+  classes,
   firstSlot,
   secondSlot,
 }) => (
-  <div className={cn(s.slots, className)}>
+  <div className={cn(s.slots, classes?.container)}>
     {firstSlot}
     {secondSlot && (
       <Image
-        className={s.arrow}
+        className={cn(s.arrow, classes?.arrow)}
         src="/images/svg/arrow2.svg"
         mode="none"
         alt="arrow"

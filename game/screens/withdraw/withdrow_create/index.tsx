@@ -56,16 +56,41 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
         }
       >
         <div className={s.modal}>
-          <div className={s.confirmModalResource}>
-            <Image alt={currentResource?.name} src={currentResource?.image!} />
-          </div>
-          <Image
+          <WithdrawSlots
+            classes={{ container: s.modalSlotsContainer, arrow: s.arrow }}
+            firstSlot={
+              <div className={s.confirmModalResource}>
+                <Image
+                  alt={currentResource?.name}
+                  src={currentResource?.image!}
+                />
+                <div className={s.quantity}>
+                  {currentBanknote?.value || '??'}{' '}
+                  {currentResource?.name || '??'}
+                </div>
+              </div>
+            }
+            secondSlot={
+              <div className={s.confirmModalBanknote}>
+                <Image
+                  src={[
+                    ipfsToS3Url(currentBanknote?.image),
+                    ipfsToUrlSafe(currentBanknote?.image),
+                  ]}
+                  alt={currentBanknote?.value}
+                />
+                <div className={s.quantity}>1 banknote</div>
+              </div>
+            }
+          />
+
+          {/* <Image
             className={s.arrow}
             src="/images/svg/arrow2.svg"
             mode="none"
             alt="arrow"
-          />
-          <div className={s.confirmModalBanknote}>
+          /> */}
+          {/* <div className={s.confirmModalBanknote}>
             <Image
               src={[
                 ipfsToS3Url(currentBanknote?.image),
@@ -73,7 +98,7 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
               ]}
               alt={currentBanknote?.value}
             />
-          </div>
+          </div> */}
         </div>
       </ConfirmModal>
       <WithdrawSlots
