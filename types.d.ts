@@ -18,6 +18,9 @@ type AtomicAsset = {
     shy?: string
     accessories?: string
     background?: string
+    name?: string
+    symbol?: string
+    amount?: string
   }
   is_burnable: boolean
   is_transferable: boolean

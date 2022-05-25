@@ -4,10 +4,10 @@ import { ConfirmModal } from 'game/components/confirm_modal'
 import { useMintBanknote } from 'game/game_api'
 import { useState } from 'react'
 import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
-import { WithdrawSlots } from '../withdraw_slots'
+import { WithdrawExchangeRow } from '../withdraw_exchange_row'
+import { CreateSlotBanknote } from './create_slot_banknote'
+import { CreateSlotResource } from './create_slot_resource'
 import s from './withdraw_create.module.scss'
-import { WithdrawSlotBanknote } from './withdraw_slot_banknote'
-import { WithdrawSlotResource } from './withdraw_slot_resource'
 
 type WithdrawCreateProps = {
   className?: string
@@ -39,26 +39,29 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
       <ConfirmModal
         isOpen={modalIsOpen}
         onConfirm={() =>
-          mintBanknote({ template_id: currentBanknote?.template_id! })
+          mintBanknote({ template_id: currentBanknote?.template_id! }).finally(
+            () => setModalIsOpen(false)
+          )
         }
         onClose={() => setModalIsOpen(false)}
         title={`You will lose ${currentBanknote?.value || '??'} ${
           currentResource?.name || '??'
-        } you will receive 1 bill`}
+        }\n you will receive 1 bill`}
         dialogChildren={
-          <>
-            <p>
-              “Senpai, are you sure you want to spend 100 bento to mint that
-              banknote? Prosperity of your harem is in your hands, waifu trust
-              you with all their heart!”
-            </p>
-          </>
+          <p>
+            “Senpai, are you sure you want to spend{' '}
+            <span className={s.dialogValue}>
+              {currentBanknote?.value || '??'} {currentResource?.name || '??'}{' '}
+            </span>
+            to mint that banknote? Prosperity of your harem is in your hands,
+            waifu trust you with all their heart!”
+          </p>
         }
       >
         <div className={s.modal}>
-          <WithdrawSlots
+          <WithdrawExchangeRow
             classes={{ container: s.modalSlotsContainer, arrow: s.arrow }}
-            firstSlot={
+            exchangeSlot={
               <div className={s.confirmModalResource}>
                 <Image
                   alt={currentResource?.name}
@@ -70,7 +73,7 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
                 </div>
               </div>
             }
-            secondSlot={
+            receiveSlot={
               <div className={s.confirmModalBanknote}>
                 <Image
                   src={[
@@ -83,35 +86,19 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
               </div>
             }
           />
-
-          {/* <Image
-            className={s.arrow}
-            src="/images/svg/arrow2.svg"
-            mode="none"
-            alt="arrow"
-          /> */}
-          {/* <div className={s.confirmModalBanknote}>
-            <Image
-              src={[
-                ipfsToS3Url(currentBanknote?.image),
-                ipfsToUrlSafe(currentBanknote?.image),
-              ]}
-              alt={currentBanknote?.value}
-            />
-          </div> */}
         </div>
       </ConfirmModal>
-      <WithdrawSlots
-        firstSlot={
-          <WithdrawSlotResource
+      <WithdrawExchangeRow
+        exchangeSlot={
+          <CreateSlotResource
             selectResource={setCurrentResource}
             currentResource={currentResource}
             mode="create"
           />
         }
-        secondSlot={
+        receiveSlot={
           currentResource && (
-            <WithdrawSlotBanknote
+            <CreateSlotBanknote
               currentResource={currentResource}
               currentBanknote={currentBanknote}
               setCurrentBanknote={setCurrentBanknote}

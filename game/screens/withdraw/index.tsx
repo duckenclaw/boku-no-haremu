@@ -8,11 +8,13 @@ import { WithdrawCreate } from './withdrow_create'
 
 type WithdrawMode = 'create' | 'cashOut'
 
-export const RESOURCES: {
+export type ResourceType = {
   name: string
   image: string
   currency: 'NYA' | 'CHT' | 'SMP' | 'BNT'
-}[] = [
+}
+
+export const RESOURCES: ResourceType[] = [
   {
     name: 'Nyan',
     image: '/images/currencies/nyan.png',

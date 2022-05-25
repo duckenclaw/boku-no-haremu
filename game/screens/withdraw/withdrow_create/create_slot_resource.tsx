@@ -3,20 +3,20 @@ import { CardImage } from 'game/components/card_image'
 import { GameModal } from 'game/components/game_modal'
 import { useGetResources } from 'game/game_api'
 import { useState } from 'react'
-import { WithdrawSlot } from '../withdraw_slots'
+import { WithdrawSlot } from '../withdraw_slot'
 import { CurrentResourceType } from '.'
 import { RESOURCES } from '..'
 
 import s from './withdraw_create.module.scss'
 
-type withdrawSlotProps = {
+type CreateSlotResourceProps = {
   className?: string
   selectResource: (resource: CurrentResourceType) => void
   currentResource: CurrentResourceType
   mode: 'create' | 'withdraw'
 }
 
-const WithdrawSlotResource: React.FC<withdrawSlotProps> = ({
+const CreateSlotResource: React.FC<CreateSlotResourceProps> = ({
   className,
   selectResource,
   currentResource,
@@ -82,4 +82,4 @@ const WithdrawSlotResource: React.FC<withdrawSlotProps> = ({
   )
 }
 
-export { WithdrawSlotResource }
+export { CreateSlotResource }

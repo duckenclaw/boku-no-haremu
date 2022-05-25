@@ -5,10 +5,10 @@ import { useGetAllBanknotesTemplates } from 'game/game_api'
 import { useEffect, useMemo } from 'react'
 import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 import { Banknote, CurrentResourceType } from '.'
-import { WithdrawSlot } from '../withdraw_slots'
+import { WithdrawSlot } from '../withdraw_slot'
 import s from './withdraw_create.module.scss'
 
-type WithdrawSlotBanknoteProps = {
+type CreateSlotBanknoteProps = {
   className?: string
   currentResource: CurrentResourceType
   currentBanknote: Banknote | null
@@ -17,7 +17,7 @@ type WithdrawSlotBanknoteProps = {
 
 type BanknotesType = { [k: string]: Banknote[] }
 
-const WithdrawSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
+const CreateSlotBanknote: React.FC<CreateSlotBanknoteProps> = ({
   className,
   currentResource,
   currentBanknote,
@@ -125,4 +125,4 @@ const WithdrawBanknoteValues: React.FC<WithdrawBanknoteValuesProps> = ({
   )
 }
 
-export { WithdrawSlotBanknote }
+export { CreateSlotBanknote }
