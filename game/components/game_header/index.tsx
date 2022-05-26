@@ -92,7 +92,7 @@ export const GameHeader = () => {
           />
           <ResourceBalance value={nya} />
         </div>
-        <div className={s.res} data-tip="Simptetix">
+        <div className={s.res} data-tip="Chantment">
           <Image
             className={s.cardPriceIcon}
             alt="crystal"
@@ -101,7 +101,7 @@ export const GameHeader = () => {
           />
           <ResourceBalance value={cht} />
         </div>
-        <div className={s.res} data-tip="Bento">
+        <div className={s.res} data-tip="Simpthetix">
           <Image
             className={s.cardPriceIcon}
             alt="simptetix"
@@ -110,7 +110,7 @@ export const GameHeader = () => {
           />
           <ResourceBalance value={smp} />
         </div>
-        <div className={s.res} data-tip="Chantment">
+        <div className={s.res} data-tip="Bento">
           <Image
             className={s.cardPriceIcon}
             alt="bento"

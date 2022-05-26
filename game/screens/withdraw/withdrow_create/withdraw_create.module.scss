@@ -1,0 +1,112 @@
+.slot {
+  max-width: 335px;
+  width: 100%;
+}
+
+.slotContainerBanknote {
+  max-width: 417px;
+  width: 100%;
+
+  .slot {
+    max-width: 417px;
+    width: 100%;
+    cursor: auto;
+  }
+}
+
+.slotImage {
+  flex: 1 1 auto;
+  width: 70%;
+  object-fit: contain;
+  box-shadow: none !important;
+  border: none;
+}
+
+.resourceModal {
+  min-height: 0;
+  padding-bottom: 90px;
+}
+
+.resources {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 26px;
+  margin-top: 55px;
+}
+
+.resource {
+  width: 135px;
+  cursor: pointer;
+}
+
+.resourceImage {
+  width: 100%;
+}
+
+.resourceName {
+  text-align: center;
+  font-size: 28px;
+  font-family: 'Bangers';
+  color: #ffffff;
+}
+
+.banknoteValues {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 24px;
+}
+
+.banknoteValueButton {
+  max-width: 77px !important;
+}
+
+.button {
+  margin-top: 140px;
+}
+
+// modal
+
+.modal {
+  padding-top: 60px;
+  padding-bottom: 50px;
+}
+
+.confirmModalResource {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 150px;
+
+  img {
+    flex: 1 1 auto;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.confirmModalBanknote {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 162px;
+  img {
+    flex: 1 1 auto;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.quantity {
+  margin-top: 10px;
+
+  font-family: 'Bangers';
+  font-size: 28px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.dialogValue {
+  color: #479ec5;
+}

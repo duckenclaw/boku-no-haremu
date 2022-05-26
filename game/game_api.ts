@@ -146,14 +146,12 @@ export const useGetTemplateById = ({
 // get all Banknotes NFTs for user
 export const useGetAllBanknotesTemplates = () => {
   const { isConnected } = useWax()
-  return useInfiniteQuery<GetAllBanknotesResponseType>({
+  return useQuery<GetAllBanknotesResponseType>({
     queryKey: ['wax/getAllBanknotes'],
     enabled: isConnected,
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/templates', {
         params: {
-          page: String(pageParam ?? 1),
-          limit: '40',
           collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
           schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
         },
@@ -636,17 +634,17 @@ export const useClaim = () => {
   })
 }
 
-type useMintBanknoteOptions = {
+type useMintBanknoteVariables = {
   template_id: string
 }
 
 // mint banknote by template_id
-export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
+export const useMintBanknote = () => {
   const { account, api, auth } = useWax()
   const qc = useQueryClient()
-  return useMutation({
+  return useMutation<any, any, useMintBanknoteVariables>({
     mutationKey: 'wax/mintBanknote',
-    mutationFn: () =>
+    mutationFn: ({ template_id }) =>
       api!.transact(
         {
           actions: [
@@ -666,6 +664,7 @@ export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
           expireSeconds: 30,
         }
       ),
+
     onSuccess: () => {
       toast.success('Banknote minted!')
       qc.invalidateQueries('wax/resources')

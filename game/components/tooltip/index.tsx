@@ -24,6 +24,6 @@ const Tooltip: React.FC<TooltipProps> = ({
   )
 }
 
-Tooltip.displayName = 'LinkButton'
+Tooltip.displayName = 'Tooltip'
 
 export { Tooltip }

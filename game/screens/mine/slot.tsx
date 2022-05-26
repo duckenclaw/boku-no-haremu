@@ -76,13 +76,12 @@ export const Slot = ({
   const showTimer = finishing_at > now
   return (
     <BaseSlot
-      className={className}
+      classes={{ container: className, content: s.slot }}
       onClick={asset_id ? undefined : onPlaceCard}
       isLoading={isLoading || isMetadataLoading}
       isEmpty={!asset_id || !card}
       isError={isError || isErrorMetadata}
       onRetry={onRetry}
-      contentClassName={s.slot}
       overlayChildren={
         <>
           {status == 1 && !showTimer && (

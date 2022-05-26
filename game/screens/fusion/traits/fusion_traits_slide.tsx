@@ -21,34 +21,15 @@ export const FusionTraitsSlide = ({
     asset_id,
   })
 
-  let characterTraits = useMemo(
+  const characterTraits = useMemo(
     () => data?.data?.immutable_data,
     [data?.data?.immutable_data]
   )
 
-  let templateData = useMemo(
+  const templateData = useMemo(
     () => data?.data.template.immutable_data,
     [data?.data.template.immutable_data]
   )
-
-  templateData = {
-    // нужно удалить когда появятся харастеристики
-    img: 'QmTLkXJoCjdYQKaQ7kDFJqtNn8gScz6KT52Aqh7SkJfpCE',
-    type: 'namichuan',
-    level: '1',
-    name: 'NYANFAC3',
-  }
-
-  characterTraits = {
-    // нужно удалить когда появятся харастеристики
-    img: 'QmTLkXJoCjdYQKaQ7kDFJqtNn8gScz6KT52Aqh7SkJfpCE',
-    shy: '3',
-    eyes: 'grey',
-    hair: 'kitsune',
-    clothes: 'grey dress',
-    emotional: '8',
-    passionate: '4',
-  }
 
   const levelTraits = {
     2: ['clothes', 'hair', 'passionate', 'shy', 'emotional'],
@@ -56,6 +37,8 @@ export const FusionTraitsSlide = ({
     4: ['accessories'],
     5: ['background', 'unique trait'],
   }
+
+  const ignoreTraits = ['img', 'name']
 
   return (
     <div className={cn(className, s.slide)}>
@@ -71,7 +54,7 @@ export const FusionTraitsSlide = ({
           <div className={s.title}>you will receive</div>
           {templateData &&
             Object.entries(templateData).map(([key, value]) =>
-              key === 'img' ? null : (
+              ignoreTraits.includes(key) ? null : (
                 <TraitItem
                   className={s.templateItem}
                   type={key}
@@ -82,7 +65,7 @@ export const FusionTraitsSlide = ({
             )}
           {characterTraits &&
             Object.entries(characterTraits).map(([key, value]) =>
-              key === 'img' ? null : (
+              ignoreTraits.includes(key) ? null : (
                 <TraitItem type={key} value={value} key={key} />
               )
             )}
