@@ -1,4 +1,4 @@
-.slotContainer {
+.slot {
   max-width: 335px;
   width: 100%;
 }
@@ -10,12 +10,13 @@
   .slot {
     max-width: 417px;
     width: 100%;
+    cursor: auto;
   }
 }
 
 .slotImage {
-  width: 60%;
-  height: 80%;
+  flex: 1 1 auto;
+  width: 70%;
   object-fit: contain;
   box-shadow: none !important;
   border: none;
@@ -50,31 +51,6 @@
   color: #ffffff;
 }
 
-.modalSlotsContainer {
-  align-items: center;
-  padding-top: 68px;
-  padding-bottom: 10px;
-}
-
-.confirmModalResource {
-  width: 150px;
-
-  img {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-  }
-}
-
-.confirmModalBanknote {
-  width: 162px;
-  img {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-  }
-}
-
 .banknoteValues {
   display: flex;
   flex-flow: row wrap;
@@ -92,25 +68,43 @@
   margin-top: 140px;
 }
 
-.slotBanknote {
-  width: 70%;
-  height: 125px;
-  object-fit: contain;
-  box-shadow: none !important;
-  border: none;
+// modal
+
+.modal {
+  padding-top: 60px;
+  padding-bottom: 50px;
+}
+
+.confirmModalResource {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 150px;
+
+  img {
+    flex: 1 1 auto;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.confirmModalBanknote {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 162px;
+  img {
+    flex: 1 1 auto;
+    width: 100%;
+    object-fit: contain;
+  }
 }
 
 .quantity {
+  margin-top: 10px;
+
   font-family: 'Bangers';
   font-size: 28px;
   text-align: center;
   color: #ffffff;
-}
-
-.arrow {
-  width: 70px !important;
-  height: 70px !important;
-  margin-top: -20px !important;
 }
 
 .dialogValue {

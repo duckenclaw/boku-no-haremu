@@ -40,7 +40,10 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
         isOpen={modalIsOpen}
         onConfirm={() =>
           mintBanknote({ template_id: currentBanknote?.template_id! }).finally(
-            () => setModalIsOpen(false)
+            () => {
+              setCurrentResource(null)
+              setModalIsOpen(false)
+            }
           )
         }
         onClose={() => setModalIsOpen(false)}
@@ -60,7 +63,7 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
       >
         <div className={s.modal}>
           <WithdrawExchangeRow
-            classes={{ container: s.modalSlotsContainer, arrow: s.arrow }}
+            mode="modal"
             exchangeSlot={
               <div className={s.confirmModalResource}>
                 <Image

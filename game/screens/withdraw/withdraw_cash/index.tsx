@@ -26,8 +26,7 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
   } = useGetCardByAssetId({ asset_id: banknoteId })
   const banknote = banknoteData?.data
 
-  const { mutateAsync: burnBanknote, isLoading: isBurnLoading } =
-    useBurnBanknote()
+  const { mutateAsync: burnBanknote } = useBurnBanknote()
 
   const banknoteName =
     banknote?.immutable_data.name?.split(' ').reverse().join(' ') || '??'
@@ -60,7 +59,7 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
       >
         <div className={s.modal}>
           <WithdrawExchangeRow
-            classes={{ container: s.modalSlotsContainer, arrow: s.arrow }}
+            mode="modal"
             exchangeSlot={
               <div className={s.confirmModalBanknote}>
                 <Image
@@ -70,7 +69,7 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
                     ipfsToUrlSafe(banknote?.immutable_data?.img),
                   ]}
                 />
-                <div className={s.quantity}>{banknoteName}</div>
+                <div className={s.quantity}>1 banknote</div>
               </div>
             }
             receiveSlot={
@@ -96,7 +95,7 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
         }
         receiveSlot={
           banknote?.immutable_data && (
-            <CashSlotResource resource={currentResource} />
+            <CashSlotResource resource={currentResource} banknote={banknote} />
           )
         }
       />

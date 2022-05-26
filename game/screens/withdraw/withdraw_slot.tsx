@@ -10,15 +10,17 @@ type WithdrawSlotProps = {
 const WithdrawSlot: React.FC<WithdrawSlotProps> = ({
   className,
   children,
+  isEmpty = false,
   ...props
 }) => {
   return (
     <BaseSlot
       classes={{
         container: cn(s.slot, className),
-        content: s.slotContent,
+        content: cn(!isEmpty && s.slotContent),
         emptyTitle: s.slotEmptyTitle,
       }}
+      isEmpty={isEmpty}
       {...props}
     >
       {children}

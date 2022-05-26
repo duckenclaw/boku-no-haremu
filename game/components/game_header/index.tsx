@@ -101,7 +101,7 @@ export const GameHeader = () => {
           />
           <ResourceBalance value={cht} />
         </div>
-        <div className={s.res} data-tip="Symptrtix">
+        <div className={s.res} data-tip="Simpthetix">
           <Image
             className={s.cardPriceIcon}
             alt="simptetix"

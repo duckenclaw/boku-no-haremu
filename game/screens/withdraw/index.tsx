@@ -26,7 +26,7 @@ export const RESOURCES: ResourceType[] = [
     currency: 'CHT',
   },
   {
-    name: 'Symptrtix',
+    name: 'Simpthetix',
     image: '/images/currencies/simptetix.png',
     currency: 'SMP',
   },

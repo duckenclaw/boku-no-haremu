@@ -48,13 +48,16 @@ const CashSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
         onRetry={() => null}
       >
         {banknote?.immutable_data?.img && (
-          <Image
-            src={[
-              ipfsToS3Url(banknote?.immutable_data?.img),
-              ipfsToUrlSafe(banknote?.immutable_data?.img),
-            ]}
-            alt={banknote?.immutable_data?.name}
-          />
+          <>
+            <Image
+              src={[
+                ipfsToS3Url(banknote?.immutable_data?.img),
+                ipfsToUrlSafe(banknote?.immutable_data?.img),
+              ]}
+              alt={banknote?.immutable_data?.name}
+            />
+            <div className={s.slotText}>banknote</div>
+          </>
         )}
       </WithdrawSlot>
     </>

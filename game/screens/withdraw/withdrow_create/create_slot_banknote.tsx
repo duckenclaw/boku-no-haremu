@@ -71,7 +71,7 @@ const CreateSlotBanknote: React.FC<CreateSlotBanknoteProps> = ({
       >
         {currentBanknote && (
           <Image
-            className={s.slotBanknote}
+            className={s.slotImage}
             src={[
               ipfsToS3Url(currentBanknote.image),
               ipfsToUrlSafe(currentBanknote.image),

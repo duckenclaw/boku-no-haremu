@@ -1,51 +1,65 @@
+.slotContent {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: stretch;
+}
+
 .cashSlot {
   width: 335px;
   height: 240px;
 
   img {
-    width: 250px;
-    height: 180px;
+    flex: 1 1 auto;
+    width: 70%;
     object-fit: contain;
   }
+
+  .resourceImage {
+    width: 50%;
+  }
+}
+
+.slotText {
+  padding-bottom: 20px;
+
+  font-family: 'Bangers';
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 36px;
 }
 
 .button {
   margin-top: 140px;
 }
 
-.dialogValue {
-  color: #479ec5;
+// modal
+
+.modal {
+  padding-top: 60px;
+  padding-bottom: 50px;
 }
 
 .confirmModalResource {
+  display: flex;
+  flex-flow: column nowrap;
   width: 150px;
 
   img {
+    flex: 1 1 auto;
     width: 100%;
-    height: 150px;
     object-fit: contain;
   }
 }
 
 .confirmModalBanknote {
+  display: flex;
+  flex-flow: column nowrap;
   width: 162px;
   img {
+    flex: 1 1 auto;
     width: 100%;
-    height: 150px;
     object-fit: contain;
   }
-}
-
-.arrow {
-  width: 70px !important;
-  height: 70px !important;
-  margin-top: -20px !important;
-}
-
-.modalSlotsContainer {
-  align-items: center;
-  padding-top: 68px;
-  padding-bottom: 10px;
 }
 
 .quantity {
@@ -53,4 +67,8 @@
   font-size: 28px;
   text-align: center;
   color: #ffffff;
+}
+
+.dialogValue {
+  color: #479ec5;
 }

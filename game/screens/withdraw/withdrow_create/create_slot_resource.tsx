@@ -24,12 +24,6 @@ const CreateSlotResource: React.FC<CreateSlotResourceProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const {
-    data: resourcesData,
-    isLoading: isResourcesLoading,
-    isError: isResourcesError,
-  } = useGetResources()
-
   return (
     <>
       <GameModal
@@ -59,25 +53,22 @@ const CreateSlotResource: React.FC<CreateSlotResourceProps> = ({
           ))}
         </div>
       </GameModal>
-      <div className={s.slotContainer}>
-        <WithdrawSlot
-          isEmpty={currentResource === null}
-          isLoading={isResourcesLoading}
-          isError={isResourcesError}
-          onRetry={() => null}
-          onClick={() => {
-            setIsModalOpen(true)
-          }}
-        >
-          {currentResource && (
-            <CardImage
-              className={s.slotImage}
-              alt={currentResource.name}
-              src={currentResource.image}
-            />
-          )}
-        </WithdrawSlot>
-      </div>
+      <WithdrawSlot
+        className={s.slot}
+        isEmpty={currentResource === null}
+        onRetry={() => null}
+        onClick={() => {
+          setIsModalOpen(true)
+        }}
+      >
+        {currentResource && (
+          <CardImage
+            className={s.slotImage}
+            alt={currentResource.name}
+            src={currentResource.image}
+          />
+        )}
+      </WithdrawSlot>
     </>
   )
 }

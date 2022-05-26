@@ -16,8 +16,17 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 34px;
+  align-items: stretch;
   width: 100%;
+}
+
+.slotsRow {
+  align-items: flex-start;
+  gap: 34px;
+}
+
+.modalRow {
+  gap: 24px;
 }
 
 .slot {
@@ -27,14 +36,29 @@
   cursor: pointer;
 }
 
+.slotContent {
+  flex-flow: column nowrap;
+  justify-content: stretch !important;
+}
+
 .slotEmptyTitle {
   margin-top: 50px !important;
   margin-bottom: 37px !important;
 }
 
 .arrow {
+  transform: rotate(-90deg);
+}
+
+.arrowSlots {
   width: 70px;
   height: 85px;
   margin-top: 73px;
-  transform: rotate(-90deg);
+}
+
+.arrowModal {
+  width: 70px;
+  height: 70px;
+  margin-top: -20px;
+  align-self: center;
 }
