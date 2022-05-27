@@ -22,6 +22,10 @@
   border: none;
 }
 
+.slotImageResource {
+  width: 45%;
+}
+
 .resourceModal {
   min-height: 0;
   padding-bottom: 90px;
@@ -31,17 +35,18 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 26px;
+  gap: 35px;
   margin-top: 55px;
 }
 
 .resource {
-  width: 135px;
+  width: 125px;
   cursor: pointer;
 }
 
 .resourceImage {
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .resourceName {
@@ -66,47 +71,4 @@
 
 .button {
   margin-top: 140px;
-}
-
-// modal
-
-.modal {
-  padding-top: 60px;
-  padding-bottom: 50px;
-}
-
-.confirmModalResource {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 150px;
-
-  img {
-    flex: 1 1 auto;
-    width: 100%;
-    object-fit: contain;
-  }
-}
-
-.confirmModalBanknote {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 162px;
-  img {
-    flex: 1 1 auto;
-    width: 100%;
-    object-fit: contain;
-  }
-}
-
-.quantity {
-  margin-top: 10px;
-
-  font-family: 'Bangers';
-  font-size: 28px;
-  text-align: center;
-  color: #ffffff;
-}
-
-.dialogValue {
-  color: #479ec5;
 }

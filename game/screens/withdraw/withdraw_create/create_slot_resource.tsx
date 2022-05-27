@@ -3,6 +3,7 @@ import { CardImage } from 'game/components/card_image'
 import { GameModal } from 'game/components/game_modal'
 import { useGetResources } from 'game/game_api'
 import { useState } from 'react'
+import cn from 'classnames'
 import { WithdrawSlot } from '../withdraw_slot'
 import { CurrentResourceType } from '.'
 import { RESOURCES } from '..'
@@ -63,7 +64,7 @@ const CreateSlotResource: React.FC<CreateSlotResourceProps> = ({
       >
         {currentResource && (
           <CardImage
-            className={s.slotImage}
+            className={cn(s.slotImage, s.slotImageResource)}
             alt={currentResource.name}
             src={currentResource.image}
           />

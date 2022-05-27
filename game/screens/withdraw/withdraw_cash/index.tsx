@@ -9,6 +9,7 @@ import { CashSlotBanknote } from './cash_slot_banknote'
 import { CashSlotResource } from './cash_slot_resource'
 import { Image } from 'components/shared-ui/image'
 import s from './withdraw_cash.module.scss'
+import modalStyles from '../confirm_modal.module.scss'
 import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
 type WithdrawCashProps = {
@@ -57,11 +58,11 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
           </p>
         }
       >
-        <div className={s.modal}>
+        <div className={modalStyles.modal}>
           <WithdrawExchangeRow
             mode="modal"
             exchangeSlot={
-              <div className={s.confirmModalBanknote}>
+              <div className={modalStyles.confirmModalBanknote}>
                 <Image
                   alt={banknote?.immutable_data?.name}
                   src={[
@@ -69,16 +70,16 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
                     ipfsToUrlSafe(banknote?.immutable_data?.img),
                   ]}
                 />
-                <div className={s.quantity}>1 banknote</div>
+                <div className={modalStyles.quantity}>1 banknote</div>
               </div>
             }
             receiveSlot={
-              <div className={s.confirmModalResource}>
+              <div className={modalStyles.confirmModalResource}>
                 <Image
                   src={currentResource?.image!}
                   alt={currentResource?.name}
                 />
-                <div className={s.quantity}>{banknoteName}</div>
+                <div className={modalStyles.quantity}>{banknoteName}</div>
               </div>
             }
           />

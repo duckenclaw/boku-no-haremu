@@ -20,15 +20,18 @@
   }
 
   .lower_content {
-    height: 74px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 4px;
+    min-height: 66px;
+    padding-top: 10px;
 
     .row {
       display: flex;
       flex-direction: row;
       justify-content: center;
+      gap: 10px;
     }
   }
 }
