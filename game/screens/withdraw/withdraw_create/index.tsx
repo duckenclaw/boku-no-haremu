@@ -7,6 +7,7 @@ import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 import { WithdrawExchangeRow } from '../withdraw_exchange_row'
 import { CreateSlotBanknote } from './create_slot_banknote'
 import { CreateSlotResource } from './create_slot_resource'
+import modalStyles from '../confirm_modal.module.scss'
 import s from './withdraw_create.module.scss'
 
 type WithdrawCreateProps = {
@@ -61,23 +62,23 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
           </p>
         }
       >
-        <div className={s.modal}>
+        <div className={modalStyles.modal}>
           <WithdrawExchangeRow
             mode="modal"
             exchangeSlot={
-              <div className={s.confirmModalResource}>
+              <div className={modalStyles.confirmModalResource}>
                 <Image
                   alt={currentResource?.name}
                   src={currentResource?.image!}
                 />
-                <div className={s.quantity}>
+                <div className={modalStyles.quantity}>
                   {currentBanknote?.value || '??'}{' '}
                   {currentResource?.name || '??'}
                 </div>
               </div>
             }
             receiveSlot={
-              <div className={s.confirmModalBanknote}>
+              <div className={modalStyles.confirmModalBanknote}>
                 <Image
                   src={[
                     ipfsToS3Url(currentBanknote?.image),
@@ -85,7 +86,7 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
                   ]}
                   alt={currentBanknote?.value}
                 />
-                <div className={s.quantity}>1 banknote</div>
+                <div className={modalStyles.quantity}>1 banknote</div>
               </div>
             }
           />

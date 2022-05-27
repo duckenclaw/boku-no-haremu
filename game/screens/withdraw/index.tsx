@@ -4,7 +4,7 @@ import { ScreenTitle } from 'game/components/screen_title'
 import { useState } from 'react'
 import s from './withdraw.module.scss'
 import { WithdrawCash } from './withdraw_cash'
-import { WithdrawCreate } from './withdrow_create'
+import { WithdrawCreate } from './withdraw_create'
 
 type WithdrawMode = 'create' | 'cashOut'
 
@@ -17,22 +17,22 @@ export type ResourceType = {
 export const RESOURCES: ResourceType[] = [
   {
     name: 'Nyan',
-    image: '/images/currencies/nyan.png',
+    image: '/images/currencies/game_nyan.png',
     currency: 'NYA',
   },
   {
     name: 'Chantment',
-    image: '/images/currencies/crystal.png',
+    image: '/images/currencies/game_chantment.png',
     currency: 'CHT',
   },
   {
     name: 'Simpthetix',
-    image: '/images/currencies/simptetix.png',
+    image: '/images/currencies/game_simpthetix.png',
     currency: 'SMP',
   },
   {
     name: 'Bento',
-    image: '/images/currencies/bento.png',
+    image: '/images/currencies/game_bento.png',
     currency: 'BNT',
   },
 ]
