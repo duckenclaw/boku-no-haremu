@@ -41,10 +41,11 @@ export const Fusion = () => {
   const disableFuse = useMemo(
     () =>
       isFuseLoading ||
-      (cards.some((c) => !c) &&
-        cards
-          .filter((c) => c?.template_id)
-          .every((c, _, array) => c?.template_id === array[0]?.template_id)),
+      cards.every((card) => !card) ||
+      cards.every(
+        (card) =>
+          !!cards.find((item) => item?.template_id !== card?.template_id)
+      ),
     [cards, isFuseLoading]
   )
 
