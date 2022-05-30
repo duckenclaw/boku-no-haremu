@@ -205,7 +205,7 @@ export const useGetAllBanknotes = ({
         },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
-      if (page.data.length === 20) {
+      if (page.data.length === limit) {
         return pages.length + 1
       } else return false
     },
