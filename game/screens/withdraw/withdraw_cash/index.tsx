@@ -96,7 +96,11 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
         }
         receiveSlot={
           banknote?.immutable_data && (
-            <CashSlotResource resource={currentResource} banknote={banknote} />
+            <CashSlotResource
+              className={s.resourceSlot}
+              resource={currentResource}
+              banknote={banknote}
+            />
           )
         }
       />
