@@ -17,7 +17,7 @@ const CashSlotResource: React.FC<CashSlotResourceProps> = ({
   banknote,
 }) => {
   return (
-    <WithdrawSlot className={s.cashSlot} isEmpty={false}>
+    <WithdrawSlot className={cn(s.cashSlot, className)} isEmpty={false}>
       {resource?.image && (
         <>
           <Image
