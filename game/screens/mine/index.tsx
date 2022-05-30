@@ -56,6 +56,7 @@ export const Mine = () => {
           ))}
           {!isLoading && data && data?.length < MAX_SLOTS_COUNT && (
             <Slot
+              className={s.emptySlot}
               onPlaceCard={() => {
                 setIsOpen(true)
               }}
