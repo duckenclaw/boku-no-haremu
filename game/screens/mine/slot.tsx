@@ -1,3 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import { Duration } from 'luxon'
+import {
+  animated,
+  useSpring,
+  config,
+  useChain,
+  useSpringRef,
+  useTrail,
+} from '@react-spring/web'
+
 import {
   useClaim,
   useGetCardByAssetId,
@@ -6,14 +25,13 @@ import {
   useUnsetMine,
 } from 'game/game_api'
 import { Button } from 'game/components/button'
-import { useEffect, useMemo, useState } from 'react'
-import { Duration } from 'luxon'
-import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 import { BaseSlot } from 'game/components/base_slot'
 import { CardImage } from 'game/components/card_image'
+import { currencyToImg, Resource } from 'game/components/resource'
+import { Image } from 'components/shared-ui/image'
+import { getDistanceBetweenElements, ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
 import s from './mine.module.scss'
-import { Resource } from 'game/components/resource'
 
 type SlotProps = {
   className?: string
@@ -61,7 +79,11 @@ export const Slot = ({
 
   const { mutateAsync: unsetMine, isLoading: isUnsetLoading } = useUnsetMine()
   const { mutateAsync: mine, isLoading: isMineLoading } = useMine()
-  const { mutateAsync: claim, isLoading: isClaimLoading } = useClaim()
+  const {
+    mutateAsync: claim,
+    isLoading: isClaimLoading,
+    isSuccess: isClaimSuccess,
+  } = useClaim()
 
   const finishing_at = useMemo(() => {
     if (asset_data) {
@@ -74,6 +96,7 @@ export const Slot = ({
 
   const now = useTime(status === 1 ? 1000 : false)
   const showTimer = finishing_at > now
+
   return (
     <BaseSlot
       classes={{ container: className, content: s.slot }}
@@ -82,6 +105,7 @@ export const Slot = ({
       isEmpty={!asset_id || !card}
       isError={isError || isErrorMetadata}
       onRetry={onRetry}
+      forceOverlay={status == 1 && !showTimer}
       overlayChildren={
         <>
           {status == 1 && !showTimer && (
@@ -155,6 +179,109 @@ export const Slot = ({
           )}
         </div>
       )}
+      <ResourceAnimation
+        resource={mineRecipe?.mined_resource.currency ?? ''}
+        showAnimation={isClaimSuccess}
+      />
     </BaseSlot>
+  )
+}
+
+type ResourceAnimation = {
+  resource: string
+  showAnimation: boolean
+}
+
+const ResourceAnimation = ({ resource, showAnimation }: ResourceAnimation) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [{ v }, bounceApi] = useSpring(() => ({
+    from: {
+      v: 0,
+    },
+    config: config.gentle,
+  }))
+  const [trail, flyApi] = useTrail(
+    15,
+    () => ({
+      from: { x: 0, y: 0, show: false },
+    }),
+    []
+  )
+  const [end, endApi] = useSpring(() => ({
+    from: {
+      t: 0,
+    },
+    onRest: () => {
+      bounceApi.start({ v: 0 })
+      flyApi.set({ x: 0, y: 0, show: false })
+    },
+    config: config.slow,
+  }))
+
+  useChain([bounceApi as any, flyApi, endApi])
+
+  useLayoutEffect(() => {
+    if (showAnimation && containerRef.current) {
+      const headerResource = document.getElementById(
+        `header-resource-${resource.toLowerCase()}`
+      )
+      if (!headerResource) return
+      const { x, y } = getDistanceBetweenElements(
+        containerRef.current,
+        headerResource
+      )
+      // reset values
+      endApi.start({ t: 0 })
+      bounceApi.set({ v: 0 })
+      flyApi.set({ x: 0, y: 0, show: false })
+      // start again
+      bounceApi.start({ v: 1000 })
+      flyApi.start({ x, y, show: true })
+      endApi.start({ t: 1000 })
+
+      const cb = () => {
+        const { x, y } = getDistanceBetweenElements(
+          containerRef.current!,
+          headerResource
+        )
+        flyApi.start({ x, y })
+      }
+      window.addEventListener('scroll', cb, { passive: true })
+      return () => {
+        window.removeEventListener('scroll', cb)
+      }
+    }
+  }, [showAnimation, resource])
+
+  console.log(flyApi)
+
+  return (
+    <div ref={containerRef} className={s.resource_animation}>
+      <animated.img
+        className={s.main_img}
+        alt=""
+        src={currencyToImg(resource)}
+        style={{
+          scale: v
+            .to([0, 500, 750, 1000], [0, 100, 110, 100], 'extend')
+            .to((v) => `${v}%`),
+          background: `radial-gradient(circle, rgba(237,28,255,1) 0%, rgba(237,28,255,0) 80%)`,
+        }}
+      />
+      {trail.map((t, i) => (
+        <animated.div
+          key={i}
+          className={s.fly_image}
+          style={{
+            translateX: t.x,
+            translateY: t.y,
+            display: t.show.to((v) => (v ? 'block' : 'none')),
+            opacity: end.t.to([0, 900, 1000], [1, 0.9, 0]),
+          }}
+        >
+          <Image alt="" src={currencyToImg(resource)} mode="none" />
+        </animated.div>
+      ))}
+    </div>
   )
 }

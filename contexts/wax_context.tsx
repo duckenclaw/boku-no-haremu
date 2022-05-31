@@ -64,7 +64,7 @@ const loginWithWax = () => {
 const loginWithTestnet = () =>
   Promise.resolve({
     api: new Api({
-      rpc: new JsonRpc('https://testnet.wax.blacklusion.io'),
+      rpc: new JsonRpc('https://testnet.wax.pink.gg'),
       signatureProvider: new JsSignatureProvider([
         process.env.NEXT_PUBLIC_ACTIVE_KEY_PRIV!,
         process.env.NEXT_PUBLIC_OWNER_KEY_PRIV!,

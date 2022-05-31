@@ -13,7 +13,7 @@ type ResourceProps = {
   color?: 'default' | 'purple'
 } & React.ComponentProps<'span'>
 
-const currencyToImg = (c: string) => {
+export const currencyToImg = (c: string) => {
   switch (c.toLowerCase()) {
     default:
     case 'nya':
