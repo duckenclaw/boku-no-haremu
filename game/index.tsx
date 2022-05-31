@@ -36,7 +36,12 @@ export const Game = () => {
       <WaxProvider>
         <GameComponent />
         <ReactQueryDevtools />
-        <ToastContainer toastStyle={{ top: 100 }} />
+        <ToastContainer
+          toastStyle={{ top: 100 }}
+          autoClose={2000}
+          pauseOnHover={false}
+          draggable={true}
+        />
       </WaxProvider>
     </QueryClientProvider>
   )

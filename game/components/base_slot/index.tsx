@@ -14,6 +14,7 @@ type BaseSlotProps = {
     emptyIcon?: string
   }
   overlayChildren?: React.ReactNode
+  forceOverlay?: boolean
   isEmpty?: boolean
   isLoading?: boolean
   isError?: boolean
@@ -30,6 +31,7 @@ export const BaseSlot = ({
   isEmpty = false,
   overlayChildren,
   isLoading = false,
+  forceOverlay,
   isError,
   onRetry,
   ...props
@@ -55,7 +57,9 @@ export const BaseSlot = ({
         </Loader>
       </div>
       {isOverlayChildrenAvailable() && (
-        <div className={s.overlay}>{overlayChildren}</div>
+        <div className={cn(s.overlay, { [s.force]: forceOverlay })}>
+          {overlayChildren}
+        </div>
       )}
     </div>
   )
