@@ -46,8 +46,10 @@ export const FusionTraitsSlide = ({
         <CardImage
           className={s.image}
           src={[
-            ipfsToS3Url(characterTraits?.img),
-            ipfsToUrlSafe(characterTraits?.img),
+            ipfsToS3Url(
+              data?.data?.immutable_data?.img || data?.data?.data?.img
+            ),
+            ipfsToUrlSafe(data?.data?.data?.img),
           ]}
         />
         <div className={s.info}>

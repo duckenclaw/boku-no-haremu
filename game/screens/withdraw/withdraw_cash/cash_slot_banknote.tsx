@@ -47,12 +47,16 @@ const CashSlotBanknote: React.FC<WithdrawSlotBanknoteProps> = ({
         onClick={() => setModalIsOpen(true)}
         onRetry={() => null}
       >
-        {banknote?.immutable_data?.img && (
+        {(banknote?.immutable_data?.img || banknote?.data?.img) && (
           <>
             <Image
               src={[
-                ipfsToS3Url(banknote?.immutable_data?.img),
-                ipfsToUrlSafe(banknote?.immutable_data?.img),
+                ipfsToS3Url(
+                  banknote?.immutable_data?.img || banknote?.data?.img
+                ),
+                ipfsToUrlSafe(
+                  banknote?.immutable_data?.img || banknote?.data?.img
+                ),
               ]}
               alt={banknote?.immutable_data?.name}
             />

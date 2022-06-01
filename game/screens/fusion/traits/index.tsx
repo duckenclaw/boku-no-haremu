@@ -38,7 +38,7 @@ export const FusionTraits = ({
     <>
       <Button
         className={className}
-        disabled={disabled}
+        disabled={true}
         size="small"
         onClick={() => {
           setIsOpen(true)

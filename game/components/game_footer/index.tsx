@@ -36,7 +36,7 @@ export const GameFooter = () => {
     <footer className={s.footer}>
       <nav className={s.nav_list}>
         {GameRoutes.map((s) => (
-          <ScreenLink screen={s} key={s}>
+          <ScreenLink screen={s} key={s} disabled={s === 'fuse'}>
             {s.toUpperCase()}
           </ScreenLink>
         ))}
