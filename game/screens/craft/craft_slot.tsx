@@ -46,11 +46,10 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         title={'YOUR CHOICE'}
         dialogChildren={
           <>
-            <p>“You want to craft Mimi-chan, Senpai?</p>
+            <p>“You want to craft her, Senpai?</p>
             <p>
-              I just adore them! They are as faithful as they are amorous, the
-              best companions you can find! They produce 12 Nyans and consume 2
-              Bentos and 2 Nyans, they really are needy, aren’t they?”
+              I just adore all of them! They are as faithful as they are
+              amorous, the best companions you can find!”
             </p>
           </>
         }
