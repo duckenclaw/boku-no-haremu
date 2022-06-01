@@ -114,12 +114,12 @@ export const Fusion = () => {
         }
       >
         <div className={s.modes}>
-          <Toggle
+          {/* <Toggle
             isLeft={mode === '3to1'}
             onChange={(isLeft) => setMode(isLeft ? '3to1' : '5to2')}
             leftLabel={'3 to 1'}
             rightLabel={'5 to 2'}
-          />
+          /> */}
         </div>
         <div className={classNames(s.cards, { [s.five]: mode === '5to2' })}>
           {cards.map((c, index) => (
