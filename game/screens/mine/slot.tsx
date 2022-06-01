@@ -253,8 +253,6 @@ const ResourceAnimation = ({ resource, showAnimation }: ResourceAnimation) => {
     }
   }, [showAnimation, resource])
 
-  console.log(flyApi)
-
   return (
     <div ref={containerRef} className={s.resource_animation}>
       <animated.img
