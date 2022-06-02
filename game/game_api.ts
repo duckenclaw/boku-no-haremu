@@ -95,6 +95,35 @@ const uint64Plus1 = (num: string) => {
     .reverse()
     .join('')
 }
+
+const transformResourcesRow = (row: any) => {
+  if (row) {
+    const balances = (row.resource_balances as string[] | null)?.reduce(
+      (dict, balanceStr) => {
+        const b = balanceStringToObject(balanceStr)
+        if (b.currency) {
+          dict[b.currency.toLowerCase()] = b
+        }
+        return dict
+      },
+      {} as { [key: string]: BalanceType }
+    )
+    return {
+      isUserInitialized: true,
+      is_blocked: row.is_blocked > 0,
+      ...balances,
+    } as UseGetResourcesResponseType
+  }
+  return {
+    isUserInitialized: false,
+    smp: balanceStringToObject('0', 'SMP'),
+    nya: balanceStringToObject('0', 'NYA'),
+    bnt: balanceStringToObject('0', 'BHT'),
+    cht: balanceStringToObject('0', 'CHT'),
+    is_blocked: false,
+  } as UseGetResourcesResponseType
+}
+
 //#endregion
 
 //#region QUERIES
@@ -252,34 +281,7 @@ export const useGetResources = () => {
           reverse: false,
           show_payer: false,
         })
-        .then((res) => {
-          if (res?.rows[0]) {
-            const row = res.rows[0]
-            const balances = (row.resource_balances as string[] | null)?.reduce(
-              (dict, balanceStr) => {
-                const b = balanceStringToObject(balanceStr)
-                if (b.currency) {
-                  dict[b.currency.toLowerCase()] = b
-                }
-                return dict
-              },
-              {} as { [key: string]: BalanceType }
-            )
-            return {
-              isUserInitialized: true,
-              is_blocked: row.is_blocked > 0,
-              ...balances,
-            } as UseGetResourcesResponseType
-          }
-          return {
-            isUserInitialized: false,
-            smp: balanceStringToObject('0', 'SMP'),
-            nya: balanceStringToObject('0', 'NYA'),
-            bnt: balanceStringToObject('0', 'BHT'),
-            cht: balanceStringToObject('0', 'CHT'),
-            is_blocked: false,
-          } as UseGetResourcesResponseType
-        })
+        .then((res) => transformResourcesRow(res.rows[0]))
     },
   })
 }
@@ -635,14 +637,37 @@ export const useMine = () => {
   })
 }
 
+type UseClaimResultType = {
+  delta_balances: {
+    nya: number
+    bnt: number
+    cht: number
+    smp: number
+  } & Record<string, number>
+}
+
 // claimed mined card
 export const useClaim = () => {
   const { api, account, auth } = useWax()
   const qc = useQueryClient()
-  return useMutation<any, any, useMineArguments>({
+  return useMutation<UseClaimResultType, any, useMineArguments>({
     mutationKey: 'wax/claim',
-    mutationFn: ({ asset_id }) =>
-      api!
+    mutationFn: async ({ asset_id }) => {
+      const getResources = () =>
+        api!.rpc
+          .get_table_rows({
+            json: true,
+            code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+            scope: account,
+            table: 'accounts',
+            limit: 1,
+            reverse: false,
+            show_payer: false,
+          })
+          .then((res) => transformResourcesRow(res.rows[0]))
+
+      const beforeRes = await getResources()
+      await api!
         .transact(
           {
             actions: [
@@ -662,9 +687,17 @@ export const useClaim = () => {
             expireSeconds: 30,
           }
         )
-
-        .then(waitForWaxConfirmation(api!)),
-
+        .then(waitForWaxConfirmation(api!))
+      const afterRes = await getResources()
+      return {
+        delta_balances: {
+          nya: afterRes.nya.balance - beforeRes.nya.balance,
+          bnt: afterRes.bnt.balance - beforeRes.bnt.balance,
+          cht: afterRes.cht.balance - beforeRes.cht.balance,
+          smp: afterRes.smp.balance - beforeRes.smp.balance,
+        },
+      }
+    },
     onSuccess: () => {
       toast.success('Rewards claimed!')
       qc.invalidateQueries('wax/mining')

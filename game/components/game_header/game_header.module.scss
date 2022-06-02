@@ -122,4 +122,18 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   flex-shrink: 0;
+
+  .icon_sound {
+    filter: brightness(0.8) grayscale(0.4);
+    cursor: noy-allowed;
+  }
+
+  .icon_info {
+    outline: none;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
 }
