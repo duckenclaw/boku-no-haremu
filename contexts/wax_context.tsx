@@ -18,7 +18,7 @@ const loginWithAnchor = () => {
       {
         chainId:
           '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4',
-        nodeUrl: 'https://wax.greymass.com',
+        nodeUrl: process.env.NEXT_PUBLIC_WAX_RPC!,
       },
     ],
   })
@@ -31,7 +31,7 @@ const loginWithAnchor = () => {
     )
     .then((s) => {
       let api: any = new Api({
-        rpc: new JsonRpc('https://wax.greymass.com'),
+        rpc: new JsonRpc(process.env.NEXT_PUBLIC_WAX_RPC!),
         signatureProvider: s?.makeSignatureProvider(),
       })
       api['transact'] = (...ars: any[]) => {
@@ -52,7 +52,7 @@ const loginWithAnchor = () => {
 }
 
 const loginWithWax = () => {
-  const wax = new WaxJS({ rpcEndpoint: 'https://wax.greymass.com/' })
+  const wax = new WaxJS({ rpcEndpoint: process.env.NEXT_PUBLIC_WAX_RPC! })
   return wax.login().then(() => ({
     api: wax.api,
     account: wax.userAccount,
@@ -64,7 +64,7 @@ const loginWithWax = () => {
 const loginWithTestnet = () =>
   Promise.resolve({
     api: new Api({
-      rpc: new JsonRpc('https://testnet.wax.pink.gg'),
+      rpc: new JsonRpc(process.env.NEXT_PUBLIC_WAX_RPC!),
       signatureProvider: new JsSignatureProvider([
         process.env.NEXT_PUBLIC_ACTIVE_KEY_PRIV!,
         process.env.NEXT_PUBLIC_OWNER_KEY_PRIV!,
