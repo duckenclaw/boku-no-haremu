@@ -13,7 +13,6 @@ import {
   useSpring,
   config,
   useChain,
-  useSpringRef,
   useTrail,
 } from '@react-spring/web'
 
@@ -83,6 +82,7 @@ export const Slot = ({
     mutateAsync: claim,
     isLoading: isClaimLoading,
     isSuccess: isClaimSuccess,
+    data: claimData,
   } = useClaim()
 
   const finishing_at = useMemo(() => {
@@ -182,6 +182,11 @@ export const Slot = ({
       <ResourceAnimation
         resource={mineRecipe?.mined_resource.currency ?? ''}
         showAnimation={isClaimSuccess}
+        amount={
+          claimData?.delta_balances[
+            mineRecipe?.mined_resource.currency.toLowerCase() ?? ''
+          ] ?? 0
+        }
       />
     </BaseSlot>
   )
@@ -190,9 +195,14 @@ export const Slot = ({
 type ResourceAnimation = {
   resource: string
   showAnimation: boolean
+  amount: number
 }
 
-const ResourceAnimation = ({ resource, showAnimation }: ResourceAnimation) => {
+const ResourceAnimation = ({
+  resource,
+  showAnimation,
+  amount,
+}: ResourceAnimation) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [{ v }, bounceApi] = useSpring(() => ({
     from: {
@@ -201,7 +211,7 @@ const ResourceAnimation = ({ resource, showAnimation }: ResourceAnimation) => {
     config: config.gentle,
   }))
   const [trail, flyApi] = useTrail(
-    15,
+    Math.min(amount, 100),
     () => ({
       from: { x: 0, y: 0, show: false },
     }),
@@ -260,6 +270,7 @@ const ResourceAnimation = ({ resource, showAnimation }: ResourceAnimation) => {
         alt=""
         src={currencyToImg(resource)}
         style={{
+          display: end.t.to((v) => (v >= 1000 ? 'block' : 'none')),
           scale: v
             .to([0, 500, 750, 1000], [0, 100, 110, 100], 'extend')
             .to((v) => `${v}%`),
