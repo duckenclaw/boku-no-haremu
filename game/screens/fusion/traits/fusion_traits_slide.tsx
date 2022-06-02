@@ -13,6 +13,15 @@ type FusionTraitsSlideProps = {
   className?: string
 }
 
+const levelTraits = {
+  2: ['clothes', 'hair', 'passionate', 'shy', 'emotional'],
+  3: ['eyes'],
+  4: ['accessories'],
+  5: ['background', 'unique trait'],
+}
+
+const templateTraitsKeys = ['level', 'type']
+
 export const FusionTraitsSlide = ({
   className,
   asset_id,
@@ -26,17 +35,21 @@ export const FusionTraitsSlide = ({
     [data?.data?.immutable_data]
   )
 
-  const templateData = useMemo(
-    () => data?.data.template.immutable_data,
-    [data?.data.template.immutable_data]
-  )
+  const templateTraits = useMemo(() => {
+    if (data?.data?.template?.immutable_data) {
+      return Object.entries(data.data.template.immutable_data).reduce<{
+        [key: string]: string
+      }>((acc, [key, value]) => {
+        if (templateTraitsKeys.includes(key)) {
+          acc[key] = value
+          return acc
+        }
+        return acc
+      }, {})
+    }
 
-  const levelTraits = {
-    2: ['clothes', 'hair', 'passionate', 'shy', 'emotional'],
-    3: ['eyes'],
-    4: ['accessories'],
-    5: ['background', 'unique trait'],
-  }
+    return {}
+  }, [data?.data.template.immutable_data])
 
   const ignoreTraits = ['img', 'name']
 
@@ -54,8 +67,8 @@ export const FusionTraitsSlide = ({
         />
         <div className={s.info}>
           <div className={s.title}>you will receive</div>
-          {templateData &&
-            Object.entries(templateData).map(([key, value]) =>
+          {templateTraits &&
+            Object.entries(templateTraits).map(([key, value]) =>
               ignoreTraits.includes(key) ? null : (
                 <TraitItem
                   className={s.templateItem}
@@ -76,7 +89,7 @@ export const FusionTraitsSlide = ({
               className={s.additionTrait}
               valueClassName={s.additionValue}
               type={levelTraits[
-                (Number(templateData?.level) + 1) as keyof typeof levelTraits
+                (Number(templateTraits?.level) + 1) as keyof typeof levelTraits
               ]?.join(', ')}
               value={'???'}
             />
