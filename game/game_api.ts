@@ -7,13 +7,10 @@ import {
   useQueryClient,
 } from 'react-query'
 import { toast } from 'react-toastify'
-import { Serialize } from 'eosjs'
+import { Serialize, type Api } from 'eosjs'
 
 export const AtomicHubApi = axios.create({
-  baseURL:
-    process.env.NEXT_PUBLIC_TESTNET === 'true'
-      ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
-      : 'https://wax.api.atomicassets.io/atomicassets/v1/',
+  baseURL: process.env.NEXT_PUBLIC_WAX_API!,
   headers: {
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
@@ -37,12 +34,30 @@ export const balanceStringToObject = (
   } as BalanceType
 }
 
-const awaitForTransactionConformation = async <T>(args: T): Promise<T> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(args)
-    }, 2000)
-  })
+const MAX_TRIES = 10
+const WAIT_DELAY = 2000
+
+const waitFor = (time: number) =>
+  new Promise<void>((res) => setTimeout(() => res(), time))
+
+const waitForWaxConfirmation = (api: Api) => async (result: any) => {
+  console.log('WAIT FOR CONFR:', result)
+  const transaction_id =
+    result?.transaction_id ?? result?.transaction?.id?.()?.toString?.() ?? null
+  if (transaction_id) {
+    await waitFor(WAIT_DELAY / 2)
+    for (let index = 0; index < MAX_TRIES; index++) {
+      const history = await api.rpc
+        .history_get_transaction(transaction_id)
+        .catch(() => null)
+      console.log('HISTORY FOR ', transaction_id, ':', result)
+      if (history?.trx?.receipt?.status === 'executed') {
+        return result
+      }
+      await waitFor(WAIT_DELAY)
+    }
+  }
+  return result
 }
 
 const types = Serialize.createInitialTypes()
@@ -178,7 +193,6 @@ export const useGetBanknotesBalances = () => {
   return useQuery<GetBanknoteBalancesResponseType>({
     queryKey: ['wax/getBanknotesBalances', { account }],
     enabled: isConnected,
-
     queryFn: () =>
       AtomicHubApi.get(
         `/accounts/${account}/${process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION}`
@@ -481,15 +495,9 @@ export const useInitAccount = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Account successfully initialized!')
       qc.invalidateQueries('wax/resources')
@@ -531,15 +539,9 @@ export const useInitMine = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Card placed into mining slot!')
       qc.invalidateQueries('wax/mining')
@@ -578,15 +580,8 @@ export const useUnsetMine = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Card removed from mining slot!')
       qc.invalidateQueries('wax/mining')
@@ -625,15 +620,9 @@ export const useMine = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Resource mining started!')
       qc.invalidateQueries('wax/resources')
@@ -673,15 +662,9 @@ export const useClaim = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Rewards claimed!')
       qc.invalidateQueries('wax/mining')
@@ -725,15 +708,9 @@ export const useMintBanknote = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Banknote minted!')
       qc.invalidateQueries('wax/resources')
@@ -778,15 +755,9 @@ export const useBurnBanknote = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Banknote burned!')
       qc.invalidateQueries('wax/resources')
@@ -851,15 +822,9 @@ export const useFuseCards = () => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('New Waifu NFT created!')
       qc.invalidateQueries('wax/getAllCards')
@@ -901,15 +866,7 @@ export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
             expireSeconds: 30,
           }
         )
-        .then((res) => {
-          console.log('before res', res)
-          return res
-        })
-        .then((res) => awaitForTransactionConformation(res))
-        .then((res) => {
-          console.log('after res', res)
-          return res
-        }),
+        .then(waitForWaxConfirmation(api!)),
     onSuccess: () => {
       toast.success('New Waifu NFT crafted!')
       qc.invalidateQueries('wax/resources')
