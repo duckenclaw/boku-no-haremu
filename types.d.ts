@@ -1,3 +1,18 @@
+type AtomicAssetImmutableData = {
+  clothes?: string
+  emotional?: string
+  eyes?: string
+  hair?: string
+  img?: string
+  passionate?: string
+  shy?: string
+  accessories?: string
+  background?: string
+  name?: string
+  symbol?: string
+  amount?: string
+}
+
 type AtomicAsset = {
   asset_id: string
   auctions: []
@@ -8,20 +23,7 @@ type AtomicAsset = {
   collection: AtomicCollection
   contract: string
   data: any
-  immutable_data: {
-    clothes?: string
-    emotional?: string
-    eyes?: string
-    hair?: string
-    img?: string
-    passionate?: string
-    shy?: string
-    accessories?: string
-    background?: string
-    name?: string
-    symbol?: string
-    amount?: string
-  }
+  immutable_data: AtomicAssetImmutableData
   is_burnable: boolean
   is_transferable: boolean
   minted_at_block: string

@@ -67,7 +67,10 @@ const Navigation: React.FC<Props> = ({ className, setIsChecked }) => {
               <NextLink href={`/#${el.href}`} scroll={false}>
                 <a
                   className={classNames(
-                    activeSection === i && isScrollspyActive && s.navItem_active
+                    activeSection === i &&
+                      isScrollspyActive &&
+                      s.navItem_active,
+                    el.value === 'FUSE' && s.navItem_disable
                   )}
                 >
                   {el.value}

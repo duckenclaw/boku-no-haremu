@@ -37,6 +37,14 @@ export const balanceStringToObject = (
   } as BalanceType
 }
 
+const awaitForTransactionConformation = async <T>(args: T): Promise<T> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(args)
+    }, 2000)
+  })
+}
+
 const types = Serialize.createInitialTypes()
 
 const nameToUint64 = (name: string): string => {
@@ -218,8 +226,9 @@ export const useGetResources = () => {
   return useQuery({
     queryKey: ['wax/resources', { account }],
     enabled: isConnected,
-    queryFn: () =>
-      api?.rpc
+    refetchInterval: 15000,
+    queryFn: () => {
+      return api?.rpc
         .get_table_rows({
           json: true,
           code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
@@ -256,7 +265,8 @@ export const useGetResources = () => {
             cht: balanceStringToObject('0', 'CHT'),
             is_blocked: false,
           } as UseGetResourcesResponseType
-        }),
+        })
+    },
   })
 }
 
@@ -452,24 +462,34 @@ export const useInitAccount = () => {
   return useMutation({
     mutationKey: 'wax/login',
     mutationFn: () =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'login',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'login',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('Account successfully initialized!')
       qc.invalidateQueries('wax/resources')
@@ -491,25 +511,35 @@ export const useInitMine = () => {
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/initMine',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'initmine',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account!,
-                asset_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'initmine',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account!,
+                  asset_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('Card placed into mining slot!')
       qc.invalidateQueries('wax/mining')
@@ -528,25 +558,35 @@ export const useUnsetMine = () => {
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/unsetMine',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'unsetmine',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account!,
-                asset_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'unsetmine',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account!,
+                  asset_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('Card removed from mining slot!')
       qc.invalidateQueries('wax/mining')
@@ -565,25 +605,35 @@ export const useMine = () => {
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/start_mine',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'startmine',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
-                asset_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'startmine',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                  asset_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('Resource mining started!')
       qc.invalidateQueries('wax/resources')
@@ -603,25 +653,35 @@ export const useClaim = () => {
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/claim',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'claim',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
-                asset_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'claim',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                  asset_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('Rewards claimed!')
       qc.invalidateQueries('wax/mining')
@@ -645,26 +705,35 @@ export const useMintBanknote = () => {
   return useMutation<any, any, useMintBanknoteVariables>({
     mutationKey: 'wax/mintBanknote',
     mutationFn: ({ template_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'buybanknote',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account!,
-                banknote_template_id: template_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'buybanknote',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account!,
+                  banknote_template_id: template_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
-
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('Banknote minted!')
       qc.invalidateQueries('wax/resources')
@@ -689,25 +758,35 @@ export const useBurnBanknote = () => {
   return useMutation<any, any, UseBurnBanknoteVariables>({
     mutationKey: 'wax/burn_banknote',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'burnasset',
-              account: 'atomicassets',
-              authorization: [auth!],
-              data: {
-                asset_id,
-                asset_owner: account,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'burnasset',
+                account: 'atomicassets',
+                authorization: [auth!],
+                data: {
+                  asset_id,
+                  asset_owner: account,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('Banknote burned!')
       qc.invalidateQueries('wax/resources')
@@ -735,42 +814,52 @@ export const useFuseCards = () => {
   return useMutation<any, any, UseFuseCardsVariables>({
     mutationKey: 'wax/fuse_cards',
     mutationFn: ({ primeCards, secondaryCards }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'transfer',
-              account: 'atomicassets',
-              authorization: [auth!],
-              data: {
-                from: account,
-                to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-                asset_ids: [...primeCards, ...secondaryCards],
-                memo: 'Fuse waifu',
-              },
-            },
-            {
-              name: 'fuse',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'transfer',
+                account: 'atomicassets',
+                authorization: [auth!],
+                data: {
+                  from: account,
+                  to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                  asset_ids: [...primeCards, ...secondaryCards],
+                  memo: 'Fuse waifu',
                 },
-              ],
-              data: {
-                username: account,
-                primary_asset_ids: primeCards,
-                secondary_asset_ids: secondaryCards,
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+              {
+                name: 'fuse',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [
+                  {
+                    actor: account!,
+                    permission: 'active',
+                  },
+                ],
+                data: {
+                  username: account,
+                  primary_asset_ids: primeCards,
+                  secondary_asset_ids: secondaryCards,
+                },
+              },
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('New Waifu NFT created!')
       qc.invalidateQueries('wax/getAllCards')
@@ -792,25 +881,35 @@ export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
   return useMutation({
     mutationKey: 'wax/craftasset',
     mutationFn: () =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'craftasset',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
-                asset_template_id: template_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'craftasset',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                  asset_template_id: template_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then((res) => {
+          console.log('before res', res)
+          return res
+        })
+        .then((res) => awaitForTransactionConformation(res))
+        .then((res) => {
+          console.log('after res', res)
+          return res
+        }),
     onSuccess: () => {
       toast.success('New Waifu NFT crafted!')
       qc.invalidateQueries('wax/resources')

@@ -18,3 +18,8 @@ export const getDistanceBetweenElements = (a: HTMLElement, b: HTMLElement) => {
 
   return { x: bPosition.x - aPosition.x, y: bPosition.y - aPosition.y }
 }
+
+export const isEmptyObj = (obj?: { [key: string]: any }) => {
+  if (!obj) return true
+  return Object.keys(obj).length === 0
+}
