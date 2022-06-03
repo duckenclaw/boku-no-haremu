@@ -862,7 +862,7 @@ export const useFuseCards = () => {
       toast.success('New Waifu NFT created!')
       qc.invalidateQueries('wax/getAllCards')
     },
-    onError: () => {
+    onError: (e: any) => {
       toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
