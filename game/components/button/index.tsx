@@ -3,8 +3,10 @@ import { animated, useSpring } from '@react-spring/web'
 import cn from 'classnames'
 
 import s from './button.module.scss'
+import { Loader } from 'components/shared-ui/loader'
 
 type BaseButtonProps = {
+  isLoading?: boolean
   size?: 'medium' | 'small' | 'xsmall'
   color?: 'purple' | 'blue' | 'darkblue'
 }
@@ -19,16 +21,21 @@ export const Button = ({
   color = 'purple',
   onClick,
   disabled,
+  isLoading,
   ...props
 }: ButtonProps) => {
   return (
     <button
       {...props}
-      disabled={disabled}
-      onClick={!disabled ? onClick : undefined}
-      className={cn(s.button, className, { [s[size]]: true, [s[color]]: true })}
+      disabled={disabled || isLoading}
+      onClick={!(disabled || isLoading) ? onClick : undefined}
+      className={cn(s.button, className, {
+        [s[size]]: true,
+        [s[color]]: true,
+        [s.loading]: isLoading,
+      })}
     >
-      {children}
+      <ButtonLoader isLoading={isLoading}>{children}</ButtonLoader>
     </button>
   )
 }
@@ -221,3 +228,20 @@ const AnimatedBox = ({ style, className }: AnimatedBoxProps) => (
     </defs>
   </animated.svg>
 )
+
+type ButtonLoaderProps = React.PropsWithChildren<{
+  isLoading?: boolean
+}>
+
+const ButtonLoader = ({ isLoading, children }: ButtonLoaderProps) => {
+  if (isLoading)
+    return (
+      <div className={s.button_loader}>
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
+    )
+  else return <>{children}</>
+}

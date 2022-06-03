@@ -2,6 +2,7 @@ import { BaseSlot } from 'game/components/base_slot'
 import {
   useCraftCard,
   useGetMiningRecipe,
+  useGetResources,
   useGetTemplateById,
 } from 'game/game_api'
 
@@ -37,6 +38,13 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
   })
   const isLoading = isTemplateLoading || isCraftLoading
   const [isHovering, setIsHovering] = useState(false)
+  const { data: resourcesData } = useGetResources()
+  const isCraftDisabled =
+    !resourcesData ||
+    !!cost.find(({ balance, currency }) => {
+      resourcesData[currency.toLowerCase() as ResourceKey].balance < balance
+    })
+
   return (
     <>
       <ConfirmModal
@@ -95,7 +103,10 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         isError={templateIsError}
         onRetry={refetchTemplate}
         overlayChildren={
-          <div className={s.overlay} onClick={() => setIsOpen(true)}>
+          <div
+            className={classNames(s.overlay, { [s.disabled]: isCraftDisabled })}
+            onClick={() => setIsOpen(true)}
+          >
             <span className={s.overlay_text}>CRAFT</span>
           </div>
         }
