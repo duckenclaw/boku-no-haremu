@@ -20,6 +20,7 @@ import {
   useClaim,
   useGetCardByAssetId,
   useGetMiningRecipe,
+  useGetResources,
   useMine,
   useUnsetMine,
 } from 'game/game_api'
@@ -63,7 +64,7 @@ export const Slot = ({
 }: SlotProps) => {
   const asset_id = asset_data?.staked_asset_id
   const status = asset_data?.status_code ?? 0
-
+  const { data: resourcesData } = useGetResources()
   const {
     data: cardData,
     isLoading: isMetadataLoading,
@@ -97,6 +98,12 @@ export const Slot = ({
   const now = useTime(status === 1 ? 1000 : false)
   const showTimer = finishing_at > now
 
+  const isMineDisabled =
+    !(resourcesData && mineRecipe) ||
+    !!mineRecipe.cost.find(({ balance, currency }) => {
+      resourcesData[currency.toLowerCase() as ResourceKey].balance < balance
+    })
+
   return (
     <BaseSlot
       classes={{ container: className, content: s.slot }}
@@ -105,13 +112,19 @@ export const Slot = ({
       isEmpty={!asset_id || !card}
       isError={isError || isErrorMetadata}
       onRetry={onRetry}
-      forceOverlay={status == 1 && !showTimer}
+      forceOverlay={
+        (status == 1 && !showTimer) ||
+        isMineLoading ||
+        isClaimLoading ||
+        isUnsetLoading
+      }
       overlayChildren={
         <>
           {status == 1 && !showTimer && (
             <Button
               size="small"
-              disabled={isClaimLoading || isMineLoading}
+              isLoading={isClaimLoading}
+              disabled={isMineLoading}
               onClick={() => claim({ asset_id: asset_id! })}
             >
               Claim
@@ -120,7 +133,8 @@ export const Slot = ({
           {status == 0 && (
             <Button
               size="small"
-              disabled={isUnsetLoading || isMineLoading}
+              isLoading={isMineLoading}
+              disabled={isMineDisabled || isUnsetLoading}
               onClick={() => mine({ asset_id: asset_id! })}
             >
               Mine (
@@ -222,13 +236,13 @@ const ResourceAnimation = ({
       t: 0,
     },
     onRest: () => {
-      bounceApi.start({ v: 0 })
+      bounceApi.update({ v: 0 })
       flyApi.set({ x: 0, y: 0, show: false })
     },
     config: config.slow,
   }))
 
-  useChain([bounceApi as any, flyApi, endApi])
+  useChain([bounceApi as any, flyApi, endApi], [0, 0.2, 0.9], 3000)
 
   useLayoutEffect(() => {
     if (showAnimation && containerRef.current) {
@@ -270,7 +284,7 @@ const ResourceAnimation = ({
         alt=""
         src={currencyToImg(resource)}
         style={{
-          display: end.t.to((v) => (v >= 1000 ? 'block' : 'none')),
+          display: v.to((v) => (v <= 0 ? 'none' : 'block')),
           scale: v
             .to([0, 500, 750, 1000], [0, 100, 110, 100], 'extend')
             .to((v) => `${v}%`),

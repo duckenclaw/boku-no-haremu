@@ -133,7 +133,7 @@ type CharacterSlider = {
 
 type BalanceType = {
   balance: number
-  currency: string
+  currency: ResourceKey | string
 }
 
 type CraftRecipe = {
@@ -169,6 +169,8 @@ type UseGetResourcesResponseType = {
   cht: BalanceType
   is_blocked: boolean
 }
+
+type ResourceKey = 'smp' | 'nya' | 'bnt' | 'cht'
 
 type MiningRecipeRecordType = {
   asset_template_id: number
