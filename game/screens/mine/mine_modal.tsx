@@ -5,6 +5,7 @@ import { CardImage } from 'game/components/card_image'
 import { ConfirmModal } from 'game/components/confirm_modal'
 import { Slider } from 'game/components/slider'
 import { RESOURCES } from 'game/constants'
+import { useGame } from 'game/game_context'
 import { Duration } from 'luxon'
 import IconInfo from 'public/game/svg/icon_info.svg'
 import { useState } from 'react'
@@ -31,6 +32,7 @@ const MineModal: React.FC<MineModalProps> = ({
   onConfirm,
 }) => {
   const [riskValue, setRiskValue] = useState(1)
+  const { reward_precision, multiplier_to_risk } = useGame()
 
   return (
     <ConfirmModal
@@ -120,16 +122,31 @@ const MineModal: React.FC<MineModalProps> = ({
                 <Slider
                   className={s.slider}
                   value={riskValue}
-                  min={1}
-                  max={99}
+                  min={0}
+                  max={multiplier_to_risk.length}
                   onChange={(value) => setRiskValue(value as number)}
                   renderThumb={(props, state) => (
                     <div {...props}>
-                      <div className={s.thumbValue}>X{state.valueNow}</div>
+                      <div className={s.thumbValue}>
+                        X
+                        {Number(
+                          Number(
+                            multiplier_to_risk[state.valueNow].key /
+                              reward_precision
+                          ).toFixed(1)
+                        )}
+                      </div>
                     </div>
                   )}
                 />
-                <div className={s.percent}>{riskValue} %</div>
+                <div className={s.percent}>
+                  {Number(
+                    (100 - Number(multiplier_to_risk[riskValue].value)).toFixed(
+                      1
+                    )
+                  )}
+                  %
+                </div>
               </div>
             </div>
           </div>
