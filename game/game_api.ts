@@ -551,6 +551,7 @@ export const useInitAccount = () => {
 
 type useMineArguments = {
   asset_id: string
+  desired_reward?: number
 }
 // place card into slot
 export const useInitMine = () => {
@@ -593,7 +594,7 @@ export const useInitMine = () => {
   })
 }
 
-// place card into slot
+// place card out of slot
 export const useUnsetMine = () => {
   const { api, account, auth } = useWax()
   const qc = useQueryClient()
@@ -639,7 +640,7 @@ export const useMine = () => {
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/start_mine',
-    mutationFn: ({ asset_id }) =>
+    mutationFn: ({ asset_id, desired_reward = 100 }) =>
       api!
         .transact(
           {
@@ -651,6 +652,7 @@ export const useMine = () => {
                 data: {
                   username: account,
                   asset_id,
+                  desired_reward,
                 },
               },
             ],
@@ -736,8 +738,18 @@ export const useClaim = () => {
         },
       }
     },
-    onSuccess: () => {
-      toast.success('Rewards claimed!')
+    onSuccess: ({ delta_balances }) => {
+      const rewards = Object.entries(delta_balances).filter(([v, b]) => b > 0)
+      if (rewards.length > 0) {
+        toast.success(
+          'Mine rewards claimed: ' +
+            rewards.map((r) => `${r[1]} ${r[0]}`).join(',') +
+            '!'
+        )
+      } else {
+        toast.error('Risky mine was unsuccessful')
+      }
+
       qc.invalidateQueries('wax/mining')
       qc.invalidateQueries('wax/resources')
     },
