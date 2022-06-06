@@ -136,6 +136,19 @@ type BalanceType = {
   currency: ResourceKey | string
 }
 
+type GameConfig = {
+  banknote_amount_field: string
+  schema_name: string
+  collection_name: string
+  banknote_collection_name: string
+  banknote_schema_name: string
+  banknote_symbol_field: string
+  is_paused: 0 | 1
+  multiplier_to_risk: { key: number; value: number }[]
+  reward_precision: number
+  time_multiplier: number
+}
+
 type CraftRecipe = {
   result_template_id: number
   cost: BalanceType[]
@@ -144,6 +157,7 @@ type CraftRecipe = {
 type FuseRecipe = {
   result_template_id: number
   source_template_id: number
+  cost: BalanceType[]
 }
 
 type MineRecordType = {

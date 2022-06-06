@@ -31,7 +31,7 @@ const CreateSlotResource: React.FC<CreateSlotResourceProps> = ({
         className={s.resourceModal}
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        title="Here's a list of available resources."
+        title="Here's a list of available resources"
         showClose
       >
         <div className={s.resources}>

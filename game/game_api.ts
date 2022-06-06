@@ -8,6 +8,7 @@ import {
 } from 'react-query'
 import { toast } from 'react-toastify'
 import { Serialize, type Api } from 'eosjs'
+import { useGame } from './game_context'
 
 export const AtomicHubApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_WAX_API!,
@@ -140,6 +141,34 @@ export const useWaxBalance = () => {
   })
 }
 
+export const useConfig = () => {
+  const { api, isConnected } = useWax()
+  return useQuery({
+    queryKey: [
+      'wax/config',
+      { contract: process.env.NEXT_PUBLIC_WAX_CONTRACT },
+    ],
+    cacheTime: 86400000,
+    staleTime: 3600000,
+    enabled: isConnected,
+    queryFn: () => {
+      return api?.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          table: 'config',
+          limit: 1,
+          reverse: false,
+          show_payer: false,
+        })
+        .then((res) => {
+          return res.rows[0] as GameConfig
+        })
+    },
+  })
+}
+
 // get all Waifu NFTs for user
 
 type UseGetAllCardsOptions = {
@@ -151,6 +180,7 @@ export const useGetAllCards = ({
   limit = 8,
   template_id,
 }: UseGetAllCardsOptions) => {
+  const { collection_name, schema_name } = useGame()
   const { isConnected, account } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllCards', { account, template_id, limit }],
@@ -163,8 +193,8 @@ export const useGetAllCards = ({
           page: String(pageParam ?? 1),
           limit,
           template_id,
-          collection_name: process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION,
-          schema_name: process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA,
+          collection_name: collection_name,
+          schema_name: schema_name,
         },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
@@ -184,19 +214,21 @@ type UseGetTemplateByIdOptions = {
 export const useGetTemplateById = ({
   template_id,
 }: UseGetTemplateByIdOptions) => {
+  const { collection_name } = useGame()
   const { isConnected } = useWax()
   return useQuery<GetTemplateByIdResponseType>({
     queryKey: ['wax/getTemplate', { template_id }],
     enabled: isConnected && !!template_id,
     queryFn: () =>
-      AtomicHubApi.get(
-        `/templates/${process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION}/${template_id}`
-      ).then((res) => res.data as GetTemplateByIdResponseType),
+      AtomicHubApi.get(`/templates/${collection_name}/${template_id}`).then(
+        (res) => res.data as GetTemplateByIdResponseType
+      ),
   })
 }
 
 // get all Banknotes NFTs for user
 export const useGetAllBanknotesTemplates = () => {
+  const { banknote_schema_name, banknote_collection_name } = useGame()
   const { isConnected } = useWax()
   return useQuery<GetAllBanknotesResponseType>({
     queryKey: ['wax/getAllBanknotes'],
@@ -204,8 +236,8 @@ export const useGetAllBanknotesTemplates = () => {
     queryFn: ({ pageParam }) =>
       AtomicHubApi.get('/templates', {
         params: {
-          collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
-          schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+          collection_name: banknote_collection_name,
+          schema_name: banknote_schema_name,
         },
       }).then((res) => res.data as GetAllBanknotesResponseType),
     getNextPageParam: (page, pages) => {
@@ -218,14 +250,15 @@ export const useGetAllBanknotesTemplates = () => {
 
 // get banknote balance stats for user
 export const useGetBanknotesBalances = () => {
+  const { banknote_collection_name } = useGame()
   const { account, isConnected } = useWax()
   return useQuery<GetBanknoteBalancesResponseType>({
     queryKey: ['wax/getBanknotesBalances', { account }],
     enabled: isConnected,
     queryFn: () =>
-      AtomicHubApi.get(
-        `/accounts/${account}/${process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION}`
-      ).then((res) => res.data as GetBanknoteBalancesResponseType),
+      AtomicHubApi.get(`/accounts/${account}/${banknote_collection_name}`).then(
+        (res) => res.data as GetBanknoteBalancesResponseType
+      ),
   })
 }
 
@@ -239,6 +272,7 @@ export const useGetAllBanknotes = ({
   template_id,
   limit = 9,
 }: useGetBanknotesByTemplateIdOptions) => {
+  const { banknote_collection_name, banknote_schema_name } = useGame()
   const { account, isConnected } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllBanknotes', { account, template_id }],
@@ -249,8 +283,8 @@ export const useGetAllBanknotes = ({
         params: {
           owner: account,
           page: String(pageParam ?? 1),
-          collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
-          schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+          collection_name: banknote_collection_name,
+          schema_name: banknote_schema_name,
           limit: limit,
           template_id,
         },
@@ -411,6 +445,9 @@ export const useFuseRecipes = () => {
           limit: 100,
         })
         .then((res) => {
+          res.rows.forEach((row) => {
+            row.cost = row.cost.map((c: any) => balanceStringToObject(c))
+          })
           return res.rows as FuseRecipe[]
         }),
   })
@@ -452,19 +489,20 @@ type UseGetTemplateOptions = {
 }
 
 export const useGetTemplates = ({ mode }: UseGetTemplateOptions) => {
+  const {
+    banknote_collection_name,
+    banknote_schema_name,
+    collection_name,
+    schema_name,
+  } = useGame()
   return useQuery({
     queryKey: ['wax/getTemplates', { mode }],
     queryFn: () =>
       AtomicHubApi.get(`/templates`, {
         params: {
           collection_name:
-            mode === 'card'
-              ? process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION
-              : process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
-          schema_name:
-            mode === 'card'
-              ? process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA
-              : process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+            mode === 'card' ? collection_name : banknote_collection_name,
+          schema_name: mode === 'card' ? schema_name : banknote_schema_name,
         },
       }).then((res) => res.data as GetTemplatesResponseType),
   })
@@ -861,6 +899,8 @@ export const useFuseCards = () => {
     onSuccess: () => {
       toast.success('New Waifu NFT created!')
       qc.invalidateQueries('wax/getAllCards')
+      qc.invalidateQueries('wax/resources')
+      qc.invalidateQueries('wax/fuse_queue')
     },
     onError: (e: any) => {
       toast.error(e?.message ?? 'Error occurred during transaction')
