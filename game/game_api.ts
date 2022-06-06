@@ -148,6 +148,8 @@ export const useConfig = () => {
       'wax/config',
       { contract: process.env.NEXT_PUBLIC_WAX_CONTRACT },
     ],
+    cacheTime: 86400000,
+    staleTime: 3600000,
     enabled: isConnected,
     queryFn: () => {
       return api?.rpc
@@ -896,7 +898,7 @@ export const useFuseCards = () => {
 
     onSuccess: () => {
       toast.success('New Waifu NFT created!')
-      qc.invalidateQueries('wax/resources')
+      qc.invalidateQueries('wax/getAllCards')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/fuse_queue')
     },
