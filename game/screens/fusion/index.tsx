@@ -105,14 +105,20 @@ export const Fusion = () => {
               ?.find(
                 (r) => r.source_template_id.toString() === cards[0]?.template_id
               )
-              ?.cost.map((c, i) => (
-                <Resource
-                  className={s.resource}
-                  balance={c}
-                  size="large"
-                  key={i}
-                />
-              ))}
+              ?.cost.map((c, i) => {
+                const cost = {
+                  ...c,
+                  balance: mode === '5to2' ? c.balance * 2 : c.balance,
+                }
+                return (
+                  <Resource
+                    className={s.resource}
+                    balance={cost}
+                    size="large"
+                    key={i}
+                  />
+                )
+              })}
           </div>
         </div>
       </ConfirmModal>
