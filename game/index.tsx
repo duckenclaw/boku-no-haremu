@@ -69,7 +69,9 @@ export const GameComponent = () => {
         onRetry={refetchResources}
       >
         {isConnected ? (
-          resourcesData?.isUserInitialized ? (
+          configData?.is_paused === 1 ? (
+            <h1>The game is currently on pause</h1>
+          ) : resourcesData?.isUserInitialized ? (
             <GameContextProvider config={configData!}>
               <GameHeader />
               <Router />
