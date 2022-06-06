@@ -28,9 +28,16 @@ import { BaseSlot } from 'game/components/base_slot'
 import { CardImage } from 'game/components/card_image'
 import { currencyToImg, Resource } from 'game/components/resource'
 import { Image } from 'components/shared-ui/image'
-import { getDistanceBetweenElements, ipfsToS3Url, ipfsToUrlSafe } from 'utils'
+import {
+  getDistanceBetweenElements,
+  ipfsToS3Url,
+  ipfsToUrlSafe,
+  isEmptyObj,
+} from 'utils'
 
 import s from './mine.module.scss'
+
+import { MineModal } from './mine_modal'
 
 type SlotProps = {
   className?: string
@@ -61,6 +68,7 @@ export const Slot = ({
   asset_data,
   onPlaceCard,
 }: SlotProps) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
   const asset_id = asset_data?.staked_asset_id
   const status = asset_data?.status_code ?? 0
 
@@ -74,6 +82,7 @@ export const Slot = ({
   const { data: mineRecipe } = useGetMiningRecipe({
     template_id: cardData?.data.template.template_id,
   })
+
   const card = cardData?.data
 
   const { mutateAsync: unsetMine, isLoading: isUnsetLoading } = useUnsetMine()
@@ -98,97 +107,109 @@ export const Slot = ({
   const showTimer = finishing_at > now
 
   return (
-    <BaseSlot
-      classes={{ container: className, content: s.slot }}
-      onClick={asset_id ? undefined : onPlaceCard}
-      isLoading={isLoading || isMetadataLoading}
-      isEmpty={!asset_id || !card}
-      isError={isError || isErrorMetadata}
-      onRetry={onRetry}
-      forceOverlay={status == 1 && !showTimer}
-      overlayChildren={
-        <>
-          {status == 1 && !showTimer && (
-            <Button
-              size="small"
-              disabled={isClaimLoading || isMineLoading}
-              onClick={() => claim({ asset_id: asset_id! })}
-            >
-              Claim
-            </Button>
-          )}
-          {status == 0 && (
-            <Button
-              size="small"
-              disabled={isUnsetLoading || isMineLoading}
-              onClick={() => mine({ asset_id: asset_id! })}
-            >
-              Mine (
-              {mineRecipe
-                ? Duration.fromObject({
-                    seconds: mineRecipe.mining_time,
-                  }).toFormat('hh:mm:ss')
-                : '...'}
-              )
-            </Button>
-          )}
-          {status == 0 && (
-            <Button
-              size="small"
-              color="blue"
-              disabled={isUnsetLoading || isMineLoading}
-              onClick={() => unsetMine({ asset_id: asset_id! })}
-            >
-              Return
-            </Button>
-          )}
-        </>
-      }
-    >
-      {card && (
-        <CardImage
-          isActive
-          alt={card.asset_id}
-          disabled={status === 1 && showTimer}
-          src={[ipfsToS3Url(card.data.img), ipfsToUrlSafe(card.data.img)]}
-        />
-      )}
-      {status == 1 && showTimer && (
-        <div className={s.timer}>
-          {Duration.fromMillis(finishing_at.getTime() - now.getTime()).toFormat(
-            'hh:mm:ss'
-          )}
-        </div>
-      )}
-      {mineRecipe && (
-        <div className={s.lower_content}>
-          <div className={s.row}>
-            <Resource
-              sign="plus"
-              size="large"
-              color="purple"
-              balance={mineRecipe.mined_resource}
-            />
-          </div>
-          {status === 0 && (
-            <div className={s.row}>
-              {mineRecipe.cost.map((c, index) => (
-                <Resource sign="minus" balance={c} key={index} />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-      <ResourceAnimation
-        resource={mineRecipe?.mined_resource.currency ?? ''}
-        showAnimation={isClaimSuccess}
-        amount={
-          claimData?.delta_balances[
-            mineRecipe?.mined_resource.currency.toLowerCase() ?? ''
-          ] ?? 0
+    <>
+      <MineModal
+        isOpen={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+        onConfirm={() => mine({ asset_id: asset_id! })}
+        cardData={
+          isEmptyObj(card?.immutable_data) ? card?.data : card?.immutable_data
         }
+        mineRecipe={mineRecipe}
       />
-    </BaseSlot>
+      <BaseSlot
+        classes={{ container: className, content: s.slot }}
+        onClick={asset_id ? undefined : onPlaceCard}
+        isLoading={isLoading || isMetadataLoading}
+        isEmpty={!asset_id || !card}
+        isError={isError || isErrorMetadata}
+        onRetry={onRetry}
+        forceOverlay={status == 1 && !showTimer}
+        overlayChildren={
+          <>
+            {status == 1 && !showTimer && (
+              <Button
+                size="small"
+                disabled={isClaimLoading || isMineLoading}
+                onClick={() => claim({ asset_id: asset_id! })}
+              >
+                Claim
+              </Button>
+            )}
+            {status == 0 && (
+              <Button
+                className={s.mineButton}
+                size="small"
+                disabled={isUnsetLoading || isMineLoading}
+                onClick={() => setModalIsOpen(true)}
+              >
+                Mine (
+                {mineRecipe
+                  ? Duration.fromObject({
+                      seconds: mineRecipe.mining_time,
+                    }).toFormat('hh:mm:ss')
+                  : '...'}
+                )
+              </Button>
+            )}
+            {status == 0 && (
+              <Button
+                size="small"
+                color="blue"
+                disabled={isUnsetLoading || isMineLoading}
+                onClick={() => unsetMine({ asset_id: asset_id! })}
+              >
+                Return
+              </Button>
+            )}
+          </>
+        }
+      >
+        {card && (
+          <CardImage
+            isActive
+            alt={card.asset_id}
+            disabled={status === 1 && showTimer}
+            src={[ipfsToS3Url(card.data.img), ipfsToUrlSafe(card.data.img)]}
+          />
+        )}
+        {status == 1 && showTimer && (
+          <div className={s.timer}>
+            {Duration.fromMillis(
+              finishing_at.getTime() - now.getTime()
+            ).toFormat('hh:mm:ss')}
+          </div>
+        )}
+        {mineRecipe && (
+          <div className={s.lower_content}>
+            <div className={s.row}>
+              <Resource
+                sign="plus"
+                size="large"
+                color="purple"
+                balance={mineRecipe.mined_resource}
+              />
+            </div>
+            {status === 0 && (
+              <div className={s.row}>
+                {mineRecipe.cost.map((c, index) => (
+                  <Resource sign="minus" balance={c} key={index} />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+        <ResourceAnimation
+          resource={mineRecipe?.mined_resource.currency ?? ''}
+          showAnimation={isClaimSuccess}
+          amount={
+            claimData?.delta_balances[
+              mineRecipe?.mined_resource.currency.toLowerCase() ?? ''
+            ] ?? 0
+          }
+        />
+      </BaseSlot>
+    </>
   )
 }
 

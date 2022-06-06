@@ -1,3 +1,9 @@
+type ResourceType = {
+  name: string
+  image: string
+  apiName: 'NYA' | 'CHT' | 'SMP' | 'BNT'
+}
+
 type AtomicAssetImmutableData = {
   clothes?: string
   emotional?: string
@@ -22,8 +28,12 @@ type AtomicAsset = {
   burned_by_account: null
   collection: AtomicCollection
   contract: string
-  data: any
-  immutable_data: AtomicAssetImmutableData
+  data: {
+    [key: string]: string
+  }
+  immutable_data: {
+    [key: string]: string
+  }
   is_burnable: boolean
   is_transferable: boolean
   minted_at_block: string

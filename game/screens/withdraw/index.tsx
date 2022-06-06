@@ -8,35 +8,6 @@ import { WithdrawCreate } from './withdraw_create'
 
 type WithdrawMode = 'create' | 'cashOut'
 
-export type ResourceType = {
-  name: string
-  image: string
-  currency: 'NYA' | 'CHT' | 'SMP' | 'BNT'
-}
-
-export const RESOURCES: ResourceType[] = [
-  {
-    name: 'Nyan',
-    image: '/images/currencies/game_nyan.png',
-    currency: 'NYA',
-  },
-  {
-    name: 'Chantment',
-    image: '/images/currencies/game_chantment.png',
-    currency: 'CHT',
-  },
-  {
-    name: 'Simpthetix',
-    image: '/images/currencies/game_simpthetix.png',
-    currency: 'SMP',
-  },
-  {
-    name: 'Bento',
-    image: '/images/currencies/game_bento.png',
-    currency: 'BNT',
-  },
-]
-
 export const Withdraw = () => {
   const [mode, setMode] = useState<WithdrawMode>('create')
 

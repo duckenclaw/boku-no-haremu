@@ -119,9 +119,7 @@
 
 .info {
   display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  flex-shrink: 0;
+  flex-flow: row nowrap;
 
   .icon_sound {
     filter: brightness(0.8) grayscale(0.4);
@@ -129,6 +127,8 @@
   }
 
   .icon_info {
+    width: 68px;
+    height: 68px;
     outline: none;
     cursor: pointer;
 

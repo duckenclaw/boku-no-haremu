@@ -1,27 +1,23 @@
 import { Image } from 'components/shared-ui/image'
 import { CardImage } from 'game/components/card_image'
 import { GameModal } from 'game/components/game_modal'
-import { useGetResources } from 'game/game_api'
 import { useState } from 'react'
 import cn from 'classnames'
 import { WithdrawSlot } from '../withdraw_slot'
-import { CurrentResourceType } from '.'
-import { RESOURCES } from '..'
 
 import s from './withdraw_create.module.scss'
+import { RESOURCES } from 'game/constants'
 
 type CreateSlotResourceProps = {
   className?: string
-  selectResource: (resource: CurrentResourceType) => void
-  currentResource: CurrentResourceType
-  mode: 'create' | 'withdraw'
+  selectResource: (resource: ResourceType) => void
+  currentResource: ResourceType | null
 }
 
 const CreateSlotResource: React.FC<CreateSlotResourceProps> = ({
   className,
   selectResource,
   currentResource,
-  mode,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 

@@ -3,7 +3,6 @@ import { Button } from 'game/components/button'
 import { ConfirmModal } from 'game/components/confirm_modal'
 import { useBurnBanknote, useGetCardByAssetId } from 'game/game_api'
 import { useState } from 'react'
-import { RESOURCES } from '..'
 import { WithdrawExchangeRow } from '../withdraw_exchange_row'
 import { CashSlotBanknote } from './cash_slot_banknote'
 import { CashSlotResource } from './cash_slot_resource'
@@ -11,6 +10,7 @@ import { Image } from 'components/shared-ui/image'
 import s from './withdraw_cash.module.scss'
 import modalStyles from '../confirm_modal.module.scss'
 import { ipfsToS3Url, ipfsToUrlSafe, isEmptyObj } from 'utils'
+import { RESOURCES } from 'game/constants'
 
 type WithdrawCashProps = {
   className?: string
@@ -35,8 +35,8 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
 
   const currentResource = RESOURCES.find(
     (item) =>
-      item.currency === banknote?.immutable_data.symbol ||
-      item.currency === banknote?.data.symbol
+      item.apiName === banknote?.immutable_data.symbol ||
+      item.apiName === banknote?.data.symbol
   )
 
   return (
