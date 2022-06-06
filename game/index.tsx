@@ -5,16 +5,15 @@ import { ToastContainer } from 'react-toastify'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import { useWax, WaxProvider } from 'contexts/wax_context'
-import { GameContextProvider } from './game_context'
+import { GameContextProvider } from 'game/game_context'
 import { GameFooter } from 'game/components/game_footer'
 import { GameHeader } from 'game/components/game_header'
 import { Wallets } from 'game/components/game_wallets'
 import { InitAccount } from 'game/components/game_init_account'
 import { Router } from 'game/screens/router'
-import { useGetResources, useInitAccount } from './game_api'
-import { GameLayout } from './game_layout'
+import { useConfig, useGetResources, useInitAccount } from './game_api'
+import { GameLayout } from 'game/game_layout'
 import { Loader } from 'components/shared-ui/loader'
-import s from './game_component.module.scss'
 
 Modal.setAppElement('#__next')
 
@@ -56,16 +55,22 @@ export const GameComponent = () => {
     refetch: refetchResources,
   } = useGetResources()
   const { isLoading: isInitAccountLoading } = useInitAccount()
+  const { isLoading: isConfigLoading, data: configData } = useConfig()
   return (
     <GameLayout>
       <Loader
-        isLoading={isLoadingWax || isLoadingResources || isInitAccountLoading}
+        isLoading={
+          isLoadingWax ||
+          isLoadingResources ||
+          isInitAccountLoading ||
+          isConfigLoading
+        }
         isError={isErrorResources}
         onRetry={refetchResources}
       >
         {isConnected ? (
           resourcesData?.isUserInitialized ? (
-            <GameContextProvider>
+            <GameContextProvider config={configData!}>
               <GameHeader />
               <Router />
               <GameFooter />

@@ -20,6 +20,7 @@ import SlideIcon from 'public/game/svg/modal_slide.svg'
 
 import s from './card_modal.module.scss'
 import { CardFilter } from './card_filter'
+import { useGame } from 'game/game_context'
 
 type CardModalProps = {
   isOpen?: boolean
@@ -79,6 +80,8 @@ export const CardsInventory = ({
   useEffect(() => {
     setPage(1)
   }, [templateFilter])
+
+  const { collection_name } = useGame()
 
   const {
     data: miningData,
@@ -225,7 +228,7 @@ export const CardsInventory = ({
             className={s.buy}
             size="small"
             href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
-              process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION ?? ''
+              collection_name
             )}`}
             target="_blank"
           >
@@ -265,6 +268,8 @@ export const BanknoteInventory = ({
     isError: isErrorTemplates,
     refetch: refetchTemplates,
   } = useGetTemplates({ mode: 'banknote' })
+
+  const { banknote_collection_name } = useGame()
 
   const {
     data,
@@ -385,7 +390,7 @@ export const BanknoteInventory = ({
             className={s.buy}
             size="small"
             href={`https://wax.atomichub.io/market?collection_name=${encodeURIComponent(
-              process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION ?? ''
+              banknote_collection_name
             )}`}
             target="_blank"
           >
