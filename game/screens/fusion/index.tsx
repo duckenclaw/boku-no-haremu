@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { Button, Toggle } from 'game/components/button'
 import { ConfirmModal } from 'game/components/confirm_modal'
 import { ScreenContainer } from 'game/components/screen_container'
-import { useFuseCards, useFuseRecipes } from 'game/game_api'
+import { useFuseCards, useFuseRecipes, useGetResources } from 'game/game_api'
 import { useEffect, useMemo, useState } from 'react'
 import { ScreenTitle } from 'game/components/screen_title'
 import { FusionModalCard } from './fusion_modal_card'
@@ -28,6 +28,7 @@ export const Fusion = () => {
   const [cards, setCards] = useState<FusionSlotData[]>([null, null, null])
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
+  const { data: resourcesData } = useGetResources()
   const { data: fuseRecipesData, isLoading: isFuseRecipesData } =
     useFuseRecipes()
 
@@ -48,7 +49,17 @@ export const Fusion = () => {
       cards.some((card) => card === null) ||
       cards.every((card) =>
         cards.find((item) => item?.template_id !== card?.template_id)
-      ),
+      ) ||
+      !(resourcesData && fuseRecipesData) ||
+      fuseRecipesData
+        ?.find((r) => r.source_template_id.toString() === cards[0]?.template_id)
+        ?.cost.find((c, i) => {
+          const balance = mode === '5to2' ? c.balance * 2 : c.balance
+          return (
+            resourcesData[c.currency.toLocaleLowerCase() as ResourceKey]
+              .balance < balance
+          )
+        }),
     [cards, isFuseLoading]
   )
 
