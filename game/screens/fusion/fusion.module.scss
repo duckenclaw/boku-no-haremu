@@ -17,12 +17,10 @@
     font-size: 54px;
 
     text-align: center;
-    background: linear-gradient(
-      180deg,
-      #ea748f 0%,
-      #ff418a 53.65%,
-      #f237a5 100%
-    );
+    background: linear-gradient(180deg,
+        #ea748f 0%,
+        #ff418a 53.65%,
+        #f237a5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
@@ -117,6 +115,22 @@
   min-height: 360px;
   padding-bottom: 52px;
   font-family: 'Bangers';
+
+  .cost {
+    font-family: 'Bangers';
+    font-style: normal;
+    font-size: 18px;
+    color: #FFFFFF;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    margin: 24px auto;
+    gap: 10px
+  }
 }
 
 .modalSubtitle {

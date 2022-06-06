@@ -24,8 +24,8 @@ export const Withdraw = () => {
         onChange={() =>
           mode === 'create' ? setMode('cashOut') : setMode('create')
         }
-        leftLabel="create"
-        rightLabel="cash out"
+        leftLabel="Cash Out"
+        rightLabel="Claim"
       />
       {mode === 'create' ? <WithdrawCreate /> : <WithdrawCash />}
     </ScreenContainer>

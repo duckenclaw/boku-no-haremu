@@ -10,7 +10,8 @@ export type GameState = {
 
 type GameContextValue = {
   dispatch: React.Dispatch<Action>
-} & GameState
+} & GameState &
+  GameConfig
 
 type Action = {
   type: 'setScreen'
@@ -36,6 +37,10 @@ type InitArgs = {
   screen?: GameState['screen'] | null
 }
 
+type GameContextProviderProps = {
+  config: GameConfig
+}
+
 const init = ({ screen: screenArg }: InitArgs): GameState => {
   const screen = screenArg ? (screenArg ?? 'mine').trim() : 'mine'
   return {
@@ -43,7 +48,10 @@ const init = ({ screen: screenArg }: InitArgs): GameState => {
   }
 }
 
-export const GameContextProvider: React.FC = ({ children }) => {
+export const GameContextProvider: React.FC<GameContextProviderProps> = ({
+  config,
+  children,
+}) => {
   const router = useRouter()
   const [state, dispatch] = useReducer(
     reducer,
@@ -64,9 +72,10 @@ export const GameContextProvider: React.FC = ({ children }) => {
   const value = useMemo(
     () => ({
       ...state,
+      ...config,
       dispatch,
     }),
-    [state]
+    [state, config]
   )
   return <context.Provider value={value}>{children}</context.Provider>
 }
