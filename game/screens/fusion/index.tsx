@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { Button, Toggle } from 'game/components/button'
 import { ConfirmModal } from 'game/components/confirm_modal'
 import { ScreenContainer } from 'game/components/screen_container'
-import { useFuseCards } from 'game/game_api'
+import { useFuseCards, useFuseRecipes } from 'game/game_api'
 import { useEffect, useMemo, useState } from 'react'
 import { ScreenTitle } from 'game/components/screen_title'
 import { FusionModalCard } from './fusion_modal_card'
@@ -12,6 +12,7 @@ import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
 import { FusionTraits } from './traits'
 import s from './fusion.module.scss'
+import { Resource } from 'game/components/resource'
 
 type FusionMode = '3to1' | '5to2'
 
@@ -26,6 +27,9 @@ export const Fusion = () => {
   const [mode, setMode] = useState<FusionMode>('3to1')
   const [cards, setCards] = useState<FusionSlotData[]>([null, null, null])
   const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const { data: fuseRecipesData, isLoading: isFuseRecipesData } =
+    useFuseRecipes()
 
   useEffect(() => {
     setCards(Array(mode === '3to1' ? 3 : 5).fill(null))
@@ -94,6 +98,21 @@ export const Fusion = () => {
                 asset_id={card?.asset_id}
               />
             ))}
+          </div>
+          <div className={s.cost}>
+            cost:{' '}
+            {fuseRecipesData
+              ?.find(
+                (r) => r.source_template_id.toString() === cards[0]?.template_id
+              )
+              ?.cost.map((c, i) => (
+                <Resource
+                  className={s.resource}
+                  balance={c}
+                  size="large"
+                  key={i}
+                />
+              ))}
           </div>
         </div>
       </ConfirmModal>

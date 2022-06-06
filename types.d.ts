@@ -144,6 +144,7 @@ type CraftRecipe = {
 type FuseRecipe = {
   result_template_id: number
   source_template_id: number
+  cost: BalanceType[]
 }
 
 type MineRecordType = {

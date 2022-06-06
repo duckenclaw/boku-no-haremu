@@ -411,6 +411,9 @@ export const useFuseRecipes = () => {
           limit: 100,
         })
         .then((res) => {
+          res.rows.forEach((row) => {
+            row.cost = row.cost.map((c: any) => balanceStringToObject(c))
+          })
           return res.rows as FuseRecipe[]
         }),
   })
