@@ -8,7 +8,7 @@ import { RESOURCES } from 'game/constants'
 import { useGame } from 'game/game_context'
 import { Duration } from 'luxon'
 import IconInfo from 'public/game/svg/icon_info.svg'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 import s from './mine.module.scss'
 
@@ -17,7 +17,7 @@ type MineModalProps = {
   isOpen?: boolean
   isLoading?: boolean
   onClose: () => void
-  onConfirm: () => Promise<void>
+  onConfirm: (value?: number) => Promise<void>
   cardData?: { [key: string]: string }
   mineRecipe?: MiningRecipeRecordType
 }
@@ -31,18 +31,48 @@ const MineModal: React.FC<MineModalProps> = ({
   isLoading,
   onConfirm,
 }) => {
-  const [riskValue, setRiskValue] = useState(1)
+  const [riskValueIndex, setRiskValueIndex] = useState(0)
   const { reward_precision, multiplier_to_risk } = useGame()
+  const sortedRiskValues = useMemo(
+    () => Object.values(multiplier_to_risk).sort((a, b) => a.key - b.key),
+    [multiplier_to_risk]
+  )
+
+  const currentResource = useMemo(
+    () =>
+      RESOURCES.find(
+        (item) => item.apiName === mineRecipe?.mined_resource.currency
+      ),
+    [mineRecipe?.mined_resource.currency]
+  )
+
+  const riskValue = Number(
+    (100 - Number(sortedRiskValues[riskValueIndex].value)).toFixed(1)
+  )
+  const xValue = Number(
+    Number(sortedRiskValues[riskValueIndex].key / reward_precision).toFixed(1)
+  )
+  const productionValue = mineRecipe?.mined_resource.balance
+    ? Number((Number(mineRecipe?.mined_resource.balance) * xValue).toFixed(1))
+    : '??'
 
   return (
     <ConfirmModal
       isOpen={isOpen}
-      onConfirm={() => onConfirm()}
-      onClose={() => onClose()}
+      onConfirm={() =>
+        onConfirm(sortedRiskValues[riskValueIndex].key).finally(() =>
+          setRiskValueIndex(0)
+        )
+      }
+      onClose={() => {
+        setRiskValueIndex(0)
+        onClose()
+      }}
       dialogChildren={
         <p>
-          “Are you sure you want to mine her Senpai? you will get 180 nyan. your
-          risk is 0% 100% chance that you will get the resources.”
+          “Are you sure you want to mine her Senpai? You will get{' '}
+          {productionValue} {currentResource?.name}. Your risk is {riskValue}%{' '}
+          {100 - riskValue}% chance that you will get the resources.”
         </p>
       }
       title="you are going to mine"
@@ -79,16 +109,9 @@ const MineModal: React.FC<MineModalProps> = ({
                     className={s.resourceIcon}
                     alt="nyan"
                     mode="none"
-                    src={
-                      RESOURCES.find(
-                        (item) =>
-                          item.apiName === mineRecipe?.mined_resource.currency
-                      )?.image || ''
-                    }
+                    src={currentResource?.image || ''}
                   />
-                  <div className={s.digit}>
-                    {mineRecipe?.mined_resource.balance}
-                  </div>
+                  <div className={s.digit}>{productionValue}</div>
                 </div>
               </div>
             </div>
@@ -121,32 +144,16 @@ const MineModal: React.FC<MineModalProps> = ({
               <div className={s.sliderContainer}>
                 <Slider
                   className={s.slider}
-                  value={riskValue}
                   min={0}
-                  max={multiplier_to_risk.length}
-                  onChange={(value) => setRiskValue(value as number)}
+                  max={sortedRiskValues.length - 1}
+                  onChange={(value) => setRiskValueIndex(value as number)}
                   renderThumb={(props, state) => (
                     <div {...props}>
-                      <div className={s.thumbValue}>
-                        X
-                        {Number(
-                          Number(
-                            multiplier_to_risk[state.valueNow].key /
-                              reward_precision
-                          ).toFixed(1)
-                        )}
-                      </div>
+                      <div className={s.thumbValue}>X{xValue}</div>
                     </div>
                   )}
                 />
-                <div className={s.percent}>
-                  {Number(
-                    (100 - Number(multiplier_to_risk[riskValue].value)).toFixed(
-                      1
-                    )
-                  )}
-                  %
-                </div>
+                <div className={s.percent}>{riskValue}%</div>
               </div>
             </div>
           </div>

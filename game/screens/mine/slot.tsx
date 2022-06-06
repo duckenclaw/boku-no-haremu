@@ -118,7 +118,11 @@ export const Slot = ({
       <MineModal
         isOpen={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
-        onConfirm={() => mine({ asset_id: asset_id! })}
+        onConfirm={(desiredValue?: number) =>
+          mine({ asset_id: asset_id!, desired_reward: desiredValue }).finally(
+            () => setModalIsOpen(false)
+          )
+        }
         cardData={
           isEmptyObj(card?.immutable_data) ? card?.data : card?.immutable_data
         }
