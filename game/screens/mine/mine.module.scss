@@ -66,7 +66,130 @@
     }
   }
 }
+.mineButton {
+  margin-bottom: 2px !important;
+}
 
 .emptySlot {
   cursor: pointer;
+}
+
+.modal {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 9%;
+  justify-content: center;
+  max-width: 570px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px;
+
+  font-family: 'Bangers';
+  color: #ffffff;
+  font-size: 18px;
+
+  .imageContainer {
+    max-width: 220px;
+    width: 100%;
+  }
+
+  .image {
+    height: 320px;
+    margin-bottom: 4px;
+    object-fit: contain;
+  }
+
+  .timeTitle {
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .time {
+    font-size: 30px;
+    color: #479ec5;
+    text-align: center;
+  }
+
+  .info {
+    flex: 1 0 auto;
+    padding-top: 12px;
+  }
+
+  .title {
+    margin-bottom: 28px;
+  }
+
+  .name {
+    margin-right: 12px;
+    font-size: 28px;
+    color: #d5436f;
+  }
+
+  .iconInfo {
+    width: 18px;
+    height: 18px;
+    margin-left: 14px;
+  }
+
+  .lvl {
+    font-size: 24px;
+    color: #479ec5;
+  }
+
+  .subtitle {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    margin-bottom: 12px;
+  }
+
+  .row {
+    margin-bottom: 24px;
+  }
+
+  .content {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+  }
+
+  .resourceItem {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .digit {
+    font-size: 30px;
+  }
+
+  .resourceIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .sliderContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  .slider {
+    flex: 1 0 auto;
+  }
+
+  .thumbValue {
+    position: absolute;
+    top: 30px;
+    font-size: 24px;
+    color: #d5436f;
+  }
+
+  .percent {
+    white-space: nowrap;
+    font-size: 24px;
+    color: #479ec5;
+  }
 }

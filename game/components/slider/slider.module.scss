@@ -1,0 +1,22 @@
+.slider {
+  max-width: 240px;
+  width: 100%;
+  height: 9px;
+  margin-right: 16px;
+}
+
+.sliderTrack {
+  height: 9px;
+  border-radius: 6px;
+  background: linear-gradient(0deg, #45265e, #45265e);
+}
+
+.sliderThumb {
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(180deg, #ea748f 0%, #ff418a 53.65%, #f237a5 100%);
+  border-radius: 50%;
+}

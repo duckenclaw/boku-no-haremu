@@ -14,12 +14,6 @@ type WithdrawCreateProps = {
   className?: string
 }
 
-export type CurrentResourceType = {
-  name: string
-  image: string
-  currency: string
-} | null
-
 export type Banknote = {
   template_id: string
   image: string
@@ -28,8 +22,9 @@ export type Banknote = {
 
 const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [currentResource, setCurrentResource] =
-    useState<null | CurrentResourceType>(null)
+  const [currentResource, setCurrentResource] = useState<null | ResourceType>(
+    null
+  )
   const [currentBanknote, setCurrentBanknote] = useState<Banknote | null>(null)
 
   const { mutateAsync: mintBanknote, isLoading: isMintLoading } =
@@ -97,7 +92,6 @@ const WithdrawCreate: React.FC<WithdrawCreateProps> = ({ className }) => {
           <CreateSlotResource
             selectResource={setCurrentResource}
             currentResource={currentResource}
-            mode="create"
           />
         }
         receiveSlot={

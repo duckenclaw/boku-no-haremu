@@ -51,7 +51,7 @@ export const Fusion = () => {
         cards.find((item) => item?.template_id !== card?.template_id)
       ) ||
       !(resourcesData && fuseRecipesData) ||
-      fuseRecipesData
+      !!fuseRecipesData
         ?.find((r) => r.source_template_id.toString() === cards[0]?.template_id)
         ?.cost.find((c, i) => {
           const balance = mode === '5to2' ? c.balance * 2 : c.balance
