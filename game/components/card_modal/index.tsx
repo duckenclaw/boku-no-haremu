@@ -188,7 +188,6 @@ export const CardsInventory = ({
           </div>
         </div>
         <div className={s.content}>
-          {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
           <SlideIcon
             className={cn(s.side, { [s.hide]: page <= 1 })}
             onClick={page > 1 ? () => setPage(page - 1) : undefined}
@@ -347,7 +346,6 @@ export const BanknoteInventory = ({
           </div>
         </div>
         <div className={s.content}>
-          {isFetching && !isLoading && <LoaderIcon className={s.loaderIcon} />}
           <SlideIcon
             className={cn(s.side, { [s.hide]: page <= 1 })}
             onClick={page > 1 ? () => setPage(page - 1) : undefined}

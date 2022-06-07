@@ -55,7 +55,7 @@ export const GameDialog = ({
           <div className={s.buttons}>
             {onOk && <SkewButton onClick={onOk}>{okLabel ?? 'OK'}</SkewButton>}
             {onCancel && (
-              <SkewButton onClick={onCancel} mirror>
+              <SkewButton className={s.cancelButton} onClick={onCancel} mirror>
                 {cancelLabel ?? 'Cancel'}
               </SkewButton>
             )}
