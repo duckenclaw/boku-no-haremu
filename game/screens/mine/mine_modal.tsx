@@ -56,6 +56,8 @@ const MineModal: React.FC<MineModalProps> = ({
     ? Number((Number(mineRecipe?.mined_resource.balance) * xValue).toFixed(1))
     : '??'
 
+  const [name, lvl] = cardData?.name ? cardData?.name.split(' ') : ['??', '??']
+
   return (
     <ConfirmModal
       isOpen={isOpen}
@@ -95,8 +97,8 @@ const MineModal: React.FC<MineModalProps> = ({
           </div>
           <div className={s.info}>
             <div className={s.title}>
-              <span className={s.name}>{cardData?.name}</span>
-              <span className={s.lvl}>{cardData?.level} lvl</span>
+              <span className={s.name}>{name}</span>
+              <span className={s.lvl}>{lvl} lvl</span>
             </div>
             <div className={s.row}>
               <div className={s.subtitle}>
