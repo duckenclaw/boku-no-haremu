@@ -174,6 +174,7 @@ type MineRecordType = {
   finishing_at: number
   staked_asset_id: string
   status_code: number
+  reward_multiplier: number
   username: string
 }
 
