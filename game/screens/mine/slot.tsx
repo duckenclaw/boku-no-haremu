@@ -39,6 +39,7 @@ import {
 import s from './mine.module.scss'
 
 import { MineModal } from './mine_modal'
+import { useGame } from 'game/game_context'
 
 type SlotProps = {
   className?: string
@@ -83,11 +84,10 @@ export const Slot = ({
   const { data: mineRecipe } = useGetMiningRecipe({
     template_id: cardData?.data.template.template_id,
   })
-
   const card = cardData?.data
-
   const { mutateAsync: unsetMine, isLoading: isUnsetLoading } = useUnsetMine()
   const { mutateAsync: mine, isLoading: isMineLoading } = useMine()
+  const { reward_precision } = useGame()
   const {
     mutateAsync: claim,
     isLoading: isClaimLoading,
@@ -112,6 +112,21 @@ export const Slot = ({
     !!mineRecipe.cost.find(({ balance, currency }) => {
       resourcesData[currency.toLowerCase() as ResourceKey].balance < balance
     })
+
+  const currentMultiplier =
+    asset_data?.reward_multiplier &&
+    Number((asset_data?.reward_multiplier / reward_precision).toFixed(1))
+
+  const productionResource = useMemo(() => {
+    if (!mineRecipe) return null
+    if (currentMultiplier) {
+      return {
+        ...mineRecipe.mined_resource,
+        balance: currentMultiplier * mineRecipe.mined_resource.balance,
+      }
+    }
+    return mineRecipe.mined_resource
+  }, [currentMultiplier, mineRecipe])
 
   return (
     <>
@@ -204,7 +219,7 @@ export const Slot = ({
                 sign="plus"
                 size="large"
                 color="purple"
-                balance={mineRecipe.mined_resource}
+                balance={productionResource || mineRecipe.mined_resource}
               />
             </div>
             {status === 0 && (

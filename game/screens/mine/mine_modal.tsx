@@ -33,6 +33,7 @@ const MineModal: React.FC<MineModalProps> = ({
 }) => {
   const [riskValueIndex, setRiskValueIndex] = useState(0)
   const { reward_precision, multiplier_to_risk } = useGame()
+
   const sortedRiskValues = useMemo(
     () => Object.values(multiplier_to_risk).sort((a, b) => a.key - b.key),
     [multiplier_to_risk]
@@ -69,10 +70,11 @@ const MineModal: React.FC<MineModalProps> = ({
         onClose()
       }}
       dialogChildren={
-        <p>
+        <p className={s.dialogChildren}>
           “Are you sure you want to mine her Senpai? You will get{' '}
-          {productionValue} {currentResource?.name}. Your risk is {riskValue}%{' '}
-          {100 - riskValue}% chance that you will get the resources.”
+          <span>{productionValue}</span> {currentResource?.name}. Your risk is{' '}
+          {riskValue}% {100 - riskValue}% chance that you will get the
+          resources.”
         </p>
       }
       title="you are going to mine"
