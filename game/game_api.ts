@@ -640,8 +640,8 @@ export const useMine = () => {
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/start_mine',
-    mutationFn: ({ asset_id, desired_reward = 100 }) =>
-      api!
+    mutationFn: ({ asset_id, desired_reward = 100 }) => {
+      return api!
         .transact(
           {
             actions: [
@@ -662,8 +662,8 @@ export const useMine = () => {
             expireSeconds: 30,
           }
         )
-
-        .then(waitForWaxConfirmation(api!)),
+        .then(waitForWaxConfirmation(api!))
+    },
 
     onSuccess: () => {
       toast.success('Resource mining started!')
