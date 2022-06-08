@@ -59,6 +59,20 @@ const MineModal: React.FC<MineModalProps> = ({
 
   const [name, lvl] = cardData?.name ? cardData?.name.split(' ') : ['??', '??']
 
+  const dialogStrings = useMemo(
+    () => [
+      `<p>
+        “Are you sure you want to mine her Senpai? You will get
+        <span>${productionValue}</span> ${currentResource?.name}. </p>
+        <p>Your risk is
+          ${riskValue}% ${100 - riskValue}% chance that you will get the
+          resources.”
+        </p>
+      `,
+    ],
+    [currentResource?.name, productionValue, riskValue]
+  )
+
   return (
     <ConfirmModal
       isOpen={isOpen}
@@ -71,14 +85,7 @@ const MineModal: React.FC<MineModalProps> = ({
         setRiskValueIndex(0)
         onClose()
       }}
-      dialogChildren={
-        <p className={s.dialogChildren}>
-          “Are you sure you want to mine her Senpai? You will get{' '}
-          <span>{productionValue}</span> {currentResource?.name}. Your risk is{' '}
-          {riskValue}% {100 - riskValue}% chance that you will get the
-          resources.”
-        </p>
-      }
+      dialogStrings={dialogStrings}
       title="you are going to mine"
     >
       <div className={cn(className, s.modal)}>
