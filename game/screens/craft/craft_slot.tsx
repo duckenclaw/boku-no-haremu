@@ -2,6 +2,7 @@ import { BaseSlot } from 'game/components/base_slot'
 import {
   useCraftCard,
   useGetMiningRecipe,
+  useGetResources,
   useGetTemplateById,
 } from 'game/game_api'
 
@@ -12,13 +13,21 @@ import { CardImage } from 'game/components/card_image'
 
 import s from './craft.module.scss'
 import { ConfirmModal } from 'game/components/confirm_modal'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import classNames from 'classnames'
 
 type CraftSlotProps = {
   template_id: number
   cost: BalanceType[]
 }
+
+const dialogStrings = [
+  `<p>“You want to craft her, Senpai?</p> \n
+  <p>
+    I just adore all of them! They are as faithful as they are
+    amorous, the best companions you can find!”
+  </p>`,
+]
 
 export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
   const {
@@ -37,6 +46,13 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
   })
   const isLoading = isTemplateLoading || isCraftLoading
   const [isHovering, setIsHovering] = useState(false)
+  const { data: resourcesData } = useGetResources()
+  const isCraftDisabled =
+    !resourcesData ||
+    !!cost.find(({ balance, currency }) => {
+      resourcesData[currency.toLowerCase() as ResourceKey].balance < balance
+    })
+
   return (
     <>
       <ConfirmModal
@@ -44,16 +60,7 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         onConfirm={() => craft().then(() => setIsOpen(false))}
         onClose={() => setIsOpen(false)}
         title={'YOUR CHOICE'}
-        dialogChildren={
-          <>
-            <p>“You want to craft Mimi-chan, Senpai?</p>
-            <p>
-              I just adore them! They are as faithful as they are amorous, the
-              best companions you can find! They produce 12 Nyans and consume 2
-              Bentos and 2 Nyans, they really are needy, aren’t they?”
-            </p>
-          </>
-        }
+        dialogStrings={dialogStrings}
       >
         <div className={s.choice_container}>
           <CardImage
@@ -96,11 +103,14 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         isError={templateIsError}
         onRetry={refetchTemplate}
         overlayChildren={
-          <div className={s.overlay} onClick={() => setIsOpen(true)}>
+          <div
+            className={classNames(s.overlay, { [s.disabled]: isCraftDisabled })}
+            onClick={() => setIsOpen(true)}
+          >
             <span className={s.overlay_text}>CRAFT</span>
           </div>
         }
-        contentClassName={s.craft_content}
+        classes={{ content: s.craft_content }}
       >
         <CardImage
           alt={template_id.toString()}
@@ -112,7 +122,7 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         />
         <div className={s.cost}>
           {cost.map((c, i) => (
-            <Resource key={i} balance={c} size="medium" vertical />
+            <Resource key={i} balance={c} vertical />
           ))}
         </div>
       </BaseSlot>

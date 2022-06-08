@@ -34,7 +34,6 @@ export const FusionTraits = ({
     activeCard < primeCards.length - 1 && setActiveCard(activeCard + 1)
 
   const prevSlide = () => activeCard > 0 && setActiveCard(activeCard - 1)
-
   return (
     <>
       <Button

@@ -63,6 +63,7 @@
     .side {
       align-self: center;
       margin: 0 20px;
+      min-width: 34px;
       cursor: pointer;
 
       &.rotate {
@@ -83,27 +84,27 @@
       flex: 1;
       display: grid;
       gap: 24px 24px;
-      grid-template-columns: 128px 128px 128px 128px;
+      grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+      grid-template-rows: repeat(auto-fill, auto);
       justify-content: center;
 
       .card {
         cursor: pointer;
         width: 100%;
-        height: 194px;
 
         &.blocked {
           cursor: not-allowed;
           filter: brightness(0.5) grayscale(0.5);
-          box-shadow: 0px 0px 8px 0px rgb(149 224 245 / 84%);
           transform: none;
         }
       }
     }
 
     .banknotes {
+      width: 100%;
       display: grid;
       gap: 51px 17px;
-      grid-template-columns: 162px 162px 162px;
+      grid-template-columns: repeat(auto-fit, minmax(162px, 1fr));
 
       .banknote {
         display: flex;
@@ -129,19 +130,22 @@
   position: relative;
 
   .dropdown {
-    z-index: 100;
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
     position: absolute;
+    z-index: 100;
     left: 0;
     top: calc(100% + 16px);
     display: none;
-    opacity: 0;
     min-width: 182px;
-    transition: opacity 0.3s ease-in-out;
+    max-height: 408px;
+    padding: 18px 16px 18px 32px;
 
     background: #111622;
-    border-radius: 8px;
     border: 3px solid #5092ad;
-    padding: 18px 32px;
+    border-radius: 8px;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
 
     &.open {
       display: flex;

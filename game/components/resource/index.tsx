@@ -9,21 +9,21 @@ type ResourceProps = {
   balance: BalanceType
   sign?: 'none' | 'plus' | 'minus'
   vertical?: boolean
-  size?: 'default' | 'large' | 'medium'
+  size?: 'default' | 'large' | 'small'
   color?: 'default' | 'purple'
 } & React.ComponentProps<'span'>
 
-const currencyToImg = (c: string) => {
+export const currencyToImg = (c: string) => {
   switch (c.toLowerCase()) {
     default:
     case 'nya':
-      return '/images/currencies/nyan.png'
+      return '/images/currencies/game_nyan.png'
     case 'cht':
-      return '/images/currencies/crystal.png'
+      return '/images/currencies/game_chantment.png'
     case 'smp':
-      return '/images/currencies/simptetix.png'
+      return '/images/currencies/game_simpthetix.png'
     case 'bnt':
-      return '/images/currencies/bento.png'
+      return '/images/currencies/game_bento.png'
   }
 }
 

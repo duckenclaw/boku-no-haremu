@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 4px;
 
   font-family: 'Bangers';
   font-style: normal;
@@ -14,8 +15,6 @@
 
   .image_container {
     position: relative;
-    width: 30px;
-    height: 30px;
 
     .image {
       height: 100%;
@@ -45,16 +44,16 @@
       font-size: 18px;
 
       .image_container {
-        width: 25px;
-        height: 25px;
+        width: 28px;
+        height: 28px;
       }
     }
 
-    &__medium {
+    &__small {
       font-size: 20px;
       .image_container {
-        width: 37px;
-        height: 37px;
+        width: 23px;
+        height: 23px;
       }
     }
 
@@ -62,8 +61,8 @@
       font-size: 24px;
 
       .image_container {
-        width: 37px;
-        height: 37px;
+        width: 35px;
+        height: 35px;
       }
     }
   }

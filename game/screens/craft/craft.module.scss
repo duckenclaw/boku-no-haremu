@@ -11,6 +11,8 @@
   cursor: pointer;
   position: relative;
 
+
+
   .overlay_text {
     position: absolute;
     top: 50%;
@@ -24,6 +26,11 @@
     color: #ff418a;
     -webkit-text-stroke: 1px #ffffff;
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    filter: brightness(0.5) grayscale(0.8);
+  }
 }
 
 .blur {
@@ -31,7 +38,7 @@
 }
 
 .craft_content {
-  padding: 12px;
+  padding-bottom: 12px;
   display: flex;
   flex-direction: column;
 
@@ -66,12 +73,10 @@
       font-family: 'Bangers';
 
       font-size: 32px;
-      background: linear-gradient(
-        180deg,
-        #ea748f 0%,
-        #ff418a 53.65%,
-        #f237a5 100%
-      );
+      background: linear-gradient(180deg,
+          #ea748f 0%,
+          #ff418a 53.65%,
+          #f237a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;

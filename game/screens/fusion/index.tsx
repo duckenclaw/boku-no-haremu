@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { Button, Toggle } from 'game/components/button'
 import { ConfirmModal } from 'game/components/confirm_modal'
 import { ScreenContainer } from 'game/components/screen_container'
-import { useFuseCards } from 'game/game_api'
+import { useFuseCards, useFuseRecipes, useGetResources } from 'game/game_api'
 import { useEffect, useMemo, useState } from 'react'
 import { ScreenTitle } from 'game/components/screen_title'
 import { FusionModalCard } from './fusion_modal_card'
@@ -12,6 +12,7 @@ import { FusionQueue } from './fusion_queue'
 import { FusionSlot } from './fusion_slot'
 import { FusionTraits } from './traits'
 import s from './fusion.module.scss'
+import { Resource } from 'game/components/resource'
 
 type FusionMode = '3to1' | '5to2'
 
@@ -21,11 +22,22 @@ export type FusionSlotData = {
   is_prime?: boolean
 } | null
 
+const dialogStrings = [
+  `<p>
+  “Senpai, are you sure you want to lose these waifus forever? Make
+  your choice, we believe in you!”
+  </p>`,
+]
+
 export const Fusion = () => {
   const [fusionCount, setFusionCount] = useState(0)
   const [mode, setMode] = useState<FusionMode>('3to1')
   const [cards, setCards] = useState<FusionSlotData[]>([null, null, null])
   const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const { data: resourcesData } = useGetResources()
+  const { data: fuseRecipesData, isLoading: isFuseRecipesData } =
+    useFuseRecipes()
 
   useEffect(() => {
     setCards(Array(mode === '3to1' ? 3 : 5).fill(null))
@@ -41,10 +53,20 @@ export const Fusion = () => {
   const disableFuse = useMemo(
     () =>
       isFuseLoading ||
-      (cards.some((c) => !c) &&
-        cards
-          .filter((c) => c?.template_id)
-          .every((c, _, array) => c?.template_id === array[0]?.template_id)),
+      cards.some((card) => card === null) ||
+      cards.every((card) =>
+        cards.find((item) => item?.template_id !== card?.template_id)
+      ) ||
+      !(resourcesData && fuseRecipesData) ||
+      !!fuseRecipesData
+        ?.find((r) => r.source_template_id.toString() === cards[0]?.template_id)
+        ?.cost.find((c, i) => {
+          const balance = mode === '5to2' ? c.balance * 2 : c.balance
+          return (
+            resourcesData[c.currency.toLocaleLowerCase() as ResourceKey]
+              .balance < balance
+          )
+        }),
     [cards, isFuseLoading]
   )
 
@@ -75,14 +97,7 @@ export const Fusion = () => {
         onConfirm={onConfirm}
         onClose={() => setModalIsOpen(false)}
         title={'Are you sure?'}
-        dialogChildren={
-          <>
-            <p>
-              “Senpai, are you sure you want to lose these waifus forever? Make
-              your choice, we believe in you!”
-            </p>
-          </>
-        }
+        dialogStrings={dialogStrings}
       >
         <div className={s.modal}>
           <div className={s.modalSubtitle}>you will lose forever</div>
@@ -94,6 +109,27 @@ export const Fusion = () => {
                 asset_id={card?.asset_id}
               />
             ))}
+          </div>
+          <div className={s.cost}>
+            cost:{' '}
+            {fuseRecipesData
+              ?.find(
+                (r) => r.source_template_id.toString() === cards[0]?.template_id
+              )
+              ?.cost.map((c, i) => {
+                const cost = {
+                  ...c,
+                  balance: mode === '5to2' ? c.balance * 2 : c.balance,
+                }
+                return (
+                  <Resource
+                    className={s.resource}
+                    balance={cost}
+                    size="large"
+                    key={i}
+                  />
+                )
+              })}
           </div>
         </div>
       </ConfirmModal>

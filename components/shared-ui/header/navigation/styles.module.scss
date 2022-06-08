@@ -1,5 +1,5 @@
 .container {
-  color: #479EC5;
+  color: #479ec5;
 }
 
 .navList {
@@ -8,8 +8,8 @@
   flex-flow: row wrap;
   list-style: none;
   margin-left: -10px;
-  
-  @media(max-width: 1024px) {
+
+  @media (max-width: 1024px) {
     display: block;
     width: 100%;
     padding-top: 72px;
@@ -20,7 +20,7 @@
 
 .navItem {
   margin-right: 30px;
-  color: #F237A5;
+  color: #f237a5;
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -28,36 +28,20 @@
   display: block;
   padding: 10px;
   cursor: pointer;
-  text-shadow: -0 -1.2px 0 #FFFFFF,
-    0 -1.2px 0 #FFFFFF,
-    -0 1.2px 0 #FFFFFF,
-    0 1.2px 0 #FFFFFF,
-    -1.2px -0 0 #FFFFFF,
-    1.2px -0 0 #FFFFFF,
-    -1.2px 0 0 #FFFFFF,
-    1.2px 0 0 #FFFFFF,
-    -1px -1.2px 0 #FFFFFF,
-    1px -1.2px 0 #FFFFFF,
-    -1px 1.2px 0 #FFFFFF,
-    1px 1.2px 0 #FFFFFF,
-    -1.2px -1px 0 #FFFFFF,
-    1.2px -1px 0 #FFFFFF,
-    -1.2px 1px 0 #FFFFFF,
-    1.2px 1px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF,
-    -1.2px -1.2px 0 #FFFFFF,
-    1.2px -1.2px 0 #FFFFFF,
-    -1.2px 1.2px 0 #FFFFFF,
-    1.2px 1.2px 0 #FFFFFF;
+  text-shadow: -0 -1.2px 0 #ffffff, 0 -1.2px 0 #ffffff, -0 1.2px 0 #ffffff,
+    0 1.2px 0 #ffffff, -1.2px -0 0 #ffffff, 1.2px -0 0 #ffffff,
+    -1.2px 0 0 #ffffff, 1.2px 0 0 #ffffff, -1px -1.2px 0 #ffffff,
+    1px -1.2px 0 #ffffff, -1px 1.2px 0 #ffffff, 1px 1.2px 0 #ffffff,
+    -1.2px -1px 0 #ffffff, 1.2px -1px 0 #ffffff, -1.2px 1px 0 #ffffff,
+    1.2px 1px 0 #ffffff, -1.2px -1.2px 0 #ffffff, 1.2px -1.2px 0 #ffffff,
+    -1.2px 1.2px 0 #ffffff, 1.2px 1.2px 0 #ffffff, -1.2px -1.2px 0 #ffffff,
+    1.2px -1.2px 0 #ffffff, -1.2px 1.2px 0 #ffffff, 1.2px 1.2px 0 #ffffff;
 
-  @media(max-width: 1200px) {
+  @media (max-width: 1200px) {
     margin-right: 0px;
   }
 
-  @media(max-width: 1024px) {
+  @media (max-width: 1024px) {
     padding-top: 24px;
     padding-bottom: 24px;
     font-style: normal;
@@ -68,7 +52,7 @@
 }
 
 .navItem_active {
-  color: #2E92BF;
+  color: #2e92bf;
 }
 
 .navLink {

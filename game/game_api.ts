@@ -7,13 +7,11 @@ import {
   useQueryClient,
 } from 'react-query'
 import { toast } from 'react-toastify'
-import { Serialize } from 'eosjs'
+import { Serialize, type Api } from 'eosjs'
+import { useGame } from './game_context'
 
 export const AtomicHubApi = axios.create({
-  baseURL:
-    process.env.NEXT_PUBLIC_TESTNET === 'true'
-      ? 'https://test.wax.api.atomicassets.io/atomicassets/v1/'
-      : 'https://wax.api.atomicassets.io/atomicassets/v1/',
+  baseURL: process.env.NEXT_PUBLIC_WAX_API!,
   headers: {
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
@@ -35,6 +33,32 @@ export const balanceStringToObject = (
     balance: isNaN(balance) ? 0 : balance,
     currency: currency_str,
   } as BalanceType
+}
+
+const MAX_TRIES = 10
+const WAIT_DELAY = 2000
+
+const waitFor = (time: number) =>
+  new Promise<void>((res) => setTimeout(() => res(), time))
+
+const waitForWaxConfirmation = (api: Api) => async (result: any) => {
+  console.log('WAIT FOR CONFR:', result)
+  const transaction_id =
+    result?.transaction_id ?? result?.transaction?.id?.()?.toString?.() ?? null
+  if (transaction_id) {
+    await waitFor(WAIT_DELAY / 2)
+    for (let index = 0; index < MAX_TRIES; index++) {
+      const history = await api.rpc
+        .history_get_transaction(transaction_id)
+        .catch(() => null)
+      console.log('HISTORY FOR ', transaction_id, ':', result)
+      if (history?.trx?.receipt?.status === 'executed') {
+        return result
+      }
+      await waitFor(WAIT_DELAY)
+    }
+  }
+  return result
 }
 
 const types = Serialize.createInitialTypes()
@@ -72,6 +96,35 @@ const uint64Plus1 = (num: string) => {
     .reverse()
     .join('')
 }
+
+const transformResourcesRow = (row: any) => {
+  if (row) {
+    const balances = (row.resource_balances as string[] | null)?.reduce(
+      (dict, balanceStr) => {
+        const b = balanceStringToObject(balanceStr)
+        if (b.currency) {
+          dict[b.currency.toLowerCase()] = b
+        }
+        return dict
+      },
+      {} as { [key: string]: BalanceType }
+    )
+    return {
+      isUserInitialized: true,
+      is_blocked: row.is_blocked > 0,
+      ...balances,
+    } as UseGetResourcesResponseType
+  }
+  return {
+    isUserInitialized: false,
+    smp: balanceStringToObject('0', 'SMP'),
+    nya: balanceStringToObject('0', 'NYA'),
+    bnt: balanceStringToObject('0', 'BHT'),
+    cht: balanceStringToObject('0', 'CHT'),
+    is_blocked: false,
+  } as UseGetResourcesResponseType
+}
+
 //#endregion
 
 //#region QUERIES
@@ -88,6 +141,34 @@ export const useWaxBalance = () => {
   })
 }
 
+export const useConfig = () => {
+  const { api, isConnected } = useWax()
+  return useQuery({
+    queryKey: [
+      'wax/config',
+      { contract: process.env.NEXT_PUBLIC_WAX_CONTRACT },
+    ],
+    cacheTime: 86400000,
+    staleTime: 3600000,
+    enabled: isConnected,
+    queryFn: () => {
+      return api?.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          table: 'config',
+          limit: 1,
+          reverse: false,
+          show_payer: false,
+        })
+        .then((res) => {
+          return res.rows[0] as GameConfig
+        })
+    },
+  })
+}
+
 // get all Waifu NFTs for user
 
 type UseGetAllCardsOptions = {
@@ -99,6 +180,7 @@ export const useGetAllCards = ({
   limit = 8,
   template_id,
 }: UseGetAllCardsOptions) => {
+  const { collection_name, schema_name } = useGame()
   const { isConnected, account } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllCards', { account, template_id, limit }],
@@ -111,8 +193,8 @@ export const useGetAllCards = ({
           page: String(pageParam ?? 1),
           limit,
           template_id,
-          collection_name: process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION,
-          schema_name: process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA,
+          collection_name,
+          schema_name,
         },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
@@ -132,51 +214,33 @@ type UseGetTemplateByIdOptions = {
 export const useGetTemplateById = ({
   template_id,
 }: UseGetTemplateByIdOptions) => {
+  const { collection_name } = useGame()
   const { isConnected } = useWax()
   return useQuery<GetTemplateByIdResponseType>({
     queryKey: ['wax/getTemplate', { template_id }],
     enabled: isConnected && !!template_id,
     queryFn: () =>
-      AtomicHubApi.get(
-        `/templates/${process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION}/${template_id}`
-      ).then((res) => res.data as GetTemplateByIdResponseType),
+      AtomicHubApi.get(`/templates/${collection_name}/${template_id}`).then(
+        (res) => res.data as GetTemplateByIdResponseType
+      ),
   })
 }
 
 // get all Banknotes NFTs for user
 export const useGetAllBanknotesTemplates = () => {
+  const { banknote_schema_name, banknote_collection_name } = useGame()
   const { isConnected } = useWax()
-  return useInfiniteQuery<GetAllBanknotesResponseType>({
+  return useQuery<GetAllBanknotesResponseType>({
     queryKey: ['wax/getAllBanknotes'],
     enabled: isConnected,
-    queryFn: ({ pageParam }) =>
+    queryFn: () =>
       AtomicHubApi.get('/templates', {
         params: {
-          page: String(pageParam ?? 1),
-          limit: '40',
-          collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
-          schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+          collection_name: banknote_collection_name,
+          schema_name: banknote_schema_name,
+          limit: 200,
         },
       }).then((res) => res.data as GetAllBanknotesResponseType),
-    getNextPageParam: (page, pages) => {
-      if (page.data.length === 20) {
-        return pages.length + 1
-      } else return false
-    },
-  })
-}
-
-// get banknote balance stats for user
-export const useGetBanknotesBalances = () => {
-  const { account, isConnected } = useWax()
-  return useQuery<GetBanknoteBalancesResponseType>({
-    queryKey: ['wax/getBanknotesBalances', { account }],
-    enabled: isConnected,
-
-    queryFn: () =>
-      AtomicHubApi.get(
-        `/accounts/${account}/${process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION}`
-      ).then((res) => res.data as GetBanknoteBalancesResponseType),
   })
 }
 
@@ -190,6 +254,7 @@ export const useGetAllBanknotes = ({
   template_id,
   limit = 9,
 }: useGetBanknotesByTemplateIdOptions) => {
+  const { banknote_collection_name, banknote_schema_name } = useGame()
   const { account, isConnected } = useWax()
   return useInfiniteQuery<GetAllCardsResponseType>({
     queryKey: ['wax/getAllBanknotes', { account, template_id }],
@@ -200,14 +265,14 @@ export const useGetAllBanknotes = ({
         params: {
           owner: account,
           page: String(pageParam ?? 1),
-          collection_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
-          schema_name: process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+          collection_name: banknote_collection_name,
+          schema_name: banknote_schema_name,
           limit: limit,
           template_id,
         },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
-      if (page.data.length === 20) {
+      if (page.data.length === limit) {
         return pages.length + 1
       } else return false
     },
@@ -220,8 +285,9 @@ export const useGetResources = () => {
   return useQuery({
     queryKey: ['wax/resources', { account }],
     enabled: isConnected,
-    queryFn: () =>
-      api?.rpc
+    refetchInterval: 15000,
+    queryFn: () => {
+      return api?.rpc
         .get_table_rows({
           json: true,
           code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
@@ -231,34 +297,8 @@ export const useGetResources = () => {
           reverse: false,
           show_payer: false,
         })
-        .then((res) => {
-          if (res?.rows[0]) {
-            const row = res.rows[0]
-            const balances = (row.resource_balances as string[] | null)?.reduce(
-              (dict, balanceStr) => {
-                const b = balanceStringToObject(balanceStr)
-                if (b.currency) {
-                  dict[b.currency.toLowerCase()] = b
-                }
-                return dict
-              },
-              {} as { [key: string]: BalanceType }
-            )
-            return {
-              isUserInitialized: true,
-              is_blocked: row.is_blocked > 0,
-              ...balances,
-            } as UseGetResourcesResponseType
-          }
-          return {
-            isUserInitialized: false,
-            smp: balanceStringToObject('0', 'SMP'),
-            nya: balanceStringToObject('0', 'NYA'),
-            bnt: balanceStringToObject('0', 'BHT'),
-            cht: balanceStringToObject('0', 'CHT'),
-            is_blocked: false,
-          } as UseGetResourcesResponseType
-        }),
+        .then((res) => transformResourcesRow(res.rows[0]))
+    },
   })
 }
 
@@ -296,21 +336,6 @@ export const useGetCardByAssetId = ({
       AtomicHubApi.get(`/assets/${asset_id}`).then(
         (res) => res.data as GetCardByIdResponseType
       ),
-  })
-}
-
-type useGetCardsByAssetIds = {
-  assetIds?: string[] | null
-}
-
-export const useGetCardsByAssetIds = ({ assetIds }: useGetCardsByAssetIds) => {
-  return useQuery({
-    queryKey: ['wax/getCardsByAssetIds', assetIds],
-    enabled: !!assetIds,
-    queryFn: () =>
-      AtomicHubApi.get(`/assets`, {
-        params: { ids: assetIds?.join(',') },
-      }).then((res) => res.data as GetCardsByIdsResponseType),
   })
 }
 
@@ -387,6 +412,9 @@ export const useFuseRecipes = () => {
           limit: 100,
         })
         .then((res) => {
+          res.rows.forEach((row) => {
+            row.cost = row.cost.map((c: any) => balanceStringToObject(c))
+          })
           return res.rows as FuseRecipe[]
         }),
   })
@@ -428,19 +456,20 @@ type UseGetTemplateOptions = {
 }
 
 export const useGetTemplates = ({ mode }: UseGetTemplateOptions) => {
+  const {
+    banknote_collection_name,
+    banknote_schema_name,
+    collection_name,
+    schema_name,
+  } = useGame()
   return useQuery({
     queryKey: ['wax/getTemplates', { mode }],
     queryFn: () =>
       AtomicHubApi.get(`/templates`, {
         params: {
           collection_name:
-            mode === 'card'
-              ? process.env.NEXT_PUBLIC_CARDS_NFT_COLLECTION
-              : process.env.NEXT_PUBLIC_BANKNOTE_NFT_COLLECTION,
-          schema_name:
-            mode === 'card'
-              ? process.env.NEXT_PUBLIC_CARDS_NFT_SCHEMA
-              : process.env.NEXT_PUBLIC_BANKNOTE_NFT_SCHEMA,
+            mode === 'card' ? collection_name : banknote_collection_name,
+          schema_name: mode === 'card' ? schema_name : banknote_schema_name,
         },
       }).then((res) => res.data as GetTemplatesResponseType),
   })
@@ -454,37 +483,42 @@ export const useInitAccount = () => {
   return useMutation({
     mutationKey: 'wax/login',
     mutationFn: () =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'login',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'login',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Account successfully initialized!')
       qc.invalidateQueries('wax/resources')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }
 
 type useMineArguments = {
   asset_id: string
+  desired_reward?: number
 }
 // place card into slot
 export const useInitMine = () => {
@@ -493,69 +527,76 @@ export const useInitMine = () => {
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/initMine',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'initmine',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account!,
-                asset_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'initmine',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account!,
+                  asset_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Card placed into mining slot!')
       qc.invalidateQueries('wax/mining')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }
 
-// place card into slot
+// place card out of slot
 export const useUnsetMine = () => {
   const { api, account, auth } = useWax()
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/unsetMine',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'unsetmine',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account!,
-                asset_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'unsetmine',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account!,
+                  asset_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Card removed from mining slot!')
       qc.invalidateQueries('wax/mining')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }
@@ -566,115 +607,169 @@ export const useMine = () => {
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/start_mine',
-    mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'startmine',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
-                asset_id,
+    mutationFn: ({ asset_id, desired_reward = 100 }) => {
+      return api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'startmine',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                  asset_id,
+                  desired_reward,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then(waitForWaxConfirmation(api!))
+    },
+
     onSuccess: () => {
       toast.success('Resource mining started!')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/mining')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
+}
+
+type UseClaimResultType = {
+  delta_balances: {
+    nya: number
+    bnt: number
+    cht: number
+    smp: number
+  } & Record<string, number>
 }
 
 // claimed mined card
 export const useClaim = () => {
   const { api, account, auth } = useWax()
   const qc = useQueryClient()
-  return useMutation<any, any, useMineArguments>({
+  return useMutation<UseClaimResultType, any, useMineArguments>({
     mutationKey: 'wax/claim',
-    mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'claim',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
-                asset_id,
+    mutationFn: async ({ asset_id }) => {
+      const getResources = () =>
+        api!.rpc
+          .get_table_rows({
+            json: true,
+            code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+            scope: account,
+            table: 'accounts',
+            limit: 1,
+            reverse: false,
+            show_payer: false,
+          })
+          .then((res) => transformResourcesRow(res.rows[0]))
+
+      const beforeRes = await getResources()
+      await api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'claim',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                  asset_id,
+                },
               },
-            },
-          ],
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then(waitForWaxConfirmation(api!))
+      const afterRes = await getResources()
+      return {
+        delta_balances: {
+          nya: afterRes.nya.balance - beforeRes.nya.balance,
+          bnt: afterRes.bnt.balance - beforeRes.bnt.balance,
+          cht: afterRes.cht.balance - beforeRes.cht.balance,
+          smp: afterRes.smp.balance - beforeRes.smp.balance,
         },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
-    onSuccess: () => {
-      toast.success('Rewards claimed!')
+      }
+    },
+    onSuccess: ({ delta_balances }) => {
+      const rewards = Object.entries(delta_balances).filter(([v, b]) => b > 0)
+      if (rewards.length > 0) {
+        toast.success(
+          'Mine rewards claimed: ' +
+            rewards.map((r) => `${r[1]} ${r[0]}`).join(',') +
+            '!'
+        )
+      } else {
+        toast.error('Risky mine was unsuccessful')
+      }
+
       qc.invalidateQueries('wax/mining')
       qc.invalidateQueries('wax/resources')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }
 
-type useMintBanknoteOptions = {
+type useMintBanknoteVariables = {
   template_id: string
 }
 
 // mint banknote by template_id
-export const useMintBanknote = ({ template_id }: useMintBanknoteOptions) => {
+export const useMintBanknote = () => {
   const { account, api, auth } = useWax()
   const qc = useQueryClient()
-  return useMutation({
+  return useMutation<any, any, useMintBanknoteVariables>({
     mutationKey: 'wax/mintBanknote',
-    mutationFn: () =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'buybanknote',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account!,
-                banknote_template_id: template_id,
+    mutationFn: ({ template_id }) =>
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'buybanknote',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account!,
+                  banknote_template_id: template_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Banknote minted!')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/getBanknotesBalances')
       qc.invalidateQueries('wax/getAllBanknotes')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }
@@ -690,25 +785,29 @@ export const useBurnBanknote = () => {
   return useMutation<any, any, UseBurnBanknoteVariables>({
     mutationKey: 'wax/burn_banknote',
     mutationFn: ({ asset_id }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'burnasset',
-              account: 'atomicassets',
-              authorization: [auth!],
-              data: {
-                asset_id,
-                asset_owner: account,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'burnasset',
+                account: 'atomicassets',
+                authorization: [auth!],
+                data: {
+                  asset_id,
+                  asset_owner: account,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('Banknote burned!')
       qc.invalidateQueries('wax/resources')
@@ -716,9 +815,9 @@ export const useBurnBanknote = () => {
       qc.invalidateQueries('wax/getAllBanknotes')
       qc.invalidateQueries('wax/getBanknotesByTemplateId')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }
@@ -736,48 +835,54 @@ export const useFuseCards = () => {
   return useMutation<any, any, UseFuseCardsVariables>({
     mutationKey: 'wax/fuse_cards',
     mutationFn: ({ primeCards, secondaryCards }) =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'transfer',
-              account: 'atomicassets',
-              authorization: [auth!],
-              data: {
-                from: account,
-                to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-                asset_ids: [...primeCards, ...secondaryCards],
-                memo: 'Fuse waifu',
-              },
-            },
-            {
-              name: 'fuse',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [
-                {
-                  actor: account!,
-                  permission: 'active',
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'transfer',
+                account: 'atomicassets',
+                authorization: [auth!],
+                data: {
+                  from: account,
+                  to: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                  asset_ids: [...primeCards, ...secondaryCards],
+                  memo: 'Fuse waifu',
                 },
-              ],
-              data: {
-                username: account,
-                primary_asset_ids: primeCards,
-                secondary_asset_ids: secondaryCards,
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+              {
+                name: 'fuse',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [
+                  {
+                    actor: account!,
+                    permission: 'active',
+                  },
+                ],
+                data: {
+                  username: account,
+                  primary_asset_ids: primeCards,
+                  secondary_asset_ids: secondaryCards,
+                },
+              },
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+
+        .then(waitForWaxConfirmation(api!)),
+
     onSuccess: () => {
       toast.success('New Waifu NFT created!')
       qc.invalidateQueries('wax/getAllCards')
+      qc.invalidateQueries('wax/resources')
+      qc.invalidateQueries('wax/fuse_queue')
     },
-    onError: () => {
-      toast.error('Error occurred during transaction')
+    onError: (e: any) => {
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }
@@ -793,33 +898,35 @@ export const useCraftCard = ({ template_id }: UseCraftCardOptions) => {
   return useMutation({
     mutationKey: 'wax/craftasset',
     mutationFn: () =>
-      api!.transact(
-        {
-          actions: [
-            {
-              name: 'craftasset',
-              account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
-              authorization: [auth!],
-              data: {
-                username: account,
-                asset_template_id: template_id,
+      api!
+        .transact(
+          {
+            actions: [
+              {
+                name: 'craftasset',
+                account: process.env.NEXT_PUBLIC_WAX_CONTRACT!,
+                authorization: [auth!],
+                data: {
+                  username: account,
+                  asset_template_id: template_id,
+                },
               },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      ),
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        )
+        .then(waitForWaxConfirmation(api!)),
     onSuccess: () => {
       toast.success('New Waifu NFT crafted!')
       qc.invalidateQueries('wax/resources')
       qc.invalidateQueries('wax/getAllCards')
     },
-    onError: (e) => {
+    onError: (e: any) => {
       console.log('error', e)
-      toast.error('Error occurred during transaction')
+      toast.error(e?.message ?? 'Error occurred during transaction')
     },
   })
 }

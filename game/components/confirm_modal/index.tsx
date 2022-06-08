@@ -5,7 +5,7 @@ import { GameDialog } from 'game/components/game_dialog'
 
 type ConfirmModalProps = {
   children?: React.ReactNode
-  dialogChildren?: React.ReactNode
+  dialogStrings?: string[]
   isOpen?: boolean
   title?: string
   onClose?: () => void
@@ -14,7 +14,7 @@ type ConfirmModalProps = {
 
 export const ConfirmModal = ({
   isOpen = false,
-  dialogChildren,
+  dialogStrings,
   onClose,
   title,
   onConfirm,
@@ -41,9 +41,8 @@ export const ConfirmModal = ({
           }
         }}
         onCancel={onClose}
-      >
-        {dialogChildren}
-      </GameDialog>
+        strings={dialogStrings}
+      />
     </>
   )
 }

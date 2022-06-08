@@ -1,6 +1,6 @@
 .slot {
     position: relative;
-    overflow: hidden;
+
     border-radius: 12px;
     border: 6px solid #6AA3C6;
     height: 430px;
@@ -61,14 +61,20 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease-in-out;
-    }
 
-    &:hover {
-        .overlay {
-
+        &.force {
             opacity: 1;
             pointer-events: all;
         }
     }
+
+    &:hover {
+        .overlay {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+
 
 }

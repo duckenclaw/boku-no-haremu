@@ -13,6 +13,15 @@ type FusionTraitsSlideProps = {
   className?: string
 }
 
+const levelTraits = {
+  2: ['clothes', 'hair', 'passionate', 'shy', 'emotional'],
+  3: ['eyes'],
+  4: ['accessories'],
+  5: ['background', 'unique trait'],
+}
+
+const templateTraitsKeys = ['level', 'type']
+
 export const FusionTraitsSlide = ({
   className,
   asset_id,
@@ -21,41 +30,28 @@ export const FusionTraitsSlide = ({
     asset_id,
   })
 
-  let characterTraits = useMemo(
+  const characterTraits = useMemo(
     () => data?.data?.immutable_data,
     [data?.data?.immutable_data]
   )
 
-  let templateData = useMemo(
-    () => data?.data.template.immutable_data,
-    [data?.data.template.immutable_data]
-  )
+  const templateTraits = useMemo(() => {
+    if (data?.data?.template?.immutable_data) {
+      return Object.entries(data.data.template.immutable_data).reduce<{
+        [key: string]: string
+      }>((acc, [key, value]) => {
+        if (templateTraitsKeys.includes(key)) {
+          acc[key] = value
+          return acc
+        }
+        return acc
+      }, {})
+    }
 
-  templateData = {
-    // нужно удалить когда появятся харастеристики
-    img: 'QmTLkXJoCjdYQKaQ7kDFJqtNn8gScz6KT52Aqh7SkJfpCE',
-    type: 'namichuan',
-    level: '1',
-    name: 'NYANFAC3',
-  }
+    return {}
+  }, [data?.data.template.immutable_data])
 
-  characterTraits = {
-    // нужно удалить когда появятся харастеристики
-    img: 'QmTLkXJoCjdYQKaQ7kDFJqtNn8gScz6KT52Aqh7SkJfpCE',
-    shy: '3',
-    eyes: 'grey',
-    hair: 'kitsune',
-    clothes: 'grey dress',
-    emotional: '8',
-    passionate: '4',
-  }
-
-  const levelTraits = {
-    2: ['clothes', 'hair', 'passionate', 'shy', 'emotional'],
-    3: ['eyes'],
-    4: ['accessories'],
-    5: ['background', 'unique trait'],
-  }
+  const ignoreTraits = ['img', 'name']
 
   return (
     <div className={cn(className, s.slide)}>
@@ -63,15 +59,17 @@ export const FusionTraitsSlide = ({
         <CardImage
           className={s.image}
           src={[
-            ipfsToS3Url(characterTraits?.img),
-            ipfsToUrlSafe(characterTraits?.img),
+            ipfsToS3Url(
+              data?.data?.immutable_data?.img || data?.data?.data?.img
+            ),
+            ipfsToUrlSafe(data?.data?.data?.img),
           ]}
         />
         <div className={s.info}>
           <div className={s.title}>you will receive</div>
-          {templateData &&
-            Object.entries(templateData).map(([key, value]) =>
-              key === 'img' ? null : (
+          {templateTraits &&
+            Object.entries(templateTraits).map(([key, value]) =>
+              ignoreTraits.includes(key) ? null : (
                 <TraitItem
                   className={s.templateItem}
                   type={key}
@@ -82,7 +80,7 @@ export const FusionTraitsSlide = ({
             )}
           {characterTraits &&
             Object.entries(characterTraits).map(([key, value]) =>
-              key === 'img' ? null : (
+              ignoreTraits.includes(key) ? null : (
                 <TraitItem type={key} value={value} key={key} />
               )
             )}
@@ -91,7 +89,7 @@ export const FusionTraitsSlide = ({
               className={s.additionTrait}
               valueClassName={s.additionValue}
               type={levelTraits[
-                (Number(templateData?.level) + 1) as keyof typeof levelTraits
+                (Number(templateTraits?.level) + 1) as keyof typeof levelTraits
               ]?.join(', ')}
               value={'???'}
             />

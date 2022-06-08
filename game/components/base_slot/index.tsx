@@ -7,40 +7,49 @@ import { Loader } from 'components/shared-ui/loader'
 
 type BaseSlotProps = {
   children?: React.ReactNode
+  classes?: {
+    container?: string
+    content?: string
+    emptyTitle?: string
+    emptyIcon?: string
+  }
   overlayChildren?: React.ReactNode
+  forceOverlay?: boolean
   isEmpty?: boolean
   isLoading?: boolean
-  contentClassName?: string
-  isError: boolean
-  onRetry: () => void
+  isError?: boolean
+  onRetry?: () => void
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
 
 export const BaseSlot = ({
+  classes,
   className,
   children,
   isEmpty = false,
   overlayChildren,
   isLoading = false,
+  forceOverlay,
   isError,
   onRetry,
-  contentClassName,
   ...props
 }: BaseSlotProps) => {
   const isOverlayChildrenAvailable = () =>
     overlayChildren && !isLoading && !isEmpty && !isError
 
   return (
-    <div className={cn(className, s.slot)} {...props}>
+    <div className={cn(classes?.container, s.slot)} {...props}>
       <div className={s.background} />
-      <div className={cn(s.content, contentClassName)}>
+      <div className={cn(s.content, classes?.content)}>
         <Loader isLoading={isLoading} isError={isError} onRetry={onRetry}>
           {isEmpty ? (
             <>
-              <span className={s.empty_title}>EMPTY SLOT</span>
-              <AddIcon className={s.empty_icon} />
+              <span className={cn(s.empty_title, classes?.emptyTitle)}>
+                EMPTY SLOT
+              </span>
+              <AddIcon className={cn(s.empty_icon, classes?.emptyIcon)} />
             </>
           ) : (
             children
@@ -48,7 +57,9 @@ export const BaseSlot = ({
         </Loader>
       </div>
       {isOverlayChildrenAvailable() && (
-        <div className={s.overlay}>{overlayChildren}</div>
+        <div className={cn(s.overlay, { [s.force]: forceOverlay })}>
+          {overlayChildren}
+        </div>
       )}
     </div>
   )

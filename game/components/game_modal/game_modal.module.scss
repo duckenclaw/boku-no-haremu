@@ -1,78 +1,70 @@
 .overlay {
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    inset: 0px;
-    overflow: scroll;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  inset: 0px;
+  overflow: scroll;
 
-    display: block;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    @media screen and (max-height:1024px) {
-
-        &::after {
-            content: ' ';
-            display: block;
-            min-height: min(27vw, 400px);
-        }
-
-
-
+  @media screen and (max-height: 1024px) {
+    &::after {
+      content: ' ';
+      display: block;
+      min-height: min(27vw, 400px);
     }
+  }
 }
-
 
 .modal {
+  position: relative;
+  margin: min(10vw, 100px) auto 0;
 
-    position: relative;
-    margin: min(10vw, 100px) auto 0;
+  max-width: min(904px, 90vw);
+  width: 100%;
+  min-height: 60vh;
 
-    max-width: min(904px, 90vw);
-    width: 100%;
-    min-height: 60vh;
+  padding: 40px 48px 48px;
 
-    padding: 40px 48px 48px;
+  background: #2d0d3b;
+  border-radius: 8px;
+  border: 3px solid #71b2cf;
 
-    background: #2D0D3B;
-    border-radius: 8px;
-    border: 3px solid #71B2CF;
+  display: flex;
+  flex-direction: column;
 
-    display: flex;
-    flex-direction: column;
+  .title {
+    white-space: pre-line;
+    font-family: 'Bangers';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    text-align: center;
+    color: #ffffff;
+  }
 
-    .title {
-        font-family: 'Bangers';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 40px;
-        text-align: center;
-        color: #FFFFFF;
+  &.disabled {
+    filter: brightness(0.5) grayscale(0.5);
+    cursor: not-allowed;
+  }
+
+  .cross {
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    box-sizing: content-box;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.9);
     }
-
-    &.disabled {
-        filter: brightness(0.5) grayscale(0.5);
-        cursor: not-allowed;
-    }
-
-    .cross {
-        padding: 10px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        box-sizing: content-box;
-        cursor: pointer;
-
-        &:active {
-            transform: scale(0.9)
-        }
-    }
-
+  }
 }
 
-
-
 .bodyOpen {
-    overflow: hidden;
+  overflow: hidden;
 }

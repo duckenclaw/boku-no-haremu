@@ -1,3 +1,24 @@
+type ResourceType = {
+  name: string
+  image: string
+  apiName: 'NYA' | 'CHT' | 'SMP' | 'BNT'
+}
+
+type AtomicAssetImmutableData = {
+  clothes?: string
+  emotional?: string
+  eyes?: string
+  hair?: string
+  img?: string
+  passionate?: string
+  shy?: string
+  accessories?: string
+  background?: string
+  name?: string
+  symbol?: string
+  amount?: string
+}
+
 type AtomicAsset = {
   asset_id: string
   auctions: []
@@ -7,17 +28,11 @@ type AtomicAsset = {
   burned_by_account: null
   collection: AtomicCollection
   contract: string
-  data: any
+  data: {
+    [key: string]: string
+  }
   immutable_data: {
-    clothes?: string
-    emotional?: string
-    eyes?: string
-    hair?: string
-    img?: string
-    passionate?: string
-    shy?: string
-    accessories?: string
-    background?: string
+    [key: string]: string
   }
   is_burnable: boolean
   is_transferable: boolean
@@ -128,7 +143,20 @@ type CharacterSlider = {
 
 type BalanceType = {
   balance: number
-  currency: string
+  currency: ResourceKey | string
+}
+
+type GameConfig = {
+  banknote_amount_field: string
+  schema_name: string
+  collection_name: string
+  banknote_collection_name: string
+  banknote_schema_name: string
+  banknote_symbol_field: string
+  is_paused: 0 | 1
+  multiplier_to_risk: { key: number; value: number }[]
+  reward_precision: number
+  time_multiplier: number
 }
 
 type CraftRecipe = {
@@ -139,12 +167,14 @@ type CraftRecipe = {
 type FuseRecipe = {
   result_template_id: number
   source_template_id: number
+  cost: BalanceType[]
 }
 
 type MineRecordType = {
   finishing_at: number
   staked_asset_id: string
   status_code: number
+  reward_multiplier: number
   username: string
 }
 
@@ -164,6 +194,8 @@ type UseGetResourcesResponseType = {
   cht: BalanceType
   is_blocked: boolean
 }
+
+type ResourceKey = 'smp' | 'nya' | 'bnt' | 'cht'
 
 type MiningRecipeRecordType = {
   asset_template_id: number

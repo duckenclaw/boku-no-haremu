@@ -1,0 +1,42 @@
+.modal {
+  padding-top: 60px;
+  padding-bottom: 50px;
+}
+
+.confirmModalResource {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 145px;
+
+  img {
+    flex: 1 1 auto;
+    width: 120px;
+    object-fit: contain;
+  }
+}
+
+.confirmModalBanknote {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 162px;
+  img {
+    flex: 1 1 auto;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.quantity {
+  width: 100%;
+  margin-top: 10px;
+
+  font-family: 'Bangers';
+  font-size: 28px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.dialogValue {
+  color: #479ec5;
+}

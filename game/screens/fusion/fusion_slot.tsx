@@ -68,7 +68,10 @@ export const FusionSlot = ({
         }}
       />
       <BaseSlot
-        className={classnames(s.slot, { [s.prime_slot]: isPrime })}
+        classes={{
+          container: classnames(s.slot, { [s.prime_slot]: isPrime }),
+          content: s.content,
+        }}
         isEmpty={!asset_id}
         isLoading={isCardLoading || isFuseRecipesData}
         isError={isErrorCard}
@@ -76,7 +79,6 @@ export const FusionSlot = ({
         onClick={() => {
           setIsOpenModal(true)
         }}
-        contentClassName={s.content}
         overlayChildren={
           <div className={s.buttons}>
             <Button

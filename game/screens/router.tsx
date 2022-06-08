@@ -67,6 +67,7 @@ export const Router = () => {
       position: 'absolute',
       move: 1,
       maxHeight: '90vh',
+      maxWidth: '100vw',
       overflow: 'hidden',
     },
   })
