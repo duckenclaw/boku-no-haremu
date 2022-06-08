@@ -4,13 +4,13 @@ import { Button } from 'game/components/button'
 import { useGetAllBanknotesTemplates } from 'game/game_api'
 import { useEffect, useMemo } from 'react'
 import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
-import { Banknote, CurrentResourceType } from '.'
+import { Banknote } from '.'
 import { WithdrawSlot } from '../withdraw_slot'
 import s from './withdraw_create.module.scss'
 
 type CreateSlotBanknoteProps = {
   className?: string
-  currentResource: CurrentResourceType
+  currentResource: ResourceType
   currentBanknote: Banknote | null
   setCurrentBanknote: (banknote: Banknote | null) => void
 }
@@ -56,10 +56,10 @@ const CreateSlotBanknote: React.FC<CreateSlotBanknoteProps> = ({
   }, [templateData?.data])
 
   useEffect(() => {
-    if (banknotes && currentResource?.currency) {
-      setCurrentBanknote(banknotes[currentResource.currency][0])
+    if (banknotes && currentResource?.apiName) {
+      setCurrentBanknote(banknotes[currentResource.apiName][0])
     }
-  }, [banknotes, currentResource?.currency, setCurrentBanknote])
+  }, [banknotes, currentResource?.apiName, setCurrentBanknote])
 
   return (
     <div className={s.slotContainerBanknote}>
@@ -82,7 +82,7 @@ const CreateSlotBanknote: React.FC<CreateSlotBanknoteProps> = ({
       </WithdrawSlot>
       {banknotes && currentResource && (
         <WithdrawBanknoteValues
-          banknotes={banknotes[currentResource.currency]}
+          banknotes={banknotes[currentResource.apiName]}
           setCurrentBanknote={setCurrentBanknote}
           currentBanknote={currentBanknote}
         />

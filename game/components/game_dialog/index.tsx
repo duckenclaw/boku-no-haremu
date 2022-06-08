@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { useTransition, animated } from '@react-spring/web'
 import { SkewButton } from 'game/components/button'
+import Typed from 'typed.js'
 import s from './game_dialog.module.scss'
 
 type GameDialogProps = {
-  children?: React.ReactNode
+  strings?: string[]
   isOpen?: boolean
   onOk?: () => void
   okLabel?: string
@@ -14,7 +15,7 @@ type GameDialogProps = {
 }
 
 export const GameDialog = ({
-  children,
+  strings,
   onOk,
   onCancel,
   isOpen,
@@ -51,11 +52,11 @@ export const GameDialog = ({
           style={{ opacity, translateY, translateX }}
           className={s.dialog}
         >
-          <div className={s.content}>{children}</div>
+          <GameDialogContent strings={strings} />
           <div className={s.buttons}>
             {onOk && <SkewButton onClick={onOk}>{okLabel ?? 'OK'}</SkewButton>}
             {onCancel && (
-              <SkewButton onClick={onCancel} mirror>
+              <SkewButton className={s.cancelButton} onClick={onCancel} mirror>
                 {cancelLabel ?? 'Cancel'}
               </SkewButton>
             )}
@@ -64,3 +65,34 @@ export const GameDialog = ({
       )
   )
 }
+
+type GameDialogContentProps = {
+  className?: string
+  strings?: string[]
+}
+
+const GameDialogContent: React.FC<GameDialogContentProps> = ({ strings }) => {
+  const typedEl = useRef<null | HTMLDivElement>(null)
+  const typed = useRef<any>(null)
+
+  useLayoutEffect(() => {
+    if (typedEl.current) {
+      const options = {
+        strings: strings ?? [],
+        typeSpeed: 10,
+        loop: false,
+      }
+      typed.current = new Typed(typedEl.current, options)
+    }
+
+    return () => {
+      if (typed.current) {
+        typed.current.destroy()
+      }
+    }
+  }, [strings])
+
+  return <div className={s.content} ref={typedEl} />
+}
+
+export { GameDialogContent }

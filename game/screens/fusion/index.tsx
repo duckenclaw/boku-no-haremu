@@ -22,6 +22,13 @@ export type FusionSlotData = {
   is_prime?: boolean
 } | null
 
+const dialogStrings = [
+  `<p>
+  “Senpai, are you sure you want to lose these waifus forever? Make
+  your choice, we believe in you!”
+  </p>`,
+]
+
 export const Fusion = () => {
   const [fusionCount, setFusionCount] = useState(0)
   const [mode, setMode] = useState<FusionMode>('3to1')
@@ -51,7 +58,7 @@ export const Fusion = () => {
         cards.find((item) => item?.template_id !== card?.template_id)
       ) ||
       !(resourcesData && fuseRecipesData) ||
-      fuseRecipesData
+      !!fuseRecipesData
         ?.find((r) => r.source_template_id.toString() === cards[0]?.template_id)
         ?.cost.find((c, i) => {
           const balance = mode === '5to2' ? c.balance * 2 : c.balance
@@ -90,14 +97,7 @@ export const Fusion = () => {
         onConfirm={onConfirm}
         onClose={() => setModalIsOpen(false)}
         title={'Are you sure?'}
-        dialogChildren={
-          <>
-            <p>
-              “Senpai, are you sure you want to lose these waifus forever? Make
-              your choice, we believe in you!”
-            </p>
-          </>
-        }
+        dialogStrings={dialogStrings}
       >
         <div className={s.modal}>
           <div className={s.modalSubtitle}>you will lose forever</div>

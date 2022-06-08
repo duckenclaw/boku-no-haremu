@@ -23,7 +23,7 @@ export const Loader = ({
   isNoData,
   customNoDataComponent,
 }: LoaderProps) => {
-  if (isLoading) return <LoaderIcon />
+  if (isLoading) return <LoaderIcon className={className} />
   if (isError) {
     return (
       <>

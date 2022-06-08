@@ -5,6 +5,7 @@ import s from './styles.module.scss'
 import { SakuraAnimation } from './sakura_animation'
 
 import { Image } from 'components/shared-ui/image'
+import Link from 'next/link'
 type Props = {
   className?: string
 }
@@ -24,9 +25,11 @@ const Hero: React.FC<Props> = ({ className }) => {
       />
       <div className={s.content}>
         <div className={s.buttons}>
-          <a href="https://discord.gg/S3rbu5GXGQ" className={s.cta}>
-            <button className={s.button}>PLAY</button>
-          </a>
+          <Link href="/play">
+            <a className={s.cta}>
+              <button className={s.button}>PLAY</button>
+            </a>
+          </Link>
           <a href="https://bridge.bokunoharemu.com/" className={s.bridge_btn}>
             <button className={s.button}>Bridge</button>
           </a>

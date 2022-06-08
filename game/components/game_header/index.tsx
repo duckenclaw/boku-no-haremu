@@ -179,9 +179,8 @@ export const GameHeader = () => {
         onOk={() => {
           setIsInfoOpen(false)
         }}
-      >
-        {getTextByScreen(screen)}
-      </GameDialog>
+        strings={[getTextByScreen(screen)]}
+      />
     </>
   )
 }

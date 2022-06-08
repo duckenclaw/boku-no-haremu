@@ -193,8 +193,8 @@ export const useGetAllCards = ({
           page: String(pageParam ?? 1),
           limit,
           template_id,
-          collection_name: collection_name,
-          schema_name: schema_name,
+          collection_name,
+          schema_name,
         },
       }).then((res) => res.data as GetAllCardsResponseType),
     getNextPageParam: (page, pages) => {
@@ -233,32 +233,14 @@ export const useGetAllBanknotesTemplates = () => {
   return useQuery<GetAllBanknotesResponseType>({
     queryKey: ['wax/getAllBanknotes'],
     enabled: isConnected,
-    queryFn: ({ pageParam }) =>
+    queryFn: () =>
       AtomicHubApi.get('/templates', {
         params: {
           collection_name: banknote_collection_name,
           schema_name: banknote_schema_name,
+          limit: 200,
         },
       }).then((res) => res.data as GetAllBanknotesResponseType),
-    getNextPageParam: (page, pages) => {
-      if (page.data.length === 20) {
-        return pages.length + 1
-      } else return false
-    },
-  })
-}
-
-// get banknote balance stats for user
-export const useGetBanknotesBalances = () => {
-  const { banknote_collection_name } = useGame()
-  const { account, isConnected } = useWax()
-  return useQuery<GetBanknoteBalancesResponseType>({
-    queryKey: ['wax/getBanknotesBalances', { account }],
-    enabled: isConnected,
-    queryFn: () =>
-      AtomicHubApi.get(`/accounts/${account}/${banknote_collection_name}`).then(
-        (res) => res.data as GetBanknoteBalancesResponseType
-      ),
   })
 }
 
@@ -354,21 +336,6 @@ export const useGetCardByAssetId = ({
       AtomicHubApi.get(`/assets/${asset_id}`).then(
         (res) => res.data as GetCardByIdResponseType
       ),
-  })
-}
-
-type useGetCardsByAssetIds = {
-  assetIds?: string[] | null
-}
-
-export const useGetCardsByAssetIds = ({ assetIds }: useGetCardsByAssetIds) => {
-  return useQuery({
-    queryKey: ['wax/getCardsByAssetIds', assetIds],
-    enabled: !!assetIds,
-    queryFn: () =>
-      AtomicHubApi.get(`/assets`, {
-        params: { ids: assetIds?.join(',') },
-      }).then((res) => res.data as GetCardsByIdsResponseType),
   })
 }
 
@@ -640,8 +607,8 @@ export const useMine = () => {
   const qc = useQueryClient()
   return useMutation<any, any, useMineArguments>({
     mutationKey: 'wax/start_mine',
-    mutationFn: ({ asset_id, desired_reward = 100 }) =>
-      api!
+    mutationFn: ({ asset_id, desired_reward = 100 }) => {
+      return api!
         .transact(
           {
             actions: [
@@ -662,8 +629,8 @@ export const useMine = () => {
             expireSeconds: 30,
           }
         )
-
-        .then(waitForWaxConfirmation(api!)),
+        .then(waitForWaxConfirmation(api!))
+    },
 
     onSuccess: () => {
       toast.success('Resource mining started!')
