@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import cn from 'classnames'
 
@@ -84,6 +84,8 @@ export const GameHeader = () => {
     window.addEventListener('click', cb, { passive: true })
     return () => window.removeEventListener('click', cb)
   }, [])
+
+  const dialogStrings = useMemo(() => [getTextByScreen(screen)], [screen])
 
   return (
     <>
@@ -179,7 +181,7 @@ export const GameHeader = () => {
         onOk={() => {
           setIsInfoOpen(false)
         }}
-        strings={[getTextByScreen(screen)]}
+        strings={dialogStrings}
       />
     </>
   )
