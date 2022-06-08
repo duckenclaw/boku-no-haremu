@@ -4,7 +4,7 @@ stages:
 
 .before_script_production_template:
   before_script:
-    - export NEXT_PUBLIC_ENABLE_GAME=false
+    - export NEXT_PUBLIC_ENABLE_GAME=true
     - export NEXT_PUBLIC_TESTNET=false
     - export NEXT_PUBLIC_WAX_RPC=$NEXT_PUBLIC_WAX_RPC
     - export NEXT_PUBLIC_WAX_API=$NEXT_PUBLIC_WAX_API
