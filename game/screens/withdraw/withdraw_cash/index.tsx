@@ -2,7 +2,7 @@ import cn from 'classnames'
 import { Button } from 'game/components/button'
 import { ConfirmModal } from 'game/components/confirm_modal'
 import { useBurnBanknote, useGetCardByAssetId } from 'game/game_api'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { WithdrawExchangeRow } from '../withdraw_exchange_row'
 import { CashSlotBanknote } from './cash_slot_banknote'
 import { CashSlotResource } from './cash_slot_resource'
@@ -39,6 +39,19 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
       item.apiName === banknote?.data.symbol
   )
 
+  const dialogStrings = useMemo(
+    () => [
+      `<p>
+      “You will get <span>${banknoteName} </span>
+      but lose
+      <span className={s.dialogValue}>${banknoteName} banknote</span>. Are
+      you sure you want it Senpai? You’re the master of this harem and we
+      know you are making the right choice
+    </p>`,
+    ],
+    [banknoteName]
+  )
+
   return (
     <>
       <ConfirmModal
@@ -51,15 +64,7 @@ const WithdrawCash: React.FC<WithdrawCashProps> = ({ className }) => {
         }
         onClose={() => setModalIsOpen(false)}
         title={`You will get ${banknoteName} \n you will lose ${banknoteName} banknote`}
-        dialogChildren={
-          <p>
-            “You will get <span className={s.dialogValue}>{banknoteName} </span>
-            but lose{' '}
-            <span className={s.dialogValue}>{banknoteName} banknote</span>. Are
-            you sure you want it Senpai? You’re the master of this harem and we
-            know you are making the right choice
-          </p>
-        }
+        dialogStrings={dialogStrings}
       >
         <div className={modalStyles.modal}>
           <WithdrawExchangeRow

@@ -13,13 +13,21 @@ import { CardImage } from 'game/components/card_image'
 
 import s from './craft.module.scss'
 import { ConfirmModal } from 'game/components/confirm_modal'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import classNames from 'classnames'
 
 type CraftSlotProps = {
   template_id: number
   cost: BalanceType[]
 }
+
+const dialogStrings = [
+  `<p>“You want to craft her, Senpai?</p> \n
+  <p>
+    I just adore all of them! They are as faithful as they are
+    amorous, the best companions you can find!”
+  </p>`,
+]
 
 export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
   const {
@@ -52,15 +60,7 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         onConfirm={() => craft().then(() => setIsOpen(false))}
         onClose={() => setIsOpen(false)}
         title={'YOUR CHOICE'}
-        dialogChildren={
-          <>
-            <p>“You want to craft her, Senpai?</p>
-            <p>
-              I just adore all of them! They are as faithful as they are
-              amorous, the best companions you can find!”
-            </p>
-          </>
-        }
+        dialogStrings={dialogStrings}
       >
         <div className={s.choice_container}>
           <CardImage
