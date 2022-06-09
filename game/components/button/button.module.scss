@@ -1,201 +1,211 @@
 button.button {
-    width: 100%;
-    max-width: 278px;
-    height: 56px;
+  width: 100%;
+  max-width: 278px;
+  height: 56px;
 
-    background: linear-gradient(180deg, #EA748F 0%, #FF418A 53.65%, #F237A5 100%);
-    border: 2px solid #FFFFFF;
-    border-radius: 10px;
+  background: linear-gradient(180deg, #ea748f 0%, #ff418a 53.65%, #f237a5 100%);
+  border: 2px solid #ffffff;
+  border-radius: 10px;
 
-    padding: 28px 12px;
+  padding: 28px 12px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    color: #FFFFFF;
-    font-family: Bangers;
-    font-size: 36px;
-    font-weight: 400;
-    text-align: center;
-    text-transform: uppercase;
+  color: #ffffff;
+  font-family: Bangers;
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
 
-    transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    &:focus {
-        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-        outline: none;
-    }
+  &:hover {
+    box-shadow: inset 0px 4px 10px #9f2b57;
+  }
 
-    &:active {
-        transform: scale(0.9);
-    }
+  &:active {
+    background: linear-gradient(
+      180deg,
+      #c46178 0%,
+      #c9346d 53.65%,
+      #b32a7a 100%
+    );
+    transform: scale(0.9);
+  }
 
-    &.disabled {
-        transform: none;
-        background: #53585B;
-        cursor: not-allowed;
-    }
+  &.disabled {
+    transform: none;
+    background: #53585b;
+    cursor: not-allowed;
+  }
 
-    &.loading {
-        cursor: not-allowed;
-    }
+  &.loading {
+    cursor: not-allowed;
+  }
 
-    &.small {
-        max-width: 197px;
-        height: 42px;
-        font-size: 27px;
-        padding: 17px 8px;
-    }
+  &.small {
+    max-width: 197px;
+    height: 42px;
+    font-size: 27px;
+    padding: 17px 8px;
+  }
 
-    &.xsmall {
-        max-width: 156px;
-        height: 40px;
-        font-size: 27px;
-        padding: 17px 6px;
-    }
+  &.xsmall {
+    max-width: 156px;
+    height: 40px;
+    font-size: 27px;
+    padding: 17px 6px;
+  }
 
-    &.blue {
-        background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #1D7399 100%);
-    }
+  &.blue {
+    background: linear-gradient(
+      180deg,
+      #6ccaf3 0%,
+      #2e92bf 50.52%,
+      #1d7399 100%
+    );
+  }
 
-    &.darkblue {
-        background: linear-gradient(180deg, #6CCAF3 0%, #2E92BF 50.52%, #00415E 100%);
-    }
-
-
+  &.darkblue {
+    background: linear-gradient(
+      180deg,
+      #6ccaf3 0%,
+      #2e92bf 50.52%,
+      #00415e 100%
+    );
+  }
 }
 
 .skew_button {
-    width: 264px;
-    height: 70px;
-    font-family: 'Bangers';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    text-align: center;
-    color: #FFFFFF;
-    padding: 17px 17px 23px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    background: url('/game/svg/skew_button.svg');
+  width: 264px;
+  height: 70px;
+  font-family: 'Bangers';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  text-align: center;
+  color: #ffffff;
+  padding: 17px 17px 23px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: url('/game/svg/skew_button.svg');
 
-    transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
-    &.mirror {
-        transform: scaleX(-1);
+  &.mirror {
+    transform: scaleX(-1);
 
-        span {
-            display: block;
-            transform: scaleX(-1);
-        }
-
-        &:active {
-            transform: scale(-0.9, 0.9);
-        }
+    span {
+      display: block;
+      transform: scaleX(-1);
     }
-
 
     &:active {
-        transform: scale(0.9);
+      transform: scale(-0.9, 0.9);
     }
+  }
 
+  &:active {
+    transform: scale(0.9);
+  }
 }
 
 .toggle {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  cursor: pointer;
+  max-width: 100%;
+  width: 528px;
+  min-height: 48px;
+
+  backdrop-filter: blur(40px);
+
+  box-shadow: inset 0px 0px 0px 6px #bfa6ae;
+  border-radius: 12px;
+
+  background: radial-gradient(
+    90.16% 143.01% at 15.32% 21.04%,
+    rgba(165, 239, 255, 0.15) 0%,
+    rgba(110, 191, 244, 0.0335938) 77.08%,
+    rgba(70, 144, 213, 0) 100%
+  );
+  background-blend-mode: overlay, normal;
+  backdrop-filter: blur(40px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 12px;
+
+  .back {
+    position: absolute;
+    z-index: 150;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+  }
+
+  .option {
+    user-select: none;
     position: relative;
-    cursor: pointer;
-    max-width: 100%;
-    width: 528px;
-    min-height: 48px;
-
-    backdrop-filter: blur(40px);
-
-
-    box-shadow: inset 0px 0px 0px 6px #BFA6AE;
-    border-radius: 12px;
-
-    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.15) 0%, rgba(110, 191, 244, 0.0335938) 77.08%, rgba(70, 144, 213, 0) 100%);
-    background-blend-mode: overlay, normal;
-    backdrop-filter: blur(40px);
-    /* Note: backdrop-filter has minimal browser support */
-
-    border-radius: 12px;
-
-    .back {
-        position: absolute;
-        z-index: 150;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 50%;
-    }
-
-    .option {
-        user-select: none;
-        position: relative;
-        z-index: 151;
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Bangers';
-        font-size: 24px;
-        text-align: center;
-        color: #FFFFFF;
-        -webkit-text-stroke: 1px #FFFFFF;
-    }
+    z-index: 151;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bangers';
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
+    -webkit-text-stroke: 1px #ffffff;
+  }
 }
 
 .button_loader {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  transform: scale(0.8);
 
-    display: inline-block;
-    position: relative;
-    width: 40px;
-    height: 40px;
-    transform: scale(0.8);
+  div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    margin: 4px;
+    border: 4px solid #bb35ff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #bb35ff transparent transparent transparent;
 
-
-    div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 36px;
-        height: 36px;
-        margin: 4px;
-        border: 4px solid #BB35FF;
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #BB35FF transparent transparent transparent;
-
-
-        &:nth-child(1) {
-            animation-delay: -0.45s;
-        }
-
-        &:nth-child(2) {
-            animation-delay: -0.3s;
-        }
-
-        &:nth-child(3) {
-            animation-delay: -0.15s;
-        }
-
+    &:nth-child(1) {
+      animation-delay: -0.45s;
     }
 
-    @keyframes lds-ring {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+    &:nth-child(2) {
+      animation-delay: -0.3s;
     }
 
+    &:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+  }
+
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
