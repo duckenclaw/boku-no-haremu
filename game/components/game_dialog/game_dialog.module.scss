@@ -7,11 +7,9 @@
   min-height: min(27vw, 400px);
   left: 50%;
   transform: translateX(-50%);
-  background: url('/game/svg/dialog_background_right.svg') 94% bottom / 81% 73%
-      no-repeat,
+  background: url('/game/svg/dialog_background_right.svg') 94% bottom / 81% 73% no-repeat,
     url('/game/dialog_girl.png') 0 36% / 28.19% 84.75% no-repeat,
-    url('/game/svg/dialog_background_left.svg') 0 bottom / 89.58% 70.75%
-      no-repeat;
+    url('/game/svg/dialog_background_left.svg') 0 bottom / 89.58% 70.75% no-repeat;
 
   pointer-events: none;
 
@@ -35,8 +33,13 @@
     font-size: 24px;
     color: #ffffff;
     pointer-events: all;
+
     span {
       color: #479ec5;
+    }
+
+    p {
+      margin: 0;
     }
   }
 

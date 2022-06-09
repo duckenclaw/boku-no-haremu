@@ -21,13 +21,38 @@ type CraftSlotProps = {
   cost: BalanceType[]
 }
 
-const dialogStrings = [
-  `<p>“You want to craft her, Senpai?</p> \n
-  <p>
-    I just adore all of them! They are as faithful as they are
-    amorous, the best companions you can find!”
-  </p>`,
-]
+const dialogStrings = (type: string) => {
+  switch (type) {
+    case 'Mimi-chan':
+      return [
+        `<p>“You want to craft <span>MIMI-CHAN</span>, Senpai?</p> \n
+      <p>I just adore them! They are as faithful as they are amorous, the best companions you can find!</p> \n
+      <p>They produce <span>2 Bentos</span> and consume <span>2 Nyans</span>, they really are needy, aren’t they?"</p>`,
+      ]
+    case 'Hitomi':
+      return [
+        `<p>“You want to craft <span>HITOMI</span>, Senpai?</p> \n
+      <p>Yeah, they sure feel like home, caring for you and making sure you never go hungry with their Bentos</p> \n
+      <p>They produce <span>10 Bentos</span> and consume <span>5 Nyans</span>. They sure need your affection, don’t they?"</p>`,
+      ]
+    case 'H1-Bride':
+      return [
+        `<p>“You want to craft <span>H1-BRIDE</span>, Senpai?</p> \n
+      <p>You can say they are deadly smart, incredibly so. In return for your affection you will get the most innovative technologies created by them, sounds like a good deal right?</p> \n
+      <p>They produce <span>3 Simpthetix</span> and consume <span>3 Bentos</span> and <span>4 Nyans</span>. A small price for even a fraction of their innovations.”</p>
+      `,
+      ]
+    case 'Chantress':
+      return [
+        `<p>You want to craft <span>Chantress</span>, Senpai?</p> \n
+      <p>Their magic sure is something, don’t you think? You are very lucky to have an opportunity to access their powers</p> \n
+      <p>They produce <span>5 Chantments</span> and consume <span>2 Bentos</span> and <span>4 Nyans</span>. Magic for food and love?? Count me in Senpai.”</p>
+      `,
+      ]
+    default:
+      return [`<p>I will help and guide you through your harem.</p>`]
+  }
+}
 
 export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
   const {
@@ -53,6 +78,8 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
       resourcesData[currency.toLowerCase() as ResourceKey].balance < balance
     })
 
+  console.log(templateData)
+
   return (
     <>
       <ConfirmModal
@@ -60,7 +87,7 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         onConfirm={() => craft().then(() => setIsOpen(false))}
         onClose={() => setIsOpen(false)}
         title={'YOUR CHOICE'}
-        dialogStrings={dialogStrings}
+        dialogStrings={dialogStrings(templateData?.data.immutable_data.type)}
       >
         <div className={s.choice_container}>
           <CardImage
