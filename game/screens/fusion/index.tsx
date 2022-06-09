@@ -50,25 +50,30 @@ export const Fusion = () => {
     [cards]
   ) as string[]
 
-  const disableFuse = useMemo(
-    () =>
-      isFuseLoading ||
-      cards.some((card) => card === null) ||
+  const disableFuse = useMemo(() => {
+    if (isFuseLoading) return true
+    if (cards.some((card) => card === null)) return 'Set all cards'
+    if (
       cards.every((card) =>
         cards.find((item) => item?.template_id !== card?.template_id)
-      ) ||
-      !(resourcesData && fuseRecipesData) ||
-      !!fuseRecipesData
+      )
+    )
+      return 'Cards are not of same template'
+    if (!(resourcesData && fuseRecipesData)) return true
+    if (
+      fuseRecipesData
         ?.find((r) => r.source_template_id.toString() === cards[0]?.template_id)
-        ?.cost.find((c, i) => {
+        ?.cost.find((c) => {
           const balance = mode === '5to2' ? c.balance * 2 : c.balance
           return (
             resourcesData[c.currency.toLocaleLowerCase() as ResourceKey]
               .balance < balance
           )
-        }),
-    [cards, isFuseLoading]
-  )
+        })
+    )
+      return 'Not enough resources for fuse'
+    return false
+  }, [cards, fuseRecipesData, isFuseLoading, mode, resourcesData])
 
   const onConfirm = () => {
     return mutateAsync({
@@ -100,7 +105,7 @@ export const Fusion = () => {
         dialogStrings={dialogStrings}
       >
         <div className={s.modal}>
-          <div className={s.modalSubtitle}>you will lose forever</div>
+          <div className={s.modalSubtitle}>You will lose those forever</div>
           <div className={s.modalCards}>
             {cards.map((card, index) => (
               <FusionModalCard
@@ -181,11 +186,36 @@ export const Fusion = () => {
         </div>
 
         <div className={s.actions}>
-          <Button disabled={disableFuse} onClick={() => setModalIsOpen(true)}>
+          <div className={s.cost}>
+            Cost:{' '}
+            {fuseRecipesData
+              ?.find(
+                (r) => r.source_template_id.toString() === cards[0]?.template_id
+              )
+              ?.cost.map((c, i) => {
+                const cost = {
+                  ...c,
+                  balance: mode === '5to2' ? c.balance * 2 : c.balance,
+                }
+                return (
+                  <Resource
+                    className={s.resource}
+                    balance={cost}
+                    size="large"
+                    key={i}
+                  />
+                )
+              }) ?? '...'}
+          </div>
+          <Button
+            isLoading={isFuseLoading}
+            disabled={disableFuse}
+            onClick={() => setModalIsOpen(true)}
+          >
             Fuse
           </Button>
           <FusionTraits
-            disabled={disableFuse}
+            disabled={!!disableFuse}
             slotData={cards}
             className={s.traitsButton}
           />

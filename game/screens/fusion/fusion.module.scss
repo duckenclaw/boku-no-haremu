@@ -165,8 +165,18 @@
   flex-flow: column nowrap;
   align-items: center;
   width: 100%;
+  gap: 12px;
+
+  .cost {
+    font-family: 'Bangers';
+    font-size: 25px;
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.traitsButton {
-  margin-top: 12px;
-}
+.traitsButton {}

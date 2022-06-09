@@ -33,7 +33,7 @@ button.button {
         transform: scale(0.9);
     }
 
-    &:disabled {
+    &.disabled {
         transform: none;
         background: #53585B;
         cursor: not-allowed;
