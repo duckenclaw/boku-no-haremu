@@ -47,8 +47,8 @@ const MineModal: React.FC<MineModalProps> = ({
     [mineRecipe?.mined_resource.currency]
   )
 
-  const riskValue = Number(
-    (100 - Number(sortedRiskValues[riskValueIndex].value)).toFixed(1)
+  const successValue = Number(
+    Number(sortedRiskValues[riskValueIndex].value).toFixed(1)
   )
   const xValue = Number(
     Number(sortedRiskValues[riskValueIndex].key / reward_precision).toFixed(1)
@@ -64,13 +64,12 @@ const MineModal: React.FC<MineModalProps> = ({
       `<p>
         “Are you sure you want to mine her Senpai? You will get
         <span>${productionValue}</span> ${currentResource?.name}. </p>
-        <p>Your risk is
-          ${riskValue}% ${100 - riskValue}% chance that you will get the
+        <p>With ${successValue}% chance that you will get the
           resources.”
         </p>
       `,
     ],
-    [currentResource?.name, productionValue, riskValue]
+    [currentResource?.name, productionValue, successValue]
   )
 
   return (
@@ -150,7 +149,7 @@ const MineModal: React.FC<MineModalProps> = ({
             </div>
             <div className={s.row}>
               <div className={s.subtitle}>
-                Risk <IconInfo className={s.iconInfo} />
+                Success <IconInfo className={s.iconInfo} />
               </div>
               <div className={s.sliderContainer}>
                 <Slider
@@ -164,7 +163,7 @@ const MineModal: React.FC<MineModalProps> = ({
                     </div>
                   )}
                 />
-                <div className={s.percent}>{riskValue}%</div>
+                <div className={s.percent}>{successValue}%</div>
               </div>
             </div>
           </div>
