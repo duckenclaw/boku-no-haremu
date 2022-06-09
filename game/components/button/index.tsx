@@ -3,16 +3,19 @@ import { animated, useSpring } from '@react-spring/web'
 import cn from 'classnames'
 
 import s from './button.module.scss'
-import { Loader } from 'components/shared-ui/loader'
 
 type BaseButtonProps = {
   isLoading?: boolean
   size?: 'medium' | 'small' | 'xsmall'
   color?: 'purple' | 'blue' | 'darkblue'
+  disabled?: string | boolean
 }
 
-type ButtonProps = BaseButtonProps &
-  DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+type ButtonProps = Omit<
+  DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+  'disabled'
+> &
+  BaseButtonProps
 
 export const Button = ({
   children,
@@ -27,12 +30,13 @@ export const Button = ({
   return (
     <button
       {...props}
-      disabled={disabled || isLoading}
+      data-tip={typeof disabled === 'string' ? disabled : undefined}
       onClick={!(disabled || isLoading) ? onClick : undefined}
       className={cn(s.button, className, {
         [s[size]]: true,
         [s[color]]: true,
         [s.loading]: isLoading,
+        [s.disabled]: !!disabled || isLoading,
       })}
     >
       <ButtonLoader isLoading={isLoading}>{children}</ButtonLoader>
@@ -135,7 +139,7 @@ const AnimatedBox = ({ style, className }: AnimatedBoxProps) => (
     preserveAspectRatio="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g filter="url(#filter0_b_3640_920)">
+    <g>
       <rect
         y="48"
         width="48"
@@ -168,29 +172,6 @@ const AnimatedBox = ({ style, className }: AnimatedBoxProps) => (
       />
     </g>
     <defs>
-      <filter
-        id="filter0_b_3640_920"
-        x="-40"
-        y="-40"
-        width="357"
-        height="128"
-        filterUnits="userSpaceOnUse"
-        colorInterpolationFilters="sRGB"
-      >
-        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-        <feGaussianBlur in="BackgroundImage" stdDeviation="20" />
-        <feComposite
-          in2="SourceAlpha"
-          operator="in"
-          result="effect1_backgroundBlur_3640_920"
-        />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="effect1_backgroundBlur_3640_920"
-          result="shape"
-        />
-      </filter>
       <linearGradient
         id="paint0_linear_3640_920"
         x1="24"
