@@ -21,13 +21,70 @@ type CraftSlotProps = {
   cost: BalanceType[]
 }
 
-const dialogStrings = [
-  `<p>“You want to craft her, Senpai?</p> \n
-  <p>
-    I just adore all of them! They are as faithful as they are
-    amorous, the best companions you can find!”
-  </p>`,
-]
+const CostString = (c: string) => {
+  switch (c.toLowerCase()) {
+    case 'cht':
+      return `Chantments`
+    case 'nya':
+      return `Nyans`
+    case 'smp':
+      return `Simpthetix`
+    case 'bnt':
+      return `Bentos`
+  }
+}
+
+const ProductString = (recipeData: MiningRecipeRecordType) => {
+  return `They produce <span>${recipeData?.mined_resource.balance} ${CostString(
+    recipeData?.mined_resource.currency
+  )}</span> and consume ${recipeData?.cost.map(
+    (c, index) => `<span> ${c.balance} ${CostString(c.currency)}</span>`
+  )} `
+}
+
+const dialogStrings = (
+  type: string,
+  recipeData: MiningRecipeRecordType | undefined
+) => {
+  switch (type) {
+    case 'Mimi-chan':
+      return [
+        `<p>“You want to craft <span>MIMI-CHAN</span>, Senpai?</p> \n
+      <p>I just adore them! They are as faithful as they are amorous, the best companions you can find!</p> \n
+      <p>${
+        recipeData && ProductString(recipeData)
+      }, they really are needy, aren’t they?"</p>`,
+      ]
+    case 'Hitomi':
+      return [
+        `<p>“You want to craft <span>HITOMI</span>, Senpai?</p> \n
+      <p>Yeah, they sure feel like home, caring for you and making sure you never go hungry with their Bentos</p> \n
+      <p>${
+        recipeData && ProductString(recipeData)
+      }. They sure need your affection, don’t they?"</p>`,
+      ]
+    case 'H1-Bride':
+      return [
+        `<p>“You want to craft <span>H1-BRIDE</span>, Senpai?</p> \n
+      <p>You can say they are deadly smart, incredibly so. In return for your affection you will get the most innovative technologies created by them, sounds like a good deal right?</p> \n
+      <p>${
+        recipeData && ProductString(recipeData)
+      }. A small price for even a fraction of their innovations.”</p>
+      `,
+      ]
+    case 'Chantress':
+      return [
+        `<p>You want to craft <span>Chantress</span>, Senpai?</p> \n
+      <p>Their magic sure is something, don’t you think? You are very lucky to have an opportunity to access their powers</p> \n
+      <p>${
+        recipeData && ProductString(recipeData)
+      }. Magic for food and love?? Count me in Senpai.”</p>
+      `,
+      ]
+    default:
+      return [`<p>I will help and guide you through your harem.</p>`]
+  }
+}
 
 export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
   const {
@@ -60,7 +117,11 @@ export const CraftSlot = ({ template_id, cost }: CraftSlotProps) => {
         onConfirm={() => craft().then(() => setIsOpen(false))}
         onClose={() => setIsOpen(false)}
         title={'YOUR CHOICE'}
-        dialogStrings={dialogStrings}
+        dialogStrings={useMemo(
+          () =>
+            dialogStrings(templateData?.data.immutable_data.type, recipeData),
+          [templateData?.data.immutable_data.type, recipeData]
+        )}
       >
         <div className={s.choice_container}>
           <CardImage

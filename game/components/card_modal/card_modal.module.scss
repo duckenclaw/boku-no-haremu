@@ -91,11 +91,28 @@
       .card {
         cursor: pointer;
         width: 100%;
+        height: auto;
 
         &.blocked {
           cursor: not-allowed;
           filter: brightness(0.5) grayscale(0.5);
           transform: none;
+        }
+      }
+
+      .lower_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        min-height: 66px;
+        padding-top: 10px;
+
+        .row {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          gap: 10px;
         }
       }
     }

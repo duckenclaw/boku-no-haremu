@@ -12,6 +12,7 @@ import {
   useGetAllCards,
   useGetAllBanknotes,
   useGetTemplates,
+  useGetMiningRecipes,
 } from 'game/game_api'
 import { ipfsToS3Url, ipfsToUrlSafe } from 'utils'
 
@@ -21,6 +22,7 @@ import SlideIcon from 'public/game/svg/modal_slide.svg'
 import s from './card_modal.module.scss'
 import { CardFilter } from './card_filter'
 import { useGame } from 'game/game_context'
+import { Resource } from '../resource'
 
 type CardModalProps = {
   isOpen?: boolean
@@ -83,6 +85,7 @@ export const CardsInventory = ({
 
   const { collection_name } = useGame()
 
+  const { data: mineRecipes } = useGetMiningRecipes()
   const {
     data: miningData,
     isLoading: isMiningDataLoading,
@@ -198,18 +201,44 @@ export const CardsInventory = ({
             onRetry={refetchCardsData}
           >
             <div className={s.cards}>
-              {cards.map((c) => (
-                <CardImage
-                  className={cn(s.card, { [s.blocked]: c.is_blocked_by_game })}
-                  style={{ objectFit: 'cover' }}
-                  alt={c.name}
-                  src={[ipfsToS3Url(c.data.img), ipfsToUrlSafe(c.data.img)]}
-                  key={c.asset_id}
-                  onClick={() =>
-                    !c.is_blocked_by_game && onSelect?.(c.asset_id, c)
-                  }
-                />
-              ))}
+              {cards.map((c) => {
+                const mineRecipe = mineRecipes?.find(
+                  (r) =>
+                    r.asset_template_id.toString() === c.template.template_id
+                )
+                return (
+                  <div className={s.row} key={c.asset_id}>
+                    <CardImage
+                      className={cn(s.card, {
+                        [s.blocked]: c.is_blocked_by_game,
+                      })}
+                      style={{ objectFit: 'cover' }}
+                      alt={c.name}
+                      src={[ipfsToS3Url(c.data.img), ipfsToUrlSafe(c.data.img)]}
+                      onClick={() =>
+                        !c.is_blocked_by_game && onSelect?.(c.asset_id, c)
+                      }
+                    />
+                    {mineRecipe && (
+                      <div className={s.lower_content}>
+                        <div className={s.row}>
+                          <Resource
+                            sign="plus"
+                            size="large"
+                            color="purple"
+                            balance={mineRecipe.mined_resource}
+                          />
+                        </div>
+                        <div className={s.row}>
+                          {mineRecipe.cost.map((c, index) => (
+                            <Resource sign="minus" balance={c} key={index} />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </Loader>
           <SlideIcon
