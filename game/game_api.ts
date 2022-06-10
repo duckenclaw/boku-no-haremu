@@ -372,6 +372,31 @@ export const useGetMiningRecipe = ({
   })
 }
 
+export const useGetMiningRecipes = () => {
+  const { api, isConnected } = useWax()
+  return useQuery({
+    queryKey: ['wax/mining_recipes'],
+    enabled: isConnected,
+    queryFn: () =>
+      api?.rpc
+        .get_table_rows({
+          json: true,
+          code: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          scope: process.env.NEXT_PUBLIC_WAX_CONTRACT,
+          table: 'miningrecipe',
+          limit: 100,
+        })
+        .then((res) => {
+          res.rows = res.rows.map((r) => ({
+            ...r,
+            mined_resource: balanceStringToObject(r.mined_resource),
+            cost: r.cost.map((c: any) => balanceStringToObject(c)),
+          }))
+          return res.rows as MiningRecipeRecordType[]
+        }),
+  })
+}
+
 // get craft recipes
 export const useCraftRecipes = () => {
   const { api, isConnected } = useWax()
